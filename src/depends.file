@@ -1,0 +1,7 @@
+mod_parameters.o:      makefile
+mod_parameters.o:      MODEL.CPP
+seir.o:      makefile
+seir.o:      MODEL.CPP
+seir.o:      mod_parameters.o
+slsode.o:      makefile
+slsode.o:      MODEL.CPP

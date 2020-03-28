@@ -1,0 +1,9 @@
+MODULES = \
+	mod_parameters.F90
+
+F90FILES = \
+	seir.F90
+
+F77FILES = \
+	slsode.F
+
