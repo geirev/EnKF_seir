@@ -1,6 +1,7 @@
 program seir
    use mod_parameters
-   external f
+   implicit none
+   external f,jac
    integer, parameter :: neq=10 ! Number of equations
    real y(0:neq-1)              ! Solution S, E, I R
 
@@ -62,11 +63,8 @@ program seir
 !             &"S" "E" "I" "Mild" "Severe" "Hospital" "Fatal" "R_Mild" "R_Severe" "R_fatal" &
              &"Susceptible" "Dead" "Hospitalized" "Recovered" "Infected" "Exposed"' 
    write(10,'(a,i5,a,i5,a)')' ZONE T="Average"  F=POINT, I=',nt,', J=1, K=1'
-   dead=y(4)*mortality/100.0
-   recovered=y(4)-dead
    write(10,'(20g13.4)')t,N*y(0),N*y(9),N*(y(5)+y(6)),N*(y(7) + y(8)), N*y(2), N*y(1) 
    print '(20f12.2)',t,N*y(0),N*y(9),N*(y(5)+y(6)),N*(y(7) + y(8)), N*y(2), N*y(1), y(0)+y(9)+y(7)+y(8) 
-
 
    dt= time/real(nt-1)
    do i=1,nt
@@ -144,12 +142,12 @@ subroutine f(neq, t, y, ydot)
    ydot(9) =  (1/D_death)*Fatal
 end subroutine
  
-!subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
-!   use mod_parameters
-!   implicit none
-!   integer neq, ml, mu, nrowpd
-!   real t, y(neq), pd(nrowpd,neq), N
-!   pd=0.0
+subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
+   use mod_parameters
+   implicit none
+   integer neq, ml, mu, nrowpd
+   real t, y(neq), pd(nrowpd,neq)
+   pd=0.0
 !   N=sum(y(1:4))
 !   pd(1,1) = -Rt*y(3)/(Tinf*N)
 !   pd(1,3) = -Rt*y(1)/(Tinf*N)
@@ -159,4 +157,4 @@ end subroutine
 !   pd(3,2) =  1.0/Tinc 
 !   pd(3,3) = -1.0/Tinf        
 !   pd(4,3) =  1.0/Tinf        
-!end subroutine
+end subroutine
