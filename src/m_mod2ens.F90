@@ -1,0 +1,29 @@
+module m_mod2ens
+contains
+subroutine mod2ens(nrpar, nrens, enspar , j)
+! Copies initial conditions from ens(:,j) to y before simulation
+   use mod_parameters
+   implicit none
+   integer, intent(in) :: nrpar
+   integer, intent(in) :: nrens
+   integer, intent(in) :: j
+   real,    intent(inout) :: enspar(nrpar,nrens)
+
+   enspar(1,j)   =  Time_to_death      + enspar(1,j)  ! Days to death
+   enspar(2,j)   =  N                  + enspar(2,j)  ! Initial population
+   enspar(3,j)   =  I0                 + enspar(3,j)  ! Initial infectious
+   enspar(4,j)   =  R0                 + enspar(4,j)  ! Basic Reproduction Number
+   enspar(5,j)   =  D_incbation        + enspar(5,j)  ! Incubation period (Tinc)
+   enspar(6,j)   =  D_infectious       + enspar(6,j)  ! Duration patient is infectious (Tinf)
+   enspar(7,j)   =  D_recovery_mild    + enspar(7,j)  ! Recovery time mild cases (11.1)
+   enspar(8,j)   =  D_recovery_severe  + enspar(8,j)  ! Recovery time severe cases (28.6) Lengt of hospital stay
+   enspar(9,j)   =  D_death            + enspar(9,j)  ! Time sick
+   enspar(10,j)  =  D_hospital_lag     + enspar(10,j) ! Time to hospitalization.
+   enspar(11,j)  =  CFR                + enspar(11,j) ! Case fatality rate 
+   enspar(12,j)  =  Time               + enspar(12,j) ! Length of simulation
+   enspar(13,j)  =  p_severe           + enspar(13,j) ! Hospitalization rate % for severe cases
+   enspar(14,j)  =  Rt                 + enspar(14,j) ! Basic Reproduction Number during intervention
+   enspar(15,j)  =  InterventionTime   + enspar(15,j) ! Interventions start here
+   enspar(16,j)  =  duration           + enspar(16,j) ! Duration of measures
+end subroutine
+end module

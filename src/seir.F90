@@ -1,5 +1,9 @@
 program seir
    use mod_parameters
+   use m_ens2mod
+   use m_mod2ens
+   use m_tecplot
+   use m_random
    implicit none
    external f,jac
    integer, parameter :: neq=10 ! Number of equations
@@ -21,28 +25,44 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Time stepping
-   integer, parameter :: nt=1000
+   integer, parameter :: nt=200
    real tout,t,dt
    integer i
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Ensemble variables
+   integer, parameter :: nrens=100
+   integer, parameter :: nrpar=16
+   real ens(0:neq-1,0:nt,nrens)
+   real enspar(1:nrpar,nrens)
+   real parstd(1:nrpar)
+   integer j
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Set parameters (decleared in mod_parameters.F90)
-   Time_to_death     = 32.0                  ! Days to death
-   N                 = 5178365.0             ! Initial population
-   I0                = 195.0                 ! Initial infectious
-   R0                = 2.2                   ! Basic Reproduction Number
-   D_incbation       = 5.2                   ! Incubation period (Tinc)
-   D_infectious      = 2.9                   ! Duration patient is infectious (Tinf)
-   D_recovery_mild   = (14.0 - 2.9)          ! Recovery time mild cases (11.1)
-   D_recovery_severe = (31.5 - 2.9)          ! Recovery time severe cases (28.6) Lengt of hospital stay
-   D_hospital_lag    = 5.0                   ! Time to hospitalization.
-   D_death           = Time_to_death - D_infectious
-   CFR               = 0.02                  ! Case fatality rate 
-   Time              = 365.0                 ! Length of simulation
-   p_severe          = 0.2                   ! Hospitalization rate % for severe cases
-   Rt                = 0.9                   ! Basic Reproduction Number during intervention
-   InterventionTime  = 60.0                  ! Interventions start here
-   duration          = 500                   ! Duration of measures
+   Time_to_death     = 32.0                         ; parstd(1)=3.0   ! 1  Days to death
+   N                 = 5000000.0                    ; parstd(2)=0.0   ! 2  Initial population
+   I0                = 195.0                        ; parstd(3)=20.0  ! 3  Initial infectious
+   R0                = 2.2                          ; parstd(4)=0.2   ! 4  Basic Reproduction Number
+   D_incbation       = 5.2                          ; parstd(5)=1.0   ! 5  Incubation period (Tinc)
+   D_infectious      = 2.9                          ; parstd(6)=1.0   ! 6  Duration patient is infectious (Tinf)
+   D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=2.0   ! 7  Recovery time mild cases (11.1)
+   D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=2.0   ! 8  Recovery time severe cases (28.6) Lengt of hospital stay
+   D_death           = Time_to_death-D_infectious   ; parstd(9)=2.0   ! 9  Time sick
+   D_hospital_lag    = 5.0                          ; parstd(10)=2.0  ! 10 Time to hospitalization.
+   CFR               = 0.02                         ; parstd(11)=0.002! 11 Case fatality rate 
+   Time              = 365.0                        ; parstd(12)=0.0  ! 12 Length of simulation
+   p_severe          = 0.2                          ; parstd(13)=0.1  ! 13 Hospitalization rate % for severe cases
+   Rt                = 0.9                          ; parstd(14)=0.1  ! 14 Basic Reproduction Number during intervention
+   InterventionTime  = 30.0                         ; parstd(15)=2.0  ! 15 Interventions start here
+   duration          = 500                          ; parstd(16)=0.0  ! 16 Duration of measures
+
+   call random(enspar,nrpar*nrens)
+   do j=1,nrens
+      enspar(:,j)=parstd(:)*enspar(:,j)
+      call mod2ens(nrpar,nrens,enspar,j)
+   enddo
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initial conditions
@@ -57,30 +77,39 @@ program seir
    y(8) = 0.0         ! R_severe (recovered)
    y(9) = 0.0         ! R_fatal (dead)
 
-   open(10,file='seir.dat')
-   write(10,*)'TITLE = "Solutions"'
-   write(10,*)'VARIABLES = "time" &
-!             &"S" "E" "I" "Mild" "Severe" "Hospital" "Fatal" "R_Mild" "R_Severe" "R_fatal" &
-             &"Susceptible" "Dead" "Hospitalized" "Recovered" "Infected" "Exposed"' 
-   write(10,'(a,i5,a,i5,a)')' ZONE T="Average"  F=POINT, I=',nt,', J=1, K=1'
-   write(10,'(20g13.4)')t,N*y(0),N*y(9),N*(y(5)+y(6)),N*(y(7) + y(8)), N*y(2), N*y(1) 
-   print '(20f12.2)',t,N*y(0),N*y(9),N*(y(5)+y(6)),N*(y(7) + y(8)), N*y(2), N*y(1), y(0)+y(9)+y(7)+y(8) 
+! Randomizing number of initially infected
+   call random(ens(2,0,:),nrens)
+   ens(2,0,:)=parstd(3)*ens(2,0,:) / N
 
-   dt= time/real(nt-1)
-   do i=1,nt
-      t=0+real(i)*dt
-      tout=t+dt
-
-
-      call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
-      if (istate < 0) then
-         print '(a,i3)','negative istate, exiting: ',istate
-         stop
-      endif
-      write(10,'(20g13.4)')t,N*y(0),N*y(9),N*(y(5)+y(6)),N*(y(7) + y(8)), N*y(2), N*y(1) 
-      print '(20f12.2)',t,N*y(0),N*y(9),N*(y(5)+y(6)),N*(y(7) + y(8)), N*y(2), N*y(1), y(0)+y(9)+y(7)+y(8) 
+   do j=1,nrens
+      ens(3:9,0,j)=y(3:9)
+      ens(2,0,j)= ens(2,0,j)+y(2)
+      ens(0,0,j)=1.0-ens(2,0,j)
    enddo
-   close(10)
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   dt= time/real(nt-1)
+
+   do j=1,nrens        ! ensemble loop
+      y(:)=ens(:,0,j) 
+      call ens2mod(nrpar, nrens, enspar , j)
+
+      istate=1
+      do i=1,nt 
+         t=0+real(i)*dt
+         tout=t+dt
+         call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
+         if (istate < 0) then
+            print '(a,i3)','negative istate, exiting: ',istate
+            stop
+         endif
+         ens(:,i,j)=y(:)
+      enddo
+
+   enddo
+
+   call tecplot(ens,nt,nrens,neq)
 
 end program
 
@@ -158,3 +187,4 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
 !   pd(3,3) = -1.0/Tinf        
 !   pd(4,3) =  1.0/Tinf        
 end subroutine
+

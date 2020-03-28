@@ -1,5 +1,11 @@
 MODULES = \
-	mod_parameters.F90
+	m_ens2mod.F90\
+	m_ensave.F90\
+	m_ensstd.F90\
+	m_mod2ens.F90\
+	mod_parameters.F90\
+	m_random.F90\
+	m_tecplot.F90
 
 F90FILES = \
 	seir.F90

@@ -1,0 +1,63 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CFR	mod_parameters.F90	/^   real, save :: CFR /;"	v	module:mod_parameters
+D_death	mod_parameters.F90	/^   real, save :: D_death /;"	v	module:mod_parameters
+D_hospital_lag	mod_parameters.F90	/^   real, save :: D_hospital_lag /;"	v	module:mod_parameters
+D_incbation	mod_parameters.F90	/^   real, save :: D_incbation /;"	v	module:mod_parameters
+D_infectious	mod_parameters.F90	/^   real, save :: D_infectious /;"	v	module:mod_parameters
+D_recovery_mild	mod_parameters.F90	/^   real, save :: D_recovery_mild /;"	v	module:mod_parameters
+D_recovery_severe	mod_parameters.F90	/^   real, save :: D_recovery_severe /;"	v	module:mod_parameters
+I0	mod_parameters.F90	/^   real, save :: I0 /;"	v	module:mod_parameters
+InterventionTime	mod_parameters.F90	/^   real, save :: InterventionTime /;"	v	module:mod_parameters
+N	mod_parameters.F90	/^   real, save :: N$/;"	v	module:mod_parameters
+R0	mod_parameters.F90	/^   real, save :: R0 /;"	v	module:mod_parameters
+Rt	mod_parameters.F90	/^   real, save :: Rt /;"	v	module:mod_parameters
+Time	mod_parameters.F90	/^   real, save :: Time$/;"	v	module:mod_parameters
+Time_to_death	mod_parameters.F90	/^   real, save :: Time_to_death$/;"	v	module:mod_parameters
+Xmax	mod_parameters.F90	/^   real, save :: Xmax /;"	v	module:mod_parameters
+atol	seir.F90	/^   real    :: atol=/;"	v	program:seir
+dt	seir.F90	/^   real tout,t,dt$/;"	v	program:seir
+duration	mod_parameters.F90	/^   real, save :: duration$/;"	v	module:mod_parameters
+ens	seir.F90	/^   real ens(/;"	v	program:seir
+ens2mod	m_ens2mod.F90	/^subroutine ens2mod(/;"	s	module:m_ens2mod
+ensave	m_ensave.F90	/^subroutine ensave(/;"	s	module:m_ensave
+enspar	seir.F90	/^   real enspar(/;"	v	program:seir
+ensstd	m_ensstd.F90	/^subroutine ensstd(/;"	s	module:m_ensstd
+f	seir.F90	/^subroutine f(/;"	s
+i	seir.F90	/^   in/;"	v	program:seir
+iopt	seir.F90	/^   integer :: iopt=/;"	v	program:seir
+istate	seir.F90	/^   integer :: istate=/;"	v	program:seir
+itask	seir.F90	/^   integer :: itask=/;"	v	program:seir
+itol	seir.F90	/^   integer :: itol=/;"	v	program:seir
+iwork	seir.F90	/^   integer :: iwork(/;"	v	program:seir
+j	seir.F90	/^   integer j$/;"	v	program:seir
+jac	seir.F90	/^subroutine jac(/;"	s
+liw	seir.F90	/^   integer, parameter :: liw=/;"	v	program:seir
+lrw	seir.F90	/^   integer, parameter :: lrw=/;"	v	program:seir
+m_ens2mod	m_ens2mod.F90	/^module m_ens2mod$/;"	m
+m_ensave	m_ensave.F90	/^module m_ensave$/;"	m
+m_ensstd	m_ensstd.F90	/^module m_ensstd$/;"	m
+m_mod2ens	m_mod2ens.F90	/^module m_mod2ens$/;"	m
+m_random	m_random.F90	/^module m_random$/;"	m
+m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
+mf	seir.F90	/^   integer :: mf=/;"	v	program:seir
+mod2ens	m_mod2ens.F90	/^subroutine mod2ens(/;"	s	module:m_mod2ens
+mod_parameters	mod_parameters.F90	/^module mod_parameters$/;"	m
+neq	seir.F90	/^   integer, parameter :: neq=/;"	v	program:seir
+nrens	seir.F90	/^   integer, parameter :: nrens=/;"	v	program:seir
+nrpar	seir.F90	/^   integer, parameter :: nrpar=/;"	v	program:seir
+nt	seir.F90	/^   inte/;"	v	program:seir
+p_severe	mod_parameters.F90	/^   real, save :: p_severe$/;"	v	module:mod_parameters
+parstd	seir.F90	/^   real parstd(/;"	v	program:seir
+random	m_random.F90	/^subroutine random(/;"	s	module:m_random
+rtol	seir.F90	/^   real    :: rtol=/;"	v	program:seir
+rwork	seir.F90	/^   real    :: rwork(/;"	v	program:seir
+seir	seir.F90	/^program seir$/;"	p
+t	seir.F90	/^   real to/;"	v	program:seir
+tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
+tout	seir.F90	/^   real tout,/;"	v	program:seir
+y	seir.F90	/^   real y(/;"	v	program:seir
