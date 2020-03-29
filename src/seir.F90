@@ -12,16 +12,17 @@ program seir
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! slsode parameters and workspace
    integer :: itol=1
-   real    :: rtol=1.0E-6
-   real    :: atol=1.0e-8
+   real    :: rtol=1.0E-5
+   real    :: atol=1.0E-7
    integer :: itask=1
    integer :: istate=1
    integer :: iopt=0
-   integer, parameter :: lrw=20 + 16*neq     ! for mf=10
-   real    :: rwork(lrw)
-   integer, parameter :: liw=20              ! for mf=10
-   integer :: iwork(liw)
-   integer :: mf=10                          ! Nostiff Adams (no Jacobian)
+
+   integer mf
+   integer lrw,liw
+
+   real,    allocatable  :: rwork(:) ! (lrw)
+   integer, allocatable  :: iwork(:)  !(liw)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Time stepping
@@ -31,7 +32,7 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Ensemble variables
-   integer, parameter :: nrens=100
+   integer, parameter :: nrens=999
    integer, parameter :: nrpar=13
 
    real enspar(1:nrpar,nrens)    ! Ensemble of parameters (state variables)
@@ -62,6 +63,21 @@ program seir
    integer m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   mf=10
+   select case (mf)
+   case(10)        ! Nostiff Adams (no Jacobian)
+      lrw = 20 + 16*neq
+      liw = 20
+   case(21 : 22)
+      lrw = 22 + 9*neq +neq**2 
+      liw = 20 + neq
+   case default
+      stop 'wrong mf'
+   end select
+
+   allocate(rwork(lrw))
+   allocate(iwork(liw))
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
    Time_to_death     = 32.0                         ; parstd(1)=3.0   ! 1  Days to death
    N                 = 5000000.0                    ; parstd(2)=0.0   ! 2  Initial population
@@ -86,6 +102,7 @@ program seir
       enspar(:,j)=parstd(:)*enspar(:,j)
       call mod2ens(nrpar,nrens,enspar,j)
    enddo
+   enspar=max(enspar,0.01)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! EnKF initialization
@@ -134,7 +151,7 @@ program seir
          call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
          ens(:,i,j)=y(:)
          if (istate < 0) then
-            print '(a,i3)','negative istate, exiting: ',istate
+            print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
             istate=2
             ens(:,:,j)=-1.0
             exit
@@ -171,7 +188,7 @@ program seir
          call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
          ens(:,i,j)=y(:)
          if (istate < 0) then
-            print '(a,i3)','negative istate, exiting: ',istate
+            print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=1,  iens=',j
             istate=2
             ens(:,:,j)=-1.0
             exit
@@ -214,47 +231,87 @@ subroutine f(neq, t, y, ydot)
    a= 1.0/D_incbation
    b= 1.0/D_infectious
 
-   S        = y(0) ! Susectable
-   E        = y(1) ! Exposed
-   I        = y(2) ! Infected
-   Mild     = y(3) ! Recovering (Mild)
-   Severe   = y(4) ! Recovering (Severe at home)
-   Severe_H = y(5) ! Recovering (Severe in hospital)
-   Fatal    = y(6) ! Recovering (Fatal)
-   R_Mild   = y(7) ! Rehibilitated
-   R_Severe = y(8) ! Rehibilitated
-   R_Fatal  = y(9) ! Dead
+!   S        = y(0) ! Susectable
+!   E        = y(1) ! Exposed
+!   I        = y(2) ! Infected
+!   Mild     = y(3) ! Recovering (Mild)
+!   Severe   = y(4) ! Recovering (Severe at home)
+!   Severe_H = y(5) ! Recovering (Severe in hospital)
+!   Fatal    = y(6) ! Recovering (Fatal)
+!   R_Mild   = y(7) ! Rehibilitated
+!   R_Severe = y(8) ! Rehibilitated
+!   R_Fatal  = y(9) ! Dead
 
    p_fatal  = CFR
    p_mild   = 1 - P_SEVERE - CFR
    D_death  = Time_to_death-D_infectious   ! 9  Time sick
 
-   ydot(0) = -beta*I*S
-   ydot(1) =  beta*I*S - a*E
-   ydot(2) =  a*E - b*I
-   ydot(3) =  p_mild*b*I   - (1/D_recovery_mild)*Mild
-   ydot(4) =  p_severe*b*I - (1/D_hospital_lag)*Severe
-   ydot(5) =  (1/D_hospital_lag)*Severe - (1/D_recovery_severe)*Severe_H
-   ydot(6) =  p_fatal*b*I  - (1/D_death)*Fatal
-   ydot(7) =  (1/D_recovery_mild)*Mild
-   ydot(8) =  (1/D_recovery_severe)*Severe_H
-   ydot(9) =  (1/D_death)*Fatal
+!   ydot(0) = -beta*I*S
+!   ydot(1) =  beta*I*S - a*E
+!   ydot(2) =  a*E - b*I
+!   ydot(3) =  p_mild*b*I   - (1/D_recovery_mild)*Mild
+!   ydot(4) =  p_severe*b*I - (1/D_hospital_lag)*Severe
+!   ydot(5) =  (1/D_hospital_lag)*Severe - (1/D_recovery_severe)*Severe_H
+!   ydot(6) =  p_fatal*b*I  - (1/D_death)*Fatal
+!   ydot(7) =  (1/D_recovery_mild)*Mild
+!   ydot(8) =  (1/D_recovery_severe)*Severe_H
+!   ydot(9) =  (1/D_death)*Fatal
+
+   ydot(0) = -beta*y(2)*y(0)
+   ydot(1) =  beta*y(2)*y(0) - a*y(1)
+   ydot(2) =  a*y(1) - b*y(2)
+   ydot(3) =  p_mild*b*y(2)   - (1.0/D_recovery_mild)*y(3)
+   ydot(4) =  p_severe*b*y(2) - (1.0/D_hospital_lag)*y(4)
+   ydot(5) =  (1.0/D_hospital_lag)*y(4) - (1.0/D_recovery_severe)*y(5)
+   ydot(6) =  p_fatal*b*y(2)  - (1.0/D_death)*y(6)
+   ydot(7) =  (1.0/D_recovery_mild)  *y(3)
+   ydot(8) =  (1.0/D_recovery_severe)*y(5)
+   ydot(9) =  (1.0/D_death)          *y(6)
 end subroutine
  
 subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
    use mod_parameters
    implicit none
    integer neq, ml, mu, nrowpd
-   real t, y(neq), pd(nrowpd,neq)
+   real t, y(0:neq-1), pd(0:neq-1,0:neq-1)
+   real p_fatal
+   real p_mild
+   real beta,a,b
+
+   if ((t > interventiontime).and.(t < interventiontime + duration)) then
+      beta=Rt/D_infectious
+   elseif (t > interventiontime + duration) then
+      beta=1.0/D_infectious
+   else
+      beta=R0/D_infectious
+   endif
+
+   a= 1.0/D_incbation
+   b= 1.0/D_infectious
+
+   p_fatal  = CFR
+   p_mild   = 1 - P_SEVERE - CFR
+   D_death  = Time_to_death-D_infectious   ! 9  Time sick
+
    pd=0.0
-!   N=sum(y(1:4))
-!   pd(1,1) = -Rt*y(3)/(Tinf*N)
-!   pd(1,3) = -Rt*y(1)/(Tinf*N)
-!   pd(2,1) =  Rt*y(3)/(Tinf*N)
-!   pd(2,2) = -1.0/Tinc
-!   pd(2,3) =  Rt*y(1)/(Tinf*N)
-!   pd(3,2) =  1.0/Tinc 
-!   pd(3,3) = -1.0/Tinf        
-!   pd(4,3) =  1.0/Tinf        
+   pd(0,0) = -beta*y(2)
+   pd(0,2) = -beta*y(0)
+   pd(1,0) =  beta*y(2)
+   pd(1,1) = -a
+   pd(1,2) =  beta*y(0)
+   pd(2,1) =  a
+   pd(2,2) = -b
+   pd(3,2) =  p_mild*b
+   pd(3,3) = -1.0/D_recovery_mild
+   pd(4,2) =  p_severe*b
+   pd(4,4) = -1.0/D_hospital_lag
+   pd(5,4) =  1.0/D_hospital_lag
+   pd(5,5) = -1.0/D_recovery_severe
+   pd(6,2) =  p_fatal*b
+   pd(6,6) = -1.0/D_death
+   pd(7,3) =  1.0/D_recovery_mild
+   pd(8,5) =  1.0/D_recovery_severe
+   pd(9,6) =  1.0/D_death
+
 end subroutine
 

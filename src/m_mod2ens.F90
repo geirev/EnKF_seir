@@ -17,7 +17,7 @@ subroutine mod2ens(nrpar, nrens, enspar , j)
    enspar(6,j)   =  D_infectious       + enspar(6,j)  ! Duration patient is infectious (Tinf)
    enspar(7,j)   =  D_recovery_mild    + enspar(7,j)  ! Recovery time mild cases (11.1)
    enspar(8,j)   =  D_recovery_severe  + enspar(8,j)  ! Recovery time severe cases (28.6) Lengt of hospital stay
-   enspar(9,j)  =  D_hospital_lag      + enspar(9,j)  ! Time to hospitalization.
+   enspar(9,j)   =  D_hospital_lag     + enspar(9,j)  ! Time to hospitalization.
    enspar(10,j)  =  CFR                + enspar(10,j) ! Case fatality rate 
    enspar(11,j)  =  p_severe           + enspar(11,j) ! Hospitalization rate % for severe cases
    enspar(12,j)  =  Rt                 + enspar(12,j) ! Basic Reproduction Number during intervention
