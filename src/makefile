@@ -40,7 +40,7 @@ CPPFLAGS = -traditional -P $(CPPARCH) $(CPPMODEL)
 #LIBDIR = -L /h/geve/lib/linux  -L /usr/lib/gcc/x86_64-redhat-linux/3.4.3/32 -L/h/a152128/lib/linux 
 
 LIBS =  -lg2c  -lblas -llapack -lfftw3 -lecl -lhash -lpthread
-LIBS =  -llapack -lblas  -llapack 
+LIBS =  ./libenkfanalysis.a -llapack -lblas  -llapack 
 
 
 BINDIR = $(HOME)/bin
@@ -88,6 +88,7 @@ $(TARGET): $(INC2) $(OMOD) $(OBJECTS)
 	cd ./$(BUILD) ; $(LD) $(LINKFLAGS) -o $(TARGET) $(OMOD) $(OBJECTS) $(LIBDIR) $(LIBS) 
 
 install:
+	@mkdir -p $(BINDIR)
 	cp $(BUILD)/$(TARGET) $(BINDIR)
 
 

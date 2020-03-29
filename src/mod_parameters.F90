@@ -13,7 +13,8 @@ module mod_parameters
    real, save :: CFR               
    real, save :: InterventionTime  
    real, save :: Xmax              
-   real, save :: Time
-   real, save :: duration
    real, save :: p_severe
+
+   real, save :: duration
+   real, save :: time
 end module 

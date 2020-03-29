@@ -25,22 +25,44 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Time stepping
-   integer, parameter :: nt=200
+   integer, parameter :: nt=365           ! Number of outputs
    real tout,t,dt
    integer i
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Ensemble variables
    integer, parameter :: nrens=100
-   integer, parameter :: nrpar=16
-   real ens(0:neq-1,0:nt,nrens)
-   real enspar(1:nrpar,nrens)
-   real parstd(1:nrpar)
+   integer, parameter :: nrpar=13
+
+   real enspar(1:nrpar,nrens)    ! Ensemble of parameters (state variables)
+   real parstd(1:nrpar)          ! Standard deviations of state variables
    integer j
 
+   real ens(0:neq-1,0:nt,nrens)  ! storage of the ensemble of solutions for printing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Set parameters (decleared in mod_parameters.F90)
+! EnKF variables
+   integer, parameter :: nrobs=2 ! Number of observations
+   integer, parameter :: ne=1    ! extended E ensemble
+   logical    lenkf
+   integer :: mode_analysis=11
+   logical :: lrandrot=.false.
+   logical :: lupdate_randrot=.false.
+   logical :: lsymsqrt=.false.
+   integer :: inflate=0
+   integer :: infmult=1.0
+   real :: truncation=0.999      ! singular value truncation
+   real dobs(nrobs)              ! Observation values
+   integer iobst                 ! time of measurement
+   real innovation(nrobs)        ! Observation innovation dobs-y
+   real D(nrobs,nrens)           ! dobs+eps - y
+   real S(nrobs,nrens)           ! Ensemble of predicted observation anomalies
+   real E(nrobs,nrens)           ! Ensemble of measurement perturbations
+   real R(nrobs,nrobs)           ! Measurement error covariance matrix
+   integer m
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
    Time_to_death     = 32.0                         ; parstd(1)=3.0   ! 1  Days to death
    N                 = 5000000.0                    ; parstd(2)=0.0   ! 2  Initial population
    I0                = 195.0                        ; parstd(3)=20.0  ! 3  Initial infectious
@@ -48,15 +70,16 @@ program seir
    D_incbation       = 5.2                          ; parstd(5)=1.0   ! 5  Incubation period (Tinc)
    D_infectious      = 2.9                          ; parstd(6)=1.0   ! 6  Duration patient is infectious (Tinf)
    D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=2.0   ! 7  Recovery time mild cases (11.1)
-   D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=2.0   ! 8  Recovery time severe cases (28.6) Lengt of hospital stay
-   D_death           = Time_to_death-D_infectious   ; parstd(9)=2.0   ! 9  Time sick
-   D_hospital_lag    = 5.0                          ; parstd(10)=2.0  ! 10 Time to hospitalization.
-   CFR               = 0.02                         ; parstd(11)=0.002! 11 Case fatality rate 
-   Time              = 365.0                        ; parstd(12)=0.0  ! 12 Length of simulation
-   p_severe          = 0.2                          ; parstd(13)=0.1  ! 13 Hospitalization rate % for severe cases
-   Rt                = 0.9                          ; parstd(14)=0.1  ! 14 Basic Reproduction Number during intervention
-   InterventionTime  = 30.0                         ; parstd(15)=2.0  ! 15 Interventions start here
-   duration          = 500                          ; parstd(16)=0.0  ! 16 Duration of measures
+   D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=2.0   ! 8  Recovery time severe cases Length of hospital stay
+   D_hospital_lag    = 5.0                          ; parstd(9)=2.0  ! 10 Time to hospitalization.
+   CFR               = 0.02                         ; parstd(10)=0.002! 11 Case fatality rate 
+   p_severe          = 0.2                          ; parstd(11)=0.1  ! 12 Hospitalization rate % for severe cases
+   Rt                = 0.9                          ; parstd(12)=0.1  ! 13 Basic Reproduction Number during intervention
+   InterventionTime  = 30.0                         ; parstd(13)=2.0  ! 14 Interventions start here
+
+   duration= 500                         ! Duration of measures
+   time=365.0                            ! Length of simulation
+   dt= time/real(nt-1)                   ! Timestep of outputs
 
    call random(enspar,nrpar*nrens)
    do j=1,nrens
@@ -65,7 +88,23 @@ program seir
    enddo
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Initial conditions
+! EnKF initialization
+!  Observations
+   lenkf=.true.     ! True to run EnKF
+   iobst=30         ! day of measurment
+   dobs(1) =22.0    ! total deaths at day ?
+   dobs(2) =300.0   ! total hospitalized at day ?
+   R(1,1)=1.0; R(1,2)=0.0
+   R(2,1)=0.0; R(2,2)=1.0
+   call random(E,nrobs*nrens)
+   do m=1,nrobs
+      E(m,:)=sqrt(R(m,m))*E(m,:)          
+      D(m,:)=dobs(m)+E(m,:)
+   enddo
+
+
+!!!!/home/geve/Dropbox/EnKF_analysis/test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! First guess (mean) initial conditions
    y(0) = (N-I0)/N    ! Susceptible (Normalized initial nonimmune population)
    y(1) = 0.0         ! Exposed 
    y(2) = I0/N        ! Infected
@@ -77,39 +116,69 @@ program seir
    y(8) = 0.0         ! R_severe (recovered)
    y(9) = 0.0         ! R_fatal (dead)
 
-! Randomizing number of initially infected
-   call random(ens(2,0,:),nrens)
-   ens(2,0,:)=parstd(3)*ens(2,0,:) / N
-
-   do j=1,nrens
-      ens(3:9,0,j)=y(3:9)
-      ens(2,0,j)= ens(2,0,j)+y(2)
-      ens(0,0,j)=1.0-ens(2,0,j)
-   enddo
-
+! Ensemble of initial conditions
+! (Initializing y(2) = ens(2,0,:) with number of initially infected I0 from enspar(3,:))
+   ens(:,0,:)=0.0
+   ens(2,0,:)=enspar(3,:)/N
+   ens(0,0,:)=1.0-ens(2,0,:)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   dt= time/real(nt-1)
-
-   do j=1,nrens        ! ensemble loop
+! Prior ensemble prediction
+   do j=1,nrens
       y(:)=ens(:,0,j) 
       call ens2mod(nrpar, nrens, enspar , j)
-
       istate=1
       do i=1,nt 
          t=0+real(i)*dt
          tout=t+dt
          call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
+         ens(:,i,j)=y(:)
          if (istate < 0) then
             print '(a,i3)','negative istate, exiting: ',istate
-            stop
+            istate=2
+            ens(:,:,j)=-1.0
+            exit
          endif
-         ens(:,i,j)=y(:)
       enddo
-
    enddo
+   call tecplot(ens,enspar,nt,nrens,neq,nrpar,0)
 
-   call tecplot(ens,nt,nrens,neq)
+   if (.not.lenkf) stop
+
+   innovation(:)=0.0                                  ! only for sqrt filters
+
+   D(1,:) = D(1,:)-N*ens(9,iobst,:)                   ! Dead
+   D(2,:) = D(2,:)-N*(ens(5,iobst,:)+ens(6,iobst,:))  ! Hospitelized
+
+   S(1,:) = N*( ens(9,iobst,:) - sum(ens(9,iobst,:))/real(nrens) )           
+   S(2,:) = N*( ens(5,iobst,:) - sum(ens(5,iobst,:))/real(nrens) &
+                  &+ens(6,iobst,:) - sum(ens(6,iobst,:))/real(nrens) )
+
+   call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
+                 lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
+   
+   ens(:,0,:)=0.0
+   ens(2,0,:)=enspar(3,:)/N
+   ens(0,0,:)=1.0-ens(2,0,:)
+
+   do j=1,nrens
+      y(:)=ens(:,0,j) 
+      call ens2mod(nrpar, nrens, enspar , j)
+      istate=1
+      do i=1,nt 
+         t=0+real(i)*dt
+         tout=t+dt
+         call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
+         ens(:,i,j)=y(:)
+         if (istate < 0) then
+            print '(a,i3)','negative istate, exiting: ',istate
+            istate=2
+            ens(:,:,j)=-1.0
+            exit
+         endif
+      enddo
+   enddo
+   call tecplot(ens,enspar,nt,nrens,neq,nrpar,1)
 
 end program
 
@@ -158,6 +227,7 @@ subroutine f(neq, t, y, ydot)
 
    p_fatal  = CFR
    p_mild   = 1 - P_SEVERE - CFR
+   D_death  = Time_to_death-D_infectious   ! 9  Time sick
 
    ydot(0) = -beta*I*S
    ydot(1) =  beta*I*S - a*E

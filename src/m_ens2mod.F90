@@ -17,14 +17,11 @@ subroutine ens2mod(nrpar, nrens, enspar , j)
    D_infectious      = enspar(6,j)    ! Duration patient is infectious (Tinf)
    D_recovery_mild   = enspar(7,j)    ! Recovery time mild cases (11.1)
    D_recovery_severe = enspar(8,j)    ! Recovery time severe cases (28.6) Lengt of hospital stay
-   D_death           = enspar(9,j)    ! Time sick
-   D_hospital_lag    = enspar(10,j)   ! Time to hospitalization.
-   CFR               = enspar(11,j)   ! Case fatality rate 
-   Time              = enspar(12,j)   ! Length of simulation
-   p_severe          = enspar(13,j)   ! Hospitalization rate % for severe cases
-   Rt                = enspar(14,j)   ! Basic Reproduction Number during intervention
-   InterventionTime  = enspar(15,j)   ! Interventions start here
-   duration          = enspar(16,j)   ! Duration of measures
+   D_hospital_lag    = enspar(9,j)   ! Time to hospitalization.
+   CFR               = enspar(10,j)   ! Case fatality rate 
+   p_severe          = enspar(11,j)   ! Hospitalization rate % for severe cases
+   Rt                = enspar(12,j)   ! Basic Reproduction Number during intervention
+   InterventionTime  = enspar(13,j)   ! Interventions start here
 end subroutine
 end module
 
