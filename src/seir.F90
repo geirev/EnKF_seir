@@ -87,7 +87,7 @@ program seir
    D_infectious      = 2.9                          ; parstd(6)=1.0   ! 6  Duration patient is infectious (Tinf)
    D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=2.0   ! 7  Recovery time mild cases (11.1)
    D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=2.0   ! 8  Recovery time severe cases Length of hospital stay
-   D_hospital_lag    = 5.0                          ; parstd(9)=2.0  ! 10 Time to hospitalization.
+   D_hospital_lag    = 5.0                          ; parstd(9)=2.0   ! 10 Time to hospitalization.
    CFR               = 0.02                         ; parstd(10)=0.002! 11 Case fatality rate 
    p_severe          = 0.2                          ; parstd(11)=0.1  ! 12 Hospitalization rate % for severe cases
    Rt                = 0.9                          ; parstd(12)=0.1  ! 13 Basic Reproduction Number during intervention
@@ -121,8 +121,6 @@ program seir
       print '(i3,100f10.2)',m,D(m,1:10)
    enddo
 
-
-!!!!/home/geve/Dropbox/EnKF_analysis/test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! First guess (mean) initial conditions                                         Model var     Latex
    y(0) = (N-I0)/N    ! Susceptible (Normalized initial nonimmune population)   (S       )    S
    y(1) = 0.0         ! Exposed                                                 (E       )    E
