@@ -63,7 +63,7 @@ program seir
    integer m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   mf=10
+   mf=21
    select case (mf)
    case(10)        ! Nostiff Adams (no Jacobian)
       lrw = 20 + 16*neq
@@ -81,7 +81,7 @@ program seir
 ! Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
    Time_to_death     = 32.0                         ; parstd(1)=3.0   ! 1  Days to death
    N                 = 5000000.0                    ; parstd(2)=0.0   ! 2  Initial population
-   I0                = 195.0                        ; parstd(3)=20.0  ! 3  Initial infectious
+   I0                = 50.0                         ; parstd(3)=1.1   ! 3  Initial infectious (19 cases 1st march)
    R0                = 2.2                          ; parstd(4)=0.2   ! 4  Basic Reproduction Number
    D_incbation       = 5.2                          ; parstd(5)=1.0   ! 5  Incubation period (Tinc)
    D_infectious      = 2.9                          ; parstd(6)=1.0   ! 6  Duration patient is infectious (Tinf)
@@ -91,7 +91,7 @@ program seir
    CFR               = 0.02                         ; parstd(10)=0.002! 11 Case fatality rate 
    p_severe          = 0.2                          ; parstd(11)=0.1  ! 12 Hospitalization rate % for severe cases
    Rt                = 0.9                          ; parstd(12)=0.1  ! 13 Basic Reproduction Number during intervention
-   InterventionTime  = 30.0                         ; parstd(13)=2.0  ! 14 Interventions start here
+   InterventionTime  = 30.0                         ; parstd(13)=2.0  ! 14 Interventions start here (15th march)
 
    duration= 500                         ! Duration of measures
    time=365.0                            ! Length of simulation
@@ -108,30 +108,32 @@ program seir
 ! EnKF initialization
 !  Observations
    lenkf=.true.     ! True to run EnKF
-   iobst=30         ! day of measurment
-   dobs(1) =22.0    ! total deaths at day ?
-   dobs(2) =300.0   ! total hospitalized at day ?
+   iobst=45         ! day of measurment
+   dobs(1) =25.0    ! total deaths at day 29
+   dobs(2) =317.0   ! total hospitalized at day 29
    R(1,1)=1.0; R(1,2)=0.0
    R(2,1)=0.0; R(2,2)=1.0
    call random(E,nrobs*nrens)
+   print *,'D:'
    do m=1,nrobs
       E(m,:)=sqrt(R(m,m))*E(m,:)          
       D(m,:)=dobs(m)+E(m,:)
+      print '(i3,100f10.2)',m,D(m,1:10)
    enddo
 
 
 !!!!/home/geve/Dropbox/EnKF_analysis/test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! First guess (mean) initial conditions
-   y(0) = (N-I0)/N    ! Susceptible (Normalized initial nonimmune population)
-   y(1) = 0.0         ! Exposed 
-   y(2) = I0/N        ! Infected
-   y(3) = 0.0         ! Mild
-   y(4) = 0.0         ! Severe   (severe at home)
-   y(5) = 0.0         ! Severe_H (severe at hospital)
-   y(6) = 0.0         ! Severe at hospital that will die   
-   y(7) = 0.0         ! R_mild   (recovered)
-   y(8) = 0.0         ! R_severe (recovered)
-   y(9) = 0.0         ! R_fatal (dead)
+! First guess (mean) initial conditions                                         Model var     Latex
+   y(0) = (N-I0)/N    ! Susceptible (Normalized initial nonimmune population)   (S       )    S
+   y(1) = 0.0         ! Exposed                                                 (E       )    E
+   y(2) = I0/N        ! Infected                                                (I       )    I
+   y(3) = 0.0         ! Sick Mild                                               (Mild    )    S_mild
+   y(4) = 0.0         ! Sick (Severe at home)                                   (Severe  )    S_home
+   y(5) = 0.0         ! Sick (Severe at hospital)                               (Severe_H)    S_hosp
+   y(6) = 0.0         ! Sick (Severe at hospital that will die)                 (Fatal   )    S_mort
+   y(7) = 0.0         ! Removed_mild   (recovered)                              (R_Mild  )    R_mild
+   y(8) = 0.0         ! Removed_severe (recovered)                              (R_Severe)    R_seve
+   y(9) = 0.0         ! Removed_fatal (dead)                                    (R_Fatal )    R_dead
 
 ! Ensemble of initial conditions
 ! (Initializing y(2) = ens(2,0,:) with number of initially infected I0 from enspar(3,:))
@@ -166,6 +168,14 @@ program seir
 
    D(1,:) = D(1,:)-N*ens(9,iobst,:)                   ! Dead
    D(2,:) = D(2,:)-N*(ens(5,iobst,:)+ens(6,iobst,:))  ! Hospitelized
+   print *,'Y'
+   print '(a,100f10.2)',' 1',N*ens(9,iobst,1:10)
+   print '(a,100f10.2)',' 2',N*(ens(5,iobst,1:10)+ens(6,iobst,1:10)) 
+
+   print *,'D innovation'
+   do m=1,nrobs
+      print '(i3,100f10.2)',m,D(m,1:10)
+   enddo
 
    S(1,:) = N*( ens(9,iobst,:) - sum(ens(9,iobst,:))/real(nrens) )           
    S(2,:) = N*( ens(5,iobst,:) - sum(ens(5,iobst,:))/real(nrens) &
