@@ -8,6 +8,7 @@ program seir
    external f,jac
    integer, parameter :: neq=10 ! Number of equations
    real y(0:neq-1)              ! Solution S, E, I R
+   logical ex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! slsode parameters and workspace
@@ -35,8 +36,8 @@ program seir
    integer, parameter :: nrens=999
    integer, parameter :: nrpar=13
 
-   real enspar(1:nrpar,nrens)    ! Ensemble of parameters (state variables)
-   real parstd(1:nrpar)          ! Standard deviations of state variables
+   real enspar(1:nrpar+neq,nrens) ! Ensemble of state variables ( parameters + initial conditions)
+   real parstd(1:nrpar)           ! Standard deviations of parameters
    integer j
 
    real ens(0:neq-1,0:nt,nrens)  ! storage of the ensemble of solutions for printing
@@ -63,87 +64,94 @@ program seir
    integer m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   mf=21
-   select case (mf)
-   case(10)        ! Nostiff Adams (no Jacobian)
-      lrw = 20 + 16*neq
-      liw = 20
-   case(21 : 22)
-      lrw = 22 + 9*neq +neq**2 
-      liw = 20 + neq
-   case default
-      stop 'wrong mf'
-   end select
-
+! SLSODE parameters
+   mf=21  ! (10,21,22)
+   lrw =max(20+16*neq, 22+9*neq+neq**2)
+   liw = 20 + neq
    allocate(rwork(lrw))
    allocate(iwork(liw))
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-   Time_to_death     = 32.0                         ; parstd(1)=3.0   ! 1  Days to death
-   N                 = 5000000.0                    ; parstd(2)=0.0   ! 2  Initial population
-   I0                = 50.0                         ; parstd(3)=1.1   ! 3  Initial infectious (19 cases 1st march)
-   R0                = 2.2                          ; parstd(4)=0.2   ! 4  Basic Reproduction Number
-   D_incbation       = 5.2                          ; parstd(5)=1.0   ! 5  Incubation period (Tinc)
-   D_infectious      = 2.9                          ; parstd(6)=1.0   ! 6  Duration patient is infectious (Tinf)
-   D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=2.0   ! 7  Recovery time mild cases (11.1)
-   D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=2.0   ! 8  Recovery time severe cases Length of hospital stay
-   D_hospital_lag    = 5.0                          ; parstd(9)=2.0   ! 10 Time to hospitalization.
-   CFR               = 0.02                         ; parstd(10)=0.002! 11 Case fatality rate 
-   p_severe          = 0.2                          ; parstd(11)=0.1  ! 12 Hospitalization rate % for severe cases
-   Rt                = 0.9                          ; parstd(12)=0.1  ! 13 Basic Reproduction Number during intervention
-   InterventionTime  = 30.0                         ; parstd(13)=2.0  ! 14 Interventions start here (15th march)
-
-   duration= 500                         ! Duration of measures
-   time=365.0                            ! Length of simulation
-   dt= time/real(nt-1)                   ! Timestep of outputs
-
-   call random(enspar,nrpar*nrens)
-   do j=1,nrens
-      enspar(:,j)=parstd(:)*enspar(:,j)
-      call mod2ens(nrpar,nrens,enspar,j)
-   enddo
-   enspar=max(enspar,0.01)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! EnKF initialization
 !  Observations
    lenkf=.true.     ! True to run EnKF
-   iobst=45         ! day of measurment
-   dobs(1) =25.0    ! total deaths at day 29
-   dobs(2) =317.0   ! total hospitalized at day 29
-   R(1,1)=1.0; R(1,2)=0.0
-   R(2,1)=0.0; R(2,2)=1.0
+   iobst=31         ! 31/3 day of measurment since first death 12th March
+   dobs(1) =34.0    ! total deaths at day 31/3
+   dobs(2) =319.0   ! total hospitalized at day 31/3
+   R(1,1)=0.01; R(1,2)=0.0
+   R(2,1)=0.0; R(2,2)=0.01
    call random(E,nrobs*nrens)
-   print *,'D:'
+   print *,'D: perturbed data'
    do m=1,nrobs
       E(m,:)=sqrt(R(m,m))*E(m,:)          
       D(m,:)=dobs(m)+E(m,:)
       print '(i3,100f10.2)',m,D(m,1:10)
    enddo
 
-! First guess (mean) initial conditions                                         Model var     Latex
-   y(0) = (N-I0)/N    ! Susceptible (Normalized initial nonimmune population)   (S       )    S
-   y(1) = 0.0         ! Exposed                                                 (E       )    E
-   y(2) = I0/N        ! Infected                                                (I       )    I
-   y(3) = 0.0         ! Sick Mild                                               (Mild    )    S_mild
-   y(4) = 0.0         ! Sick (Severe at home)                                   (Severe  )    S_home
-   y(5) = 0.0         ! Sick (Severe at hospital)                               (Severe_H)    S_hosp
-   y(6) = 0.0         ! Sick (Severe at hospital that will die)                 (Fatal   )    S_mort
-   y(7) = 0.0         ! Removed_mild   (recovered)                              (R_Mild  )    R_mild
-   y(8) = 0.0         ! Removed_severe (recovered)                              (R_Severe)    R_seve
-   y(9) = 0.0         ! Removed_fatal (dead)                                    (R_Fatal )    R_dead
 
-! Ensemble of initial conditions
-! (Initializing y(2) = ens(2,0,:) with number of initially infected I0 from enspar(3,:))
-   ens(:,0,:)=0.0
-   ens(2,0,:)=enspar(3,:)/N
-   ens(0,0,:)=1.0-ens(2,0,:)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
+   Time_to_death     = 32.0                         ; parstd(1)=0.0    ! 1  Days to death
+   N                 = 5000000.0                    ; parstd(2)=0.0    ! 2  Initial population
+   I0                = 40.0                         ; parstd(3)=5.0    ! 3  Initial infectious (19 cases 1st march)
+   R0                = 2.2                          ; parstd(4)=0.25   ! 4  Basic Reproduction Number
+   D_incbation       = 5.2                          ; parstd(5)=0.0    ! 5  Incubation period (Tinc)
+   D_infectious      = 2.9                          ; parstd(6)=0.0    ! 6  Duration patient is infectious (Tinf)
+   D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=0.0    ! 7  Recovery time mild cases (11.1)
+   D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
+   D_hospital_lag    = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
+   CFR               = 0.04                         ; parstd(10)=0.002 ! 11 Case fatality rate 
+   p_severe          = 0.15                         ; parstd(11)=0.0   ! 12 Hospitalization rate % for severe cases
+   Rt                = 0.9                          ; parstd(12)=0.05  ! 13 Basic Reproduction Number during intervention
+   InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
+
+   duration= 500                         ! Duration of measures
+   time=365.0                            ! Length of simulation
+   dt= time/real(nt-1)                   ! Timestep of outputs
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! perturb first guess values of parameters and initial conditions
+   call random(enspar(1:nrpar,1:nrens),nrpar*nrens)
+   do j=1,nrens
+      enspar(1:nrpar,j)=parstd(1:nrpar)*enspar(1:nrpar,j)
+      call mod2ens(nrpar,nrens,neq,enspar,j)
+   enddo
+   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.01) ! Ensure positive parameters
+   enspar(12,:)=min(enspar(12,:),0.999)          ! Ensure Rt < 1.0
+
+   print '(a)','Simple initialization'
+   do j=1,nrens
+      I0=enspar(3,j)     
+      ens(0,0,j)=(N-I0)   ! Susceptible (Normalized initial nonimmune population)   (S       )    S
+      ens(1,0,j)=4*I0     ! Exposed                                                 (E       )    E
+      ens(2,0,j)=I0       ! Infected                                                (I       )    I
+      ens(3,0,j)=0.0      ! Sick Mild                                               (Mild    )    S_mild
+      ens(4,0,j)=0.0      ! Sick (Severe at home)                                   (Severe  )    S_home
+      ens(5,0,j)=0.0      ! Sick (Severe at hospital)                               (Severe_H)    S_hosp
+      ens(6,0,j)=0.0      ! Sick (Severe at hospital that will die)                 (Fatal   )    S_mort
+      ens(7,0,j)=0.0      ! Removed_mild   (recovered)                              (R_Mild  )    R_mild
+      ens(8,0,j)=0.0      ! Removed_severe (recovered)                              (R_Severe)    R_seve
+      ens(9,0,j)=0.0      ! Removed_fatal (dead)                                    (R_Fatal )    R_dead
+   enddo
+   ens(:,0,:)=ens(:,0,:)/N
+
+! Copy initial ensemble to enspar for later updating
+   enspar(nrpar+1:nrpar+neq,:)=ens(0:neq-1,0,:) 
+
+   print '(a)','enspar INI'
+   print '(a,100g13.4)','1', enspar(1:nrpar,1)
+   print '(a,100g13.4)','2', enspar(1:nrpar,2)
+   print '(a,100g13.4)','3', enspar(1:nrpar,3)
+   print '(a)','ens INI'
+   print '(a,100g13.4)','1', N*ens(:,0,1)
+   print '(a,100g13.4)','2', N*ens(:,0,2)
+   print '(a,100g13.4)','3', N*ens(:,0,3)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    do j=1,nrens
       y(:)=ens(:,0,j) 
-      call ens2mod(nrpar, nrens, enspar , j)
+      call ens2mod(nrpar, nrens, neq, enspar , j)
       istate=1
       do i=1,nt 
          t=0+real(i)*dt
@@ -152,9 +160,7 @@ program seir
          ens(:,i,j)=y(:)
          if (istate < 0) then
             print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
-            istate=2
-            ens(:,:,j)=-1.0
-            exit
+            stop
          endif
       enddo
    enddo
@@ -162,13 +168,15 @@ program seir
 
    if (.not.lenkf) stop
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! EnKF update
    innovation(:)=0.0                                  ! only for sqrt filters
-
    D(1,:) = D(1,:)-N*ens(9,iobst,:)                   ! Dead
    D(2,:) = D(2,:)-N*(ens(5,iobst,:)+ens(6,iobst,:))  ! Hospitelized
-   print *,'Y'
-   print '(a,100f10.2)',' 1',N*ens(9,iobst,1:10)
-   print '(a,100f10.2)',' 2',N*(ens(5,iobst,1:10)+ens(6,iobst,1:10)) 
+
+   print *,'Predicted measurements (10 realizations):'
+   print '(a,100f10.2)','d(1)',N*ens(9,iobst,1:10)
+   print '(a,100f10.2)','d(2)',N*(ens(5,iobst,1:10)+ens(6,iobst,1:10)) 
 
    print *,'D innovation'
    do m=1,nrobs
@@ -177,18 +185,28 @@ program seir
 
    S(1,:) = N*( ens(9,iobst,:) - sum(ens(9,iobst,:))/real(nrens) )           
    S(2,:) = N*( ens(5,iobst,:) - sum(ens(5,iobst,:))/real(nrens) &
-                  &+ens(6,iobst,:) - sum(ens(6,iobst,:))/real(nrens) )
+              &+ens(6,iobst,:) - sum(ens(6,iobst,:))/real(nrens) )
 
-   call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
+   call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
                  lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
-   
-   ens(:,0,:)=0.0
-   ens(2,0,:)=enspar(3,:)/N
-   ens(0,0,:)=1.0-ens(2,0,:)
 
+   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.01)
+   ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.0)
+
+   print '(a)','enspar ANA'
+   print '(a,100g13.4)','1', enspar(1:nrpar,1)
+   print '(a,100g13.4)','2', enspar(1:nrpar,2)
+   print '(a,100g13.4)','3', enspar(1:nrpar,3)
+   print '(a)','ens FIN'
+   print '(a,100g13.4)','1', N*ens(:,0,1)
+   print '(a,100g13.4)','2', N*ens(:,0,2)
+   print '(a,100g13.4)','3', N*ens(:,0,3)
+  
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Posterior ensemble prediction
    do j=1,nrens
       y(:)=ens(:,0,j) 
-      call ens2mod(nrpar, nrens, enspar , j)
+      call ens2mod(nrpar, nrens, neq, enspar , j)
       istate=1
       do i=1,nt 
          t=0+real(i)*dt
@@ -196,10 +214,8 @@ program seir
          call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
          ens(:,i,j)=y(:)
          if (istate < 0) then
-            print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=1,  iens=',j
-            istate=2
-            ens(:,:,j)=-1.0
-            exit
+            print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
+            stop
          endif
       enddo
    enddo

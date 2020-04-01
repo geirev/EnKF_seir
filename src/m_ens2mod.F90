@@ -1,13 +1,14 @@
 module m_ens2mod
 contains
-subroutine ens2mod(nrpar, nrens, enspar , j)
+subroutine ens2mod(nrpar, nrens, neq, enspar , j)
 ! Copies initial conditions from ens(:,j) to y before simulation
    use mod_parameters
    implicit none
    integer, intent(in) :: nrpar
    integer, intent(in) :: nrens
+   integer, intent(in) :: neq
    integer, intent(in) :: j
-   real,    intent(in) :: enspar(nrpar,nrens)
+   real,    intent(in) :: enspar(nrpar+neq,nrens)
 
    Time_to_death     = enspar(1,j)    ! Days to death
    N                 = enspar(2,j)    ! Initial population

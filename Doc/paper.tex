@@ -1,0 +1,409 @@
+\pdfoptionpdfminorversion=7
+%\documentclass[natbib,twocolumn]{svjour3}
+%\documentclass[natbib]{svjour3}
+\documentclass[twoside,11pt]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
+\newfloat{algorithm}{t}{lop}
+\floatname{algorithm}{\bf Algorithm}
+\usepackage[pdftex]{color}
+\usepackage{pdfcolmk}
+\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{newtxtext,newtxmath}
+\usepackage{bm}
+\usepackage{natbib}
+\usepackage{setspace}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\usepackage[a4paper,head=17mm,headsep=7mm,top=0.8in,left=0.9in,right=0.9in,bottom=0.8in]{geometry}
+
+\bibliographystyle{spbasic}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\@combinedblfloats{\box\@outputbox}{\unvbox\@outputbox}{}{\errmessage{\noexpand patch failed}}
+\makeatother
+
+
+\usepackage{marginnote}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\pdfminorversion=5
+
+\usepackage{scalerel,stackengine}
+\newcommand\pig[1]{\scalerel*[5pt]{\big#1}{%
+  \ensurestackMath{\addstackgap[1.5pt]{\big#1}}}}
+\newcommand\pigl[1]{\mathopen{\pig{#1}}}
+\newcommand\pigr[1]{\mathclose{\pig{#1}}}
+
+
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1, key2, key3}, % list of keywords
+    pdfnewwindow=true,      % links in new PDF window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links (change box color with linkbordercolor)
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan,           % color of external links
+}
+
+
+\newcommand{\E}[1]{\mathbb{E}\left[\, #1 \,\right]}
+\newcommand{\benen}{\frac{1}{N} \bmEN\bmEN^\rmT}
+\newcommand{\bIenen}{\Big(\bmI-\frac{1}{N} \bmEN\bmEN^\rmT\Big)}
+
+\newcommand{\framedeqX}[1]{
+\begin{flushleft}
+\fboxrule=0.4mm
+\fbox{
+\begin{minipage}{0.454\textwidth}
+#1
+\text{ }
+\end{minipage}
+}
+\end{flushleft}
+}
+
+
+
+
+
+
+
+
+\newcommand {\hpil}{\rightarrow}
+\newcommand {\vpil}{\sim}
+\newcommand {\D}[2]{\frac{d #1}{d #2}}
+\newcommand {\Dd}[2] {\frac{d^2 #1}{d {#2}^2}}
+\newcommand {\Dp}[2] {\frac{\partial #1}{\partial #2}}
+\newcommand {\Ddp}[2] {\frac{{\partial}^2 #1}{\partial {#2}^2}}
+\newcommand {\Ddpp}[2] {\frac{{\partial}^2 #1}{\partial #2^2}}
+\newcommand {\del} {\nabla}
+\newcommand {\Dj}[3]{\frac{ d_{\scriptstyle{#3}} #1}{d #2}}
+\newcommand {\et}{{\scriptscriptstyle \frac{1}{2}}}
+\newcommand {\ento}{\frac{1}{2}}
+\newcommand {\lp}{\left(}
+\newcommand {\rp}{\right)}
+\newcommand {\lk}{\left\{ }
+\newcommand {\rk}{\right\} }
+
+
+
+
+\newcommand{\rma}{\mathrm{a}}
+\newcommand{\rmb}{\mathrm{b}}
+\newcommand{\rmc}{\mathrm{c}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmf}{\mathrm{f}}
+\newcommand{\rmg}{\mathrm{g}}
+\newcommand{\rmh}{\mathrm{h}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmj}{\mathrm{j}}
+\newcommand{\rmk}{\mathrm{k}}
+\newcommand{\rml}{\mathrm{l}}
+\newcommand{\rmm}{\mathrm{m}}
+\newcommand{\rmn}{\mathrm{n}}
+\newcommand{\rmo}{\mathrm{o}}
+\newcommand{\rmp}{\mathrm{p}}
+\newcommand{\rmq}{\mathrm{q}}
+\newcommand{\rmr}{\mathrm{r}}
+\newcommand{\rms}{\mathrm{s}}
+\newcommand{\rmt}{\mathrm{t}}
+\newcommand{\rmu}{\mathrm{u}}
+\newcommand{\rmv}{\mathrm{v}}
+\newcommand{\rmw}{\mathrm{w}}
+\newcommand{\rmx}{\mathrm{x}}
+\newcommand{\rmy}{\mathrm{y}}
+\newcommand{\rmz}{\mathrm{z}}
+
+\newcommand{\rmA}{\mathrm{A}}
+\newcommand{\rmB}{\mathrm{B}}
+\newcommand{\rmC}{\mathrm{C}}
+\newcommand{\rmD}{\mathrm{D}}
+\newcommand{\rmE}{\mathrm{E}}
+\newcommand{\rmF}{\mathrm{F}}
+\newcommand{\rmG}{\mathrm{G}}
+\newcommand{\rmH}{\mathrm{H}}
+\newcommand{\rmI}{\mathrm{I}}
+\newcommand{\rmJ}{\mathrm{J}}
+\newcommand{\rmK}{\mathrm{K}}
+\newcommand{\rmL}{\mathrm{L}}
+\newcommand{\rmM}{\mathrm{M}}
+\newcommand{\rmN}{\mathrm{N}}
+\newcommand{\rmO}{\mathrm{O}}
+\newcommand{\rmP}{\mathrm{P}}
+\newcommand{\rmQ}{\mathrm{Q}}
+\newcommand{\rmR}{\mathrm{R}}
+\newcommand{\rmS}{\mathrm{S}}
+\newcommand{\rmT}{\mathrm{T}}
+\newcommand{\rmU}{\mathrm{U}}
+\newcommand{\rmV}{\mathrm{V}}
+\newcommand{\rmW}{\mathrm{W}}
+\newcommand{\rmX}{\mathrm{X}}
+\newcommand{\rmY}{\mathrm{Y}}
+\newcommand{\rmZ}{\mathrm{Z}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calZ}{\mathcal{Z}}
+
+\newcommand{\bmNull}{{\mathbf{0}}}
+\newcommand{\bma}{{\mathbf{a}}}
+\newcommand{\bmb}{{\mathbf{b}}}
+\newcommand{\bmc}{{\mathbf{c}}}
+\newcommand{\bmd}{{\mathbf{d}}}
+\newcommand{\hatd}{\hat{\bmd}}
+\newcommand{\hatm}{\hat{m}}
+\newcommand{\bme}{{\mathbf{e}}}
+\newcommand{\bmf}{{\mathbf{f}}}
+\newcommand{\bmg}{{\mathbf{g}}}
+\newcommand{\bmh}{{\mathbf{h}}}
+\newcommand{\bmi}{{\mathbf{i}}}
+\newcommand{\bmj}{{\mathbf{j}}}
+\newcommand{\bmk}{{\mathbf{k}}}
+\newcommand{\bml}{{\mathbf{l}}}
+\newcommand{\bmm}{{\mathbf{m}}}
+\newcommand{\bmn}{{\mathbf{n}}}
+\newcommand{\bmo}{{\mathbf{o}}}
+\newcommand{\bmp}{{\mathbf{p}}}
+\newcommand{\bmq}{{\mathbf{q}}}
+\newcommand{\bmr}{{\mathbf{r}}}
+\newcommand{\bms}{{\mathbf{s}}}
+\newcommand{\bmt}{{\mathbf{t}}}
+\newcommand{\bmu}{{\mathbf{u}}}
+\newcommand{\bmv}{{\mathbf{v}}}
+\newcommand{\bmw}{{\mathbf{w}}}
+\newcommand{\bmx}{{\mathbf{x}}}
+\newcommand{\bmy}{{\mathbf{y}}}
+\newcommand{\bmz}{{\mathbf{z}}}
+
+
+\newcommand{\bmA}{{\mathbf{A}}}
+\newcommand{\bmB}{{\mathbf{B}}}
+\newcommand{\bmC}{{\mathbf{C}}}
+\newcommand{\bmD}{{\mathbf{D}}}
+\newcommand{\bmE}{{\mathbf{E}}}
+\newcommand{\bmF}{{\mathbf{F}}}
+\newcommand{\bmG}{{\mathbf{G}}}
+\newcommand{\bmH}{{\mathbf{H}}}
+\newcommand{\bmI}{{\mathbf{I}}}
+\newcommand{\bmJ}{{\mathbf{J}}}
+\newcommand{\bmK}{{\mathbf{K}}}
+\newcommand{\bmL}{{\mathbf{L}}}
+\newcommand{\bmM}{{\mathbf{M}}}
+\newcommand{\bmN}{{\mathbf{N}}}
+\newcommand{\bmO}{{\mathbf{O}}}
+\newcommand{\bmP}{{\mathbf{P}}}
+\newcommand{\bmQ}{{\mathbf{Q}}}
+\newcommand{\bmR}{{\mathbf{R}}}
+\newcommand{\bmS}{{\mathbf{S}}}
+\newcommand{\bmT}{{\mathbf{T}}}
+\newcommand{\bmU}{{\mathbf{U}}}
+\newcommand{\bmV}{{\mathbf{V}}}
+\newcommand{\bmW}{{\mathbf{W}}}
+\newcommand{\bmX}{{\mathbf{X}}}
+\newcommand{\bmY}{{\mathbf{Y}}}
+\newcommand{\bmZ}{{\mathbf{Z}}}
+
+
+\newcommand{\ol}{\overline}
+
+\newcommand{\bmEN}{\mathbf{1}}
+\newcommand{\bmSigma}{\boldsymbol{\Sigma}}
+\newcommand{\bmOmega}{\boldsymbol{\Omega}}
+\newcommand{\bmPi}{\boldsymbol{\Pi}}
+\newcommand{\bmLambda}{\boldsymbol{\Lambda}}
+\newcommand{\bmdelta}{\boldsymbol{\delta}}
+\newcommand{\bmepsilon}{\boldsymbol{\epsilon}}
+
+\newcommand{\red}[1]{{\color{red} #1} }
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\green}[1]{{\color{green} #1}}
+
+
+
+\newcommand{\gradgxfj}{\bmG_{\bmx_j^\rmf}}
+\newcommand{\gradgzfj}{\bmG_{\bmz_j^\rmf}}
+\newcommand{\gradgzf}{\bmG_{\bmz}}
+\newcommand{\gradgqf}{\bmG_\bmq}
+\newcommand{\gradgxf}{\bmG_\bmx}
+
+
+\begin{document}
+\setlength{\parskip}{3mm} 
+
+\title{EnKFseir}
+\author{Geir Evensen}
+%\institute{G. Evensen \at
+%           NORCE (Norwegian Research Center, Bergen, Norway and
+%           Nansen Environmental and Remote Sensing Center, Bergen, Norway\\
+%           tel.: +47 93 09 09 37\\
+%           \email{geir.evensen@norceresearch.no}
+%}
+
+\date{Version compiled \today}
+
+\maketitle
+
+%\abstract{
+%ddd
+%}
+
+\section{Seir model\label{sec:model}}
+
+\subsection{Model variables}
+All model variables are dimensionless normalized by the total initial population $N$.
+\begin{center}
+\begin{tabular}{llll}
+\hline
+ Variable&  Numerical             & Description                                             & Variable in html  \\
+\hline
+ $\bmS     $ & $y(0) = (N-I_0)/N$ & Susceptible (Population not immune to disease)          & \verb+(S       )+ \\
+ $\bmE     $ & $y(1) = 0.0      $ & Exposed     (Population currently in incubation)        & \verb+(E       )+ \\
+ $\bmI     $ & $y(2) = I_0/N    $ & Infected    (Number of infections actively circulating) & \verb+(I       )+ \\
+ $\bmQ_\rmm$ & $y(3) = 0.0      $ & Sick Mild   (Number of mild cases)                      & \verb+(Mild    )+ \\
+ $\bmQ_\rms$ & $y(4) = 0.0      $ & Sick Severe (Number of sever cases at home)             & \verb+(Severe  )+ \\
+ $\bmQ_\rmh$ & $y(5) = 0.0      $ & Sick Hospital (Number of sever cases at hospital)       & \verb+(Severe_H)+ \\
+ $\bmQ_\rmf$ & $y(6) = 0.0      $ & Sick Fatal   (Severe at hospital that will die)         & \verb+(Fatal   )+ \\
+ $\bmR_\rmm$ & $y(7) = 0.0      $ & Removed mild   (recovered)                              & \verb+(R_Mild  )+ \\
+ $\bmR_\rms$ & $y(8) = 0.0      $ & Removed severe (recovered)                              & \verb+(R_Severe)+ \\
+ $\bmD     $ & $y(9) = 0.0      $ & Removed fatal (Dead)                                    & \verb+(R_Fatal )+ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\newcommand{\Tinc}  {\tau_\textrm{inc}}
+\newcommand{\Tinf}  {\tau_\textrm{inf}}
+\newcommand{\Tdeath}{\tau_\textrm{death}}
+\newcommand{\Trecm} {\tau_\textrm{recm}}
+\newcommand{\Trecs} {\tau_\textrm{recs}}
+\newcommand{\Thosp} {\tau_\textrm{hosp}}
+\newcommand{\Tint}  {\tau_\textrm{intervention}}
+\newcommand{\Ttd}   {\tau_\textrm{2death}}
+
+
+\subsection{Model equations}
+%
+\begin{equation}
+ \bmS \hpil \bmE \hpil \bmI \hpil
+\begin{cases}
+\bmQ_\rmm                     &  \hpil \bmR_\rmm  \\
+\bmQ_\rms    \hpil \bmQ_\rmh  &  \hpil \bmR_\rms  \\
+\bmQ_\rmf                     &  \hpil \bmD
+\end{cases}
+\label{eq:}
+\end{equation}
+%
+The model starts with a non-immune population $\bmS$ and a number of infectious persons $\bmI$. people in $\bmS$ gets in contact with people
+in $\bmI$ and are exposed $\bmE$.  After some time they become infectious and move to $\bmI$.  The infectious people then develop desease
+and are moved to $\bmQ_\rmm$ for mild cases, $\bmQ_\rms$ for severe cases, and $\bmQ_\rmf$ for fatal cases. The severe cases are all
+going to the hospital after some time $\bmQ_h$. (The fatal cases are also assumed being hospitelized.) Then $\bmQ_\rmm$ recovers and
+are moved to $\bmR_\rmm$, the severe hospitelized $\bmQ_\rmh$ recovers and move to $\bmR_\rms$, and the fatally ill $\bmQ_\rmf$ ends
+up dead  in $\bmD$. 
+
+The model assumes that as soon as you get sick $\bmQ$ categories you don't infect anyone anymore, in other words
+you are $\bmQ$arantined. We know this is not the case since doctors and nurses are getting infected at the hospitals.
+
+Note that the dimensional equations includes a division by $N$ in the quadratic terms which disappears from the non-dimensional
+equations below.
+%
+\begin{align}
+\Dp{\bmS}{t}      &=   -(R(t)/\Tinf)   \, \bmI \, \bmS                                     \label{eq:S} \\
+\Dp{\bmE}{t}      &=    (R(t)/\Tinf)   \, \bmI \, \bmS  - (1/\Tinc )  \, \bmE              \label{eq:E} \\
+\Dp{\bmI}{t}      &=    (1/\Tinc)      \, \bmE          - (1/\Tinf )  \, \bmI              \label{eq:I} \\
+\Dp{\bmQ_\rmm}{t} &=    (p_\rmm/\Tinf) \, \bmI          - (1/\Trecm)  \, \bmQ_\rmm         \label{eq:Sm} \\
+\Dp{\bmQ_\rms}{t} &=    (p_\rms/\Tinf) \, \bmI          - (1/\Thosp)  \, \bmQ_\rms         \label{eq:Sh} \\
+\Dp{\bmQ_\rmh}{t} &=    (1/\Thosp)     \, \bmQ_\rms     - (1/\Trecs)  \, \bmQ_\rmh         \label{eq:Shos} \\
+\Dp{\bmQ_\rmf}{t} &=    (p_\rmf/\Tinf) \, \bmI          - (1/\Tdeath) \,\bmQ_\rmf          \label{eq:Sdead} \\
+\Dp{\bmR_\rmm }{t}&=    (1/\Trecm)     \, \bmQ_\rmm                                        \label{eq:Rm} \\
+\Dp{\bmR_\rms}{t} &=    (1/\Trecs)     \, \bmQ_\rmh                                        \label{eq:E} \\
+\Dp{\bmD     }{t} &=    (1/\Tdeath)    \, \bmQ_\rmf                                        \label{eq:E} 
+\end{align}
+
+%
+\subsection{Model paramters}
+\begin{center}
+\small
+\begin{tabular}{llll}
+\hline
+$\Ttd$  &  $P(1 )$ &\verb+ Time_to_death     = 32.0              +   &  Days to death                                       \\
+$N$     &  $P(2 )$ &\verb+ N                 = 5000000.0           +   &  Initial population                                  \\
+$I_0$   &  $P(3 )$ &\verb+ I0                = 50.0                +   &  Initial infectious (19 cases 1st march)             \\
+$R_0$   &  $P(4 )$ &\verb+ R0                = 2.2                 +   &  Basic Reproduction Number                           \\
+$\Tinc$ &  $P(5 )$ &\verb+ D_incbation       = 5.2                 +   &  Incubation period (Tinc)                            \\
+$\Tinf$ &  $P(6 )$ &\verb+ D_infectious      = 2.9                 +   &  Duration patient is infectious (Tinf)               \\
+$\Trecm$&  $P(7 )$ &\verb+ D_recovery_mild   = 14.0 - D_infectious +   &  Recovery time mild cases (11.1)                     \\
+$\Trecs$&  $P(8 )$ &\verb+ D_recovery_severe = 31.5 - D_infectious +   &  Recovery time severe cases Length of hospital stay  \\
+$\Thosp$&  $P(9 )$ &\verb+ D_hospital_lag    = 5.0                 +   &  Time to hospitalization.                            \\
+$p_\rmf$&  $P(10)$ &\verb+ CFR               = 0.02                +   &  Case fatality rate                                  \\
+$p_\rms$&  $P(11)$ &\verb+ p_severe          = 0.2                 +   &  Hospitalization rate \% for severe cases            \\
+$R(t)  $&  $P(12)$ &\verb+ Rt                = 0.9                 +   &  Basic Reproduction Number during intervention       \\
+$\Tint$ &  $P(13)$ &\verb+ InterventionTime  = 30.0               +   &  Interventions start here (15th march)               \\
+%$ a= 1.0/\Tinc       $                      &&&                                          \\
+%$ b= 1.0/\Tinf       $                      &&&                                          \\
+$ p_\rmm  = 1 - p_\rms - p_\rmf $           &&&                                   \\
+$\Tdeath  = \Ttd   - \Tinf$  &&&                                \\
+\hline
+\end{tabular}
+\end{center}
+%
+%
+\subsection{Diagnostic variables}
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Number of hospitelized & $N(\bmQ_\rmf + \bmQ_\rmh)$ \\
+Number of recovered    & $N(\bmR_\rmm+\bmR_\rms)$ \\
+Number of deaths       & $N\bmD$ \\
+Number of exposed      & $N\bmE$ \\
+Number of infectious   & $N\bmI$ \\
+Number of susceptible  & $N\bmS$ \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\bibliography{geir,geirres}
+
+\end{document}
