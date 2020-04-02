@@ -16,9 +16,9 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    real ens(0:neq-1,0:nt,nrens)
    real enspar(nrpar,nrens)
 
-   real tmpens(1:nout,0:nt,nrens)
-   real ave(nout,0:nt)
-   real std(nout,0:nt)
+   real tmpens(0:nout,0:nt,nrens)
+   real ave(0:nout,0:nt)
+   real std(0:nout,0:nt)
 
    integer i,j
    real t,dt
@@ -27,7 +27,8 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    write(tag,'(i1.1)')pri
    dt= time/real(nt-1)
 
-   tmpens(1,:,:)=ens(0,:,:)             ! Susceptible
+   tmpens(0,:,:)=ens(0,:,:)             ! Susceptible
+   tmpens(1,:,:)=ens(1,:,:)+ens(2,:,:)+ens(3,:,:)+ens(4,:,:)+ens(5,:,:)+ens(6,:,:)+ens(7,:,:)+ens(9,:,:)+ens(9,:,:)
    tmpens(2,:,:)=ens(9,:,:)             ! Dead
    tmpens(3,:,:)=ens(5,:,:)+ens(6,:,:)  ! Hospilitized
    tmpens(4,:,:)=ens(7,:,:)+ens(8,:,:)  ! Recovered
@@ -35,15 +36,26 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    tmpens(6,:,:)=ens(1,:,:)             ! exposed 
 
 
-   call ensave(tmpens,ave,nout,nt,nrens)
-   call ensstd(tmpens,std,ave,nout,nt,nrens)
-   std=1.0*std
+   call ensave(tmpens,ave,nout+1,nt,nrens)
+   call ensstd(tmpens,std,ave,nout+1,nt,nrens)
+   std=3.0*std
 
    open(10,file='susc_'//tag//'.dat')
       write(10,*)'TITLE = "Susceptible_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Susceptible_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      do i=0,nt
+         t=0+real(i)*dt
+         write(10,'(2000g13.4)')t, N*ave(1,i), N*std(1,i), N*tmpens(1,i,:)
+      enddo
+   close(10)
+
+   open(10,file='case_'//tag//'.dat')
+      write(10,*)'TITLE = "Cases_'//tag//'"'
+      write(10,*)'VARIABLES = "time" "ave" "std" '
+      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Cases_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
          write(10,'(2000g13.4)')t, N*ave(1,i), N*std(1,i), N*tmpens(1,i,:)

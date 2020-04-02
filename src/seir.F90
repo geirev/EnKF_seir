@@ -79,7 +79,7 @@ program seir
    dobs(1) =34.0    ! total deaths at day 31/3
    dobs(2) =319.0   ! total hospitalized at day 31/3
    R(1,1)=0.01; R(1,2)=0.0
-   R(2,1)=0.0; R(2,2)=0.01
+   R(2,1)=0.0; R(2,2)=00.01
    call random(E,nrobs*nrens)
    print *,'D: perturbed data'
    do m=1,nrobs
@@ -92,20 +92,20 @@ program seir
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
    Time_to_death     = 32.0                         ; parstd(1)=0.0    ! 1  Days to death
-   N                 = 5000000.0                    ; parstd(2)=0.0    ! 2  Initial population
-   I0                = 40.0                         ; parstd(3)=5.0    ! 3  Initial infectious (19 cases 1st march)
-   R0                = 2.2                          ; parstd(4)=0.25   ! 4  Basic Reproduction Number
+   N                 = 5400000.0                    ; parstd(2)=0.0    ! 2  Initial population
+   I0                = 51.0                         ; parstd(3)=4.0    ! 3  Initial infectious (19 cases 1st march)
+   R0                = 3.8                          ; parstd(4)=0.00   ! 4  Basic Reproduction Number
    D_incbation       = 5.2                          ; parstd(5)=0.0    ! 5  Incubation period (Tinc)
    D_infectious      = 2.9                          ; parstd(6)=0.0    ! 6  Duration patient is infectious (Tinf)
    D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=0.0    ! 7  Recovery time mild cases (11.1)
    D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
    D_hospital_lag    = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
-   CFR               = 0.04                         ; parstd(10)=0.002 ! 11 Case fatality rate 
-   p_severe          = 0.15                         ; parstd(11)=0.0   ! 12 Hospitalization rate % for severe cases
-   Rt                = 0.9                          ; parstd(12)=0.05  ! 13 Basic Reproduction Number during intervention
+   CFR               = 0.008                        ; parstd(10)=0.0010  ! 11 Case fatality rate 
+   p_severe          = 0.028                        ; parstd(11)=0.0000  ! 12 Hospitalization rate % for severe cases
+   Rt                = 0.8                          ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
    InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
 
-   duration= 500                         ! Duration of measures
+   duration= 30000                          ! Duration of measures
    time=365.0                            ! Length of simulation
    dt= time/real(nt-1)                   ! Timestep of outputs
 
@@ -116,13 +116,12 @@ program seir
       enspar(1:nrpar,j)=parstd(1:nrpar)*enspar(1:nrpar,j)
       call mod2ens(nrpar,nrens,neq,enspar,j)
    enddo
-   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.01) ! Ensure positive parameters
-   enspar(12,:)=min(enspar(12,:),0.999)          ! Ensure Rt < 1.0
+   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.0001) ! Ensure positive parameters
+   enspar(12,:)=min(enspar(12,:),0.999)            ! Ensure Rt < 1.0
 
    print '(a)','Simple initialization'
    do j=1,nrens
       I0=enspar(3,j)     
-      ens(0,0,j)=(N-I0)   ! Susceptible (Normalized initial nonimmune population)   (S       )    S
       ens(1,0,j)=4*I0     ! Exposed                                                 (E       )    E
       ens(2,0,j)=I0       ! Infected                                                (I       )    I
       ens(3,0,j)=0.0      ! Sick Mild                                               (Mild    )    S_mild
@@ -132,6 +131,7 @@ program seir
       ens(7,0,j)=0.0      ! Removed_mild   (recovered)                              (R_Mild  )    R_mild
       ens(8,0,j)=0.0      ! Removed_severe (recovered)                              (R_Severe)    R_seve
       ens(9,0,j)=0.0      ! Removed_fatal (dead)                                    (R_Fatal )    R_dead
+      ens(0,0,j)=N-sum(ens(1:neq-1,0,j))   ! Susceptible (Normalized initial nonimmune population)   (S       )    S
    enddo
    ens(:,0,:)=ens(:,0,:)/N
 
@@ -190,7 +190,7 @@ program seir
    call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
                  lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
 
-   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.01)
+   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.0001)
    ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.0)
 
    print '(a)','enspar ANA'
@@ -248,7 +248,7 @@ subroutine f(neq, t, y, ydot)
    if ((t > interventiontime).and.(t < interventiontime + duration)) then
       beta=Rt/D_infectious
    elseif (t > interventiontime + duration) then
-      beta=1.0/D_infectious
+      beta=1.3/D_infectious
    else
       beta=R0/D_infectious
    endif
@@ -305,7 +305,7 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
    if ((t > interventiontime).and.(t < interventiontime + duration)) then
       beta=Rt/D_infectious
    elseif (t > interventiontime + duration) then
-      beta=1.0/D_infectious
+      beta=1.3/D_infectious
    else
       beta=R0/D_infectious
    endif
