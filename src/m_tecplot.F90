@@ -14,7 +14,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    integer, parameter  :: nout=6
 
    real ens(0:neq-1,0:nt,nrens)
-   real enspar(nrpar,nrens)
+   real enspar(nrpar+neq,nrens)
 
    real tmpens(0:nout,0:nt,nrens)
    real ave(0:nout,0:nt)
@@ -126,7 +126,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
                            &"p_severe" "Rt" "InterventionTime"' 
       write(10,'(a,i5,a,i5,a)')' ZONE T="Parameters_'//tag//'"  F=POINT, I=',nrens,', J=1, K=1'
       do j=1,nrens
-         write(10,'(2i5,2000f13.2)')j,pri,enspar(:,j)
+         write(10,'(2i5,2000f13.4)')j,pri,enspar(1:nrpar,j)
       enddo
    close(10)
   

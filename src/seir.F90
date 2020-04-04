@@ -75,8 +75,8 @@ program seir
 ! EnKF initialization
 !  Observations
    lenkf=.true.     ! True to run EnKF
-   iobst=31         ! 31/3 day of measurment since first death 12th March
-   dobs(1) =34.0    ! total deaths at day 31/3
+   iobst=34         ! 31/3 day of measurment since first death 12th March
+   dobs(1) =50.0    ! total deaths at day 31/3
    dobs(2) =319.0   ! total hospitalized at day 31/3
    R(1,1)=0.01; R(1,2)=0.0
    R(2,1)=0.0; R(2,2)=00.01
@@ -101,11 +101,11 @@ program seir
    D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
    D_hospital_lag    = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
    CFR               = 0.008                        ; parstd(10)=0.0010  ! 11 Case fatality rate 
-   p_severe          = 0.028                        ; parstd(11)=0.0000  ! 12 Hospitalization rate % for severe cases
-   Rt                = 0.8                          ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
+   p_severe          = 0.028                        ; parstd(11)=0.0020  ! 12 Hospitalization rate % for severe cases
+   Rt                = 0.7                          ; parstd(12)=0.100  ! 13 Basic Reproduction Number during intervention
    InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
 
-   duration= 30000                          ! Duration of measures
+   duration= 30                             ! Duration of measures
    time=365.0                            ! Length of simulation
    dt= time/real(nt-1)                   ! Timestep of outputs
 
@@ -248,7 +248,7 @@ subroutine f(neq, t, y, ydot)
    if ((t > interventiontime).and.(t < interventiontime + duration)) then
       beta=Rt/D_infectious
    elseif (t > interventiontime + duration) then
-      beta=1.3/D_infectious
+      beta=0.3/D_infectious
    else
       beta=R0/D_infectious
    endif
@@ -305,7 +305,7 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
    if ((t > interventiontime).and.(t < interventiontime + duration)) then
       beta=Rt/D_infectious
    elseif (t > interventiontime + duration) then
-      beta=1.3/D_infectious
+      beta=0.3/D_infectious
    else
       beta=R0/D_infectious
    endif
