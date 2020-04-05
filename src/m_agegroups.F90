@@ -1,6 +1,6 @@
 module m_agegroups
 integer, parameter :: na=11
-real               :: agegroup(0:na-1)
+real, save         :: agegroup(0:na-1)
 contains
 subroutine agegroups
 integer, parameter :: nrages=105

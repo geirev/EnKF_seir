@@ -161,6 +161,7 @@ program seir
          tout=t+dt
          call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
          ens(:,i,j)=y(:)
+         print '(a,4f12.2)','SUM=',sum(y(0:neq-1))
          if (istate < 0) then
             print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
             stop
@@ -278,21 +279,18 @@ subroutine f(neq, t, y, ydot)
 !   print '(100f8.4)',ps(:)
 !   print '(100f8.4)',pf(:)
 !   print '(a,100f8.4)','Tinf=',Tinf,Tinc,Trecm,Trecs,Thosp,Tdead  
-!    print '(11f8.2)',R
+!   print '(11f8.2)',R
 !    stop 
 ! S
    do i=0,na-1
-      ydot(i) = 0.0
+      ii=i
+      ydot(ii) = 0.0
       do k=0,na-1
-         ii=i
          kk=2*na+k
          ydot(ii) = ydot(ii) - (R(i,k)/Tinf)*y(kk)*y(ii)
       enddo
-      print '(a,i3,6g13.5)','S1',ii,y(ii),ydot(ii)
-      ydot(ii)=(3.8/Tinf)*sum(y(2*na:3*na-1))*y(ii)
-      print '(a,i3,6g13.5)','S2',ii,y(ii),ydot(ii)
+      !print '(a,i3,6g13.5)','S1',ii,y(ii),ydot(ii)
    enddo
-   stop
 
 ! E
    do i=0,na-1
@@ -300,9 +298,9 @@ subroutine f(neq, t, y, ydot)
       ydot(ii) = - (1.0/Tinc)*y(ii)
       do k=0,na-1
          kk=2*na+k  ! I
-         ydot(ii) = ydot(ii) + (R(i,k)/Tinf)*y(kk)*y(ii)
-         print '(a,2i3,6g13.5)','E ',ii,kk,y(ii),ydot(ii)
+         ydot(ii) = ydot(ii) + (R(i,k)/Tinf)*y(kk)*y(i)
       enddo
+      !print '(a,i3,6g13.5)','E ',ii,y(ii),ydot(ii)
    enddo
 
 ! I
@@ -310,7 +308,7 @@ subroutine f(neq, t, y, ydot)
       ii=2*na+i     ! I
       kk=na+i       ! E
       ydot(ii) =   (1.0/Tinc)*y(kk) - (1.0/Tinf)*y(ii)
-      !print '(a,2i3,2g13.5)','I ',ii,kk,y(ii),ydot(ii)
+      !print '(a,i3,2g13.5)','I ',ii,y(ii),ydot(ii)
    enddo
 
 ! Qm
