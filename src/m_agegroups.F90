@@ -6,6 +6,8 @@ subroutine agegroups
 integer, parameter :: nrages=105
 real               :: ages_male(0:nrages)
 real               :: ages_female(0:nrages)
+integer i,n
+
 
 
 ! Group 1:  0-5    years old   Kindergarden
@@ -22,6 +24,7 @@ real               :: ages_female(0:nrages)
 
   integer ia(0:na-1)
   integer ib(0:na-1)
+
   ia( 0)=0 ; ib( 0)=5
   ia( 1)=6 ; ib( 1)=12
   ia( 2)=13; ib( 2)=19
@@ -252,7 +255,6 @@ real               :: ages_female(0:nrages)
      agegroup(i)=sum(ages_male(ia(i):ib(i)))    + sum(ages_female(ia(i):ib(i)))
      print '(a,i2,a,i2,a,i3,a,f9.0)','Population in agegroup: ',i,' agerange(',ia(i),'--',ib(i),')= ',agegroup(i)
   enddo
-
   print '(a,2f13.0)','Total Norwegan population: ',sum(ages_male(:)) + sum(ages_female(:)) , sum(agegroup(:))
 
 end subroutine

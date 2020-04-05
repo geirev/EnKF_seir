@@ -2,6 +2,7 @@ module m_tecplot
 contains
 subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    use mod_parameters
+   use m_agegroups
    use m_ensave
    use m_ensstd
    implicit none
@@ -17,37 +18,88 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    real enspar(nrpar+neq,nrens)
 
    real tmpens(0:nout,0:nt,nrens)
-   real ave(0:nout,0:nt)
-   real std(0:nout,0:nt)
+   real ave(0:neq-1,0:nt)
+   real std(0:neq-1,0:nt)
+   real avet(0:nout,0:nt)
+   real stdt(0:nout,0:nt)
 
    integer i,j
    real t,dt
    character(len=1) tag
+   character(len=3) tag3
 
    write(tag,'(i1.1)')pri
-   dt= time/real(nt-1)
+   dt= time/real(nt)
 
-   tmpens(0,:,:)=ens(0,:,:)             ! Susceptible
-   tmpens(1,:,:)=ens(1,:,:)+ens(2,:,:)+ens(3,:,:)+ens(4,:,:)+ens(5,:,:)+ens(6,:,:)+ens(7,:,:)+ens(9,:,:)+ens(9,:,:)
-   tmpens(2,:,:)=ens(9,:,:)             ! Dead
-   tmpens(3,:,:)=ens(5,:,:)+ens(6,:,:)  ! Hospilitized
-   tmpens(4,:,:)=ens(7,:,:)+ens(8,:,:)  ! Recovered
-   tmpens(5,:,:)=ens(2,:,:)             ! Infected
-   tmpens(6,:,:)=ens(1,:,:)             ! exposed 
+! Big tecplot dump
+   call ensave(ens,ave,neq,nt,nrens)
+   call ensstd(ens,std,ave,neq,nt,nrens)
+   std=2.0*std
+   open(10,file='bigdump'//tag//'.dat')
+      write(10,*)'TITLE = "Bigdump"'
+      write(10,*)'VARIABLES = "i" "time" "S1" "S2" "S3" "S4" "S5" "S6" "S7" "S8" "S9" "S10" "S11" &
+                                    &"E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9" "E10" "E11" &
+                                    &"I1" "I2" "I3" "I4" "I5" "I6" "I7" "I8" "I9" "I10" "I11" &
+                                    &"Qm" "Qs" "Qh" "Qf" "Rm" "Rs" "D"'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
+      do i=0,nt
+         t=0+real(i)*dt
+         write(10,'(i5,f10.2,50g13.5)')i,t,N*ave(:,i)
+      enddo
+
+      write(10,'(a,i5,a,i5,a)')' ZONE T="std"  F=POINT, I=',nt+1,', J=1, K=1'
+      do i=0,nt
+         t=0+real(i)*dt
+         write(10,'(i5,f10.2,50g13.5)')i,t,N*std(:,i)
+      enddo
+
+      do j=1,nrens
+         write(tag3,'(i3.3)')j
+         write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
+         do i=0,nt
+            t=0+real(i)*dt
+            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(:,i,j)
+         enddo
+      enddo
+   close(10)
+
+!   S_i        = y(0    : na-1   ) ! Susectable
+!   E_i        = y(na   : 2*na-1 ) ! Exposed
+!   I_i        = y(2*na : 3*na-1 ) ! Infected
+!   Q_m        = y(3*na) ! Recovering (Mild)
+!   Q_s        = y(3*na+1) ! Recovering (Severe at home)
+!   Q_h        = y(3*na+2) ! Recovering (Severe in hospital)
+!   Q_f        = y(3*na+3) ! fatally sick to die
+!   R_m        = y(3*na+4) ! Recovered
+!   R_s        = y(3*na+5) ! Recovered 
+!   D          = y(3*na+6) ! Dead
+   
+   tmpens(:,:,:)=0.0
+   do i=0,na-1
+      tmpens(0,:,:)=tmpens(0,:,:)+ens(i,:,:)      ! Susceptible 
+      tmpens(5,:,:)=tmpens(5,:,:)+ens(2*na+i,:,:) ! Infected
+      tmpens(6,:,:)=tmpens(6,:,:)+ens(1*na+i,:,:) ! Exposed
+   enddo
+   do i=na,neq-1
+      tmpens(1,:,:)=tmpens(1,:,:)+ens(i,:,:) ! All cases
+   enddo
+   tmpens(2,:,:)=ens(3*na+6,:,:)                  ! Dead
+   tmpens(3,:,:)=ens(3*na+2,:,:)+ens(3*na+3,:,:)  ! Hospilitized
+   tmpens(4,:,:)=ens(3*na+4,:,:)+ens(3*na+5,:,:)  ! Recovered
 
 
-   call ensave(tmpens,ave,nout+1,nt,nrens)
-   call ensstd(tmpens,std,ave,nout+1,nt,nrens)
-   std=3.0*std
+   call ensave(tmpens,avet,nout+1,nt,nrens)
+   call ensstd(tmpens,stdt,avet,nout+1,nt,nrens)
+   std=2.0*std
 
    open(10,file='susc_'//tag//'.dat')
       write(10,*)'TITLE = "Susceptible_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Susceptible_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Susceptible_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(1,i), N*std(1,i), N*tmpens(1,i,:)
+         write(10,'(2000g13.4)')t, N*avet(1,i), N*stdt(1,i), N*tmpens(1,i,:)
       enddo
    close(10)
 
@@ -55,10 +107,10 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'TITLE = "Cases_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Cases_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Cases_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(1,i), N*std(1,i), N*tmpens(1,i,:)
+         write(10,'(2000g13.4)')t, N*avet(1,i), N*stdt(1,i), N*tmpens(1,i,:)
       enddo
    close(10)
 
@@ -66,10 +118,10 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'TITLE = "Dead_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Dead_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Dead_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(2,i), N*std(2,i), N*tmpens(2,i,:)
+         write(10,'(2000g13.4)')t, N*avet(2,i), N*stdt(2,i), N*tmpens(2,i,:)
       enddo
    close(10)
 
@@ -77,10 +129,10 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'TITLE = "Hospitalized_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Hospitalized_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Hospitalized_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(3,i), N*std(3,i), N*tmpens(3,i,:)
+         write(10,'(2000g13.4)')t, N*avet(3,i), N*stdt(3,i), N*tmpens(3,i,:)
       enddo
    close(10)
 
@@ -88,10 +140,10 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'TITLE = "Recovered_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Recovered_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Recovered_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(4,i), N*std(4,i), N*tmpens(4,i,:)
+         write(10,'(2000g13.4)')t, N*avet(4,i), N*stdt(4,i), N*tmpens(4,i,:)
       enddo
    close(10)
 
@@ -99,10 +151,10 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'TITLE = "Infected_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Infected_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Infected_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(5,i), N*std(5,i), N*tmpens(5,i,:)
+         write(10,'(2000g13.4)')t, N*avet(5,i), N*stdt(5,i), N*tmpens(5,i,:)
       enddo
    close(10)
 
@@ -110,10 +162,10 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'TITLE = "Exposed_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Exposed_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="Exposed_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*ave(6,i), N*std(6,i), N*tmpens(6,i,:)
+         write(10,'(2000g13.4)')t, N*avet(6,i), N*stdt(6,i), N*tmpens(6,i,:)
       enddo
    close(10)
 

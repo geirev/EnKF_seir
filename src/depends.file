@@ -12,8 +12,16 @@ m_mod2ens.o:      MODEL.CPP
 m_mod2ens.o:      mod_parameters.o
 mod_parameters.o:      makefile
 mod_parameters.o:      MODEL.CPP
+m_pfactors.o:      m_agegroups.o
+m_pfactors.o:      makefile
+m_pfactors.o:      MODEL.CPP
+m_pfactors.o:      mod_parameters.o
 m_random.o:      makefile
 m_random.o:      MODEL.CPP
+m_Rmatrix.o:      m_agegroups.o
+m_Rmatrix.o:      makefile
+m_Rmatrix.o:      MODEL.CPP
+m_tecplot.o:      m_agegroups.o
 m_tecplot.o:      makefile
 m_tecplot.o:      m_ensave.o
 m_tecplot.o:      m_ensstd.o
@@ -25,7 +33,9 @@ seir.o:      m_ens2mod.o
 seir.o:      m_mod2ens.o
 seir.o:      MODEL.CPP
 seir.o:      mod_parameters.o
+seir.o:      m_pfactors.o
 seir.o:      m_random.o
+seir.o:      m_Rmatrix.o
 seir.o:      m_tecplot.o
 slsode.o:      makefile
 slsode.o:      MODEL.CPP

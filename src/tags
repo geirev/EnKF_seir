@@ -6,22 +6,25 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 CFR	mod_parameters.F90	/^   real, save :: CFR /;"	v	module:mod_parameters
 D	seir.F90	/^   real D(/;"	v	program:seir
-D_death	mod_parameters.F90	/^   real, save :: D_death /;"	v	module:mod_parameters
-D_hospital_lag	mod_parameters.F90	/^   real, save :: D_hospital_lag /;"	v	module:mod_parameters
-D_incbation	mod_parameters.F90	/^   real, save :: D_incbation /;"	v	module:mod_parameters
-D_infectious	mod_parameters.F90	/^   real, save :: D_infectious /;"	v	module:mod_parameters
-D_recovery_mild	mod_parameters.F90	/^   real, save :: D_recovery_mild /;"	v	module:mod_parameters
-D_recovery_severe	mod_parameters.F90	/^   real, save :: D_recovery_severe /;"	v	module:mod_parameters
 E	seir.F90	/^   real E(/;"	v	program:seir
 I0	mod_parameters.F90	/^   real, save :: I0 /;"	v	module:mod_parameters
 InterventionTime	mod_parameters.F90	/^   real, save :: InterventionTime /;"	v	module:mod_parameters
 N	mod_parameters.F90	/^   real, save :: N$/;"	v	module:mod_parameters
 R	seir.F90	/^   real R(/;"	v	program:seir
 R0	mod_parameters.F90	/^   real, save :: R0 /;"	v	module:mod_parameters
+Rmat	m_Rmatrix.F90	/^real, save         :: Rmat(/;"	v	module:m_Rmatrix
+Rmatrix	m_Rmatrix.F90	/^subroutine Rmatrix$/;"	s	module:m_Rmatrix
 Rt	mod_parameters.F90	/^   real, save :: Rt /;"	v	module:mod_parameters
 S	seir.F90	/^   real S(/;"	v	program:seir
+Tdead	mod_parameters.F90	/^   real, save :: Tdead /;"	v	module:mod_parameters
+Thosp	mod_parameters.F90	/^   real, save :: Thosp$/;"	v	module:mod_parameters
 Time_to_death	mod_parameters.F90	/^   real, save :: Time_to_death$/;"	v	module:mod_parameters
+Tinc	mod_parameters.F90	/^   real, save :: Tinc$/;"	v	module:mod_parameters
+Tinf	mod_parameters.F90	/^   real, save :: Tinf$/;"	v	module:mod_parameters
+Trecm	mod_parameters.F90	/^   real, save :: Trecm$/;"	v	module:mod_parameters
+Trecs	mod_parameters.F90	/^   real, save :: Trecs$/;"	v	module:mod_parameters
 Xmax	mod_parameters.F90	/^   real, save :: Xmax /;"	v	module:mod_parameters
+agegroup	m_agegroups.F90	/^real, save         :: agegroup(/;"	v	module:m_agegroups
 agegroups	m_agegroups.F90	/^subroutine agegroups$/;"	s	module:m_agegroups
 atol	seir.F90	/^   real    :: atol=/;"	v	program:seir
 dobs	seir.F90	/^   real dobs(/;"	v	program:seir
@@ -53,17 +56,20 @@ lrw	seir.F90	/^   integer lrw,/;"	v	program:seir
 lsymsqrt	seir.F90	/^   logical :: lsymsqrt=/;"	v	program:seir
 lupdate_randrot	seir.F90	/^   logical :: lupdate_randrot=/;"	v	program:seir
 m	seir.F90	/^   integer m$/;"	v	program:seir
+m_Rmatrix	m_Rmatrix.F90	/^module m_Rmatrix$/;"	m
 m_agegroups	m_agegroups.F90	/^module m_agegroups$/;"	m
 m_ens2mod	m_ens2mod.F90	/^module m_ens2mod$/;"	m
 m_ensave	m_ensave.F90	/^module m_ensave$/;"	m
 m_ensstd	m_ensstd.F90	/^module m_ensstd$/;"	m
 m_mod2ens	m_mod2ens.F90	/^module m_mod2ens$/;"	m
+m_pfactors	m_pfactors.F90	/^module m_pfactors$/;"	m
 m_random	m_random.F90	/^module m_random$/;"	m
 m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
 mf	seir.F90	/^   integer mf$/;"	v	program:seir
 mod2ens	m_mod2ens.F90	/^subroutine mod2ens(/;"	s	module:m_mod2ens
 mod_parameters	mod_parameters.F90	/^module mod_parameters$/;"	m
 mode_analysis	seir.F90	/^   integer :: mode_analysis=/;"	v	program:seir
+na	m_agegroups.F90	/^integer, parameter :: na=/;"	v	module:m_agegroups
 ne	seir.F90	/^   integer, parameter :: ne=/;"	v	program:seir
 neq	seir.F90	/^   integer, parameter :: neq=/;"	v	program:seir
 nrens	seir.F90	/^   integer, parameter :: nrens=/;"	v	program:seir
@@ -72,6 +78,10 @@ nrpar	seir.F90	/^   integer, parameter :: nrpar=/;"	v	program:seir
 nt	seir.F90	/^   inte/;"	v	program:seir
 p_severe	mod_parameters.F90	/^   real, save :: p_severe$/;"	v	module:mod_parameters
 parstd	seir.F90	/^   real parstd(/;"	v	program:seir
+pf	m_pfactors.F90	/^real, save         :: pf(/;"	v	module:m_pfactors
+pfactors	m_pfactors.F90	/^subroutine pfactors$/;"	s	module:m_pfactors
+pm	m_pfactors.F90	/^real, save         :: pm(/;"	v	module:m_pfactors
+ps	m_pfactors.F90	/^real, save         :: ps(/;"	v	module:m_pfactors
 random	m_random.F90	/^subroutine random(/;"	s	module:m_random
 rtol	seir.F90	/^   real    :: rtol=/;"	v	program:seir
 rwork	seir.F90	/^   real,    allocatable  :: rwork(/;"	v	program:seir
