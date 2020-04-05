@@ -4,17 +4,16 @@ module mod_parameters
    real, save :: I0                
    real, save :: R0                
    real, save :: Rt                
-   real, save :: D_incbation       
-   real, save :: D_infectious      
-   real, save :: D_recovery_mild   
-   real, save :: D_recovery_severe 
-   real, save :: D_hospital_lag    
-   real, save :: D_death           
-   real, save :: CFR               
+   real, save :: Tinc
+   real, save :: Tinf
+   real, save :: Trecm
+   real, save :: Trecs
+   real, save :: Thosp
+   real, save :: Tdead             
    real, save :: InterventionTime  
    real, save :: Xmax              
    real, save :: p_severe
-
+   real, save :: CFR               
    real, save :: duration
    real, save :: time
 end module 

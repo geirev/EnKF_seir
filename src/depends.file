@@ -1,3 +1,5 @@
+m_agegroups.o:      makefile
+m_agegroups.o:      MODEL.CPP
 m_ens2mod.o:      makefile
 m_ens2mod.o:      MODEL.CPP
 m_ens2mod.o:      mod_parameters.o
@@ -17,6 +19,7 @@ m_tecplot.o:      m_ensave.o
 m_tecplot.o:      m_ensstd.o
 m_tecplot.o:      MODEL.CPP
 m_tecplot.o:      mod_parameters.o
+seir.o:      m_agegroups.o
 seir.o:      makefile
 seir.o:      m_ens2mod.o
 seir.o:      m_mod2ens.o

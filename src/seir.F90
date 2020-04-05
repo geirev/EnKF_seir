@@ -4,9 +4,10 @@ program seir
    use m_mod2ens
    use m_tecplot
    use m_random
+   use m_agegroups
    implicit none
    external f,jac
-   integer, parameter :: neq=10 ! Number of equations
+   integer, parameter :: neq=40 ! Number of equations
    real y(0:neq-1)              ! Solution S, E, I R
    logical ex
 
@@ -33,7 +34,7 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Ensemble variables
-   integer, parameter :: nrens=999
+   integer, parameter :: nrens=99
    integer, parameter :: nrpar=13
 
    real enspar(1:nrpar+neq,nrens) ! Ensemble of state variables ( parameters + initial conditions)
@@ -62,10 +63,10 @@ program seir
    real E(nrobs,nrens)           ! Ensemble of measurement perturbations
    real R(nrobs,nrobs)           ! Measurement error covariance matrix
    integer m
-
+   call agegroups
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! SLSODE parameters
-   mf=21  ! (10,21,22)
+   mf=10  ! (10,21,22)
    lrw =max(20+16*neq, 22+9*neq+neq**2)
    liw = 20 + neq
    allocate(rwork(lrw))
@@ -92,18 +93,19 @@ program seir
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
    Time_to_death     = 32.0                         ; parstd(1)=0.0    ! 1  Days to death
-   N                 = 5400000.0                    ; parstd(2)=0.0    ! 2  Initial population
+   N                 = sum(agegroup(:))             ; parstd(2)=0.0    ! 2  Initial population
+   print *,'N=',N
    I0                = 51.0                         ; parstd(3)=4.0    ! 3  Initial infectious (19 cases 1st march)
    R0                = 3.8                          ; parstd(4)=0.00   ! 4  Basic Reproduction Number
-   D_incbation       = 5.2                          ; parstd(5)=0.0    ! 5  Incubation period (Tinc)
-   D_infectious      = 2.9                          ; parstd(6)=0.0    ! 6  Duration patient is infectious (Tinf)
-   D_recovery_mild   = 14.0 - D_infectious          ; parstd(7)=0.0    ! 7  Recovery time mild cases (11.1)
-   D_recovery_severe = 31.5 - D_infectious          ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
-   D_hospital_lag    = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
+   Tinc              = 5.2                          ; parstd(5)=0.0    ! 5  Incubation period (Tinc)
+   Tinf              = 2.9                          ; parstd(6)=0.0    ! 6  Duration patient is infectious (Tinf)
+   Trecm             = 14.0 - Tinf                  ; parstd(7)=0.0    ! 7  Recovery time mild cases (11.1)
+   Trecs             = 31.5 - Tinf                  ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
+   Thosp             = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
    CFR               = 0.008                        ; parstd(10)=0.0010  ! 11 Case fatality rate 
    p_severe          = 0.028                        ; parstd(11)=0.0020  ! 12 Hospitalization rate % for severe cases
    Rt                = 0.7                          ; parstd(12)=0.100  ! 13 Basic Reproduction Number during intervention
-   InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
+   InterventionTime  = 365.0                        ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
 
    duration= 30                             ! Duration of measures
    time=365.0                            ! Length of simulation
@@ -122,16 +124,17 @@ program seir
    print '(a)','Simple initialization'
    do j=1,nrens
       I0=enspar(3,j)     
-      ens(1,0,j)=4*I0     ! Exposed                                                 (E       )    E
-      ens(2,0,j)=I0       ! Infected                                                (I       )    I
-      ens(3,0,j)=0.0      ! Sick Mild                                               (Mild    )    S_mild
-      ens(4,0,j)=0.0      ! Sick (Severe at home)                                   (Severe  )    S_home
-      ens(5,0,j)=0.0      ! Sick (Severe at hospital)                               (Severe_H)    S_hosp
-      ens(6,0,j)=0.0      ! Sick (Severe at hospital that will die)                 (Fatal   )    S_mort
-      ens(7,0,j)=0.0      ! Removed_mild   (recovered)                              (R_Mild  )    R_mild
-      ens(8,0,j)=0.0      ! Removed_severe (recovered)                              (R_Severe)    R_seve
-      ens(9,0,j)=0.0      ! Removed_fatal (dead)                                    (R_Fatal )    R_dead
-      ens(0,0,j)=N-sum(ens(1:neq-1,0,j))   ! Susceptible (Normalized initial nonimmune population)   (S       )    S
+      ens(0    :   na-1, 0, j) = agegroup(0:na-1)  ! Susceptible na agegroups                 S_i
+      ens(na   : 2*na-1, 0, j) = 4*I0/real(na)     ! Exposed     na agegroups                 E_i
+      ens(2*na : 3*na-1, 0, j) =   I0/real(na)     ! Infected    na agegroups                 I_i
+      ens(3*na         , 0, j) = 0.0               ! Sick Mild                                Q_m
+      ens(3*na+1       , 0, j) = 0.0               ! Sick (Severe at home)                    Q_s
+      ens(3*na+2       , 0, j) = 0.0               ! Sick (Severe at hospital)                Q_h
+      ens(3*na+3       , 0, j) = 0.0               ! Sick (Severe at hospital that will die)  Q_f
+      ens(3*na+4       , 0, j) = 0.0               ! Removed_mild   (recovered)               R_m
+      ens(3*na+5       , 0, j) = 0.0               ! Removed_severe (recovered)               R_s
+      ens(3*na+6       , 0, j) = 0.0               ! Removed_fatal (dead)                     D
+      ens(0:na-1 ,0, j) = ens(0:na-1, 0, j) - ens(na:2*na-1, 0, j) - ens(2*na : 3*na-1, 0, j)
    enddo
    ens(:,0,:)=ens(:,0,:)/N
 
@@ -165,7 +168,10 @@ program seir
       enddo
    enddo
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,0)
-
+   do i=1,nt
+      write(10,'(i5,40g17.8)')i,N*ens(:,i,2)
+   enddo
+   stop
    if (.not.lenkf) stop
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -219,78 +225,147 @@ program seir
          endif
       enddo
    enddo
+   
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,1)
 
 end program
 
 subroutine f(neq, t, y, ydot)
    use mod_parameters
+   use m_agegroups
    implicit none
+   integer i,k,ii,kk
    integer neq
    real t 
    real y(0:neq-1)
    real ydot(0:neq-1)
-   real S        
-   real E        
-   real I        
-   real Mild     
-   real Severe   
-   real Severe_H 
-   real Fatal    
-   real R_Mild   
-   real R_Severe 
-   real R_Fatal  
 
    real p_fatal
    real p_mild
-   real beta,a,b
+   real beta
+
+   real R(0:na-1,0:na-1)
+   real pm(0:na-1)
+   real ps(0:na-1)
+   real pf(0:na-1)
 
    if ((t > interventiontime).and.(t < interventiontime + duration)) then
-      beta=Rt/D_infectious
+      R=0.7
    elseif (t > interventiontime + duration) then
-      beta=0.3/D_infectious
+      R=1.0
    else
-      beta=R0/D_infectious
+      R=3.8
    endif
-   a= 1.0/D_incbation
-   b= 1.0/D_infectious
+   R=3.8
 
-!   S        = y(0) ! Susectable
-!   E        = y(1) ! Exposed
-!   I        = y(2) ! Infected
-!   Mild     = y(3) ! Recovering (Mild)
-!   Severe   = y(4) ! Recovering (Severe at home)
-!   Severe_H = y(5) ! Recovering (Severe in hospital)
-!   Fatal    = y(6) ! Recovering (Fatal)
-!   R_Mild   = y(7) ! Rehibilitated
-!   R_Severe = y(8) ! Rehibilitated
-!   R_Fatal  = y(9) ! Dead
+!   S_i        = y(0    : na-1   ) ! Susectable
+!   E_i        = y(na   : 2*na-1 ) ! Exposed
+!   I_i        = y(2*na : 3*na-1 ) ! Infected
+!   Q_m        = y(3*na) ! Recovering (Mild)
+!   Q_s        = y(3*na+1) ! Recovering (Severe at home)
+!   Q_h        = y(3*na+2) ! Recovering (Severe in hospital)
+!   Q_f        = y(3*na+3) ! fatally sick to die
+!   R_m        = y(3*na+4) ! Recovered
+!   R_s        = y(3*na+5) ! Recovered 
+!   D          = y(3*na+6) ! Dead
+   
+   pf(:) = CFR
+   ps(:) = P_SEVERE
+   pm(:) = 1.0 - P_SEVERE - CFR
+   Tdead  = Time_to_death-Tinf 
 
-   p_fatal  = CFR
-   p_mild   = 1 - P_SEVERE - CFR
-   D_death  = Time_to_death-D_infectious   ! 9  Time sick
+!   print '(100f8.4)',pm(:)
+!   print '(100f8.4)',ps(:)
+!   print '(100f8.4)',pf(:)
+!   print '(a,100f8.4)','Tinf=',Tinf,Tinc,Trecm,Trecs,Thosp,Tdead  
+!    print '(11f8.2)',R
+!    stop 
+! S
+   do i=0,na-1
+      ydot(i) = 0.0
+      do k=0,na-1
+         ii=i
+         kk=2*na+k
+         ydot(ii) = ydot(ii) - (R(i,k)/Tinf)*y(kk)*y(ii)
+      enddo
+      print '(a,i3,6g13.5)','S1',ii,y(ii),ydot(ii)
+      ydot(ii)=(3.8/Tinf)*sum(y(2*na:3*na-1))*y(ii)
+      print '(a,i3,6g13.5)','S2',ii,y(ii),ydot(ii)
+   enddo
+   stop
 
-!   ydot(0) = -beta*I*S
-!   ydot(1) =  beta*I*S - a*E
-!   ydot(2) =  a*E - b*I
-!   ydot(3) =  p_mild*b*I   - (1/D_recovery_mild)*Mild
-!   ydot(4) =  p_severe*b*I - (1/D_hospital_lag)*Severe
-!   ydot(5) =  (1/D_hospital_lag)*Severe - (1/D_recovery_severe)*Severe_H
-!   ydot(6) =  p_fatal*b*I  - (1/D_death)*Fatal
-!   ydot(7) =  (1/D_recovery_mild)*Mild
-!   ydot(8) =  (1/D_recovery_severe)*Severe_H
-!   ydot(9) =  (1/D_death)*Fatal
+! E
+   do i=0,na-1
+      ii=na+i       ! E
+      ydot(ii) = - (1.0/Tinc)*y(ii)
+      do k=0,na-1
+         kk=2*na+k  ! I
+         ydot(ii) = ydot(ii) + (R(i,k)/Tinf)*y(kk)*y(ii)
+         print '(a,2i3,6g13.5)','E ',ii,kk,y(ii),ydot(ii)
+      enddo
+   enddo
 
-   ydot(0) = -beta*y(2)*y(0)
-   ydot(1) =  beta*y(2)*y(0) - a*y(1)
-   ydot(2) =  a*y(1) - b*y(2)
-   ydot(3) =  p_mild*b*y(2)   - (1.0/D_recovery_mild)*y(3)
-   ydot(4) =  p_severe*b*y(2) - (1.0/D_hospital_lag)*y(4)
-   ydot(5) =  (1.0/D_hospital_lag)*y(4) - (1.0/D_recovery_severe)*y(5)
-   ydot(6) =  p_fatal*b*y(2)  - (1.0/D_death)*y(6)
-   ydot(7) =  (1.0/D_recovery_mild)  *y(3)
-   ydot(8) =  (1.0/D_recovery_severe)*y(5)
-   ydot(9) =  (1.0/D_death)          *y(6)
+! I
+   do i=0,na-1
+      ii=2*na+i     ! I
+      kk=na+i       ! E
+      ydot(ii) =   (1.0/Tinc)*y(kk) - (1.0/Tinf)*y(ii)
+      !print '(a,2i3,2g13.5)','I ',ii,kk,y(ii),ydot(ii)
+   enddo
+
+! Qm
+   ii=3*na          ! Qm
+   ydot(ii) =  - (1.0/Trecm)*y(ii) 
+   do k=0,na-1
+      kk=2*na+k     ! I
+      ydot(ii) = ydot(ii) + (pm(k)/Tinf)*y(kk)
+      !print '(a,2i3,2g13.5)','Qm',ii,kk,y(ii),ydot(ii)
+   enddo
+
+! Qs
+   ii=3*na+1        ! Qs
+   ydot(ii) =  - (1.0/Thosp)*y(ii) 
+   do k=0,na-1
+      kk=2*na+k     ! I
+      ydot(ii) = ydot(ii) + (ps(k)/Tinf)*y(kk)
+      !print '(a,2i3,2g13.5)','Qs',ii,kk,y(ii),ydot(ii)
+   enddo
+
+! Qh
+   ii=3*na+2        ! Qh
+   kk=3*na+1        ! Qs
+   ydot(ii) =  + (1.0/Thosp)*y(kk)  - (1.0/Trecs)*y(ii)
+   !print '(a,2i3,2g13.5)','Qh',ii,kk,y(ii),ydot(ii)
+   
+! Qf
+   ii=3*na+3        ! Qf
+   ydot(ii) =  - (1.0/Tdead)*y(ii) 
+   do k=0,na-1
+      kk=2*na+k     ! I
+      ydot(ii) = ydot(ii) + (pf(k)/Tinf)*y(kk)
+      !print '(a,2i3,2g13.5)','Qf',ii,kk,y(ii),ydot(ii)
+   enddo
+
+! Rm
+   ii=3*na+4        ! Rm
+   kk=3*na
+   ydot(ii) =   (1.0/Trecm)*y(kk) 
+   !print '(a,i3,2g13.5)','Rm',ii,y(ii),ydot(ii)
+
+! Rs
+   ii=3*na+5        ! Rs
+   kk=3*na+2        ! Qh
+   ydot(ii) =   (1.0/Trecs)*y(kk) 
+   !print '(a,i3,2g13.5)','Rs',ii,y(ii),ydot(ii)
+
+! D
+   ii=3*na+6        ! D
+   kk=3*na+3        ! Qf
+   ydot(ii) =   (1.0/Tdead)*y(kk) 
+   !print '(a,i3,2g13.5)','D ',ii,y(ii),ydot(ii)
+
+   !print *,'sumydot',sum(ydot(0:neq-1))
+
 end subroutine
  
 subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
@@ -302,40 +377,37 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
    real p_mild
    real beta,a,b
 
-   if ((t > interventiontime).and.(t < interventiontime + duration)) then
-      beta=Rt/D_infectious
-   elseif (t > interventiontime + duration) then
-      beta=0.3/D_infectious
-   else
-      beta=R0/D_infectious
-   endif
-
-   a= 1.0/D_incbation
-   b= 1.0/D_infectious
-
-   p_fatal  = CFR
-   p_mild   = 1 - P_SEVERE - CFR
-   D_death  = Time_to_death-D_infectious   ! 9  Time sick
-
-   pd=0.0
-   pd(0,0) = -beta*y(2)
-   pd(0,2) = -beta*y(0)
-   pd(1,0) =  beta*y(2)
-   pd(1,1) = -a
-   pd(1,2) =  beta*y(0)
-   pd(2,1) =  a
-   pd(2,2) = -b
-   pd(3,2) =  p_mild*b
-   pd(3,3) = -1.0/D_recovery_mild
-   pd(4,2) =  p_severe*b
-   pd(4,4) = -1.0/D_hospital_lag
-   pd(5,4) =  1.0/D_hospital_lag
-   pd(5,5) = -1.0/D_recovery_severe
-   pd(6,2) =  p_fatal*b
-   pd(6,6) = -1.0/D_death
-   pd(7,3) =  1.0/D_recovery_mild
-   pd(8,5) =  1.0/D_recovery_severe
-   pd(9,6) =  1.0/D_death
-
+!   if ((t > interventiontime).and.(t < interventiontime + duration)) then
+!      beta=Rt/Tinf
+!   elseif (t > interventiontime + duration) then
+!      beta=0.3/Tinf
+!   else
+!      beta=R0/Tinf
+!   endif
+!
+!   p_fatal  = CFR
+!   p_mild   = 1 - P_SEVERE - CFR
+!   Tdead  = Time_to_death-Tinf 
+!
+!   pd=0.0
+!   pd(0,0) = -beta*y(2)
+!   pd(0,2) = -beta*y(0)
+!   pd(1,0) =  beta*y(2)
+!   pd(1,1) = -1.0/Tinc
+!   pd(1,2) =  beta*y(0)
+!   pd(2,1) =  1.0/Tinc
+!   pd(2,2) = -1.0/Tinf
+!   pd(3,2) =  p_mild*1.0/Tinf
+!   pd(3,3) = -1.0/Trecm
+!   pd(4,2) =  p_severe*1.0/Tinf
+!   pd(4,4) = -1.0/Thosp
+!   pd(5,4) =  1.0/Thosp
+!   pd(5,5) = -1.0/Trecs
+!   pd(6,2) =  p_fatal*1.0/Tinf
+!   pd(6,6) = -1.0/Tdead
+!   pd(7,3) =  1.0/Trecm
+!   pd(8,5) =  1.0/Trecs
+!   pd(9,6) =  1.0/Tdead
+!
 end subroutine
 
