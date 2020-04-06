@@ -15,13 +15,15 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    integer, parameter  :: nout=6
 
    real ens(0:neq-1,0:nt,nrens)
-   real enspar(nrpar+neq,nrens)
-
-   real tmpens(0:nout,0:nt,nrens)
    real ave(0:neq-1,0:nt)
    real std(0:neq-1,0:nt)
+
+   real tmpens(0:nout,0:nt,nrens)
    real avet(0:nout,0:nt)
    real stdt(0:nout,0:nt)
+
+   real enspar(nrpar+neq,nrens)
+
 
    integer i,j
    real t,dt
@@ -53,7 +55,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
          write(10,'(i5,f10.2,50g13.5)')i,t,N*std(:,i)
       enddo
 
-      do j=1,nrens
+      do j=1,min(nrens,100)
          write(tag3,'(i3.3)')j
          write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
          do i=0,nt
@@ -66,7 +68,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
 !   S_i        = y(0    : na-1   ) ! Susectable
 !   E_i        = y(na   : 2*na-1 ) ! Exposed
 !   I_i        = y(2*na : 3*na-1 ) ! Infected
-!   Q_m        = y(3*na) ! Recovering (Mild)
+!   Q_m        = y(3*na)   ! Recovering (Mild)
 !   Q_s        = y(3*na+1) ! Recovering (Severe at home)
 !   Q_h        = y(3*na+2) ! Recovering (Severe in hospital)
 !   Q_f        = y(3*na+3) ! fatally sick to die
@@ -87,7 +89,6 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    tmpens(3,:,:)=ens(3*na+2,:,:)+ens(3*na+3,:,:)  ! Hospilitized
    tmpens(4,:,:)=ens(3*na+4,:,:)+ens(3*na+5,:,:)  ! Recovered
 
-
    call ensave(tmpens,avet,nout+1,nt,nrens)
    call ensstd(tmpens,stdt,avet,nout+1,nt,nrens)
    std=2.0*std
@@ -99,7 +100,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Susceptible_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.4)')t, N*avet(1,i), N*stdt(1,i), N*tmpens(1,i,:)
+         write(10,'(2000g13.4)')t, N*avet(0,i), N*stdt(0,i), N*tmpens(0,i,:)
       enddo
    close(10)
 

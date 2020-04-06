@@ -109,11 +109,11 @@ program seir
    Thosp             = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
    CFR               = 0.010                        ; parstd(10)=0.0020  ! 11 Case fatality rate 
    p_severe          = 0.020                        ; parstd(11)=0.0030  ! 12 Hospitalization rate % for severe cases
-   Rt                = 0.9                          ; parstd(12)=0.100  ! 13 Basic Reproduction Number during intervention
+   Rt                = 0.8                          ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
    InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
 
-   duration= 30                             ! Duration of measures
-   time=365.0                            ! Length of simulation
+   duration= 3000. ! 45.0                             ! Duration of measures
+   time=765.0                            ! Length of simulation
    dt= time/real(nt)                     ! Timestep of outputs
 
    call Rmatrix
