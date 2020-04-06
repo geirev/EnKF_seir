@@ -1,1 +1,20 @@
 EnKF_seir code
+
+Installation:
+git clone git@github.com:geirev/EnKF_seir.git
+git clone git@github.com:geirev/EnKF_analysis.git
+
+Install blas, lapack, and Fortran95
+
+
+cd EnKF_analysis/lib
+"in the makefile: change build dir to dir where EnKF_seir will be build"
+make
+
+cd EnKF_seir/src
+"change target install dir which is currently $HOME/bin"
+make
+
+make a run catalog and run "seir"
+
+good luck and ask when you get stuck 🙂
