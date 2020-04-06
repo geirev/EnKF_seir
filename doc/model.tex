@@ -281,7 +281,7 @@
 \begin{document}
 \setlength{\parskip}{3mm} 
 
-\title{EnKFseir}
+\title{SEIR with age compartments}
 \author{Geir Evensen}
 %\institute{G. Evensen \at
 %           NORCE (Norwegian Research Center, Bergen, Norway and
@@ -297,36 +297,65 @@
 %\abstract{
 %ddd
 %}
-
-\section{SEIR with age compartments}
-We have used the model described to run a sensitivity simulation to assess the impact of opening children 
-schools and kinder gardens after Easter. The age based model considers 11 age groups as defined in Tab.~\ref{tab:age}.
+\section{SEIR with age compartments\label{sec:age}}
+We have used the model described in Appendix~\ref{sec:age} to run a sensitivity simulation to assess the impact of opening children 
+schools and kindergartens after Easter. The age based model considers 11 age groups as defined in Tab.~\ref{tab:age}.
 The $R$ matrix used in the simulation after letting children back to kinder gardens and schools is presented in Tab.~\ref{tab:R}.
 Note that the $P$ factors and the $\bmR$ matrix are rather uncertain, and we should gather more data to calibrate these coefficients.
-A prior ensemble integration is first providing a prior prediction. The EnKF is then used to condition model parameters on
-todays accumulated deaths and the number of hospitalized patients. Then another ensemble prediction is run with the updated ensemble of model paraemters,
-to provide the posterior prediction with uncertainty estimates.
-%
-\begin{quote}
-\textbf{From this simulation, opening of schools and kindergardens is likely to yield strong growth in new cases for the young agegroups followed
-by spreading of the virus to their parents, teachers, and the rest of the community.  The continous lookdown in the rest of the society 
-stabelizes somewhat the growth, but we still see a large increase in the number of sick people, hospitalized people, and deaths.}
-\end{quote}
-%
+
+We have run one case where we continue todays measures with $R=0.8$ as shown in Fig.~\ref{fig:closed08}, and then three cases with 
+different $\bmR$ matrices, which give rise to a stable case Fig.~\ref{fig:open07}, a neutral case Fig.~\ref{fig:open08}, and an unstable case
+Fig.~\ref{fig:open09}.
+
+
 
 \begin{figure}[p]
 \begin{center}
-\includegraphics[width=0.99\textwidth]{predopen.eps} \\
-\includegraphics[width=0.99\textwidth]{predclosed.eps}
+\includegraphics[width=0.99\textwidth]{closedA08.eps}\\ 
+\includegraphics[width=0.99\textwidth]{closedB08.eps}
 \end{center}
-\caption{The upper plot is generated from an ensemble prediction where the current interventions are continued with $R=0.8$. The lower plot
-shows the corresponding result when we open kinder gardens and schools for children aged 6--12 years old. The black curve is the ensemble average of
-accumulated deaths in the two scenarios while the red curve is the ensemble mean of the number of hospitalized persons.
-The error bars show plus minus two standard deviations.  The blue and green curves are the number of exposed and infectious persons in the different 
-age groups.  The thickest blue and green lines corresponds to the youngest age group (0--5 years old) while the second thickest lines denote the second 
-age group from (6---12 years old).
-\label{fig:caseopen}}
+\caption{Stable case  where the current interventions are continued with $R=0.8$. 
+The upper plot is  an ensemble prediction of Hospitalized and accumulated Deaths.
+The pale colored
+lines are the prior realizations while the darker lines are the postrior realizations. The black dashed and solid lines are the
+enemble means for the prior and the postrior.  The lower plot shows the number of exposed and infectious persons in the different 
+age groups.  The thickest blue and green lines corresponds to the youngest age group (0--5 years old) while the second
+thickest lines denote the second age group from (6---12 years old).
+\label{fig:closed08}}
 \end{figure}
+
+\begin{figure}[p]
+\begin{center}
+\includegraphics[width=0.99\textwidth]{openA07.eps} \\
+\includegraphics[width=0.99\textwidth]{openB07.eps}
+\end{center}
+\caption{Stable case  where we open kinder gardens and schools for children aged 6--12 years old after Easter. 
+The $\bmR$ matrix from Tab.~\ref{tab:R} is used after Easter but with all 0.8 numbers set to 0.7.
+\label{fig:open07}}
+\end{figure}
+
+
+\begin{figure}[p]
+\begin{center}
+\includegraphics[width=0.99\textwidth]{openA08.eps} \\
+\includegraphics[width=0.99\textwidth]{openB08.eps} 
+\end{center}
+\caption{Neutral case where we open kinder gardens and schools for children aged 6--12 years old after Easter. 
+The $\bmR$ matrix from Tab.~\ref{tab:R} is used after Easter but with all 0.8 numbers are retained at 0.8.
+\label{fig:open08}}
+\end{figure}
+
+
+\begin{figure}[p]
+\begin{center}
+\includegraphics[width=0.99\textwidth]{openA09.eps} \\
+\includegraphics[width=0.99\textwidth]{openB09.eps} 
+\end{center}
+\caption{Unstable case where we open kinder gardens and schools for children aged 6--12 years old after Easter. 
+The $\bmR$ matrix from Tab.~\ref{tab:R} is used after Easter but with all 0.8 numbers set to 0.9.
+\label{fig:open09}}
+\end{figure}
+
 
 
 \newpage

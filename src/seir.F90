@@ -81,11 +81,11 @@ program seir
 ! EnKF initialization
 !  Observations
    lenkf=.true.     ! True to run EnKF
-   iobst=36         ! 31/3 day of measurment since first death 12th March
-   dobs(1) =71.0    ! total deaths at day 31/3
-   dobs(2) =311.0   ! total hospitalized at day 31/3
+   iobst=37         ! 31/3 day of measurment since first death 12th March
+   dobs(1) =76.0    ! total deaths at day 31/3
+   dobs(2) =316.0   ! total hospitalized at day 31/3
    R(1,1)=0.1; R(1,2)=0.0
-   R(2,1)=0.0;  R(2,2)=0.01
+   R(2,1)=0.0; R(2,2)=1.0
    call random(E,nrobs*nrens)
    print *,'D: perturbed data'
    do m=1,nrobs
@@ -108,12 +108,12 @@ program seir
    Trecs             = 31.5 - Tinf                  ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
    Thosp             = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
    CFR               = 0.010                        ; parstd(10)=0.0020  ! 11 Case fatality rate 
-   p_severe          = 0.020                        ; parstd(11)=0.0030  ! 12 Hospitalization rate % for severe cases
+   p_severe          = 0.018                        ; parstd(11)=0.0030  ! 12 Hospitalization rate % for severe cases
    Rt                = 0.8                          ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
    InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
 
-   duration= 3000. ! 45.0                             ! Duration of measures
-   time=765.0                            ! Length of simulation
+   duration= 30. ! 45.0                             ! Duration of measures
+   time=365.0                            ! Length of simulation
    dt= time/real(nt)                     ! Timestep of outputs
 
    call Rmatrix
