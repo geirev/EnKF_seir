@@ -1,5 +1,6 @@
 MODULES = \
 	m_agegroups.F90\
+	m_enkfini.F90\
 	m_ens2mod.F90\
 	m_ensave.F90\
 	m_ensstd.F90\
@@ -8,6 +9,7 @@ MODULES = \
 	m_pfactors.F90\
 	m_random.F90\
 	m_Rmatrix.F90\
+	m_solve.F90\
 	m_tecplot.F90
 
 F90FILES = \

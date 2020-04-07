@@ -7,118 +7,54 @@ program seir
    use m_agegroups
    use m_Rmatrix
    use m_pfactors
+   use m_enkfini
+   use m_solve
 
    implicit none
-   external f,jac
-   integer, parameter :: neq=40 ! Number of equations
-   real y(0:neq-1)              ! Solution S, E, I R
+! Dimensions
+   integer, parameter :: neq=40     ! Number of equations
+   integer, parameter :: nt=365     ! Number of outputs
+   integer, parameter :: nrens=99   ! Number of ensemble members
+   integer, parameter :: nrpar=13   ! Number of uncertain model parameters
+
+
+   integer i,k,j,m
    logical ex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! slsode parameters and workspace
-   integer :: itol=1
-   real    :: rtol=1.0E-5
-   real    :: atol=1.0E-7
-   integer :: itask=1
-   integer :: istate=1
-   integer :: iopt=0
-
-   integer mf
-   integer lrw,liw
-
-   real,    allocatable  :: rwork(:) ! (lrw)
-   integer, allocatable  :: iwork(:)  !(liw)
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Time stepping
-   integer, parameter :: nt=365           ! Number of outputs
-   real tout,t,dt
-   integer i
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Ensemble variables
-   integer, parameter :: nrens=99
-   integer, parameter :: nrpar=13
-
+   real ens(0:neq-1,0:nt,nrens)   ! storage of the ensemble of solutions for printing
    real enspar(1:nrpar+neq,nrens) ! Ensemble of state variables ( parameters + initial conditions)
    real parstd(1:nrpar)           ! Standard deviations of parameters
-   integer j
-
-   real ens(0:neq-1,0:nt,nrens)  ! storage of the ensemble of solutions for printing
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! EnKF variables
-   integer, parameter :: nrobs=2 ! Number of observations
-   integer, parameter :: ne=1    ! extended E ensemble
-   logical    lenkf
-   integer :: mode_analysis=11
-   logical :: lrandrot=.false.
-   logical :: lupdate_randrot=.false.
-   logical :: lsymsqrt=.false.
-   integer :: inflate=0
-   integer :: infmult=1.0
-   real :: truncation=0.999      ! singular value truncation
-   real dobs(nrobs)              ! Observation values
-   integer iobst                 ! time of measurement
-   real innovation(nrobs)        ! Observation innovation dobs-y
-   real D(nrobs,nrens)           ! dobs+eps - y
-   real S(nrobs,nrens)           ! Ensemble of predicted observation anomalies
-   real E(nrobs,nrens)           ! Ensemble of measurement perturbations
-   real R(nrobs,nrobs)           ! Measurement error covariance matrix
-   integer m
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Set up agegroups
    call agegroups
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! SLSODE parameters
-   mf=10  ! (10,21,22)
-   lrw =max(20+16*neq, 22+9*neq+neq**2)
-   liw = 20 + neq
-   allocate(rwork(lrw))
-   allocate(iwork(liw))
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! EnKF initialization
-!  Observations
-   lenkf=.true.     ! True to run EnKF
-   iobst=37         ! 31/3 day of measurment since first death 12th March
-   dobs(1) =76.0    ! total deaths at day 31/3
-   dobs(2) =316.0   ! total hospitalized at day 31/3
-   R(1,1)=0.1; R(1,2)=0.0
-   R(2,1)=0.0; R(2,2)=1.0
-   call random(E,nrobs*nrens)
-   print *,'D: perturbed data'
-   do m=1,nrobs
-      E(m,:)=sqrt(R(m,m))*E(m,:)          
-      D(m,:)=dobs(m)+E(m,:)
-      print '(i3,100f10.2)',m,D(m,1:10)
-   enddo
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-   Time_to_death     = 32.0                         ; parstd(1)=0.0    ! 1  Days to death
-   N                 = sum(agegroup(:))             ; parstd(2)=0.0    ! 2  Initial population
+   Time_to_death     = 32.0                         ; parstd(1)=0.0     ! 1  Days to death
+   N                 = sum(agegroup(:))             ; parstd(2)=0.0     ! 2  Initial population
    print *,'N=',N
-   I0                = 51.0                         ; parstd(3)=6.0    ! 3  Initial infectious (19 cases 1st march)
-   R0                = 3.8                          ; parstd(4)=0.5    ! 4  Basic Reproduction Number
-   Tinc              = 5.2                          ; parstd(5)=0.0    ! 5  Incubation period (Tinc)
-   Tinf              = 2.9                          ; parstd(6)=0.0    ! 6  Duration patient is infectious (Tinf)
-   Trecm             = 14.0 - Tinf                  ; parstd(7)=0.0    ! 7  Recovery time mild cases (11.1)
-   Trecs             = 31.5 - Tinf                  ; parstd(8)=0.0    ! 8  Recovery time severe cases Length of hospital stay
-   Thosp             = 5.0                          ; parstd(9)=0.0    ! 10 Time to hospitalization.
-   CFR               = 0.010                        ; parstd(10)=0.0020  ! 11 Case fatality rate 
-   p_severe          = 0.018                        ; parstd(11)=0.0030  ! 12 Hospitalization rate % for severe cases
+   I0                = 51.0                         ; parstd(3)=6.0     ! 3  Initial infectious (19 cases 1st march)
+   R0                = 3.8                          ; parstd(4)=0.5     ! 4  Basic Reproduction Number
+   Tinc              = 5.2                          ; parstd(5)=0.0     ! 5  Incubation period (Tinc)
+   Tinf              = 2.9                          ; parstd(6)=0.0     ! 6  Duration patient is infectious (Tinf)
+   Trecm             = 14.0 - Tinf                  ; parstd(7)=0.0     ! 7  Recovery time mild cases (11.1)
+   Trecs             = 31.5 - Tinf                  ; parstd(8)=0.0     ! 8  Recovery time severe cases Length of hospital stay
+   Thosp             = 5.0                          ; parstd(9)=0.0     ! 10 Time to hospitalization.
+   CFR               = 0.010                        ; parstd(10)=0.0020 ! 11 Case fatality rate 
+   p_severe          = 0.018                        ; parstd(11)=0.0030 ! 12 Hospitalization rate % for severe cases
    Rt                = 0.8                          ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
-   InterventionTime  = 15.0                         ; parstd(13)=0.0   ! 14 Interventions start here (15th march)
-
-   duration= 30. ! 45.0                             ! Duration of measures
-   time=365.0                            ! Length of simulation
-   dt= time/real(nt)                     ! Timestep of outputs
+   InterventionTime  = 15.0                         ; parstd(13)=0.0    ! 14 Interventions start here (15th march)
+   duration= 30.                                                        ! Duration of measures
+   time=365.0                                                           ! Length of simulation
 
    call Rmatrix
    call pfactors
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! EnKF initialization (reads data from corona.dat and generates E, D, and R)
+   call enkfini(nrens,nt,time)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! perturb first guess values of parameters and initial conditions
@@ -162,88 +98,67 @@ program seir
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    do j=1,nrens
-      y(:)=ens(:,0,j) 
       call ens2mod(nrpar, nrens, neq, enspar , j)
       call pfactors 
-      istate=1
-      do i=1,nt 
-         t=0+real(i)*dt
-         tout=t+dt
-         call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
-         ens(:,i,j)=y(:)
-!         print '(a,4f12.2)','SUM=',sum(y(0:neq-1))
-         if (istate < 0) then
-            print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
-            stop
-         endif
-      enddo
+      call solve(ens,neq,nrens,nt,j)
    enddo
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,0)
    if (.not.lenkf) stop
 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! EnKF update
    print '(a)','Prior ensemble parameters:'
-   do i=1,4
+   do i=1,2
       print '(i2,100g12.3)',i, enspar(1:nrpar,i)
    enddo
    print '(a)','Prior ensemble initial conditions:'
-   do i=1,4
+   do i=1,2
       print '(i1,a)',i,':'
       print '(10g12.3)',N*ens(:,0,i)
    enddo 
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! EnKF update
-   innovation(:)=0.0                                  ! only for sqrt filters
-   D(1,:) = D(1,:)-N*ens(3*na+6,iobst,:)                   ! Dead
-   D(2,:) = D(2,:)-N*(ens(3*na+2,iobst,:)+ens(3*na+3,iobst,:))  ! Hospitelized
-
-   print *,'Predicted measurements (10 realizations):'
-   print '(a,100f10.2)','d(1)',N*ens(3*na+6,iobst,1:10)
-   print '(a,100f10.2)','d(2)',N*(ens(3*na+2,iobst,1:10)+ens(3*na+3,iobst,1:10)) 
-
-   print *,'D innovation'
+   !innovation(:)=0.0                                  ! only for sqrt filters
    do m=1,nrobs
-      print '(i3,100f10.2)',m,D(m,1:10)
+      select case (cobs(m))
+      case('d')
+         D(m,:) = D(m,:)-N*ens(3*na+6,iobs(m),:)
+         S(m,:) = N*( ens(3*na+6,iobs(m),:) - sum(ens(3*na+6,iobs(m),:))/real(nrens) )           
+      case('h')
+         D(m,:) = D(m,:)-N*(ens(3*na+2,iobs(m),:)+ens(3*na+3,iobs(m),:))
+         S(m,:) = N*( ens(3*na+2,iobs(m),:) - sum(ens(3*na+2,iobs(m),:))/real(nrens) &
+                &    +ens(3*na+3,iobs(m),:) - sum(ens(3*na+3,iobs(m),:))/real(nrens) )
+      case default
+         stop 'Measurement type not found'
+      end select
+      print '(a,i3,100f10.2)','D:',m,D(m,1:10)
+      print '(a,i3,100f10.2)','S:',m,S(m,1:10)
    enddo
 
-   S(1,:) = N*( ens(3*na+6,iobst,:) - sum(ens(3*na+6,iobst,:))/real(nrens) )           
-   S(2,:) = N*( ens(3*na+2,iobst,:) - sum(ens(3*na+2,iobst,:))/real(nrens) &
-              &+ens(3*na+3,iobst,:) - sum(ens(3*na+3,iobst,:))/real(nrens) )
 
    call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
                  lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
-
+ 
    enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.0001)
    ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.0)
 
    print '(a)','Posterior ensemble parameters:'
-   do i=1,4
+   do i=1,2
       print '(i2,100g12.3)',i, enspar(1:nrpar,i)
    enddo
    print '(a)','Posterior ensemble initial conditions:'
-   do i=1,4
+   do i=1,2
       print '(i1,a)',i,':'
       print '(10g13.4)', N*ens(:,0,i)
    enddo 
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Posterior ensemble prediction
    do j=1,nrens
-      y(:)=ens(:,0,j) 
       call ens2mod(nrpar, nrens, neq, enspar , j)
       call pfactors 
-      istate=1
-      do i=1,nt 
-         t=0+real(i)*dt
-         tout=t+dt
-         call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
-         ens(:,i,j)=y(:)
-         if (istate < 0) then
-            print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
-            stop
-         endif
-      enddo
+      call solve(ens,neq,nrens,nt,j)
    enddo
-   
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,1)
 
 end program

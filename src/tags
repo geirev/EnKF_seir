@@ -4,18 +4,19 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+200	m_enkfini.F90	/^   200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines$/;"	l	subroutine:enkfini	file:
 CFR	mod_parameters.F90	/^   real, save :: CFR /;"	v	module:mod_parameters
-D	seir.F90	/^   real D(/;"	v	program:seir
-E	seir.F90	/^   real E(/;"	v	program:seir
+D	m_enkfini.F90	/^   real, allocatable    :: D(/;"	v	module:m_enkfini
+E	m_enkfini.F90	/^   real, allocatable    :: E(/;"	v	module:m_enkfini
 I0	mod_parameters.F90	/^   real, save :: I0 /;"	v	module:mod_parameters
 InterventionTime	mod_parameters.F90	/^   real, save :: InterventionTime /;"	v	module:mod_parameters
 N	mod_parameters.F90	/^   real, save :: N$/;"	v	module:mod_parameters
-R	seir.F90	/^   real R(/;"	v	program:seir
+R	m_enkfini.F90	/^   real, allocatable    :: R(/;"	v	module:m_enkfini
 R0	mod_parameters.F90	/^   real, save :: R0 /;"	v	module:mod_parameters
 Rmat	m_Rmatrix.F90	/^real, save         :: Rmat(/;"	v	module:m_Rmatrix
 Rmatrix	m_Rmatrix.F90	/^subroutine Rmatrix$/;"	s	module:m_Rmatrix
 Rt	mod_parameters.F90	/^   real, save :: Rt /;"	v	module:mod_parameters
-S	seir.F90	/^   real S(/;"	v	program:seir
+S	m_enkfini.F90	/^   real, allocatable    :: S(/;"	v	module:m_enkfini
 Tdead	mod_parameters.F90	/^   real, save :: Tdead /;"	v	module:mod_parameters
 Thosp	mod_parameters.F90	/^   real, save :: Thosp$/;"	v	module:mod_parameters
 Time_to_death	mod_parameters.F90	/^   real, save :: Time_to_death$/;"	v	module:mod_parameters
@@ -27,9 +28,13 @@ Xmax	mod_parameters.F90	/^   real, save :: Xmax /;"	v	module:mod_parameters
 agegroup	m_agegroups.F90	/^real, save         :: agegroup(/;"	v	module:m_agegroups
 agegroups	m_agegroups.F90	/^subroutine agegroups$/;"	s	module:m_agegroups
 atol	seir.F90	/^   real    :: atol=/;"	v	program:seir
-dobs	seir.F90	/^   real dobs(/;"	v	program:seir
+cobs	m_enkfini.F90	/^   character(len=1), allocatable :: cobs(/;"	v	module:m_enkfini
+date	m_enkfini.F90	/^   character(len=5) date$/;"	v	module:m_enkfini
+days_in_month	m_enkfini.F90	/^   integer, parameter :: days_in_month(/;"	v	module:m_enkfini
+dobs	m_enkfini.F90	/^   real, allocatable    :: dobs(/;"	v	module:m_enkfini
 dt	seir.F90	/^   real tout,t,dt$/;"	v	program:seir
 duration	mod_parameters.F90	/^   real, save :: duration$/;"	v	module:mod_parameters
+enkfini	m_enkfini.F90	/^subroutine enkfini$/;"	s	module:m_enkfini
 ens	seir.F90	/^   real ens(/;"	v	program:seir
 ens2mod	m_ens2mod.F90	/^subroutine ens2mod(/;"	s	module:m_ens2mod
 ensave	m_ensave.F90	/^subroutine ensave(/;"	s	module:m_ensave
@@ -38,26 +43,33 @@ ensstd	m_ensstd.F90	/^subroutine ensstd(/;"	s	module:m_ensstd
 ex	seir.F90	/^   logical ex$/;"	v	program:seir
 f	seir.F90	/^subroutine f(/;"	s
 i	seir.F90	/^   in/;"	v	program:seir
-inflate	seir.F90	/^   integer :: inflate=/;"	v	program:seir
-infmult	seir.F90	/^   integer :: infmult=/;"	v	program:seir
-innovation	seir.F90	/^   real innovation(/;"	v	program:seir
-iobst	seir.F90	/^   integer iobst /;"	v	program:seir
+iday	m_enkfini.F90	/^   integer imonth,iday,/;"	v	module:m_enkfini
+ideath	m_enkfini.F90	/^   integer imonth,iday,ideath,/;"	v	module:m_enkfini
+ihosp	m_enkfini.F90	/^   integer imonth,iday,ideath,ihosp,/;"	v	module:m_enkfini
+imonth	m_enkfini.F90	/^   integer imonth,/;"	v	module:m_enkfini
+inflate	m_enkfini.F90	/^   integer :: inflate=/;"	v	module:m_enkfini
+infmult	m_enkfini.F90	/^   integer :: infmult=/;"	v	module:m_enkfini
+innovation	m_enkfini.F90	/^   real, allocatable    :: innovation(/;"	v	module:m_enkfini
+iobs	m_enkfini.F90	/^   integer, allocatable :: iobs(/;"	v	module:m_enkfini
+iobst	m_enkfini.F90	/^   integer imonth,iday,ideath,ihosp,iobst$/;"	v	module:m_enkfini
 iopt	seir.F90	/^   integer :: iopt=/;"	v	program:seir
 istate	seir.F90	/^   integer :: istate=/;"	v	program:seir
 itask	seir.F90	/^   integer :: itask=/;"	v	program:seir
 itol	seir.F90	/^   integer :: itol=/;"	v	program:seir
 iwork	seir.F90	/^   integer, allocatable  :: iwork(/;"	v	program:seir
-j	seir.F90	/^   integer j$/;"	v	program:seir
+j	seir.F90	/^   integer i,k,j,/;"	v	program:seir
 jac	seir.F90	/^subroutine jac(/;"	s
-lenkf	seir.F90	/^   logical    lenkf$/;"	v	program:seir
+k	seir.F90	/^   integer i,k,/;"	v	program:seir
+lenkf	m_enkfini.F90	/^   logical    lenkf$/;"	v	module:m_enkfini
 liw	seir.F90	/^   integer lrw,liw$/;"	v	program:seir
-lrandrot	seir.F90	/^   logical :: lrandrot=/;"	v	program:seir
+lrandrot	m_enkfini.F90	/^   logical :: lrandrot=/;"	v	module:m_enkfini
 lrw	seir.F90	/^   integer lrw,/;"	v	program:seir
-lsymsqrt	seir.F90	/^   logical :: lsymsqrt=/;"	v	program:seir
-lupdate_randrot	seir.F90	/^   logical :: lupdate_randrot=/;"	v	program:seir
-m	seir.F90	/^   integer m$/;"	v	program:seir
+lsymsqrt	m_enkfini.F90	/^   logical :: lsymsqrt=/;"	v	module:m_enkfini
+lupdate_randrot	m_enkfini.F90	/^   logical :: lupdate_randrot=/;"	v	module:m_enkfini
+m	seir.F90	/^   integer i,k,j,m$/;"	v	program:seir
 m_Rmatrix	m_Rmatrix.F90	/^module m_Rmatrix$/;"	m
 m_agegroups	m_agegroups.F90	/^module m_agegroups$/;"	m
+m_enkfini	m_enkfini.F90	/^module m_enkfini$/;"	m
 m_ens2mod	m_ens2mod.F90	/^module m_ens2mod$/;"	m
 m_ensave	m_ensave.F90	/^module m_ensave$/;"	m
 m_ensstd	m_ensstd.F90	/^module m_ensstd$/;"	m
@@ -68,12 +80,13 @@ m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
 mf	seir.F90	/^   integer mf$/;"	v	program:seir
 mod2ens	m_mod2ens.F90	/^subroutine mod2ens(/;"	s	module:m_mod2ens
 mod_parameters	mod_parameters.F90	/^module mod_parameters$/;"	m
-mode_analysis	seir.F90	/^   integer :: mode_analysis=/;"	v	program:seir
+mode_analysis	m_enkfini.F90	/^   integer :: mode_analysis=/;"	v	module:m_enkfini
 na	m_agegroups.F90	/^integer, parameter :: na=/;"	v	module:m_agegroups
-ne	seir.F90	/^   integer, parameter :: ne=/;"	v	program:seir
+ne	m_enkfini.F90	/^   integer, parameter :: ne=/;"	v	module:m_enkfini
 neq	seir.F90	/^   integer, parameter :: neq=/;"	v	program:seir
 nrens	seir.F90	/^   integer, parameter :: nrens=/;"	v	program:seir
-nrobs	seir.F90	/^   integer, parameter :: nrobs=/;"	v	program:seir
+nrlines	m_enkfini.F90	/^   integer nrlines /;"	v	module:m_enkfini
+nrobs	m_enkfini.F90	/^   integer nrobs /;"	v	module:m_enkfini
 nrpar	seir.F90	/^   integer, parameter :: nrpar=/;"	v	program:seir
 nt	seir.F90	/^   inte/;"	v	program:seir
 p_severe	mod_parameters.F90	/^   real, save :: p_severe$/;"	v	module:mod_parameters
@@ -89,6 +102,7 @@ seir	seir.F90	/^program seir$/;"	p
 t	seir.F90	/^   real to/;"	v	program:seir
 tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
 time	mod_parameters.F90	/^   real, save :: time$/;"	v	module:mod_parameters
+tobs	m_enkfini.F90	/^   integer, allocatable :: tobs(/;"	v	module:m_enkfini
 tout	seir.F90	/^   real tout,/;"	v	program:seir
-truncation	seir.F90	/^   real :: truncation=/;"	v	program:seir
+truncation	m_enkfini.F90	/^   real :: truncation=/;"	v	module:m_enkfini
 y	seir.F90	/^   real y(/;"	v	program:seir
