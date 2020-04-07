@@ -51,7 +51,6 @@ subroutine enkfini(nrens,nt,time)
    dt= time/real(nt)                     ! Timestep of outputs
    do i=1,nrlines
       read(10,'(i2,tr1,i2,2i6)')iday,imonth,ideath,ihosp
-      print *,iday,imonth,ideath,ihosp
       m=m+1
       tobs(m)=0
       do k=3,imonth-1
@@ -71,6 +70,7 @@ subroutine enkfini(nrens,nt,time)
       cobs(m)='h'
       dobs(m)=real(ihosp)
    enddo
+   print '(a)','List of observations:'
    do m=1,nrobs
       print *,m,iobs(m),tobs(m),cobs(m),dobs(m)
    enddo
@@ -89,7 +89,6 @@ subroutine enkfini(nrens,nt,time)
       R(m,m)=(0.05*dobs(m))**2
       E(m,:)=sqrt(R(m,m))*E(m,:)          
       D(m,:)=dobs(m)+E(m,:)
-      print '(i3,100f10.2)',m,D(m,1:10)
    enddo
 end subroutine
 end module
