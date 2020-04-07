@@ -29,6 +29,7 @@ m_solve.o:      MODEL.CPP
 m_solve.o:      mod_parameters.o
 m_tecplot.o:      m_agegroups.o
 m_tecplot.o:      makefile
+m_tecplot.o:      m_enkfini.o
 m_tecplot.o:      m_ensave.o
 m_tecplot.o:      m_ensstd.o
 m_tecplot.o:      MODEL.CPP

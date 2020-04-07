@@ -2,7 +2,7 @@ module m_enkfini
 use m_random
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! EnKF variables
-   integer nrobs                 ! Number of observations
+   integer, save :: nrobs                 ! Number of observations
    integer nrlines               ! Number of lines in observations file
    integer, parameter :: ne=1    ! extended E ensemble
    logical    lenkf
@@ -18,6 +18,7 @@ use m_random
    real, allocatable    :: dobs(:)       ! Observation values
    integer, allocatable :: tobs(:)       ! Observation times (days from 1. March)
    character(len=1), allocatable :: cobs(:)      ! Observation times (days from 1. March)
+   real, allocatable    :: Dprt(:,:)     ! dobs+eps
    real, allocatable    :: D(:,:)        ! dobs+eps - y
    real, allocatable    :: S(:,:)        ! Ensemble of predicted observation anomalies
    real, allocatable    :: E(:,:)        ! Ensemble of measurement perturbations
@@ -34,8 +35,14 @@ subroutine enkfini(nrens,nt,time)
    real,    intent (in) :: time
    real dt
    integer i,j,k,m
+   logical ex
 
 !  Observations
+   inquire(file='corona.dat',exist=ex)
+   if (.not.ex) then
+      print '(a)','You must supply the fole corona.dat (example in src dir)'
+      stop
+   endif
    open(10,file='corona.dat')
    do i=1,1000
       read(10,'(tr1,a5)',end=200)date; print '(i4,a)',i,date
@@ -78,6 +85,7 @@ subroutine enkfini(nrens,nt,time)
 
    allocate(innovation(nrobs))
    allocate(D(nrobs,nrens))
+   allocate(Dprt(nrobs,nrens))
    allocate(S(nrobs,nrens))
    allocate(E(nrobs,nrens))
    allocate(R(nrobs,nrobs))
@@ -89,6 +97,7 @@ subroutine enkfini(nrens,nt,time)
       R(m,m)=(0.05*dobs(m))**2
       E(m,:)=sqrt(R(m,m))*E(m,:)          
       D(m,:)=dobs(m)+E(m,:)
+      Dprt(m,:)=dobs(m)+E(m,:)
    enddo
 end subroutine
 end module
