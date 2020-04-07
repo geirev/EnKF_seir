@@ -9,6 +9,9 @@ Install blas, lapack, and Fortran95
 
 cd EnKF_analysis/lib
 "in the makefile: change build dir to dir where EnKF_seir will be build"
+   BUILD = ../../EnKF_seir/build
+This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
+
 make
 
 cd EnKF_seir/src
