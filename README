@@ -18,6 +18,37 @@ cd EnKF_seir/src
 "change target install dir which is currently $HOME/bin"
 make
 
-make a run catalog and run "seir"
+make a run catalog, copy the corona.dat file to this catalog and run "seir"
 
-good luck and ask when you get stuck 🙂
+good luck and ask when you get stuck.
+
+################################################################################
+
+I always define subroutines in new modules:
+
+   module m_name_of_routine
+   ! define global variables here
+   contains
+   subroutine name_of_sub
+   ! define local variables here
+
+
+   end subroutine
+   end module
+
+in the main program you write
+   program seir
+   use m_name_of_routine
+   call  name_of_routine
+   end program
+
+The main program then has access to all the global variables defined in the module, and
+knows the header of the subroutine and the compiler checks the consistency between the call
+and the subroutine definition.
+
+   make new  -> updates the dependencies for the makefile
+   make tags -> runs ctags (useful if you use vim)
+
+For this to work install the scripts in the ./bin in your path and install ctags
+
+################################################################################
