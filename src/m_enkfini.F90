@@ -43,10 +43,13 @@ subroutine enkfini(nrens,nt,time)
       print '(a)','For EnKF, you must supply the fole corona.dat (example in src dir)'
       print '(a)','Running prior ensemble prediction'
       lenkf=.false.
+      return
    endif
+   print *
+   print '(a)','Reading corona.dat'
    open(10,file='corona.dat')
    do i=1,1000
-      read(10,'(tr1,a5)',end=200)date; print '(i4,a)',i,date
+      read(10,'(tr1,a5)',end=200)date
    enddo
    200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines
    rewind(10)
@@ -82,6 +85,7 @@ subroutine enkfini(nrens,nt,time)
    do m=1,nrobs
       print *,m,iobs(m),tobs(m),cobs(m),dobs(m)
    enddo
+   print *
 
 
    allocate(innovation(nrobs))
@@ -91,7 +95,6 @@ subroutine enkfini(nrens,nt,time)
    allocate(E(nrobs,nrens))
    allocate(R(nrobs,nrobs))
 
-   lenkf=.true.     ! True to run EnKF
    call random(E,nrobs*nrens)
    R=0.0
    do m=1,nrobs

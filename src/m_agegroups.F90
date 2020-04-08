@@ -256,6 +256,7 @@ integer i,n
      print '(a,i2,a,i2,a,i3,a,f9.0)','Population in agegroup: ',i,' agerange(',ia(i),'--',ib(i),')= ',agegroup(i)
   enddo
   print '(a,2f13.0)','Total Norwegan population: ',sum(ages_male(:)) + sum(ages_female(:)) , sum(agegroup(:))
+  print *
 
 end subroutine
 end module

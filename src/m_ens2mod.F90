@@ -1,7 +1,7 @@
 module m_ens2mod
 contains
 subroutine ens2mod(nrpar, nrens, neq, enspar , j)
-! Copies initial conditions from ens(:,j) to y before simulation
+! sets the local model parameters used in the function for the ode solver
    use mod_parameters
    implicit none
    integer, intent(in) :: nrpar
@@ -10,7 +10,7 @@ subroutine ens2mod(nrpar, nrens, neq, enspar , j)
    integer, intent(in) :: j
    real,    intent(in) :: enspar(nrpar+neq,nrens)
 
-   Time_to_death     = enspar(1,j)    ! Days to death
+   T2death           = enspar(1,j)    ! Days to death
    N                 = enspar(2,j)    ! Initial population
    I0                = enspar(3,j)    ! Initial infectious
    R0                = enspar(4,j)    ! Basic Reproduction Number
@@ -22,7 +22,7 @@ subroutine ens2mod(nrpar, nrens, neq, enspar , j)
    CFR               = enspar(10,j)   ! Case fatality rate 
    p_severe          = enspar(11,j)   ! Hospitalization rate % for severe cases
    Rt                = enspar(12,j)   ! Basic Reproduction Number during intervention
-   InterventionTime  = enspar(13,j)   ! Interventions start here
+   Tinterv           = enspar(13,j)   ! Interventions start here
 end subroutine
 end module
 

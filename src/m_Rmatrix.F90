@@ -22,7 +22,9 @@ subroutine Rmatrix
       Rmat(i,j)=Rmat(j,i)
    enddo
    enddo
+   print *
    print *,'Rmat:'
    print '(11f10.2)',Rmat
+   print *
 end subroutine
 end module

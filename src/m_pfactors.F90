@@ -14,8 +14,8 @@ subroutine pfactors
    logical :: lprt=.false.
 
    iprt=iprt+1
-   if (iprt < 4) lprt=.true.
-   if (iprt >= 4) lprt=.false.
+   if (iprt < 3) lprt=.true.
+   if (iprt >= 3) lprt=.false.
 
 
 

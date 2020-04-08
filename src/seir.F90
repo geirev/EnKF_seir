@@ -9,95 +9,47 @@ program seir
    use m_pfactors
    use m_enkfini
    use m_solve
+   use m_readinputs
+   use m_inipar
+   use m_iniens
 
    implicit none
 ! Dimensions
-   integer, parameter :: neq=40     ! Number of equations
-   integer, parameter :: nt=365     ! Number of outputs
-   integer, parameter :: nrens=999  ! Number of ensemble members
-   integer, parameter :: nrpar=13   ! Number of uncertain model parameters
-
+   integer, parameter :: neq=40             ! Number of equations
+   integer, parameter :: nrpar=13           ! Number of uncertain model parameters
+   integer  nrens                           ! Ensemble size (from infile.in)
+   integer  nt                              ! Number of output times (from infile.in)
 
    integer i,k,j,m
    logical ex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   real ens(0:neq-1,0:nt,nrens)   ! storage of the ensemble of solutions for printing
-   real enspar(1:nrpar+neq,nrens) ! Ensemble of state variables ( parameters + initial conditions)
-   real parstd(1:nrpar)           ! Standard deviations of parameters
+   real, allocatable :: ens(:,:,:)          ! storage of the ensemble of solutions for printing
+   real, allocatable :: enspar(:,:)         ! Ensemble of state variables ( parameters + initial conditions)
+   real parstd(nrpar)                       ! Standard deviations of parameters
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! Set up agegroups
-   call agegroups
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-   Time_to_death     = 32.0                         ; parstd(1)=0.0     ! 1  Days to death
-   N                 = sum(agegroup(:))             ; parstd(2)=0.0     ! 2  Initial population
-   print *,'N=',N
-   I0                = 51.0                         ; parstd(3)=6.0     ! 3  Initial infectious (19 cases 1st march)
-   R0                = 5.0                          ; parstd(4)=0.5     ! 4  Basic Reproduction Number
-   Tinc              = 5.2                          ; parstd(5)=0.0     ! 5  Incubation period (Tinc)
-   Tinf              = 2.9                          ; parstd(6)=0.0     ! 6  Duration patient is infectious (Tinf)
-   Trecm             = 14.0 - Tinf                  ; parstd(7)=0.0     ! 7  Recovery time mild cases (11.1)
-   Trecs             = 31.5 - Tinf                  ; parstd(8)=0.0     ! 8  Recovery time severe cases Length of hospital stay
-   Thosp             = 5.0                          ; parstd(9)=0.0     ! 10 Time to hospitalization.
-   CFR               = 0.006                        ; parstd(10)=0.0006 ! 11 Case fatality rate 
-   p_severe          = 0.012                        ; parstd(11)=0.0015 ! 12 Hospitalization rate % for severe cases
-   Rt                = 0.63                         ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
-   InterventionTime  = 15.0                         ; parstd(13)=0.0    ! 14 Interventions start here (15th march)
-   duration=  35.0 !                                                              ! Duration of measures
-   time=365.0                                                           ! Length of simulation
-
-   call Rmatrix
-   call pfactors
+! Initialization 
+   call readinputs(parstd,nrpar,nrens,nt)   ! reads infile.in
+   allocate( ens(0:neq-1,0:nt,nrens)   )    ! allocate ensemble for the model solutions
+   allocate( enspar(1:nrpar+neq,nrens) )    ! allocate ensemble of model parameters
+   call agegroups                           ! define agegroups and population numbers
+   call Rmatrix                             ! define R infection rates between agegroups used in phase 3
+   call pfactors                            ! define fraction of sick to mild, severe, or fatal, for each agegroup
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! EnKF initialization (reads data from corona.dat and generates E, D, and R)
-   call enkfini(nrens,nt,time)
+   if (lenkf) call enkfini(nrens,nt,time)   ! Initialize EnKF reading data etc.
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! perturb first guess values of parameters and initial conditions
-   call random(enspar(1:nrpar,1:nrens),nrpar*nrens)
-   do j=1,nrens
-      enspar(1:nrpar,j)=parstd(1:nrpar)*enspar(1:nrpar,j)
-      call mod2ens(nrpar,nrens,neq,enspar,j)
-   enddo
-   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.0001) ! Ensure positive parameters
-   enspar(12,:)=min(enspar(12,:),0.999)            ! Ensure Rt < 1.0
+! initialize ensemble of parameters
+   call  inipar(enspar,parstd,nrpar,nrens,neq)
 
-   print '(a)','Simple initialization'
-   do j=1,nrens
-      I0=enspar(3,j)     
-      ens(0    :   na-1, 0, j) = agegroup(0:na-1)  ! Susceptible na agegroups                 S_i
-      ens(na   : 2*na-1, 0, j) = 4*I0/real(na)     ! Exposed     na agegroups                 E_i
-      ens(2*na : 3*na-1, 0, j) =   I0/real(na)     ! Infected    na agegroups                 I_i
-
-      ens(3*na         , 0, j) = 0.0               ! Sick Mild                                Q_m
-      ens(3*na+1       , 0, j) = 0.0               ! Sick (Severe at home)                    Q_s
-      ens(3*na+2       , 0, j) = 0.0               ! Sick (Severe at hospital)                Q_h
-      ens(3*na+3       , 0, j) = 0.0               ! Sick (Severe at hospital that will die)  Q_f
-      ens(3*na+4       , 0, j) = 0.0               ! Removed_mild   (recovered)               R_m
-      ens(3*na+5       , 0, j) = 0.0               ! Removed_severe (recovered)               R_s
-      ens(3*na+6       , 0, j) = 0.0               ! Removed_fatal (dead)                     D
-      ens(0:na-1 ,0, j) = ens(0:na-1, 0, j) - ens(na:2*na-1, 0, j) - ens(2*na : 3*na-1, 0, j)
-   enddo
-   ens(:,0,:)=ens(:,0,:)/N
-
-! Copy initial ensemble to enspar for later updating
-   enspar(nrpar+1:nrpar+neq,:)=ens(0:neq-1,0,:) 
-
-   print '(a)','enspar INI'
-   print '(a,100g11.4)','1', enspar(1:nrpar,1)
-   print '(a,100g11.4)','2', enspar(1:nrpar,2)
-   print '(a,100g11.4)','3', enspar(1:nrpar,3)
-!   print '(a)','ens INI'
-!   print '(a,100g13.4)','1', N*ens(:,0,1)
-!   print '(a,100g13.4)','2', N*ens(:,0,2)
-!   print '(a,100g13.4)','3', N*ens(:,0,3)
+! initialize ensemble of models
+   call  iniens(ens,enspar,neq,nrens,nt,nrpar)
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
+   print '(a)','Computing prior ensemble prediction'
    do j=1,nrens
       call ens2mod(nrpar, nrens, neq, enspar , j)
       call pfactors 
@@ -111,7 +63,7 @@ program seir
 ! EnKF update
    print '(a)','Prior ensemble parameters:'
    do i=1,2
-      print '(i2,100g12.3)',i, enspar(1:nrpar,i)
+      print '(i2,100g10.3)',i, enspar(1:nrpar,i)
    enddo
    print '(a)','Prior ensemble initial conditions:'
    do i=1,2
@@ -119,7 +71,8 @@ program seir
       print '(10g12.3)',N*ens(:,0,i)
    enddo 
 
-   !innovation(:)=0.0                                  ! only for sqrt filters
+   print *
+   print '(a)','Preparing for analysis computation'
    do m=1,nrobs
       select case (cobs(m))
       case('d')
@@ -140,27 +93,31 @@ program seir
    call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
                  lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
  
-   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),0.0001)
+   enspar(1:nrpar,:)=max(enspar(1:nrpar,:),minpar)
    ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.0)
 
+   print *
    print '(a)','Posterior ensemble parameters:'
-   do i=1,2
-      print '(i2,100g12.3)',i, enspar(1:nrpar,i)
+   do i=1,3
+      print '(i2,100g10.3)',i, enspar(1:nrpar,i)
    enddo
    print '(a)','Posterior ensemble initial conditions:'
    do i=1,2
       print '(i1,a)',i,':'
-      print '(10g13.4)', N*ens(:,0,i)
+      print '(10g12.3)',N*ens(:,0,i)
    enddo 
+   print *
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Posterior ensemble prediction
+   print '(a)','Computing posterior ensemble prediction'
    do j=1,nrens
       call ens2mod(nrpar, nrens, neq, enspar , j)
       call pfactors 
       call solve(ens,neq,nrens,nt,j)
    enddo
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,1)
+   print '(a)','Done..'
 
 end program
 
@@ -180,11 +137,11 @@ subroutine f(neq, t, y, ydot)
 
    real R(0:na-1,0:na-1)
 
-   if (t <= interventiontime) then
+   if (t <= Tinterv) then
       R=R0
-   elseif (interventiontime < t .and. t <= interventiontime + duration ) then
+   elseif (Tinterv < t .and. t <= Tinterv + duration ) then
       R=Rt 
-   elseif (t > interventiontime + duration) then
+   elseif (t > Tinterv + duration) then
       call random(beta,1)
       R=Rmat  !*(1.0+0.1*beta(1))
    endif
@@ -203,7 +160,7 @@ subroutine f(neq, t, y, ydot)
 !   pf(:) = CFR
 !   ps(:) = P_SEVERE
 !   pm(:) = 1.0 - P_SEVERE - CFR
-   Tdead  = Time_to_death-Tinf 
+   Tdead  = T2death-Tinf 
 
 !   print '(100f8.4)',pm(:)
 !   print '(100f8.4)',ps(:)
@@ -305,9 +262,9 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
    real p_mild
    real beta,a,b
 
-!   if ((t > interventiontime).and.(t < interventiontime + duration)) then
+!   if ((t > Tinterv).and.(t < Tinterv + duration)) then
 !      beta=Rt/Tinf
-!   elseif (t > interventiontime + duration) then
+!   elseif (t > Tinterv + duration) then
 !      beta=0.3/Tinf
 !   else
 !      beta=R0/Tinf
@@ -315,7 +272,7 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
 !
 !   p_fatal  = CFR
 !   p_mild   = 1 - P_SEVERE - CFR
-!   Tdead  = Time_to_death-Tinf 
+!   Tdead  = T2death-Tinf 
 !
 !   pd=0.0
 !   pd(0,0) = -beta*y(2)
