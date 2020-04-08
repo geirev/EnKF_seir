@@ -14,7 +14,7 @@ program seir
 ! Dimensions
    integer, parameter :: neq=40     ! Number of equations
    integer, parameter :: nt=365     ! Number of outputs
-   integer, parameter :: nrens=99   ! Number of ensemble members
+   integer, parameter :: nrens=999  ! Number of ensemble members
    integer, parameter :: nrpar=13   ! Number of uncertain model parameters
 
 
@@ -36,17 +36,17 @@ program seir
    N                 = sum(agegroup(:))             ; parstd(2)=0.0     ! 2  Initial population
    print *,'N=',N
    I0                = 51.0                         ; parstd(3)=6.0     ! 3  Initial infectious (19 cases 1st march)
-   R0                = 3.8                          ; parstd(4)=0.5     ! 4  Basic Reproduction Number
+   R0                = 5.0                          ; parstd(4)=0.5     ! 4  Basic Reproduction Number
    Tinc              = 5.2                          ; parstd(5)=0.0     ! 5  Incubation period (Tinc)
    Tinf              = 2.9                          ; parstd(6)=0.0     ! 6  Duration patient is infectious (Tinf)
    Trecm             = 14.0 - Tinf                  ; parstd(7)=0.0     ! 7  Recovery time mild cases (11.1)
    Trecs             = 31.5 - Tinf                  ; parstd(8)=0.0     ! 8  Recovery time severe cases Length of hospital stay
    Thosp             = 5.0                          ; parstd(9)=0.0     ! 10 Time to hospitalization.
-   CFR               = 0.010                        ; parstd(10)=0.0020 ! 11 Case fatality rate 
-   p_severe          = 0.018                        ; parstd(11)=0.0030 ! 12 Hospitalization rate % for severe cases
-   Rt                = 0.8                          ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
+   CFR               = 0.006                        ; parstd(10)=0.0006 ! 11 Case fatality rate 
+   p_severe          = 0.012                        ; parstd(11)=0.0015 ! 12 Hospitalization rate % for severe cases
+   Rt                = 0.63                         ; parstd(12)=0.020  ! 13 Basic Reproduction Number during intervention
    InterventionTime  = 15.0                         ; parstd(13)=0.0    ! 14 Interventions start here (15th march)
-   duration= 30.                                                        ! Duration of measures
+   duration=  35.0 !                                                              ! Duration of measures
    time=365.0                                                           ! Length of simulation
 
    call Rmatrix
@@ -72,6 +72,7 @@ program seir
       ens(0    :   na-1, 0, j) = agegroup(0:na-1)  ! Susceptible na agegroups                 S_i
       ens(na   : 2*na-1, 0, j) = 4*I0/real(na)     ! Exposed     na agegroups                 E_i
       ens(2*na : 3*na-1, 0, j) =   I0/real(na)     ! Infected    na agegroups                 I_i
+
       ens(3*na         , 0, j) = 0.0               ! Sick Mild                                Q_m
       ens(3*na+1       , 0, j) = 0.0               ! Sick (Severe at home)                    Q_s
       ens(3*na+2       , 0, j) = 0.0               ! Sick (Severe at hospital)                Q_h

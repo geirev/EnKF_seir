@@ -111,7 +111,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       enddo
       write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
       do i=1,nrobs
-         if (cobs(i)=='d') write(10,'(2000g13.5)')tobs(i), dobs(i), sqrt(R(i,i)), Dprt(i,1:nrens)
+         if (cobs(i)=='d') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
       enddo
    close(10)
 
@@ -154,7 +154,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       enddo
       write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
       do i=1,nrobs
-         if (cobs(i)=='h') write(10,'(2000g13.5)')tobs(i), dobs(i), sqrt(R(i,i)), Dprt(i,1:nrens)
+         if (cobs(i)=='h') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
       enddo
    close(10)
 
@@ -200,7 +200,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
                            &"p_severe" "Rt" "InterventionTime"' 
       write(10,'(a,i5,a,i5,a)')' ZONE T="Parameters_'//tag//'"  F=POINT, I=',nrens,', J=1, K=1'
       do j=1,nrens
-         write(10,'(2i5,2000f13.5)')j,pri,enspar(1:nrpar,j)
+         write(10,'(2i5,200f13.4)')j,pri,enspar(1:nrpar,j)
       enddo
    close(10)
   

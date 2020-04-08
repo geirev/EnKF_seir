@@ -25,7 +25,6 @@ use m_random
    real, allocatable    :: R(:,:)        ! Measurement error covariance matrix
    character(len=5) date
    integer, parameter :: days_in_month(12) =(/31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /)
-   integer imonth,iday,ideath,ihosp,iobst
 
 contains
 subroutine enkfini(nrens,nt,time)
@@ -35,13 +34,15 @@ subroutine enkfini(nrens,nt,time)
    real,    intent (in) :: time
    real dt
    integer i,j,k,m
+   integer iyear,imonth,iday,ideath,ihosp,iobst
    logical ex
 
 !  Observations
    inquire(file='corona.dat',exist=ex)
    if (.not.ex) then
-      print '(a)','You must supply the fole corona.dat (example in src dir)'
-      stop
+      print '(a)','For EnKF, you must supply the fole corona.dat (example in src dir)'
+      print '(a)','Running prior ensemble prediction'
+      lenkf=.false.
    endif
    open(10,file='corona.dat')
    do i=1,1000
@@ -57,7 +58,7 @@ subroutine enkfini(nrens,nt,time)
    m=0
    dt= time/real(nt)                     ! Timestep of outputs
    do i=1,nrlines
-      read(10,'(i2,tr1,i2,2i6)')iday,imonth,ideath,ihosp
+      read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
       m=m+1
       tobs(m)=0
       do k=3,imonth-1
@@ -94,7 +95,7 @@ subroutine enkfini(nrens,nt,time)
    call random(E,nrobs*nrens)
    R=0.0
    do m=1,nrobs
-      R(m,m)=(0.05*dobs(m))**2
+      R(m,m)=min((0.05*dobs(m))**2,1.0)
       E(m,:)=sqrt(R(m,m))*E(m,:)          
       D(m,:)=dobs(m)+E(m,:)
       Dprt(m,:)=dobs(m)+E(m,:)
