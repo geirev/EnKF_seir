@@ -1,14 +1,18 @@
  999                      ! nrens: Ensemble size
  366                      ! nt   : Number of output times (one more than days to get daily outputs)
  365                      ! time : Length of integration in days
+#1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
-#1 Dates
+ 16                       ! Number of ESMDA steps, (1 means standard ES update)
+ 0.05                     ! Relative measurement error in fraction of observed value
+ 1.0                      ! Minimum  measurement error absolute value d_j = d + min(MAXERR,max(RELERR*d,MINERR)*eps
+ 6.0                      ! Maximum  measurement error
+#2 Dates ----------------------------------------------------------------------------------------------
  01/03-2020               ! Start date of simulation
  15/03-2020               ! Start date of first  phase of intervations
- 20/04-2020               ! Start date of second phase of intervations
-#2 First guess model parameters and their std dev
- 32.0         0.0         ! 1  T2death   : Days to death                                           
- 5300000      0.0         ! 2  N         : Initial population (overwritten from agegroups)
+ 20/04-2021               ! Start date of second phase of intervations
+#3 First guess model parameters and their std dev -----------------------------------------------------
+ 32.0         1.0         ! 1  T2death   : Days to death                                           
  51.0         6.0         ! 3  I0        : Initial infectious used to initialize the model
  4.5          0.5         ! 4  R0        : Basic reproduction number with no interventions
  5.2          0.0         ! 5  Tinc      : Incubation period 
@@ -19,7 +23,7 @@
  0.006        0.0006      ! 10 CFR       : Case fatality rate %
  0.012        0.0015      ! 11 P_severe  : Hospitalization rate % for severe cases
  0.63         0.020       ! 12 Rt        : Basic Reproduction Number during intervention
-#3 
+#4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters
  1.0                      ! Maximum value of Rt
-#4 
+#5 End of input file ----------------------------------------------------------------------------------

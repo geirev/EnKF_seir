@@ -9,7 +9,11 @@ subroutine enkfpost(ens,enspar,nrpar,nrens,nt,neq)
    integer, intent(in) :: nrens
    real,    intent(inout) :: ens(0:neq-1,0:nt,nrens)
    real,    intent(inout) :: enspar(1:nrpar+neq,nrens)
+   real avepar(nrpar)
    integer i
+   character(len=9) parname(nrpar)
+   parname(:)=(/'  T2death','        N','       I0','       R0','     Tinc','     Tinf','    Trecm',&
+               &'    Trecs','    Thosp','      CFR',' p_severe','       Rt'/)
 
 ! Ensure all parameters are larger than minpar (from infile.in)
    enspar(1:nrpar,:)=max(enspar(1:nrpar,:),minpar)
@@ -18,15 +22,12 @@ subroutine enkfpost(ens,enspar,nrpar,nrens,nt,neq)
    ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.0)
 
    print *
-   print '(a)','Posterior ensemble parameters:'
-   do i=1,3
-      print '(i2,100g10.3)',i, enspar(1:nrpar,i)
+   print '(a)','Posterior ensemble mean of parameters:'
+   do i=1,nrpar
+      avepar(i)=sum(enspar(i,:))/real(nrens)
    enddo
-   print '(a)','Posterior ensemble initial conditions:'
-   do i=1,2
-      print '(i1,a)',i,':'
-      print '(10g12.3)',N*ens(:,0,i)
-   enddo 
+   print '(100a10)',parname(:)
+   print '(100f10.3)',avepar(:)
    print *
 end subroutine
 end module

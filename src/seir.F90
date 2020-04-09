@@ -17,28 +17,28 @@ program seir
 
    implicit none
    integer, parameter :: neq=40                ! Number of equations
-   integer, parameter :: nrpar=13              ! Number of uncertain model parameters
+   integer, parameter :: nrpar=12              ! Number of uncertain model parameters
    integer  nrens                              ! Ensemble size (from infile.in)
    integer  nt                                 ! Number of output times (from infile.in)
 
    integer i,k,j,m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   real, allocatable :: ens(:,:,:)             ! storage of the ensemble of solutions for printing
+   real, allocatable :: ens(:,:,:)             ! Storage of the ensemble of solutions for printing
    real, allocatable :: enspar(:,:)            ! Ensemble of state variables ( parameters + initial conditions)
    real parstd(nrpar)                          ! Standard deviations of parameters
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initialization 
-   call readinputs(parstd,nrpar,nrens,nt)      ! reads infile.in
-   allocate( ens(0:neq-1,0:nt,nrens)   )       ! allocate ensemble for the model solutions
-   allocate( enspar(1:nrpar+neq,nrens) )       ! allocate ensemble of model parameters
-   call agegroups                              ! define agegroups and population numbers
-   call Rmatrix                                ! define R infection rates between agegroups used in phase 3
-   call pfactors                               ! define fraction of mild, severe, or fatal, for each agegroup
-   if (lenkf) call enkfini(nrens,nt,time)      ! Initialize EnKF (E, D, and R) reading data from corona.dat
-   call inipar(enspar,parstd,nrpar,nrens,neq)  ! initialize ensemble of parameters
-   call iniens(ens,enspar,neq,nrens,nt,nrpar)  ! initialize ensemble of models
+   call readinputs(parstd,nrpar,nrens,nt)      ! Reads infile.in
+   allocate( ens(0:neq-1,0:nt,nrens)   )       ! Allocate ensemble for the model solutions
+   allocate( enspar(1:nrpar+neq,nrens) )       ! Allocate ensemble of model parameters
+   call agegroups                              ! Define agegroups and population numbers
+   call Rmatrix                                ! Define R infection rates between agegroups used in phase 3
+   call pfactors                               ! Define fraction of mild, severe, or fatal, for each agegroup
+   call enkfini(nrens,nt,time)                 ! Reading data from corona.dat
+   call inipar(enspar,parstd,nrpar,nrens,neq)  ! Initialize ensemble of parameters
+   call iniens(ens,enspar,neq,nrens,nt,nrpar)  ! Initialize ensemble of models
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
@@ -48,28 +48,34 @@ program seir
       call pfactors                            ! copy member j of pfactors to model 
       call solve(ens,neq,nrens,nt,j)           ! solve ODEs for member j
    enddo
+   print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,0) ! Dump prior solution to files
    if (.not.lenkf) stop                        ! If not doing assimilation stop here
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! EnKF update
-   call enkfprep(ens,enspar,nrpar,nrens,nt,neq) ! Compute S and D matrices
-   call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
-                 lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
-   call enkfpost(ens,enspar,nrpar,nrens,nt,neq) ! Check parameters
+! ESMDA update
+   do i=1,nesmda
+      print '(a,2I3)','ESMDA step:',i,nesmda
+! Analysis step
+      call enkfprep(ens,enspar,nrpar,nrens,nt,neq) ! Compute S and D matrices
+      call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
+                    lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
+      call enkfpost(ens,enspar,nrpar,nrens,nt,neq) ! Check parameters
   
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Posterior ensemble prediction
-   print '(a)','Computing posterior ensemble prediction'
-   do j=1,nrens
-      call ens2mod(nrpar, nrens, neq, enspar , j)
-      call pfactors 
-      call solve(ens,neq,nrens,nt,j)
+      do j=1,nrens
+         call ens2mod(nrpar, nrens, neq, enspar , j)
+         call pfactors 
+         call solve(ens,neq,nrens,nt,j)
+      enddo
+   print '(a)','Done..'
    enddo
+
+   print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,nt,nrens,neq,nrpar,1)
    print '(a)','Done..'
+
 
 end program
 
@@ -237,4 +243,3 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
 !   pd(9,6) =  1.0/Tdead
 !
 end subroutine
-

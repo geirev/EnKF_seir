@@ -22,6 +22,5 @@ subroutine mod2ens(nrpar, nrens, neq, enspar , j)
    enspar(10,j)  =  CFR       + enspar(10,j) ! Case fatality rate 
    enspar(11,j)  =  p_severe  + enspar(11,j) ! Hospitalization rate % for severe cases
    enspar(12,j)  =  Rt        + enspar(12,j) ! Basic Reproduction Number during intervention
-!   enspar(13,j)  =  Tinterv   + enspar(13,j) ! Interventions start here
 end subroutine
 end module

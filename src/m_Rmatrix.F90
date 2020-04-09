@@ -3,6 +3,7 @@ use m_agegroups
 real, save         :: Rmat(0:na-1,0:na-1)
 contains
 subroutine Rmatrix
+   implicit none
    integer i,j
 ! Transmission factors when opening kindergardens after easter.
 !                   1    2    3    4    5   6    7    7    9    10   11 

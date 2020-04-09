@@ -2,7 +2,8 @@ module m_enkfini
 use m_random
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! EnKF variables
-   integer, save :: nrobs                 ! Number of observations
+   integer :: nesmda             ! Number of observations
+   integer :: nrobs              ! Number of observations
    integer nrlines               ! Number of lines in observations file
    integer, parameter :: ne=1    ! extended E ensemble
    logical    lenkf
@@ -12,6 +13,9 @@ use m_random
    logical :: lsymsqrt=.false.
    integer :: inflate=0
    integer :: infmult=1.0
+   real :: relobserr
+   real :: minobserr
+   real :: maxobserr
    real :: truncation=0.999      ! singular value truncation
    real, allocatable    :: innovation(:) ! Observation innovation dobs-y
    integer, allocatable :: iobs(:)      ! Observation time index
@@ -24,7 +28,6 @@ use m_random
    real, allocatable    :: E(:,:)        ! Ensemble of measurement perturbations
    real, allocatable    :: R(:,:)        ! Measurement error covariance matrix
    character(len=5) date
-   integer, parameter :: days_in_month(12) =(/31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2020
 
 contains
 subroutine enkfini(nrens,nt,time)
@@ -37,6 +40,7 @@ subroutine enkfini(nrens,nt,time)
    integer i,j,k,m
    integer iyear,imonth,iday,ideath,ihosp,iobst
    logical ex
+   if (.not.lenkf) return
 
 !  Observations
    inquire(file='corona.dat',exist=ex)
@@ -86,7 +90,6 @@ subroutine enkfini(nrens,nt,time)
    enddo
    print *
 
-
    allocate(innovation(nrobs))
    allocate(D(nrobs,nrens))
    allocate(Dprt(nrobs,nrens))
@@ -97,10 +100,10 @@ subroutine enkfini(nrens,nt,time)
    call random(E,nrobs*nrens)
    R=0.0
    do m=1,nrobs
-      R(m,m)=min((0.05*dobs(m))**2,1.0)
+      R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
       E(m,:)=sqrt(R(m,m))*E(m,:)          
-      D(m,:)=dobs(m)+E(m,:)
       Dprt(m,:)=dobs(m)+E(m,:)
    enddo
+
 end subroutine
 end module

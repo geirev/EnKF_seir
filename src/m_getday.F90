@@ -2,6 +2,7 @@ module m_getday
 integer :: startday=1
 contains
 integer function getday(id,im,iy)
+   implicit none
    integer, intent(in) :: id
    integer, intent(in) :: im
    integer, intent(in) :: iy

@@ -8,6 +8,7 @@ real, save         :: pf(0:na-1)
 contains
 subroutine pfactors
    use mod_parameters
+   implicit none
    real dead, seve
    integer i
    integer, save :: iprt=0

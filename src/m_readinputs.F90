@@ -22,13 +22,21 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)nrens               ;    print '(a,i4)',       'number  of samples         :',nrens
       read(10,*)nt                  ;    print '(a,i4)',       'nt                         :',nt
       read(10,*)time                ;    print '(a,f10.3)',    'Length of integration      :',time
-      read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
-!      read(10,*)N                   ;    print '(a,i9)',       'Population N               :',nint(N)
-      parstd(2)=0.0
-
       read(10,'(a)')ca      
       if (ca /= '#1') then
          print *,'#1: error in infile.in'
+         stop
+      endif
+      read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
+      read(10,*)nesmda              ;    print '(a,i2)',       'Number of ESMDA steps      :',nesmda
+      read(10,*)relobserr           ;    print '(a,f10.4)',    'Realative obs error        :',relobserr
+      read(10,*)minobserr           ;    print '(a,f10.4)',    'Minimum   obs error        :',minobserr
+      read(10,*)maxobserr           ;    print '(a,f10.4)',    'Maximum   obs error        :',maxobserr
+      parstd(2)=0.0
+
+      read(10,'(a)')ca      
+      if (ca /= '#2') then
+         print *,'#2: error in infile.in'
          stop
       endif
 
@@ -52,8 +60,8 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
 
 
       read(10,'(a)')ca      
-      if (ca /= '#2') then
-         print *,'#2: error in infile.in'
+      if (ca /= '#3') then
+         print *,'#3: error in infile.in'
          stop
       endif
 
@@ -72,8 +80,8 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
 !      read(10,*)Tinterv  , parstd(13);   print '(a,2f10.3)',   'Intervention time        and std dev :',Tinterv  ,parstd(13)
 
       read(10,'(a)')ca      
-      if (ca /= '#3') then
-         print *,'#3: error in infile.in'
+      if (ca /= '#4') then
+         print *,'#4: error in infile.in'
          stop
       endif
 
@@ -81,8 +89,8 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)rtmax               ;    print '(a,f10.3)',    'Maximum value of Rt during intervent :',rtmax
 
       read(10,'(a)')ca      
-      if (ca /= '#4') then
-         print *,'#4: error in infile.in'
+      if (ca /= '#5') then
+         print *,'#5: error in infile.in'
          stop
       endif
 

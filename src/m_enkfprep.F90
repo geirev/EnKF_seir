@@ -11,21 +11,38 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
    integer, intent(in) :: nrens
    real,    intent(in) :: ens(0:neq-1,0:nt,nrens)
    real,    intent(in) :: enspar(1:nrpar+neq,nrens)
-
+   real avepar(nrpar)
    integer i,m
-
-   print '(a)','Prior ensemble parameters:'
-   do i=1,2
-      print '(i2,100g10.3)',i, enspar(1:nrpar,i)
-   enddo
-   print '(a)','Prior ensemble initial conditions:'
-   do i=1,2
-      print '(i1,a)',i,':'
-      print '(10g12.3)',N*ens(:,0,i)
-   enddo 
-
+   logical, save :: lprt =.true.
+   character(len=9) parname(nrpar)
+   parname(:)=(/'  T2death','        N','       I0','       R0','     Tinc','     Tinf','    Trecm',&
+               &'    Trecs','    Thosp','      CFR',' p_severe','       Rt'/)
+      
    print *
+   if (lprt) then
+      print '(a)','Prior ensemble mean of parameters:'
+      do i=1,nrpar
+         avepar(i)=sum(enspar(i,:))/real(nrens)
+      enddo
+      print '(100a10)',parname(:)
+      print '(100g10.3)',avepar(:)
+      print *
+      lprt=.false.
+   endif
+
    print '(a)','Preparing for analysis computation'
+   call random(E,nrobs*nrens)
+   R=0.0
+   do m=1,nrobs
+      R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
+      E(m,:)=sqrt(R(m,m))*E(m,:)          
+
+      R(m,m)=R(m,m)*real(nesmda)
+      E(m,:)=E(m,:)*sqrt(real(nesmda))
+
+      D(m,:)=dobs(m)+E(m,:)
+   enddo
+
    do m=1,nrobs
       select case (cobs(m))
       case('d')
@@ -38,8 +55,6 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
       case default
          stop 'Measurement type not found'
       end select
-      print '(a,i3,100f10.2)','D:',m,D(m,1:10)
-      print '(a,i3,100f10.2)','S:',m,S(m,1:10)
    enddo
 
 end subroutine
