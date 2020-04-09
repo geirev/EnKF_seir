@@ -22,6 +22,8 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)nt                  ;    print '(a,i4)',       'nt                         :',nt
       read(10,*)time                ;    print '(a,f10.3)',    'Length of integration      :',time
       read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
+!      read(10,*)N                   ;    print '(a,i9)',       'Population N               :',nint(N)
+      parstd(2)=0.0
 
       read(10,'(a)')ca      
       if (ca /= '#1') then
@@ -61,7 +63,6 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
       read(10,*)T2death  , parstd(1);    print '(a,2f10.3)',   'Time to death            and std dev :',T2death  ,parstd(1)
-      read(10,*)N        , parstd(2);    print '(a,i9,f10.0)', 'Population N             and std dev :',nint(N)  ,parstd(2)
       read(10,*)I0       , parstd(3);    print '(a,2f10.3)',   'Initial infected I0      and std dev :',I0       ,parstd(3)
       read(10,*)R0       , parstd(4);    print '(a,2f10.3)',   'Initial R                and std dev :',R0       ,parstd(4)
       read(10,*)Tinc     , parstd(5);    print '(a,2f10.3)',   'Incubation time          and std dev :',Tinc     ,parstd(5)
