@@ -197,7 +197,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       write(10,*)'VARIABLES = "iens" "pri" &
                            &"Time_to_death" "N" "I0" "R0" "D_incbation" "D_infectious" &
                            &"D_recovery_mild" "D_recovery_severe" "D_hospital_lag" "CFR" &
-                           &"p_severe" "Rt" "InterventionTime"' 
+                           &"p_severe" "Rt"' 
       write(10,'(a,i5,a,i5,a)')' ZONE T="Parameters_'//tag//'"  F=POINT, I=',nrens,', J=1, K=1'
       do j=1,nrens
          write(10,'(2i5,200f13.4)')j,pri,enspar(1:nrpar,j)

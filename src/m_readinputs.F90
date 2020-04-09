@@ -10,6 +10,7 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
    integer, intent(out) :: nt
    logical ex
    character(len=2) ca
+   integer id,im,iy,k
 
    inquire(file='infile.in',exist=ex)
    if (.not.ex) then
@@ -20,14 +21,41 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)nrens               ;    print '(a,i4)',       'number  of samples         :',nrens
       read(10,*)nt                  ;    print '(a,i4)',       'nt                         :',nt
       read(10,*)time                ;    print '(a,f10.3)',    'Length of integration      :',time
-      read(10,*)duration            ;    print '(a,f10.3)',    'Duration of intervention   :',duration 
       read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
-      read(10,'(tr1,i2,tr1,i2,tr1,i4)')sday,smonth,syear 
-                                         print '(a,i3,i3,i5)',       'Start date of simulation:',sday,smonth,syear 
 
       read(10,'(a)')ca      
       if (ca /= '#1') then
          print *,'#1: error in infile.in'
+         stop
+      endif
+
+! Read startday of simulation
+      read(10,'(tr1,i2,tr1,i2,tr1,i4)')sday,smonth,syear 
+      print '(a,i3,i3,i5)',       'Start date of simulation        :',sday,smonth,syear 
+
+! Read startday of 1 intervention
+      read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
+      Tinterv=0.0
+      do k=smonth,im-1
+         Tinterv=Tinterv+days_in_month(k) - real(sday+1)  ! time of obs relative startdate
+      enddo
+      Tinterv=Tinterv+real(id)
+      print '(a,i3,i3,i5,f6.0)',    'Start date of first intervention:',id,im,iy,Tinterv
+
+! Read endday of intervention
+      read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
+      Tinterv2=0.0
+      do k=smonth,im-1
+         Tinterv2=Tinterv2+days_in_month(k) - real(sday+1)  ! time of obs relative startdate
+      enddo
+      Tinterv2=Tinterv2+real(id)
+      if (iy > 2020.0) Tinterv2=1000.0
+      print '(a,i3,i3,i5,f6.0)',    'End   date of first intervention:',id,im,iy,Tinterv2
+
+
+      read(10,'(a)')ca      
+      if (ca /= '#2') then
+         print *,'#2: error in infile.in'
          stop
       endif
 
@@ -44,11 +72,11 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)CFR      , parstd(10);   print '(a,2f10.3)',   'Critical fatality ratio  and std dev :',CFR      ,parstd(10)
       read(10,*)p_severe , parstd(11);   print '(a,2f10.3)',   'Fraction of severe cases and std dev :',p_severe ,parstd(11)
       read(10,*)Rt       , parstd(12);   print '(a,2f10.3)',   'R during interventions   and std dev :',Rt       ,parstd(12)
-      read(10,*)Tinterv  , parstd(13);   print '(a,2f10.3)',   'Intervention time        and std dev :',Tinterv  ,parstd(13)
+!      read(10,*)Tinterv  , parstd(13);   print '(a,2f10.3)',   'Intervention time        and std dev :',Tinterv  ,parstd(13)
 
       read(10,'(a)')ca      
-      if (ca /= '#2') then
-         print *,'#2: error in infile.in'
+      if (ca /= '#3') then
+         print *,'#3: error in infile.in'
          stop
       endif
 
@@ -56,8 +84,8 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)rtmax               ;    print '(a,f10.3)',    'Maximum value of Rt during intervent :',rtmax
 
       read(10,'(a)')ca      
-      if (ca /= '#3') then
-         print *,'#3: error in infile.in'
+      if (ca /= '#4') then
+         print *,'#4: error in infile.in'
          stop
       endif
 

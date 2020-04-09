@@ -24,7 +24,7 @@ use m_random
    real, allocatable    :: E(:,:)        ! Ensemble of measurement perturbations
    real, allocatable    :: R(:,:)        ! Measurement error covariance matrix
    character(len=5) date
-   integer, parameter :: days_in_month(12) =(/31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /)
+   integer, parameter :: days_in_month(12) =(/31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2020
 
    integer sday,smonth,syear
 
@@ -50,11 +50,15 @@ subroutine enkfini(nrens,nt,time)
    print *
    print '(a)','Reading corona.dat'
    open(10,file='corona.dat')
+
+! Counting number of lines in corona.dat
    do i=1,1000
       read(10,'(tr1,a5)',end=200)date
    enddo
    200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines
    rewind(10)
+
+! Allocate and read
    nrobs=2*nrlines; print '(a,i5)','nrobs=',nrobs
    allocate(dobs(nrobs))
    allocate(tobs(nrobs))
@@ -67,19 +71,19 @@ subroutine enkfini(nrens,nt,time)
       m=m+1
       tobs(m)=0
       do k=smonth,imonth-1
-         tobs(m)=tobs(m)+days_in_month(k) - sday+1
+         tobs(m)=tobs(m)+days_in_month(k) - sday+1  ! time of obs relative startdate
       enddo
       tobs(m)=tobs(m)+iday
-      iobs(m)=nint(tobs(m)/dt)
+      iobs(m)=nint(real(tobs(m))/dt)
       cobs(m)='d'
       dobs(m)=real(ideath)
       m=m+1
       tobs(m)=0
-      do k=3,imonth-1
-         tobs(m)=tobs(m)+days_in_month(k)
+      do k=smonth,imonth-1
+         tobs(m)=tobs(m)+days_in_month(k) - sday+1
       enddo
       tobs(m)=tobs(m)+iday
-      iobs(m)=nint(tobs(m)/dt)
+      iobs(m)=nint(real(tobs(m))/dt)
       cobs(m)='h'
       dobs(m)=real(ihosp)
    enddo

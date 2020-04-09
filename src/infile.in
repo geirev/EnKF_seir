@@ -1,23 +1,25 @@
- 999                      ! number of samples
- 366                      ! number of output times
- 365                      ! Length of integration
- 360.0                     ! Duration of intervetions
+ 999                      ! nrens: Ensemble size
+ 366                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 365                      ! time : Length of integration in days
  T                        ! Run EnKF to update model parameters
-#1 Model parameters and their std dev
- 32.0         0.0         ! 1  Days to death                                           
- 5300000      0.0         ! 2  Initial population (overwritten with agegroups)
- 51.0         6.0         ! 3  Initial infectious
- 4.5          0.5         ! 4  Basic Reproduction Number
- 5.2          0.0         ! 5  Incubation period (Tinc)
- 2.9          0.0         ! 6  Duration patient is infectious (Tinf)
- 14.0         0.0         ! 7  Recovery time mild cases (11.1)
- 31.5         0.0         ! 8  Recovery time severe cases Length of hospital stay
- 5.0          0.0         ! 9  Time to hospitalization.
- 0.006        0.0006      ! 10 Case fatality rate 
- 0.012        0.0015      ! 11 Hospitalization rate % for severe cases
- 0.63         0.020       ! 12 Basic Reproduction Number during intervention
- 15.0         0.0         ! 13 Interventions start here (15th march)
-#2 
+#1 Dates
+ 01/03-2020               ! Start date of simulation
+ 15/03-2020               ! Start date of first  phase of intervations
+ 20/04-2020               ! Start date of second phase of intervations
+#2 First guess model parameters and their std dev
+ 32.0         0.0         ! 1  T2death   : Days to death                                           
+ 5300000      0.0         ! 2  N         : Initial population (overwritten from agegroups)
+ 51.0         6.0         ! 3  I0        : Initial infectious used to initialize the model
+ 4.5          0.5         ! 4  R0        : Basic reproduction number with no interventions
+ 5.2          0.0         ! 5  Tinc      : Incubation period 
+ 2.9          0.0         ! 6  Tinf      : Duration patient is infectious
+ 14.0         0.0         ! 7  Trecm     : Recovery time mild cases
+ 31.5         0.0         ! 8  Trecs     : Recovery time severe cases 
+ 5.0          0.0         ! 9  Thosp     : Hospitalization time
+ 0.006        0.0006      ! 10 CFR       : Case fatality rate %
+ 0.012        0.0015      ! 11 P_severe  : Hospitalization rate % for severe cases
+ 0.63         0.020       ! 12 Rt        : Basic Reproduction Number during intervention
+#3 
  0.00001                  ! Minimum value of all parameters
  1.0                      ! Maximum value of Rt
-#3 
+#4 

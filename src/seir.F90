@@ -91,11 +91,10 @@ subroutine f(neq, t, y, ydot)
 
    if (t <= Tinterv) then
       R=R0
-   elseif (Tinterv < t .and. t <= Tinterv + duration ) then
+   elseif (Tinterv < t .and. t <= Tinterv2 ) then
       R=Rt 
-   elseif (t > Tinterv + duration) then
-      call random(beta,1)
-      R=Rmat  !*(1.0+0.1*beta(1))
+   elseif (t > Tinterv2) then
+      R=Rmat
    endif
 
 !   S_i        = y(0    : na-1   ) ! Susectable
@@ -109,18 +108,9 @@ subroutine f(neq, t, y, ydot)
 !   R_s        = y(3*na+5) ! Recovered 
 !   D          = y(3*na+6) ! Dead
    
-!   pf(:) = CFR
-!   ps(:) = P_SEVERE
-!   pm(:) = 1.0 - P_SEVERE - CFR
    Tdead  = T2death-Tinf 
 
-!   print '(100f8.4)',pm(:)
-!   print '(100f8.4)',ps(:)
-!   print '(100f8.4)',pf(:)
-!   print '(a,100f8.4)','Tinf=',Tinf,Tinc,Trecm,Trecs,Thosp,Tdead  
-!   print '(11f8.2)',R
-!    stop 
-! S
+! S_i
    do i=0,na-1
       ii=i
       ydot(ii) = 0.0
@@ -131,7 +121,7 @@ subroutine f(neq, t, y, ydot)
       !print '(a,i3,6g13.5)','S1',ii,y(ii),ydot(ii)
    enddo
 
-! E
+! E_i
    do i=0,na-1
       ii=na+i       ! E
       ydot(ii) = - (1.0/Tinc)*y(ii)
@@ -142,7 +132,7 @@ subroutine f(neq, t, y, ydot)
       !print '(a,i3,6g13.5)','E ',ii,y(ii),ydot(ii)
    enddo
 
-! I
+! I_i
    do i=0,na-1
       ii=2*na+i     ! I
       kk=na+i       ! E

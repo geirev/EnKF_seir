@@ -11,10 +11,10 @@ module mod_parameters
    real :: Thosp
    real :: Tdead             
    real :: Tinterv
+   real :: Tinterv2
    real :: Xmax              
    real :: p_severe
    real :: CFR               
-   real :: duration
    real :: time
    real :: minpar
    real :: rtmax
