@@ -14,49 +14,40 @@ program seir
    use m_iniens
 
    implicit none
-! Dimensions
-   integer, parameter :: neq=40             ! Number of equations
-   integer, parameter :: nrpar=13           ! Number of uncertain model parameters
-   integer  nrens                           ! Ensemble size (from infile.in)
-   integer  nt                              ! Number of output times (from infile.in)
+   integer, parameter :: neq=40                ! Number of equations
+   integer, parameter :: nrpar=13              ! Number of uncertain model parameters
+   integer  nrens                              ! Ensemble size (from infile.in)
+   integer  nt                                 ! Number of output times (from infile.in)
 
    integer i,k,j,m
-   logical ex
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   real, allocatable :: ens(:,:,:)          ! storage of the ensemble of solutions for printing
-   real, allocatable :: enspar(:,:)         ! Ensemble of state variables ( parameters + initial conditions)
-   real parstd(nrpar)                       ! Standard deviations of parameters
+   real, allocatable :: ens(:,:,:)             ! storage of the ensemble of solutions for printing
+   real, allocatable :: enspar(:,:)            ! Ensemble of state variables ( parameters + initial conditions)
+   real parstd(nrpar)                          ! Standard deviations of parameters
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initialization 
-   call readinputs(parstd,nrpar,nrens,nt)   ! reads infile.in
-   allocate( ens(0:neq-1,0:nt,nrens)   )    ! allocate ensemble for the model solutions
-   allocate( enspar(1:nrpar+neq,nrens) )    ! allocate ensemble of model parameters
-   call agegroups                           ! define agegroups and population numbers
-   call Rmatrix                             ! define R infection rates between agegroups used in phase 3
-   call pfactors                            ! define fraction of sick to mild, severe, or fatal, for each agegroup
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! EnKF initialization (reads data from corona.dat and generates E, D, and R)
-   if (lenkf) call enkfini(nrens,nt,time)   ! Initialize EnKF reading data etc.
-
-! initialize ensemble of parameters
-   call  inipar(enspar,parstd,nrpar,nrens,neq)
-
-! initialize ensemble of models
-   call  iniens(ens,enspar,neq,nrens,nt,nrpar)
+   call readinputs(parstd,nrpar,nrens,nt)      ! reads infile.in
+   allocate( ens(0:neq-1,0:nt,nrens)   )       ! allocate ensemble for the model solutions
+   allocate( enspar(1:nrpar+neq,nrens) )       ! allocate ensemble of model parameters
+   call agegroups                              ! define agegroups and population numbers
+   call Rmatrix                                ! define R infection rates between agegroups used in phase 3
+   call pfactors                               ! define fraction of mild, severe, or fatal, for each agegroup
+   if (lenkf) call enkfini(nrens,nt,time)      ! Initialize EnKF (E, D, and R) reading data from corona.dat
+   call inipar(enspar,parstd,nrpar,nrens,neq)  ! initialize ensemble of parameters
+   call iniens(ens,enspar,neq,nrens,nt,nrpar)  ! initialize ensemble of models
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    print '(a)','Computing prior ensemble prediction'
    do j=1,nrens
-      call ens2mod(nrpar, nrens, neq, enspar , j)
-      call pfactors 
-      call solve(ens,neq,nrens,nt,j)
+      call ens2mod(nrpar,nrens,neq,enspar,j)   ! copy ensemble member j to model parameters
+      call pfactors                            ! copy member j of pfactors to model 
+      call solve(ens,neq,nrens,nt,j)           ! solve ODEs for member j
    enddo
-   call tecplot(ens,enspar,nt,nrens,neq,nrpar,0)
-   if (.not.lenkf) stop
+   call tecplot(ens,enspar,nt,nrens,neq,nrpar,0) ! Dump prior solution to files
+   if (.not.lenkf) stop                        ! If not doing assimilation stop here
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
