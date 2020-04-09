@@ -11,7 +11,7 @@ subroutine mod2ens(nrpar, nrens, neq, enspar , j)
    real,    intent(inout) :: enspar(nrpar+neq,nrens)
 
    enspar(1,j)   =  T2death   + enspar(1,j)  ! Days to death
-   enspar(2,j)   =  N         + enspar(2,j)  ! Initial population
+   enspar(2,j)   =  1.0                      ! Not used
    enspar(3,j)   =  I0        + enspar(3,j)  ! Initial infectious
    enspar(4,j)   =  R0        + enspar(4,j)  ! Basic Reproduction Number
    enspar(5,j)   =  Tinc      + enspar(5,j)  ! Incubation period (Tinc)

@@ -3,10 +3,11 @@ integer, parameter :: na=11
 real, save         :: agegroup(0:na-1)
 contains
 subroutine agegroups
+use mod_parameters
 integer, parameter :: nrages=105
 real               :: ages_male(0:nrages)
 real               :: ages_female(0:nrages)
-integer i,n
+integer i,k
 
 
 
@@ -255,7 +256,8 @@ integer i,n
      agegroup(i)=sum(ages_male(ia(i):ib(i)))    + sum(ages_female(ia(i):ib(i)))
      print '(a,i2,a,i2,a,i3,a,f9.0)','Population in agegroup: ',i,' agerange(',ia(i),'--',ib(i),')= ',agegroup(i)
   enddo
-  print '(a,2f13.0)','Total Norwegan population: ',sum(ages_male(:)) + sum(ages_female(:)) , sum(agegroup(:))
+  N=sum(agegroup(:))
+  print '(a,2f13.0)','Total Norwegan population: ',sum(ages_male(:)) + sum(ages_female(:)) , N
   print *
 
 end subroutine
