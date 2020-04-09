@@ -3,6 +3,7 @@ contains
 subroutine readinputs(parstd,nrpar,nrens,nt)
    use mod_parameters 
    use m_enkfini 
+   use m_getday
    implicit none
    integer, intent(in)  :: nrpar
    real,    intent(out) :: parstd(nrpar)
@@ -10,7 +11,7 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
    integer, intent(out) :: nt
    logical ex
    character(len=2) ca
-   integer id,im,iy,k
+   integer id,im,iy,k,day
 
    inquire(file='infile.in',exist=ex)
    if (.not.ex) then
@@ -32,27 +33,22 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       endif
 
 ! Read startday of simulation
-      read(10,'(tr1,i2,tr1,i2,tr1,i4)')sday,smonth,syear 
-      print '(a,i3,i3,i5)',       'Start date of simulation        :',sday,smonth,syear 
+      read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
+      startday=getday(id,im,iy)
+      print '(a,i3,i3,i5,i5)',       'Start date of simulation        :',id,im,iy
+      print '(a,2i5)',               'Relative start day              :',startday,365+31+28+1
+
+
 
 ! Read startday of 1 intervention
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      Tinterv=0.0
-      do k=smonth,im-1
-         Tinterv=Tinterv+days_in_month(k) - real(sday+1)  ! time of obs relative startdate
-      enddo
-      Tinterv=Tinterv+real(id)
-      print '(a,i3,i3,i5,f6.0)',    'Start date of first intervention:',id,im,iy,Tinterv
+      Tinterv=real(getday(id,im,iy))
+      print '(a,i3,i3,i5,f10.2,i5)',    'Start date of first intervention:',id,im,iy,Tinterv
 
 ! Read endday of intervention
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      Tinterv2=0.0
-      do k=smonth,im-1
-         Tinterv2=Tinterv2+days_in_month(k) - real(sday+1)  ! time of obs relative startdate
-      enddo
-      Tinterv2=Tinterv2+real(id)
-      if (iy > 2020.0) Tinterv2=1000.0
-      print '(a,i3,i3,i5,f6.0)',    'End   date of first intervention:',id,im,iy,Tinterv2
+      Tinterv2=real(getday(id,im,iy))
+      print '(a,i3,i3,i5,f10.2,i5)',    'End   date of first intervention:',id,im,iy,Tinterv2
 
 
       read(10,'(a)')ca      

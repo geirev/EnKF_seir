@@ -1,6 +1,8 @@
 m_agegroups.o:      makefile
 m_agegroups.o:      MODEL.CPP
+m_agegroups.o:      mod_parameters.o
 m_enkfini.o:      makefile
+m_enkfini.o:      m_getday.o
 m_enkfini.o:      MODEL.CPP
 m_enkfini.o:      m_random.o
 m_enkfpost.o:      makefile
@@ -18,6 +20,8 @@ m_ensave.o:      makefile
 m_ensave.o:      MODEL.CPP
 m_ensstd.o:      makefile
 m_ensstd.o:      MODEL.CPP
+m_getday.o:      makefile
+m_getday.o:      MODEL.CPP
 m_iniens.o:      m_agegroups.o
 m_iniens.o:      makefile
 m_iniens.o:      MODEL.CPP
@@ -39,6 +43,7 @@ m_random.o:      makefile
 m_random.o:      MODEL.CPP
 m_readinputs.o:      makefile
 m_readinputs.o:      m_enkfini.o
+m_readinputs.o:      m_getday.o
 m_readinputs.o:      MODEL.CPP
 m_readinputs.o:      mod_parameters.o
 m_Rmatrix.o:      m_agegroups.o

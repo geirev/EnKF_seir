@@ -6,6 +6,7 @@ MODULES = \
 	m_ens2mod.F90\
 	m_ensave.F90\
 	m_ensstd.F90\
+	m_getday.F90\
 	m_iniens.F90\
 	m_inipar.F90\
 	m_mod2ens.F90\

@@ -23,6 +23,7 @@ Thosp	mod_parameters.F90	/^   real :: Thosp$/;"	v	module:mod_parameters
 Tinc	mod_parameters.F90	/^   real :: Tinc$/;"	v	module:mod_parameters
 Tinf	mod_parameters.F90	/^   real :: Tinf$/;"	v	module:mod_parameters
 Tinterv	mod_parameters.F90	/^   real :: Tinterv$/;"	v	module:mod_parameters
+Tinterv2	mod_parameters.F90	/^   real :: Tinterv2$/;"	v	module:mod_parameters
 Trecm	mod_parameters.F90	/^   real :: Trecm$/;"	v	module:mod_parameters
 Trecs	mod_parameters.F90	/^   real :: Trecs$/;"	v	module:mod_parameters
 Xmax	mod_parameters.F90	/^   real :: Xmax /;"	v	module:mod_parameters
@@ -32,7 +33,6 @@ cobs	m_enkfini.F90	/^   character(len=1), allocatable :: cobs(/;"	v	module:m_enk
 date	m_enkfini.F90	/^   character(len=5) date$/;"	v	module:m_enkfini
 days_in_month	m_enkfini.F90	/^   integer, parameter :: days_in_month(/;"	v	module:m_enkfini
 dobs	m_enkfini.F90	/^   real, allocatable    :: dobs(/;"	v	module:m_enkfini
-duration	mod_parameters.F90	/^   real :: duration$/;"	v	module:mod_parameters
 enkfini	m_enkfini.F90	/^subroutine enkfini(/;"	s	module:m_enkfini
 enkfpost	m_enkfpost.F90	/^subroutine enkfpost(/;"	s	module:m_enkfpost
 enkfprep	m_enkfprep.F90	/^subroutine enkfprep(/;"	s	module:m_enkfprep
@@ -42,6 +42,7 @@ ensave	m_ensave.F90	/^subroutine ensave(/;"	s	module:m_ensave
 enspar	seir.F90	/^   real, allocatable :: enspar(/;"	v	program:seir
 ensstd	m_ensstd.F90	/^subroutine ensstd(/;"	s	module:m_ensstd
 f	seir.F90	/^subroutine f(/;"	s
+getday	m_getday.F90	/^integer function getday(/;"	f	module:m_getday
 i	seir.F90	/^   in/;"	v	program:seir
 inflate	m_enkfini.F90	/^   integer :: inflate=/;"	v	module:m_enkfini
 infmult	m_enkfini.F90	/^   integer :: infmult=/;"	v	module:m_enkfini
@@ -65,6 +66,7 @@ m_enkfprep	m_enkfprep.F90	/^module m_enkfprep$/;"	m
 m_ens2mod	m_ens2mod.F90	/^module m_ens2mod$/;"	m
 m_ensave	m_ensave.F90	/^module m_ensave$/;"	m
 m_ensstd	m_ensstd.F90	/^module m_ensstd$/;"	m
+m_getday	m_getday.F90	/^module m_getday$/;"	m
 m_iniens	m_iniens.F90	/^module m_iniens$/;"	m
 m_inipar	m_inipar.F90	/^module m_inipar$/;"	m
 m_mod2ens	m_mod2ens.F90	/^module m_mod2ens$/;"	m
@@ -94,8 +96,12 @@ ps	m_pfactors.F90	/^real, save         :: ps(/;"	v	module:m_pfactors
 random	m_random.F90	/^subroutine random(/;"	s	module:m_random
 readinputs	m_readinputs.F90	/^subroutine readinputs(/;"	s	module:m_readinputs
 rtmax	mod_parameters.F90	/^   real :: rtmax$/;"	v	module:mod_parameters
+sday	m_enkfini.F90	/^   integer sday,/;"	v	module:m_enkfini
 seir	seir.F90	/^program seir$/;"	p
+smonth	m_enkfini.F90	/^   integer sday,smonth,/;"	v	module:m_enkfini
 solve	m_solve.F90	/^subroutine solve(/;"	s	module:m_solve
+startday	m_enkfini.F90	/^   integer sday,smonth,syear,startday$/;"	v	module:m_enkfini
+syear	m_enkfini.F90	/^   integer sday,smonth,syear,/;"	v	module:m_enkfini
 tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
 time	mod_parameters.F90	/^   real :: time$/;"	v	module:mod_parameters
 tobs	m_enkfini.F90	/^   integer, allocatable :: tobs(/;"	v	module:m_enkfini

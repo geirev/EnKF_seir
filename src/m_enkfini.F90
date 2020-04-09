@@ -26,10 +26,9 @@ use m_random
    character(len=5) date
    integer, parameter :: days_in_month(12) =(/31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2020
 
-   integer sday,smonth,syear
-
 contains
 subroutine enkfini(nrens,nt,time)
+   use m_getday
    implicit none
    integer, intent (in) :: nrens
    integer, intent (in) :: nt
@@ -69,24 +68,18 @@ subroutine enkfini(nrens,nt,time)
    do i=1,nrlines
       read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
       m=m+1
-      tobs(m)=0
-      do k=smonth,imonth-1
-         tobs(m)=tobs(m)+days_in_month(k) - sday+1  ! time of obs relative startdate
-      enddo
-      tobs(m)=tobs(m)+iday
+      tobs(m)=real(getday(iday,imonth,iyear))
       iobs(m)=nint(real(tobs(m))/dt)
       cobs(m)='d'
       dobs(m)=real(ideath)
+
       m=m+1
-      tobs(m)=0
-      do k=smonth,imonth-1
-         tobs(m)=tobs(m)+days_in_month(k) - sday+1
-      enddo
-      tobs(m)=tobs(m)+iday
-      iobs(m)=nint(real(tobs(m))/dt)
+      tobs(m)=tobs(m-1)
+      iobs(m)=iobs(m-1)
       cobs(m)='h'
       dobs(m)=real(ihosp)
    enddo
+
    print '(a)','List of observations:'
    do m=1,nrobs
       print *,m,iobs(m),tobs(m),cobs(m),dobs(m)
