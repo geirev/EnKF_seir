@@ -1,21 +1,21 @@
 module mod_parameters
-   real, save :: T2death
-   real, save :: N
-   real, save :: I0                
-   real, save :: R0                
-   real, save :: Rt                
-   real, save :: Tinc
-   real, save :: Tinf
-   real, save :: Trecm
-   real, save :: Trecs
-   real, save :: Thosp
-   real, save :: Tdead             
-   real, save :: Tinterv
-   real, save :: Xmax              
-   real, save :: p_severe
-   real, save :: CFR               
-   real, save :: duration
-   real, save :: time
-   real, save :: minpar
-   real, save :: rtmax
+   real :: T2death
+   real :: N
+   real :: I0                
+   real :: R0                
+   real :: Rt                
+   real :: Tinc
+   real :: Tinf
+   real :: Trecm
+   real :: Trecs
+   real :: Thosp
+   real :: Tdead             
+   real :: Tinterv
+   real :: Xmax              
+   real :: p_severe
+   real :: CFR               
+   real :: duration
+   real :: time
+   real :: minpar
+   real :: rtmax
 end module 

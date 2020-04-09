@@ -5,41 +5,42 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 200	m_enkfini.F90	/^   200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines$/;"	l	subroutine:enkfini	file:
-CFR	mod_parameters.F90	/^   real, save :: CFR /;"	v	module:mod_parameters
+CFR	mod_parameters.F90	/^   real :: CFR /;"	v	module:mod_parameters
 D	m_enkfini.F90	/^   real, allocatable    :: D(/;"	v	module:m_enkfini
 Dprt	m_enkfini.F90	/^   real, allocatable    :: Dprt(/;"	v	module:m_enkfini
 E	m_enkfini.F90	/^   real, allocatable    :: E(/;"	v	module:m_enkfini
-I0	mod_parameters.F90	/^   real, save :: I0 /;"	v	module:mod_parameters
-N	mod_parameters.F90	/^   real, save :: N$/;"	v	module:mod_parameters
+I0	mod_parameters.F90	/^   real :: I0 /;"	v	module:mod_parameters
+N	mod_parameters.F90	/^   real :: N$/;"	v	module:mod_parameters
 R	m_enkfini.F90	/^   real, allocatable    :: R(/;"	v	module:m_enkfini
-R0	mod_parameters.F90	/^   real, save :: R0 /;"	v	module:mod_parameters
+R0	mod_parameters.F90	/^   real :: R0 /;"	v	module:mod_parameters
 Rmat	m_Rmatrix.F90	/^real, save         :: Rmat(/;"	v	module:m_Rmatrix
 Rmatrix	m_Rmatrix.F90	/^subroutine Rmatrix$/;"	s	module:m_Rmatrix
-Rt	mod_parameters.F90	/^   real, save :: Rt /;"	v	module:mod_parameters
+Rt	mod_parameters.F90	/^   real :: Rt /;"	v	module:mod_parameters
 S	m_enkfini.F90	/^   real, allocatable    :: S(/;"	v	module:m_enkfini
-T2death	mod_parameters.F90	/^   real, save :: T2death$/;"	v	module:mod_parameters
-Tdead	mod_parameters.F90	/^   real, save :: Tdead /;"	v	module:mod_parameters
-Thosp	mod_parameters.F90	/^   real, save :: Thosp$/;"	v	module:mod_parameters
-Tinc	mod_parameters.F90	/^   real, save :: Tinc$/;"	v	module:mod_parameters
-Tinf	mod_parameters.F90	/^   real, save :: Tinf$/;"	v	module:mod_parameters
-Tinterv	mod_parameters.F90	/^   real, save :: Tinterv$/;"	v	module:mod_parameters
-Trecm	mod_parameters.F90	/^   real, save :: Trecm$/;"	v	module:mod_parameters
-Trecs	mod_parameters.F90	/^   real, save :: Trecs$/;"	v	module:mod_parameters
-Xmax	mod_parameters.F90	/^   real, save :: Xmax /;"	v	module:mod_parameters
+T2death	mod_parameters.F90	/^   real :: T2death$/;"	v	module:mod_parameters
+Tdead	mod_parameters.F90	/^   real :: Tdead /;"	v	module:mod_parameters
+Thosp	mod_parameters.F90	/^   real :: Thosp$/;"	v	module:mod_parameters
+Tinc	mod_parameters.F90	/^   real :: Tinc$/;"	v	module:mod_parameters
+Tinf	mod_parameters.F90	/^   real :: Tinf$/;"	v	module:mod_parameters
+Tinterv	mod_parameters.F90	/^   real :: Tinterv$/;"	v	module:mod_parameters
+Trecm	mod_parameters.F90	/^   real :: Trecm$/;"	v	module:mod_parameters
+Trecs	mod_parameters.F90	/^   real :: Trecs$/;"	v	module:mod_parameters
+Xmax	mod_parameters.F90	/^   real :: Xmax /;"	v	module:mod_parameters
 agegroup	m_agegroups.F90	/^real, save         :: agegroup(/;"	v	module:m_agegroups
 agegroups	m_agegroups.F90	/^subroutine agegroups$/;"	s	module:m_agegroups
 cobs	m_enkfini.F90	/^   character(len=1), allocatable :: cobs(/;"	v	module:m_enkfini
 date	m_enkfini.F90	/^   character(len=5) date$/;"	v	module:m_enkfini
 days_in_month	m_enkfini.F90	/^   integer, parameter :: days_in_month(/;"	v	module:m_enkfini
 dobs	m_enkfini.F90	/^   real, allocatable    :: dobs(/;"	v	module:m_enkfini
-duration	mod_parameters.F90	/^   real, save :: duration$/;"	v	module:mod_parameters
+duration	mod_parameters.F90	/^   real :: duration$/;"	v	module:mod_parameters
 enkfini	m_enkfini.F90	/^subroutine enkfini(/;"	s	module:m_enkfini
+enkfpost	m_enkfpost.F90	/^subroutine enkfpost(/;"	s	module:m_enkfpost
+enkfprep	m_enkfprep.F90	/^subroutine enkfprep(/;"	s	module:m_enkfprep
 ens	seir.F90	/^   real, allocatable :: ens(/;"	v	program:seir
 ens2mod	m_ens2mod.F90	/^subroutine ens2mod(/;"	s	module:m_ens2mod
 ensave	m_ensave.F90	/^subroutine ensave(/;"	s	module:m_ensave
 enspar	seir.F90	/^   real, allocatable :: enspar(/;"	v	program:seir
 ensstd	m_ensstd.F90	/^subroutine ensstd(/;"	s	module:m_ensstd
-ex	seir.F90	/^   logical ex$/;"	v	program:seir
 f	seir.F90	/^subroutine f(/;"	s
 i	seir.F90	/^   in/;"	v	program:seir
 inflate	m_enkfini.F90	/^   integer :: inflate=/;"	v	module:m_enkfini
@@ -59,6 +60,8 @@ m	seir.F90	/^   integer i,k,j,m$/;"	v	program:seir
 m_Rmatrix	m_Rmatrix.F90	/^module m_Rmatrix$/;"	m
 m_agegroups	m_agegroups.F90	/^module m_agegroups$/;"	m
 m_enkfini	m_enkfini.F90	/^module m_enkfini /;"	m
+m_enkfpost	m_enkfpost.F90	/^module m_enkfpost$/;"	m
+m_enkfprep	m_enkfprep.F90	/^module m_enkfprep$/;"	m
 m_ens2mod	m_ens2mod.F90	/^module m_ens2mod$/;"	m
 m_ensave	m_ensave.F90	/^module m_ensave$/;"	m
 m_ensstd	m_ensstd.F90	/^module m_ensstd$/;"	m
@@ -70,7 +73,7 @@ m_random	m_random.F90	/^module m_random$/;"	m
 m_readinputs	m_readinputs.F90	/^module m_readinputs$/;"	m
 m_solve	m_solve.F90	/^module m_solve$/;"	m
 m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
-minpar	mod_parameters.F90	/^   real, save :: minpar$/;"	v	module:mod_parameters
+minpar	mod_parameters.F90	/^   real :: minpar$/;"	v	module:mod_parameters
 mod2ens	m_mod2ens.F90	/^subroutine mod2ens(/;"	s	module:m_mod2ens
 mod_parameters	mod_parameters.F90	/^module mod_parameters$/;"	m
 mode_analysis	m_enkfini.F90	/^   integer :: mode_analysis=/;"	v	module:m_enkfini
@@ -82,7 +85,7 @@ nrlines	m_enkfini.F90	/^   integer nrlines /;"	v	module:m_enkfini
 nrobs	m_enkfini.F90	/^   integer, save :: nrobs /;"	v	module:m_enkfini
 nrpar	seir.F90	/^   integer, parameter :: nrpar=/;"	v	program:seir
 nt	seir.F90	/^   inte/;"	v	program:seir
-p_severe	mod_parameters.F90	/^   real, save :: p_severe$/;"	v	module:mod_parameters
+p_severe	mod_parameters.F90	/^   real :: p_severe$/;"	v	module:mod_parameters
 parstd	seir.F90	/^   real parstd(/;"	v	program:seir
 pf	m_pfactors.F90	/^real, save         :: pf(/;"	v	module:m_pfactors
 pfactors	m_pfactors.F90	/^subroutine pfactors$/;"	s	module:m_pfactors
@@ -90,10 +93,10 @@ pm	m_pfactors.F90	/^real, save         :: pm(/;"	v	module:m_pfactors
 ps	m_pfactors.F90	/^real, save         :: ps(/;"	v	module:m_pfactors
 random	m_random.F90	/^subroutine random(/;"	s	module:m_random
 readinputs	m_readinputs.F90	/^subroutine readinputs(/;"	s	module:m_readinputs
-rtmax	mod_parameters.F90	/^   real, save :: rtmax$/;"	v	module:mod_parameters
+rtmax	mod_parameters.F90	/^   real :: rtmax$/;"	v	module:mod_parameters
 seir	seir.F90	/^program seir$/;"	p
 solve	m_solve.F90	/^subroutine solve(/;"	s	module:m_solve
 tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
-time	mod_parameters.F90	/^   real, save :: time$/;"	v	module:mod_parameters
+time	mod_parameters.F90	/^   real :: time$/;"	v	module:mod_parameters
 tobs	m_enkfini.F90	/^   integer, allocatable :: tobs(/;"	v	module:m_enkfini
 truncation	m_enkfini.F90	/^   real :: truncation=/;"	v	module:m_enkfini
