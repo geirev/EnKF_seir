@@ -26,6 +26,8 @@ use m_random
    character(len=5) date
    integer, parameter :: days_in_month(12) =(/31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /)
 
+   integer sday,smonth,syear
+
 contains
 subroutine enkfini(nrens,nt,time)
    implicit none
@@ -64,8 +66,8 @@ subroutine enkfini(nrens,nt,time)
       read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
       m=m+1
       tobs(m)=0
-      do k=3,imonth-1
-         tobs(m)=tobs(m)+days_in_month(k)
+      do k=smonth,imonth-1
+         tobs(m)=tobs(m)+days_in_month(k) - sday+1
       enddo
       tobs(m)=tobs(m)+iday
       iobs(m)=nint(tobs(m)/dt)

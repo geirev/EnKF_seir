@@ -22,6 +22,8 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)time                ;    print '(a,f10.3)',    'Length of integration      :',time
       read(10,*)duration            ;    print '(a,f10.3)',    'Duration of intervention   :',duration 
       read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
+      read(10,'(tr1,i2,tr1,i2,tr1,i4)')sday,smonth,syear 
+                                         print '(a,i3,i3,i5)',       'Start date of simulation:',sday,smonth,syear 
 
       read(10,'(a)')ca      
       if (ca /= '#1') then
