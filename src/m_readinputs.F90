@@ -28,6 +28,7 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
          stop
       endif
       read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
+      read(10,*)mode_analysis       ;    print '(a,i2)',       'Analysis mode of EnKF      :',mode_analysis
       read(10,*)nesmda              ;    print '(a,i2)',       'Number of ESMDA steps      :',nesmda
       read(10,*)relobserr           ;    print '(a,f10.4)',    'Realative obs error        :',relobserr
       read(10,*)minobserr           ;    print '(a,f10.4)',    'Minimum   obs error        :',minobserr

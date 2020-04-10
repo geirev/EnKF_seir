@@ -7,7 +7,7 @@ use m_random
    integer nrlines               ! Number of lines in observations file
    integer, parameter :: ne=1    ! extended E ensemble
    logical    lenkf
-   integer :: mode_analysis=11
+   integer :: mode_analysis=13
    logical :: lrandrot=.false.
    logical :: lupdate_randrot=.false.
    logical :: lsymsqrt=.false.
