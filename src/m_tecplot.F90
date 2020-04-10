@@ -98,7 +98,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='dead_'//tag//'.dat')
       write(10,*)'TITLE = "Dead_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Dead_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -119,7 +119,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='susc_'//tag//'.dat')
       write(10,*)'TITLE = "Susceptible_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Susceptible_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -130,7 +130,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='case_'//tag//'.dat')
       write(10,*)'TITLE = "Cases_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Cases_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -142,7 +142,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='hosp_'//tag//'.dat')
       write(10,*)'TITLE = "Hospitalized_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Hospitalized_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -161,7 +161,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='recov_'//tag//'.dat')
       write(10,*)'TITLE = "Recovered_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Recovered_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -172,7 +172,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='infec_'//tag//'.dat')
       write(10,*)'TITLE = "Infected_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Infected_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -183,7 +183,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    open(10,file='expos_'//tag//'.dat')
       write(10,*)'TITLE = "Exposed_'//tag//'"'
       write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i3,a))')(' "',i,'"',i=1,nrens)
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Exposed_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt

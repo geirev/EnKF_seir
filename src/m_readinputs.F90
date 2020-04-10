@@ -35,6 +35,7 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)maxobserr           ;    print '(a,f10.4)',    'Maximum   obs error        :',maxobserr
       read(10,*)lmeascorr           ;    print '(a,l1)',       'Activate correated obs err :',lmeascorr
       read(10,*)rh                  ;    print '(a,f10.4)',    'Obs error correation       :',rh
+      read(10,*)truncation          ;    print '(a,f10.4)',    'EnKF SVD truncation (0.99) :',truncation
       parstd(2)=0.0
 
       read(10,'(a)')ca      

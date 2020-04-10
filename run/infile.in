@@ -1,4 +1,4 @@
- 999                      ! nrens: Ensemble size
+ 1000                     ! nrens: Ensemble size
  366                      ! nt   : Number of output times (one more than days to get daily outputs)
  365                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
@@ -10,6 +10,7 @@
  6.0                      ! Maximum  measurement error
  T                        ! Correlated measurement errors
  5.0                      ! Decorrelation half length in time of measurement errors
+ 0.99                     ! EnKF SVD truncation (around 0.99)
 #2 Dates ----------------------------------------------------------------------------------------------
  01/03-2020               ! Start date of simulation
  15/03-2020               ! Start date of first  phase of intervations

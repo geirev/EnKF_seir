@@ -10,15 +10,15 @@ use m_random
    logical lmeascorr
    real    rh
    integer  mode_analysis
-   logical :: lrandrot=.false.
-   logical :: lupdate_randrot=.false.
-   logical :: lsymsqrt=.false.
+   logical :: lrandrot=.true.
+   logical :: lupdate_randrot=.true.
+   logical :: lsymsqrt=.true.
    integer :: inflate=0
    integer :: infmult=1.0
    real :: relobserr
    real :: minobserr
    real :: maxobserr
-   real :: truncation=0.999      ! singular value truncation
+   real :: truncation                    ! singular value truncation
    real, allocatable    :: innovation(:) ! Observation innovation dobs-y
    integer, allocatable :: iobs(:)      ! Observation time index
    real, allocatable    :: dobs(:)       ! Observation values
@@ -99,14 +99,7 @@ subroutine enkfini(nrens,nt,time)
    allocate(E(nrobs,nrens))
    allocate(R(nrobs,nrobs))
 
-!   if (lmeascorr) then
-!      call pseudo1D(E,nrobs,nrens,cor1,dx,n1)
-!      call fixsample1D(B,nx,nrens)
-!   else 
-      call random(E,nrobs*nrens)
-!   endif
-
-   R=0.0
+! For printing perturbed observations
    do m=1,nrobs
       R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
       E(m,:)=sqrt(R(m,m))*E(m,:)          

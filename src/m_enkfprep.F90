@@ -39,19 +39,18 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
       call fixsample1D(E,nrobs,nrens)
    else 
       call random(E,nrobs*nrens)
+      call fixsample1D(E,nrobs,nrens)
    endif
-
 
    R=0.0
    do m=1,nrobs
-      R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
+      R(m,m)=real(nesmda)*min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
       E(m,:)=sqrt(R(m,m))*E(m,:)          
-
-      R(m,m)=R(m,m)*real(nesmda)
-      E(m,:)=E(m,:)*sqrt(real(nesmda))
-
       D(m,:)=dobs(m)+E(m,:)
    enddo
+   if (lmeascorr) then
+      R=matmul(E,transpose(E))/real(nrens)
+   endif
 
    do m=1,nrobs
       select case (cobs(m))
@@ -65,6 +64,7 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
       case default
          stop 'Measurement type not found'
       end select
+      innovation(m)=sum(D(m,:))/real(nrens)
    enddo
 
 end subroutine
