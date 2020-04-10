@@ -1,7 +1,8 @@
 old
 build
 Runs
-run
-run0
-run2
-run3
+run0/*
+run/*
+!run/infile.in
+!run/corona.dat
+

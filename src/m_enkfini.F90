@@ -7,7 +7,9 @@ use m_random
    integer nrlines               ! Number of lines in observations file
    integer, parameter :: ne=1    ! extended E ensemble
    logical    lenkf
-   integer :: mode_analysis=13
+   logical lmeascorr
+   real    rh
+   integer  mode_analysis
    logical :: lrandrot=.false.
    logical :: lupdate_randrot=.false.
    logical :: lsymsqrt=.false.
@@ -77,16 +79,16 @@ subroutine enkfini(nrens,nt,time)
       cobs(m)='d'
       dobs(m)=real(ideath)
 
-      m=m+1
-      tobs(m)=tobs(m-1)
-      iobs(m)=iobs(m-1)
-      cobs(m)='h'
-      dobs(m)=real(ihosp)
+      tobs(nrlines+m)=tobs(m)
+      iobs(nrlines+m)=iobs(m)
+      cobs(nrlines+m)='h'
+      dobs(nrlines+m)=real(ihosp)
    enddo
 
    print '(a)','List of observations:'
+   print '(a)','  number   gridp obstime obstype  obsval  stddev'
    do m=1,nrobs
-      print *,m,iobs(m),tobs(m),cobs(m),dobs(m)
+      print '(3i8,a8,2f8.3)',m,iobs(m),tobs(m),cobs(m),dobs(m),min(maxobserr,max(relobserr*dobs(m),minobserr)) 
    enddo
    print *
 
@@ -97,7 +99,13 @@ subroutine enkfini(nrens,nt,time)
    allocate(E(nrobs,nrens))
    allocate(R(nrobs,nrobs))
 
-   call random(E,nrobs*nrens)
+!   if (lmeascorr) then
+!      call pseudo1D(E,nrobs,nrens,cor1,dx,n1)
+!      call fixsample1D(B,nx,nrens)
+!   else 
+      call random(E,nrobs*nrens)
+!   endif
+
    R=0.0
    do m=1,nrobs
       R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 

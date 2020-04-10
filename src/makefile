@@ -40,7 +40,7 @@ CPPFLAGS = -traditional -P $(CPPARCH) $(CPPMODEL)
 #LIBDIR = -L /h/geve/lib/linux  -L /usr/lib/gcc/x86_64-redhat-linux/3.4.3/32 -L/h/a152128/lib/linux 
 
 LIBS =  -lg2c  -lblas -llapack -lfftw3 -lecl -lhash -lpthread
-LIBS =  ./libenkfanalysis.a -llapack -lblas  -llapack 
+LIBS =  ./libsampling.a ./libenkfanalysis.a -llapack -lblas  -llapack /usr/lib/x86_64-linux-gnu/libfftw3.so.3
 
 
 BINDIR = $(HOME)/bin

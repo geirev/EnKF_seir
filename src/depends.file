@@ -11,8 +11,10 @@ m_enkfpost.o:      mod_parameters.o
 m_enkfprep.o:      m_agegroups.o
 m_enkfprep.o:      makefile
 m_enkfprep.o:      m_enkfini.o
+m_enkfprep.o:      m_fixsample1D.o
 m_enkfprep.o:      MODEL.CPP
 m_enkfprep.o:      mod_parameters.o
+m_enkfprep.o:      m_pseudo1D.o
 m_ens2mod.o:      makefile
 m_ens2mod.o:      MODEL.CPP
 m_ens2mod.o:      mod_parameters.o

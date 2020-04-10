@@ -3,10 +3,13 @@
  365                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
+ 13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
  16                       ! Number of ESMDA steps, (1 means standard ES update)
  0.05                     ! Relative measurement error in fraction of observed value
  1.0                      ! Minimum  measurement error absolute value d_j = d + min(MAXERR,max(RELERR*d,MINERR)*eps
  6.0                      ! Maximum  measurement error
+ T                        ! Correlated measurement errors
+ 5.0                      ! Decorrelation half length in time of measurement errors
 #2 Dates ----------------------------------------------------------------------------------------------
  01/03-2020               ! Start date of simulation
  15/03-2020               ! Start date of first  phase of intervations

@@ -4,6 +4,8 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
    use mod_parameters
    use m_enkfini
    use m_agegroups
+   use m_pseudo1D
+   use m_fixsample1D
    implicit none
    integer, intent(in) :: neq
    integer, intent(in) :: nrpar
@@ -25,13 +27,21 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
          avepar(i)=sum(enspar(i,:))/real(nrens)
       enddo
       print '(100a10)',parname(:)
-      print '(100g10.3)',avepar(:)
+      print '(100f10.3)',avepar(:)
       print *
       lprt=.false.
    endif
 
    print '(a)','Preparing for analysis computation'
-   call random(E,nrobs*nrens)
+   if (lmeascorr) then
+      call pseudo1D(E(1:nrobs/2,:),nrobs/2,nrens,rh,1.0,nrobs)
+      call pseudo1D(E(nrobs/2+1:nrobs,:),nrobs/2,nrens,rh,1.0,nrobs)
+      call fixsample1D(E,nrobs,nrens)
+   else 
+      call random(E,nrobs*nrens)
+   endif
+
+
    R=0.0
    do m=1,nrobs
       R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 

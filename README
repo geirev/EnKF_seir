@@ -1,24 +1,35 @@
 EnKF_seir code
 
-Installation:
+# Installation:
+# Make a directory where you will install the following
 git clone git@github.com:geirev/EnKF_seir.git
 git clone git@github.com:geirev/EnKF_analysis.git
+git clone git@github.com:geirev/EnKF_sampling.git
 
-Install blas, lapack, and Fortran95
+# Install blas, lapack, libfftw3, and Fortran95
+sudo apt-get update
+sudo apt-get install libblas-dev liblapack-dev libfftw3-dev gfortran
 
-
+# Compile the EnKF_analysis library
 cd EnKF_analysis/lib
-"in the makefile: change build dir to dir where EnKF_seir will be build"
-   BUILD = ../../EnKF_seir/build
-This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
+# in the makefile: change build dir to dir where EnKF_seir will be build"
+#   BUILD = ../../EnKF_seir/build
+# This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
+make
 
+# Compile the EnKF_sampling library
+cd EnKF_sampling/lib
+# in the makefile: change build dir to dir where EnKF_seir will be build"
+#   BUILD = ../../EnKF_seir/build
+# This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
 make
 
 cd EnKF_seir/src
-"change target install dir which is currently $HOME/bin"
+# change target install dir which is currently $HOME/bin to where you want it to reside
 make
 
-make a run catalog, copy the corona.dat file to this catalog and run "seir"
+cd ../run
+seir
 
 good luck and ask when you get stuck.
 
