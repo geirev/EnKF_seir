@@ -16,8 +16,8 @@ subroutine iniens(ens,enspar,neq,nrens,nt,nrpar)
    do j=1,nrens
       I0=enspar(3,j)     
       ens(0    :   na-1, 0, j) = agegroup(0:na-1)  ! Susceptible na agegroups                 S_i
-      ens(na   : 2*na-1, 0, j) = 4*I0/real(na)     ! Exposed     na agegroups                 E_i
-      ens(2*na : 3*na-1, 0, j) =   I0/real(na)     ! Infected    na agegroups                 I_i
+      ens(na   : 2*na-1, 0, j) = 4.0*I0/real(na)   ! Exposed     na agegroups                 E_i
+      ens(2*na : 3*na-1, 0, j) = I0/real(na)       ! Infected    na agegroups                 I_i
       ens(3*na         , 0, j) = 0.0               ! Sick Mild                                Q_m
       ens(3*na+1       , 0, j) = 0.0               ! Sick (Severe at home)                    Q_s
       ens(3*na+2       , 0, j) = 0.0               ! Sick (Severe at hospital)                Q_h

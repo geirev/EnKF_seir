@@ -19,7 +19,7 @@ subroutine enkfpost(ens,enspar,nrpar,nrens,nt,neq)
    enspar(1:nrpar,:)=max(enspar(1:nrpar,:),minpar)
 
 ! Ensure all variables are larger than 0.0
-   ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.0)
+   ens(0:neq-1,0,:)=max(enspar(nrpar+1:nrpar+neq,:),0.000001)
 
    print *
    print '(a)','Posterior ensemble mean of parameters:'

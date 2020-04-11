@@ -22,14 +22,15 @@ subroutine pfactors
 
 ! Defining initial fractions of mild, severe, and fatal cases for different agegroups
 !            1    2    3    4    5    6    7    8    9    10   11
-   pm(:)= (/ 1.0, 1.0, 1.0, 1.0, 1.0, 0.7, 0.5, 0.3, 0.2, 0.1, 0.1 /)
-   ps(:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.6, 0.5, 0.6, 0.3, 0.1 /)
-   pf(:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.2, 0.4, 0.6, 0.8 /)
+   pm(:)= (/ 1.000, 1.000, 0.998, 0.998, 0.998, 0.900, 0.800, 0.700, 0.600, 0.500, 0.400 /)
+   pf(:)= (/ 0.000, 0.000, 0.002, 0.002, 0.002, 0.004, 0.013, 0.036, 0.080, 0.140, 0.140 /)
+   ps=1.0-pf-pm
 
 !  Initial ratios:
    if (iprt==1) print '(a,11f12.4)','pm0: ',pm(:) 
    if (iprt==1) print '(a,11f12.4)','ps0: ',ps(:) 
    if (iprt==1) print '(a,11f12.4)','pf0: ',pf(:) 
+   if (iprt==1) print *
 
    dead=0.0
    seve=0.0
@@ -55,5 +56,6 @@ subroutine pfactors
    enddo
    if (lprt) print '(a,f10.4)','dead ratio2=',dead
    if (lprt) print '(a,f10.4)','seve ratio2=',seve
+   if (iprt==1) print *
 end subroutine
 end module

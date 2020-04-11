@@ -16,17 +16,17 @@
  15/03-2020               ! Start date of first  phase of intervations
  20/04-2021               ! Start date of second phase of intervations
 #3 First guess model parameters and their std dev -----------------------------------------------------
- 32.0         1.0         ! 1  T2death   : Days to death                                           
+ 31.0        1.0         ! 1  T2death   : Days from infection to death                                           
  51.0         6.0         ! 3  I0        : Initial infectious used to initialize the model
- 4.5          0.5         ! 4  R0        : Basic reproduction number with no interventions
- 5.2          0.0         ! 5  Tinc      : Incubation period 
- 2.9          0.0         ! 6  Tinf      : Duration patient is infectious
- 14.0         0.0         ! 7  Trecm     : Recovery time mild cases
- 31.5         0.0         ! 8  Trecs     : Recovery time severe cases 
- 5.0          0.0         ! 9  Thosp     : Hospitalization time
- 0.006        0.0006      ! 10 CFR       : Case fatality rate %
- 0.012        0.0015      ! 11 P_severe  : Hospitalization rate % for severe cases
- 0.63         0.020       ! 12 Rt        : Basic Reproduction Number during intervention
+ 6.0          0.5         ! 4  R0        : Basic reproduction number (2.2 (95% CI, 1.4 to 3.9) from worldometer, 3 to 4.7 from nature)
+ 5.5          0.0         ! 5  Tinc      : Incubation period (https://www.worldometers.info/coronavirus/coronavirus-incubation-period/#52)
+ 3.8          0.0         ! 6  Tinf      : Duration patient is infectious
+ 14.0         0.0         ! 7  Trecm     : Recovery time mild cases   (from Infectious to recovered)
+ 6.8          0.0         ! 8  Trecs     : Recovery time severe cases (Days in hospital + Infectieus)
+ 5.5          0.0         ! 9  Thosp     : Days from sick until hospitalization
+ 0.004        0.0006      ! 10 CFR       : Case fatality rate %
+ 0.014        0.0015      ! 11 P_severe  : Hospitalization rate % for severe cases
+ 0.622        0.020       ! 12 Rt        : Basic Reproduction Number during intervention
 #4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters
  1.0                      ! Maximum value of Rt
