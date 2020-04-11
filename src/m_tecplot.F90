@@ -150,7 +150,7 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       enddo
       m=0
       do i=1,nrobs
-         if (cobs(i)=='d') m=m+1
+         if (cobs(i)=='h') m=m+1
       enddo
       write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
       do i=1,nrobs

@@ -29,7 +29,7 @@ use m_random
    real, allocatable    :: S(:,:)        ! Ensemble of predicted observation anomalies
    real, allocatable    :: E(:,:)        ! Ensemble of measurement perturbations
    real, allocatable    :: R(:,:)        ! Measurement error covariance matrix
-   character(len=5) date
+   integer nrobsh,nrobsd
 
 contains
 subroutine enkfini(nrens,nt,time)
@@ -57,33 +57,53 @@ subroutine enkfini(nrens,nt,time)
    open(10,file='corona.dat')
 
 ! Counting number of lines in corona.dat
-   do i=1,1000
-      read(10,'(tr1,a5)',end=200)date
+   nrobs=0
+   nrobsd=0
+   nrobsh=0
+   do i=1,10000
+      read(10,'(i2,tr1,i2,tr1,i4,2i6)',end=200)iday,imonth,iyear,ideath,ihosp
+      if (ideath > 0) then
+         nrobs=nrobs+1
+         nrobsd=nrobsd+1
+      endif
+      if (ihosp  > 0) then
+         nrobs=nrobs+1
+         nrobsh=nrobsh+1
+      endif
    enddo
    200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines
    rewind(10)
 
-! Allocate and read
-   nrobs=2*nrlines; print '(a,i5)','nrobs=',nrobs
+   print '(a,i5)','nrobs=',nrobs
    allocate(dobs(nrobs))
    allocate(tobs(nrobs))
    allocate(iobs(nrobs))
    allocate(cobs(nrobs))
    m=0
    dt= time/real(nt)                     ! Timestep of outputs
+
    do i=1,nrlines
       read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
-      m=m+1
-      tobs(m)=real(getday(iday,imonth,iyear))
-      iobs(m)=nint(real(tobs(m))/dt)
-      cobs(m)='d'
-      dobs(m)=real(ideath)
-
-      tobs(nrlines+m)=tobs(m)
-      iobs(nrlines+m)=iobs(m)
-      cobs(nrlines+m)='h'
-      dobs(nrlines+m)=real(ihosp)
+      if (ideath > 0) then
+         m=m+1
+         tobs(m)=real(getday(iday,imonth,iyear))
+         iobs(m)=nint(real(tobs(m))/dt)
+         cobs(m)='d'
+         dobs(m)=real(ideath)
+      endif
    enddo
+   rewind(10)
+   do i=1,nrlines
+      read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
+      if (ihosp > 0) then
+         m=m+1
+         tobs(m)=real(getday(iday,imonth,iyear))
+         iobs(m)=nint(real(tobs(m))/dt)
+         cobs(m)='h'
+         dobs(m)=real(ihosp)
+      endif
+   enddo
+   close(10)
 
    print '(a)','List of observations:'
    print '(a)','  number   gridp obstime obstype  obsval  stddev'
