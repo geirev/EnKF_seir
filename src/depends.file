@@ -1,4 +1,5 @@
 m_agegroups.o:      makefile
+m_agegroups.o:      mod_dimensions.o
 m_agegroups.o:      MODEL.CPP
 m_agegroups.o:      mod_parameters.o
 m_enkfini.o:      makefile
@@ -12,6 +13,7 @@ m_enkfprep.o:      m_agegroups.o
 m_enkfprep.o:      makefile
 m_enkfprep.o:      m_enkfini.o
 m_enkfprep.o:      m_fixsample1D.o
+m_enkfprep.o:      mod_dimensions.o
 m_enkfprep.o:      MODEL.CPP
 m_enkfprep.o:      mod_parameters.o
 m_enkfprep.o:      m_pseudo1D.o
@@ -26,6 +28,7 @@ m_getday.o:      makefile
 m_getday.o:      MODEL.CPP
 m_iniens.o:      m_agegroups.o
 m_iniens.o:      makefile
+m_iniens.o:      mod_dimensions.o
 m_iniens.o:      MODEL.CPP
 m_inipar.o:      makefile
 m_inipar.o:      m_mod2ens.o
@@ -35,10 +38,16 @@ m_inipar.o:      m_random.o
 m_mod2ens.o:      makefile
 m_mod2ens.o:      MODEL.CPP
 m_mod2ens.o:      mod_parameters.o
+mod_dimensions.o:      makefile
+mod_dimensions.o:      MODEL.CPP
 mod_parameters.o:      makefile
 mod_parameters.o:      MODEL.CPP
+mod_states.o:      makefile
+mod_states.o:      mod_dimensions.o
+mod_states.o:      MODEL.CPP
 m_pfactors.o:      m_agegroups.o
 m_pfactors.o:      makefile
+m_pfactors.o:      mod_dimensions.o
 m_pfactors.o:      MODEL.CPP
 m_pfactors.o:      mod_parameters.o
 m_random.o:      makefile
@@ -59,6 +68,7 @@ m_tecplot.o:      makefile
 m_tecplot.o:      m_enkfini.o
 m_tecplot.o:      m_ensave.o
 m_tecplot.o:      m_ensstd.o
+m_tecplot.o:      mod_dimensions.o
 m_tecplot.o:      MODEL.CPP
 m_tecplot.o:      mod_parameters.o
 seir.o:      m_agegroups.o
@@ -70,8 +80,10 @@ seir.o:      m_ens2mod.o
 seir.o:      m_iniens.o
 seir.o:      m_inipar.o
 seir.o:      m_mod2ens.o
+seir.o:      mod_dimensions.o
 seir.o:      MODEL.CPP
 seir.o:      mod_parameters.o
+seir.o:      mod_states.o
 seir.o:      m_pfactors.o
 seir.o:      m_random.o
 seir.o:      m_readinputs.o

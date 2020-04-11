@@ -7,16 +7,26 @@
 200	m_enkfini.F90	/^   200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines$/;"	l	subroutine:enkfini	file:
 CFR	mod_parameters.F90	/^   real :: CFR /;"	v	module:mod_parameters
 D	m_enkfini.F90	/^   real, allocatable    :: D(/;"	v	module:m_enkfini
+D	mod_states.F90	/^      real D /;"	k	type:states
 Dprt	m_enkfini.F90	/^   real, allocatable    :: Dprt(/;"	v	module:m_enkfini
 E	m_enkfini.F90	/^   real, allocatable    :: E(/;"	v	module:m_enkfini
+E	mod_states.F90	/^      real E(/;"	k	type:states
+Hs	mod_states.F90	/^      real Hs /;"	k	type:states
+I	mod_states.F90	/^      real I(/;"	k	type:states
 I0	mod_parameters.F90	/^   real :: I0 /;"	v	module:mod_parameters
 N	mod_parameters.F90	/^   real :: N$/;"	v	module:mod_parameters
+Qf	mod_states.F90	/^      real Qf /;"	k	type:states
+Qm	mod_states.F90	/^      real Qm /;"	k	type:states
+Qs	mod_states.F90	/^      real Qs /;"	k	type:states
 R	m_enkfini.F90	/^   real, allocatable    :: R(/;"	v	module:m_enkfini
 R0	mod_parameters.F90	/^   real :: R0 /;"	v	module:mod_parameters
+Rm	mod_states.F90	/^      real Rm /;"	k	type:states
 Rmat	m_Rmatrix.F90	/^real, save         :: Rmat(/;"	v	module:m_Rmatrix
 Rmatrix	m_Rmatrix.F90	/^subroutine Rmatrix$/;"	s	module:m_Rmatrix
+Rs	mod_states.F90	/^      real Rs /;"	k	type:states
 Rt	mod_parameters.F90	/^   real :: Rt /;"	v	module:mod_parameters
 S	m_enkfini.F90	/^   real, allocatable    :: S(/;"	v	module:m_enkfini
+S	mod_states.F90	/^      real S(/;"	k	type:states
 T2death	mod_parameters.F90	/^   real :: T2death$/;"	v	module:mod_parameters
 Tdead	mod_parameters.F90	/^   real :: Tdead /;"	v	module:mod_parameters
 Thosp	mod_parameters.F90	/^   real :: Thosp$/;"	v	module:mod_parameters
@@ -27,11 +37,11 @@ Tinterv2	mod_parameters.F90	/^   real :: Tinterv2$/;"	v	module:mod_parameters
 Trecm	mod_parameters.F90	/^   real :: Trecm$/;"	v	module:mod_parameters
 Trecs	mod_parameters.F90	/^   real :: Trecs$/;"	v	module:mod_parameters
 Xmax	mod_parameters.F90	/^   real :: Xmax /;"	v	module:mod_parameters
+add_states	mod_states.F90	/^   function add_states(/;"	f	module:mod_states
 agegroup	m_agegroups.F90	/^real, save         :: agegroup(/;"	v	module:m_agegroups
 agegroups	m_agegroups.F90	/^subroutine agegroups$/;"	s	module:m_agegroups
+assign_states	mod_states.F90	/^   subroutine assign_states(/;"	s	module:mod_states
 cobs	m_enkfini.F90	/^   character(len=1), allocatable :: cobs(/;"	v	module:m_enkfini
-date	m_enkfini.F90	/^   character(len=5) date$/;"	v	module:m_enkfini
-days_in_month	m_enkfini.F90	/^   integer, parameter :: days_in_month(/;"	v	module:m_enkfini
 dobs	m_enkfini.F90	/^   real, allocatable    :: dobs(/;"	v	module:m_enkfini
 enkfini	m_enkfini.F90	/^subroutine enkfini(/;"	s	module:m_enkfini
 enkfpost	m_enkfpost.F90	/^subroutine enkfpost(/;"	s	module:m_enkfpost
@@ -54,6 +64,7 @@ j	seir.F90	/^   integer i,k,j,/;"	v	program:seir
 jac	seir.F90	/^subroutine jac(/;"	s
 k	seir.F90	/^   integer i,k,/;"	v	program:seir
 lenkf	m_enkfini.F90	/^   logical    lenkf$/;"	v	module:m_enkfini
+lmeascorr	m_enkfini.F90	/^   logical lmeascorr$/;"	v	module:m_enkfini
 lrandrot	m_enkfini.F90	/^   logical :: lrandrot=/;"	v	module:m_enkfini
 lsymsqrt	m_enkfini.F90	/^   logical :: lsymsqrt=/;"	v	module:m_enkfini
 lupdate_randrot	m_enkfini.F90	/^   logical :: lupdate_randrot=/;"	v	module:m_enkfini
@@ -75,16 +86,25 @@ m_random	m_random.F90	/^module m_random$/;"	m
 m_readinputs	m_readinputs.F90	/^module m_readinputs$/;"	m
 m_solve	m_solve.F90	/^module m_solve$/;"	m
 m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
+maxobserr	m_enkfini.F90	/^   real :: maxobserr$/;"	v	module:m_enkfini
+minobserr	m_enkfini.F90	/^   real :: minobserr$/;"	v	module:m_enkfini
 minpar	mod_parameters.F90	/^   real :: minpar$/;"	v	module:mod_parameters
 mod2ens	m_mod2ens.F90	/^subroutine mod2ens(/;"	s	module:m_mod2ens
+mod_dimensions	mod_dimensions.F90	/^module mod_dimensions$/;"	m
 mod_parameters	mod_parameters.F90	/^module mod_parameters$/;"	m
-mode_analysis	m_enkfini.F90	/^   integer :: mode_analysis=/;"	v	module:m_enkfini
+mod_states	mod_states.F90	/^module mod_states$/;"	m
+mode_analysis	m_enkfini.F90	/^   integer  mode_analysis$/;"	v	module:m_enkfini
 na	m_agegroups.F90	/^integer, parameter :: na=/;"	v	module:m_agegroups
+na	mod_dimensions.F90	/^   integer, parameter :: na=/;"	v	module:mod_dimensions
 ne	m_enkfini.F90	/^   integer, parameter :: ne=/;"	v	module:m_enkfini
+neq	mod_dimensions.F90	/^   integer, parameter :: neq=/;"	v	module:mod_dimensions
 neq	seir.F90	/^   integer, parameter :: neq=/;"	v	program:seir
+nesmda	m_enkfini.F90	/^   integer :: nesmda /;"	v	module:m_enkfini
 nrens	seir.F90	/^   integer  nrens /;"	v	program:seir
 nrlines	m_enkfini.F90	/^   integer nrlines /;"	v	module:m_enkfini
-nrobs	m_enkfini.F90	/^   integer, save :: nrobs /;"	v	module:m_enkfini
+nrobs	m_enkfini.F90	/^   integer :: nrobs /;"	v	module:m_enkfini
+nrobsd	m_enkfini.F90	/^   integer nrobsh,nrobsd$/;"	v	module:m_enkfini
+nrobsh	m_enkfini.F90	/^   integer nrobsh,/;"	v	module:m_enkfini
 nrpar	seir.F90	/^   integer, parameter :: nrpar=/;"	v	program:seir
 nt	seir.F90	/^   inte/;"	v	program:seir
 p_severe	mod_parameters.F90	/^   real :: p_severe$/;"	v	module:mod_parameters
@@ -95,14 +115,19 @@ pm	m_pfactors.F90	/^real, save         :: pm(/;"	v	module:m_pfactors
 ps	m_pfactors.F90	/^real, save         :: ps(/;"	v	module:m_pfactors
 random	m_random.F90	/^subroutine random(/;"	s	module:m_random
 readinputs	m_readinputs.F90	/^subroutine readinputs(/;"	s	module:m_readinputs
+real_states_mult	mod_states.F90	/^   function real_states_mult(/;"	f	module:mod_states
+relobserr	m_enkfini.F90	/^   real :: relobserr$/;"	v	module:m_enkfini
+rh	m_enkfini.F90	/^   real    rh$/;"	v	module:m_enkfini
 rtmax	mod_parameters.F90	/^   real :: rtmax$/;"	v	module:mod_parameters
-sday	m_enkfini.F90	/^   integer sday,/;"	v	module:m_enkfini
 seir	seir.F90	/^program seir$/;"	p
-smonth	m_enkfini.F90	/^   integer sday,smonth,/;"	v	module:m_enkfini
 solve	m_solve.F90	/^subroutine solve(/;"	s	module:m_solve
-startday	m_enkfini.F90	/^   integer sday,smonth,syear,startday$/;"	v	module:m_enkfini
-syear	m_enkfini.F90	/^   integer sday,smonth,syear,/;"	v	module:m_enkfini
+sqrt_states	mod_states.F90	/^   function sqrt_states(/;"	f	module:mod_states
+startday	m_getday.F90	/^integer :: startday=/;"	v	module:m_getday
+states	mod_states.F90	/^   type states$/;"	t	module:mod_states
+states_real_mult	mod_states.F90	/^   function states_real_mult(/;"	f	module:mod_states
+states_states_mult	mod_states.F90	/^   function states_states_mult(/;"	f	module:mod_states
+subtract_states	mod_states.F90	/^   function subtract_states(/;"	f	module:mod_states
 tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
 time	mod_parameters.F90	/^   real :: time$/;"	v	module:mod_parameters
 tobs	m_enkfini.F90	/^   integer, allocatable :: tobs(/;"	v	module:m_enkfini
-truncation	m_enkfini.F90	/^   real :: truncation=/;"	v	module:m_enkfini
+truncation	m_enkfini.F90	/^   real :: truncation /;"	v	module:m_enkfini

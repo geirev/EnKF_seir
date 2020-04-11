@@ -1,13 +1,13 @@
 module m_enkfprep
 contains
-subroutine enkfprep(ens,enspar,nrpar,nrens,nt,neq)
+subroutine enkfprep(ens,enspar,nrpar,nrens,nt)
+   use mod_dimensions
    use mod_parameters
    use m_enkfini
    use m_agegroups
    use m_pseudo1D
    use m_fixsample1D
    implicit none
-   integer, intent(in) :: neq
    integer, intent(in) :: nrpar
    integer, intent(in) :: nt
    integer, intent(in) :: nrens

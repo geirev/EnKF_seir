@@ -70,7 +70,7 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       endif
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-      read(10,*)T2death  , parstd(1);    print '(a,2f10.3)',   'Time to death            and std dev :',T2death  ,parstd(1)
+      read(10,*)Tdead    , parstd(1);    print '(a,2f10.3)',   'Time to death            and std dev :',Tdead    ,parstd(1)
       read(10,*)I0       , parstd(3);    print '(a,2f10.3)',   'Initial infected I0      and std dev :',I0       ,parstd(3)
       read(10,*)R0       , parstd(4);    print '(a,2f10.3)',   'Initial R                and std dev :',R0       ,parstd(4)
       read(10,*)Tinc     , parstd(5);    print '(a,2f10.3)',   'Incubation time          and std dev :',Tinc     ,parstd(5)

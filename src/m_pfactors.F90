@@ -1,9 +1,10 @@
 module m_pfactors
+use mod_dimensions
 use m_agegroups
 
-real, save         :: pm(0:na-1)
-real, save         :: ps(0:na-1)
-real, save         :: pf(0:na-1)
+real, save         :: pm(na)
+real, save         :: ps(na)
+real, save         :: pf(na)
 
 contains
 subroutine pfactors
@@ -34,7 +35,7 @@ subroutine pfactors
 
    dead=0.0
    seve=0.0
-   do i=0,na-1
+   do i=1,na
       dead=dead+pf(i)*agegroup(i)/sum(agegroup(:))
       seve=seve+ps(i)*agegroup(i)/sum(agegroup(:))
    enddo
@@ -50,7 +51,7 @@ subroutine pfactors
 
    dead=0.0
    seve=0.0
-   do i=0,na-1
+   do i=1,na
       dead=dead+pf(i)*agegroup(i)/sum(agegroup(:))
       seve=seve+ps(i)*agegroup(i)/sum(agegroup(:))
    enddo

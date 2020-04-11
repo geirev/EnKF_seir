@@ -1,9 +1,9 @@
 module m_iniens
 contains
-subroutine iniens(ens,enspar,neq,nrens,nt,nrpar)
+subroutine iniens(ens,enspar,nrens,nt,nrpar)
+   use mod_dimensions
    use m_agegroups
    implicit none
-   integer, intent(in)   ::  neq
    integer, intent(in)   ::  nrens
    integer, intent(in)   ::  nt
    integer, intent(in)   ::  nrpar
@@ -15,7 +15,7 @@ subroutine iniens(ens,enspar,neq,nrens,nt,nrpar)
    print '(a)','Simple ensemble initialization'
    do j=1,nrens
       I0=enspar(3,j)     
-      ens(0    :   na-1, 0, j) = agegroup(0:na-1)  ! Susceptible na agegroups                 S_i
+      ens(0    :   na-1, 0, j) = agegroup(1:na)    ! Susceptible na agegroups                 S_i
       ens(na   : 2*na-1, 0, j) = 4.0*I0/real(na)   ! Exposed     na agegroups                 E_i
       ens(2*na : 3*na-1, 0, j) = I0/real(na)       ! Infected    na agegroups                 I_i
       ens(3*na         , 0, j) = 0.0               ! Sick Mild                                Q_m
@@ -27,7 +27,7 @@ subroutine iniens(ens,enspar,neq,nrens,nt,nrpar)
       ens(3*na+6       , 0, j) = 0.0               ! Removed_fatal (dead)                     D
       ens(0:na-1 ,0, j) = ens(0:na-1, 0, j) - ens(na:2*na-1, 0, j) - ens(2*na : 3*na-1, 0, j)
    enddo
-   ens(:,0,:)=ens(:,0,:)/sum(agegroup(0:na-1))
+   ens(:,0,:)=ens(:,0,:)/sum(agegroup(1:na))
 
 ! Copy initial conditions from ensemble to enspar for later updating
    enspar(nrpar+1:nrpar+neq,:)=ens(0:neq-1,0,:) 

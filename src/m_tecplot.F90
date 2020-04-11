@@ -1,6 +1,7 @@
 module m_tecplot
 contains
-subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
+subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
+   use mod_dimensions
    use mod_parameters
    use m_agegroups
    use m_ensave
@@ -9,7 +10,6 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
    implicit none
    integer, intent(in) :: nt
    integer, intent(in) :: nrens
-   integer, intent(in) :: neq
    integer, intent(in) :: nrpar
    integer, intent(in) :: pri
 
@@ -109,7 +109,12 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       do i=1,nrobs
          if (cobs(i)=='d') m=m+1
       enddo
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
+      if (m==0) then
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
+         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+      else
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
+      endif
       do i=1,nrobs
          if (cobs(i)=='d') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
       enddo
@@ -152,10 +157,12 @@ subroutine tecplot(ens,enspar,nt,nrens,neq,nrpar,pri)
       do i=1,nrobs
          if (cobs(i)=='h') m=m+1
       enddo
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
-      do i=1,nrobs
-         if (cobs(i)=='h') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
-      enddo
+      if (m==0) then
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
+         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+      else
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
+      endif
    close(10)
 
    open(10,file='recov_'//tag//'.dat')
