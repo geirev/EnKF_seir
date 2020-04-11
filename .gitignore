@@ -5,4 +5,5 @@ run0/*
 run/*
 !run/infile.in
 !run/corona.dat
+!run/README
 
