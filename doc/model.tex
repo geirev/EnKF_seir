@@ -49,7 +49,6 @@
 \newcommand{\Trecs} {\tau_\textrm{recs}}
 \newcommand{\Thosp} {\tau_\textrm{hosp}}
 \newcommand{\Tint}  {\tau_\textrm{intervention}}
-\newcommand{\Ttd}   {\tau_\textrm{2death}}
 
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
@@ -281,7 +280,7 @@
 \begin{document}
 \setlength{\parskip}{3mm} 
 
-\title{SEIR with age compartments}
+\title{New SEIR with age compartments }
 \author{Geir Evensen}
 %\institute{G. Evensen \at
 %           NORCE (Norwegian Research Center, Bergen, Norway and
@@ -294,74 +293,13 @@
 
 \maketitle
 
-%\abstract{
-%ddd
-%}
-\section{SEIR with age compartments\label{sec:age}}
-We have used the model described in Appendix~\ref{sec:age} to run a sensitivity simulation to assess the impact of opening children 
-schools and kindergartens after Easter. The age based model considers 11 age groups as defined in Tab.~\ref{tab:age}.
-The $R$ matrix used in the simulation after letting children back to kinder gardens and schools is presented in Tab.~\ref{tab:R}.
-Note that the $P$ factors and the $\bmR$ matrix are rather uncertain, and we should gather more data to calibrate these coefficients.
 
-We have run one case where we continue todays measures with $R=0.8$ as shown in Fig.~\ref{fig:closed08}, and then three cases with 
-different $\bmR$ matrices, which give rise to a stable case Fig.~\ref{fig:open07}, a neutral case Fig.~\ref{fig:open08}, and an unstable case
-Fig.~\ref{fig:open09}.
-
-
-
-\begin{figure}[p]
 \begin{center}
-\includegraphics[width=0.99\textwidth]{closedA08.eps}\\ 
-\includegraphics[width=0.99\textwidth]{closedB08.eps}
+\includegraphics[width=0.99\textwidth]{closed.png}
 \end{center}
-\caption{Stable case  where the current interventions are continued with $R=0.8$. 
-The upper plot is  an ensemble prediction of Hospitalized and accumulated Deaths.
-The pale colored
-lines are the prior realizations while the darker lines are the postrior realizations. The black dashed and solid lines are the
-enemble means for the prior and the postrior.  The lower plot shows the number of exposed and infectious persons in the different 
-age groups.  The thickest blue and green lines corresponds to the youngest age group (0--5 years old) while the second
-thickest lines denote the second age group from (6---12 years old).
-\label{fig:closed08}}
-\end{figure}
-
-\begin{figure}[p]
-\begin{center}
-\includegraphics[width=0.99\textwidth]{openA07.eps} \\
-\includegraphics[width=0.99\textwidth]{openB07.eps}
-\end{center}
-\caption{Stable case  where we open kinder gardens and schools for children aged 6--12 years old after Easter. 
-The $\bmR$ matrix from Tab.~\ref{tab:R} is used after Easter but with all 0.8 numbers set to 0.7.
-\label{fig:open07}}
-\end{figure}
-
-
-\begin{figure}[p]
-\begin{center}
-\includegraphics[width=0.99\textwidth]{openA08.eps} \\
-\includegraphics[width=0.99\textwidth]{openB08.eps} 
-\end{center}
-\caption{Neutral case where we open kinder gardens and schools for children aged 6--12 years old after Easter. 
-The $\bmR$ matrix from Tab.~\ref{tab:R} is used after Easter but with all 0.8 numbers are retained at 0.8.
-\label{fig:open08}}
-\end{figure}
-
-
-\begin{figure}[p]
-\begin{center}
-\includegraphics[width=0.99\textwidth]{openA09.eps} \\
-\includegraphics[width=0.99\textwidth]{openB09.eps} 
-\end{center}
-\caption{Unstable case where we open kinder gardens and schools for children aged 6--12 years old after Easter. 
-The $\bmR$ matrix from Tab.~\ref{tab:R} is used after Easter but with all 0.8 numbers set to 0.9.
-\label{fig:open09}}
-\end{figure}
-
-
 
 \newpage
-\section{Model description}
-We have added age compartments to the standard SEIR model. The susceptible, exposed and infected populations is modeled
-per age group, while after they get sick we gather them in common groups.
+\section{SEIR model with agecompartments}
 %
 \begin{equation}
 \begin{cases}
@@ -374,8 +312,8 @@ per age group, while after they get sick we gather them in common groups.
 \hpil
 \begin{cases}
 \bmQ_\rmm                     &  \hpil \bmR_\rmm  \\
-\bmQ_\rms    \hpil \bmQ_\rmh  &  \hpil \bmR_\rms  \\
-\bmQ_\rmf                     &  \hpil \bmD
+\bmQ_\rms    \hpil \bmH_\rms  &  \hpil \bmR_\rms  \\
+\bmQ_\rmf    \hpil \bmH_\rmf  &  \hpil \bmD
 \end{cases}
 \label{eq:}
 \end{equation}
@@ -388,11 +326,12 @@ The model equations are as follows:
 \Dp{\bmI_i}{t}    &=    \frac{1}{\Tinc}  \, \bmE_i          - \frac{1}{\Tinf}  \, \bmI_i                                     \label{eq:Ii} \\
 \Dp{\bmQ_\rmm}{t} &=    \sum_{i=1}^n\frac{p_\rmm^i}{\Tinf} \, \bmI_i          - (1/\Trecm)  \, \bmQ_\rmm         \label{eq:Sm} \\
 \Dp{\bmQ_\rms}{t} &=    \sum_{i=1}^n\frac{p_\rms^i}{\Tinf} \, \bmI_i          - (1/\Thosp)  \, \bmQ_\rms         \label{eq:Sh} \\
-\Dp{\bmQ_\rmf}{t} &=    \sum_{i=1}^n\frac{p_\rmf^i}{\Tinf} \, \bmI_i          - (1/\Tdeath) \, \bmQ_\rmf          \label{eq:Sdead} \\
-\Dp{\bmQ_\rmh}{t} &=    (1/\Thosp)     \, \bmQ_\rms     - (1/\Trecs)  \, \bmQ_\rmh         \label{eq:Shos} \\
+\Dp{\bmQ_\rmf}{t} &=    \sum_{i=1}^n\frac{p_\rmf^i}{\Tinf} \, \bmI_i          - (1/\Thosp)  \, \bmQ_\rmf          \label{eq:Sdead} \\
+\Dp{\bmH_\rms}{t} &=    (1/\Thosp)     \, \bmQ_\rms     - (1/\Trecs)  \, \bmH_\rms         \label{eq:Shos} \\
+\Dp{\bmH_\rmf}{t} &=    (1/\Thosp)     \, \bmQ_\rmf     - (1/\Tdeath) \, \bmH_\rmf         \label{eq:Fhos} \\
 \Dp{\bmR_\rmm }{t}&=    (1/\Trecm)     \, \bmQ_\rmm                                        \label{eq:Rm} \\
-\Dp{\bmR_\rms}{t} &=    (1/\Trecs)     \, \bmQ_\rmh                                        \label{eq:E} \\
-\Dp{\bmD     }{t} &=    (1/\Tdeath)    \, \bmQ_\rmf                                        \label{eq:E} 
+\Dp{\bmR_\rms}{t} &=    (1/\Trecs)     \, \bmH_\rms                                        \label{eq:E} \\
+\Dp{\bmD     }{t} &=    (1/\Tdeath)    \, \bmH_\rmf                                        \label{eq:E} 
 \end{align}
 
 
@@ -417,8 +356,8 @@ The model equations are as follows:
 \caption{
 The population numbers are obtained from SSB and are accurate. The total Norwegan population is 5367580.
 The P numbers indicate the fraction of sick people in an age group ending up with mild symptons, severe symptons (hospitalized),
-and fatal infection (hospitalized and then dead). With the current numbers, the average case fatality rate is 0.0090 and
-the average percentage of severe (hospitalized) cases is 0.0280.
+and fatal infection (hospitalized and then dead).
+\textbf{These numbers are currently defined in m\_pfactor.F90 but will later be read from a file.}
 \label{tab:age}}
 \end{table}
 %
@@ -449,6 +388,7 @@ This matrix was used after opening up children schools and kinder gardens. On th
 transmission of desease within the same age group. The off-diagonal terms are the transmissions between age groups.
 Here it is assumed that open kinder gardens and schools leads to ``normal'' transmission within these groups $R=3.8$.
 We also assume that there are increased transmission between parent groups and children.
+\textbf{These numbers are currently defined in m\_Rmatrix.F90 but will later be read from a file.}
 \label{tab:R}}
 \end{table}
 %
@@ -459,22 +399,19 @@ We also assume that there are increased transmission between parent groups and c
 \subsection{Model paramters}
 \begin{center}
 \small
-\begin{tabular}{llll}
+\begin{tabular}{lll}
 \hline
-$\Ttd   = 32.0                $&  $P(1 )$    &  Days to death                                       \\
-$N      = 5000000.0           $&  $P(2 )$    &  Initial population                                  \\
-$I_0    = 50.0                $&  $P(3 )$    &  Initial infectious (19 cases 1st march)             \\
-$R_0    = 2.2                 $&  $P(4 )$    &  Basic Reproduction Number                           \\
-$\Tinc  = 5.2                 $&  $P(5 )$    &  Incubation period (Tinc)                            \\
-$\Tinf  = 2.9                 $&  $P(6 )$    &  Duration patient is infectious (Tinf)               \\
-$\Trecm = 14.0 - \Tinf        $&  $P(7 )$    &  Recovery time mild cases (11.1)                     \\
-$\Trecs = 31.5 - \Tinf        $&  $P(8 )$    &  Recovery time severe cases Length of hospital stay  \\
-$\Thosp = 5.0                 $&  $P(9 )$    &  Time to hospitalization.                            \\
-$p_\rmf = 0.02                $&  $P(10)$    &  Case fatality rate                                  \\
-$p_\rms = 0.2                 $&  $P(11)$    &  Hospitalization rate \% for severe cases            \\
-$R(t)   = 0.8                 $&  $P(12)$    &  Basic Reproduction Number during intervention       \\
-$\Tint  = 30.0                $&  $P(13)$    &  Interventions start here (15th march)               \\
-$\Tdeath  = \Ttd   - \Tinf    $&             &                                                      \\
+$I_0    = 50.0                $&    Initial infectious                                  \\
+$R_0    = 5.0                 $&    Basic Reproduction Number                           \\
+$\Tinf  = 2.9                 $&    Infections time                                     \\
+$\Tinc  = 5.2                 $&    Incubation period                                   \\
+$\Trecm = 11.1                $&    Recovery time mild cases (11.1)                     \\
+$\Trecs = 15.0                $&    Recovery time severe cases Length of hospital stay  \\
+$\Thosp = 5.0                 $&    Time to hospitalization.                            \\
+$\Tdeath = 15.0               $&    Days to death                                       \\
+$p_\rmf = 0.006               $&    Case fatality rate                                  \\
+$p_\rms = 0.012               $&    Hospitalization rate \% for severe cases            \\
+$R(t)   = 0.63                $&    Basic Reproduction Number during intervention       \\
 \hline
 \end{tabular}
 \end{center}
@@ -484,7 +421,7 @@ $\Tdeath  = \Ttd   - \Tinf    $&             &                                  
 \begin{center}
 \begin{tabular}{ll}
 \hline
-Number of hospitelized & $N(\bmQ_\rmf + \bmQ_\rmh)$ \\
+Number of hospitelized & $N(\bmH_\rms + \bmH_\rmf)$ \\
 Number of recovered    & $N(\bmR_\rmm+\bmR_\rms)$ \\
 Number of deaths       & $N\bmD$ \\
 Number of exposed      & $N\sum \bmE_i$ \\
