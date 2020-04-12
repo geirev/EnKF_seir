@@ -8,6 +8,7 @@ real, save         :: pf(na)
 
 contains
 subroutine pfactors
+   use mod_params
    use mod_parameters
    implicit none
    real dead, seve
@@ -42,8 +43,8 @@ subroutine pfactors
 !   print '(a,f10.4)','dead ratio=',dead
 !   print '(a,f10.4)','seve ratio=',seve
    
-   pf(:)=(CFR/dead)*pf(:)
-   ps(:)=(P_SEVERE/seve)*ps(:)
+   pf(:)=(p%CFR/dead)*pf(:)
+   ps(:)=(p%p_sev/seve)*ps(:)
    pm(:)=1.0-ps(:)-pf(:)
    if (lprt) print '(a,11f12.4)','pm1: ',pm(:) 
    if (lprt) print '(a,11f12.4)','ps1: ',ps(:) 

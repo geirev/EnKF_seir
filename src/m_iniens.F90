@@ -1,21 +1,22 @@
 module m_iniens
 contains
-subroutine iniens(ens,enspar,nrens,nt,nrpar)
+subroutine iniens(ens,enspar,nrens,nt)
    use mod_dimensions
    use mod_states
+   use mod_params
+   use mod_parameters
    use m_agegroups
    implicit none
    integer, intent(in)   ::  nrens
    integer, intent(in)   ::  nt
-   integer, intent(in)   ::  nrpar
-   type(states), intent(out)  ::  ens(0:nt, 1:nrens)
-   real,    intent(inout)::  enspar(1:nrpar,1:nrens)
+   type(states), intent(out)  ::  ens(0:nt,nrens)
+   type(params), intent(in)   ::  enspar(nrens)
    integer j
    real I0   ! Initially infected
    
    print '(a)','Simple ensemble initialization'
    do j=1,nrens
-      I0=enspar(3,j)     
+      I0=enspar(j)%I0    
       ens(0,j)%S  = agegroup(1:na)    ! Susceptible na agegroups                 S_i
       ens(0,j)%E  = 4.0*I0/real(na)   ! Exposed     na agegroups                 E_i
       ens(0,j)%I  = I0/real(na)       ! Infected    na agegroups                 I_i
@@ -23,7 +24,7 @@ subroutine iniens(ens,enspar,nrens,nt,nrpar)
       ens(0,j)%Qs = 0.0               ! Sick (Severe at home)                    Q_s
       ens(0,j)%Qf = 0.0               ! Sick (Severe at hospital)                Q_h
       ens(0,j)%Hs = 0.0               ! Sick (Severe at hospital that will die)  Q_f
-!      ens(0,j)%Hf = 0.0               ! Sick (Fatal at hospital that will die)  H_f
+      ens(0,j)%Hf = 0.0               ! Sick (Fatal at hospital that will die)  H_f
       ens(0,j)%Rm = 0.0               ! Removed_mild   (recovered)               R_m
       ens(0,j)%Rs = 0.0               ! Removed_severe (recovered)               R_s
       ens(0,j)%D  = 0.0               ! Removed_fatal (dead)                     D

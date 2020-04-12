@@ -1,36 +1,34 @@
 module m_enkfprep
 contains
-subroutine enkfprep(ens,enspar,nrpar,nrens,nt)
+subroutine enkfprep(ens,enspar,nrens,nt)
    use mod_dimensions
    use mod_states
+   use mod_params
    use mod_parameters
    use m_enkfini
    use m_agegroups
    use m_pseudo1D
    use m_fixsample1D
    implicit none
-   integer, intent(in) :: nrpar
    integer, intent(in) :: nt
    integer, intent(in) :: nrens
    type(states), intent(in) :: ens(0:nt,nrens)
-   real,    intent(in) :: enspar(1:nrpar,nrens)
-   real avepar(nrpar)
+   type(params), intent(in) :: enspar(nrens)
+   type(params)  avepar
    real, allocatable :: obspertd(:,:)
    real, allocatable :: obsperth(:,:)
-   integer i,m
+   integer i,m,j
    logical, save :: lprt =.true.
-   character(len=9) parname(nrpar)
-   parname(:)=(/'    Tdead','        N','       I0','       R0','     Tinc','     Tinf','    Trecm',&
-               &'    Trecs','    Thosp','      CFR',' p_severe','       Rt'/)
  
    print *
    if (lprt) then
       print '(a)','Prior ensemble mean of parameters:'
-      do i=1,nrpar
-         avepar(i)=sum(enspar(i,:))/real(nrens)
+      avepar=0.0
+      do j=1,nrens
+         avepar=avepar+enspar(j)*(1.0/real(nrens))
       enddo
-      print '(100a10)',parname(:)
-      print '(100f10.3)',avepar(:)
+      print '(100a10)',parnames
+      print '(100f10.3)',avepar
       print *
       lprt=.false.
    endif

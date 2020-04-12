@@ -3,7 +3,6 @@ MODULES = \
 	m_enkfini.F90\
 	m_enkfpost.F90\
 	m_enkfprep.F90\
-	m_ens2mod.F90\
 	m_ensave.F90\
 	m_ensstd.F90\
 	m_getday.F90\
@@ -12,6 +11,7 @@ MODULES = \
 	mod_diag.F90\
 	mod_dimensions.F90\
 	mod_parameters.F90\
+	mod_params.F90\
 	mod_states.F90\
 	m_pfactors.F90\
 	m_random.F90\

@@ -1,9 +1,10 @@
 module m_tecplot
 contains
-subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
+subroutine tecplot(ens,enspar,nt,nrens,pri)
    use mod_dimensions
    use mod_states
    use mod_diag
+   use mod_params
    use mod_parameters
    use m_agegroups
    use m_ensave
@@ -12,10 +13,9 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
    implicit none
    integer, intent(in) :: nt
    integer, intent(in) :: nrens
-   integer, intent(in) :: nrpar
    integer, intent(in) :: pri
 
-   real, intent(in) :: enspar(nrpar,nrens)
+   type(params), intent(in) :: enspar(nrens)
 
    type(states), intent(in) :: ens(0:nt,nrens)
    type(states) ave(0:nt)
@@ -79,7 +79,7 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
    close(10)
 
    do j=1,nrens
-      do i=1,nt
+      do i=0,nt
          ensd(i,j)%S=sum(ens(i,j)%S(:))
          ensd(i,j)%E=sum(ens(i,j)%E(:))
          ensd(i,j)%I=sum(ens(i,j)%I(:))
@@ -144,7 +144,7 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
       write(10,'(a,i5,a,i5,a)')' ZONE T="Infected_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%I, stdd(i)%I, (N*ensd(i,j)%I,j=1,nrens)
+         write(10,'(2000g13.5)')t, aved(i)%I, stdd(i)%I, (ensd(i,j)%I,j=1,nrens)
       enddo
    close(10)
 
@@ -223,13 +223,10 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
 ! Parameters   
    open(10,file='par'//tag//'.dat')
       write(10,*)'TITLE = "Parameters_'//tag//'"'
-      write(10,*)'VARIABLES = "iens" "pri" &
-                           &"Time_to_death" "N" "I0" "R0" "D_incbation" "D_infectious" &
-                           &"D_recovery_mild" "D_recovery_severe" "D_hospital_lag" "CFR" &
-                           &"p_severe" "Rt"' 
+      write(10,*)'VARIABLES = "iens" "pri" ',parnames
       write(10,'(a,i5,a,i5,a)')' ZONE T="Parameters_'//tag//'"  F=POINT, I=',nrens,', J=1, K=1'
       do j=1,nrens
-         write(10,'(2i5,200f13.4)')j,pri,enspar(1:nrpar,j)
+         write(10,'(2i5,200f13.6)')j,pri,enspar(j)
       enddo
    close(10)
   

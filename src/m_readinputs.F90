@@ -1,12 +1,11 @@
 module m_readinputs
 contains
-subroutine readinputs(parstd,nrpar,nrens,nt)
+subroutine readinputs(nrens,nt)
+   use mod_params
    use mod_parameters 
    use m_enkfini 
    use m_getday
    implicit none
-   integer, intent(in)  :: nrpar
-   real,    intent(out) :: parstd(nrpar)
    integer, intent(out) :: nrens
    integer, intent(out) :: nt
    logical ex
@@ -36,7 +35,6 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)lmeascorr           ;    print '(a,l1)',       'Activate correated obs err :',lmeascorr
       read(10,*)rh                  ;    print '(a,f10.4)',    'Obs error correation       :',rh
       read(10,*)truncation          ;    print '(a,f10.4)',    'EnKF SVD truncation (0.99) :',truncation
-      parstd(2)=0.0
 
       read(10,'(a)')ca      
       if (ca /= '#2') then
@@ -70,17 +68,17 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       endif
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-      read(10,*)I0       , parstd(3);    print '(a,2f10.3)',   'Initial infected I0      and std dev :',I0       ,parstd(3)
-      read(10,*)R0       , parstd(4);    print '(a,2f10.3)',   'Initial R                and std dev :',R0       ,parstd(4)
-      read(10,*)Tinc     , parstd(5);    print '(a,2f10.3)',   'Incubation time          and std dev :',Tinc     ,parstd(5)
-      read(10,*)Tinf     , parstd(6);    print '(a,2f10.3)',   'Infection time           and std dev :',Tinf     ,parstd(6)
-      read(10,*)Trecm    , parstd(7);    print '(a,2f10.3)',   'Recovery time mild       and std dev :',Trecm    ,parstd(7)
-      read(10,*)Trecs    , parstd(8);    print '(a,2f10.3)',   'Recovery time severe     and std dev :',Trecs    ,parstd(8)
-      read(10,*)Thosp    , parstd(9);    print '(a,2f10.3)',   'Hospitalization time     and std dev :',Thosp    ,parstd(9)
-      read(10,*)Tdead    , parstd(1);    print '(a,2f10.3)',   'Time to death            and std dev :',Tdead    ,parstd(1)
-      read(10,*)CFR      , parstd(10);   print '(a,2f10.3)',   'Critical fatality ratio  and std dev :',CFR      ,parstd(10)
-      read(10,*)p_severe , parstd(11);   print '(a,2f10.3)',   'Fraction of severe cases and std dev :',p_severe ,parstd(11)
-      read(10,*)Rt       , parstd(12);   print '(a,2f10.3)',   'R during interventions   and std dev :',Rt       ,parstd(12)
+      read(10,*)p%I0   , parstd%I0   ; print '(a,2f10.3)', 'Initial infected I0      and std dev :',p%I0     ,parstd%I0   
+      read(10,*)p%R0   , parstd%R0   ; print '(a,2f10.3)', 'Initial R                and std dev :',p%R0     ,parstd%R0   
+      read(10,*)p%Tinc , parstd%Tinc ; print '(a,2f10.3)', 'Incubation time          and std dev :',p%Tinc   ,parstd%Tinc 
+      read(10,*)p%Tinf , parstd%Tinf ; print '(a,2f10.3)', 'Infection time           and std dev :',p%Tinf   ,parstd%Tinf 
+      read(10,*)p%Trecm, parstd%Trecm; print '(a,2f10.3)', 'Recovery time mild       and std dev :',p%Trecm  ,parstd%Trecm
+      read(10,*)p%Trecs, parstd%Trecs; print '(a,2f10.3)', 'Recovery time severe     and std dev :',p%Trecs  ,parstd%Trecs
+      read(10,*)p%Thosp, parstd%Thosp; print '(a,2f10.3)', 'Hospitalization time     and std dev :',p%Thosp  ,parstd%Thosp
+      read(10,*)p%Tdead, parstd%Tdead; print '(a,2f10.3)', 'Time to death            and std dev :',p%Tdead  ,parstd%Tdead
+      read(10,*)p%CFR  , parstd%CFR  ; print '(a,2f10.3)', 'Critical fatality ratio  and std dev :',p%CFR    ,parstd%CFR  
+      read(10,*)p%p_sev, parstd%p_sev; print '(a,2f10.3)', 'Fraction of severe cases and std dev :',p%p_sev  ,parstd%p_sev
+      read(10,*)p%Rt   , parstd%Rt   ; print '(a,2f10.3)', 'R during interventions   and std dev :',p%Rt     ,parstd%Rt   
 
       read(10,'(a)')ca      
       if (ca /= '#4') then

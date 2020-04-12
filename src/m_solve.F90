@@ -1,15 +1,18 @@
 module m_solve
 contains
-subroutine solve(ens,nrens,nt,j)
+subroutine solve(ens,enspar,nrens,nt,j)
    use mod_dimensions
    use mod_states
+   use mod_params
    use mod_parameters
+   use m_pfactors
    implicit none
    external f,jac
    integer, intent(in) :: nrens
    integer, intent(in) :: nt
    integer, intent(in) :: j
    type(states), intent(inout) :: ens(0:nt,nrens)
+   type(params), intent(inout) :: enspar(nrens)
    type(states) y
 
    real t,dt,tout
@@ -35,7 +38,10 @@ subroutine solve(ens,nrens,nt,j)
    allocate(rwork(lrw))
    allocate(iwork(liw))
 
+   p=enspar(j)
    y=ens(0,j) 
+   call pfactors 
+
    istate=1
    do i=1,nt 
       t=0+real(i)*dt
