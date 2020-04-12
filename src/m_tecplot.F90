@@ -83,7 +83,7 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
          ensd(i,j)%S=sum(ens(i,j)%S(:))
          ensd(i,j)%E=sum(ens(i,j)%E(:))
          ensd(i,j)%I=sum(ens(i,j)%I(:))
-         ensd(i,j)%H=ens(i,j)%Hs + ens(i,j)%Qs  ! later %Hf
+         ensd(i,j)%H=ens(i,j)%Hs + ens(i,j)%Qf  ! later %Hf
          ensd(i,j)%R=ens(i,j)%Rm + ens(i,j)%Rs
          ensd(i,j)%D=ens(i,j)%D
          ensd(i,j)%C= ensd(i,j)%E  &
