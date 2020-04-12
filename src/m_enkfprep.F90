@@ -77,17 +77,15 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt)
          D(m,:) = D(m,:)-N*ens(iobs(m),:)%D
          S(m,:) = N*( ens(iobs(m),:)%D - sum(ens(iobs(m),:)%D )*(1.0/real(nrens)) )
       case('h')
-!         D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Hf)
-         D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Qf)
+         D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Hf)
          S(m,:) = N*( ens(iobs(m),:)%Hs - sum(ens(iobs(m),:)%Hs)*(1.0/real(nrens)) &
-                &    +ens(iobs(m),:)%Qf - sum(ens(iobs(m),:)%Qf)*(1.0/real(nrens)) )
-!                &    +ens(iobs(m),:)%Hf - sum(ens(iobs(m),:)%Hf)*(1.0/real(nrens)) )
+                &    +ens(iobs(m),:)%Hf - sum(ens(iobs(m),:)%Hf)*(1.0/real(nrens)) )
       case default
          stop 'Measurement type not found'
       end select
-      print '(a,f12.2)','N=',N
-      print '(a,i3,10f10.2)','D',m,D(m,1:10)
-      print '(a,i3,10f10.2)','S',m,S(m,1:10)
+!      print '(a,f12.2)','N=',N
+!      print '(a,i3,10f10.2)','D',m,D(m,1:10)
+!      print '(a,i3,10f10.2)','S',m,S(m,1:10)
       innovation(m)=sum(D(m,:))/real(nrens)
    enddo
 

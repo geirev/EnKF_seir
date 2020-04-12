@@ -50,40 +50,40 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
    enddo
 
 ! Big tecplot dump
-!   open(10,file='bigdump'//tag//'.dat')
-!      write(10,*)'TITLE = "Bigdump"'
-!      write(10,*)'VARIABLES = "i" "time" "S1" "S2" "S3" "S4" "S5" "S6" "S7" "S8" "S9" "S10" "S11" &
-!                                    &"E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9" "E10" "E11" &
-!                                    &"I1" "I2" "I3" "I4" "I5" "I6" "I7" "I8" "I9" "I10" "I11" &
-!                                    &"Qm" "Qs" "Qh" "Qf" "Rm" "Rs" "D"'
-!      write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
-!      do i=0,nt
-!         t=0+real(i)*dt
-!         write(10,'(i5,f10.2,50g13.5)')i,t,N*ave(:,i)
-!      enddo
-! 
-!      write(10,'(a,i5,a,i5,a)')' ZONE T="std"  F=POINT, I=',nt+1,', J=1, K=1'
-!      do i=0,nt
-!         t=0+real(i)*dt
-!         write(10,'(i5,f10.2,50g13.5)')i,t,N*std(:,i)
-!      enddo
-! 
+   open(10,file='bigdump'//tag//'.dat')
+      write(10,*)'TITLE = "Bigdump"'
+      write(10,*)'VARIABLES = "i" "time" "S1" "S2" "S3" "S4" "S5" "S6" "S7" "S8" "S9" "S10" "S11" &
+                                    &"E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9" "E10" "E11" &
+                                    &"I1" "I2" "I3" "I4" "I5" "I6" "I7" "I8" "I9" "I10" "I11" &
+                                    &"Qm" "Qs" "Qh" "Qf" "Rm" "Rs" "D"'
+      write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
+      do i=0,nt
+         t=0+real(i)*dt
+         write(10,'(i5,f10.2,50g13.5)')i,t,N*ave(i)
+      enddo
+ 
+      write(10,'(a,i5,a,i5,a)')' ZONE T="std"  F=POINT, I=',nt+1,', J=1, K=1'
+      do i=0,nt
+         t=0+real(i)*dt
+         write(10,'(i5,f10.2,50g13.5)')i,t,N*std(i)
+      enddo
+ 
 !      do j=1,min(nrens,100)
 !         write(tag3,'(i3.3)')j
 !         write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
 !         do i=0,nt
 !            t=0+real(i)*dt
-!            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(:,i,j)
+!            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(i,j)
 !         enddo
 !      enddo
-!   close(10)
+   close(10)
 
    do j=1,nrens
       do i=1,nt
          ensd(i,j)%S=sum(ens(i,j)%S(:))
          ensd(i,j)%E=sum(ens(i,j)%E(:))
          ensd(i,j)%I=sum(ens(i,j)%I(:))
-         ensd(i,j)%H=ens(i,j)%Hs + ens(i,j)%Qf  ! later %Hf
+         ensd(i,j)%H=ens(i,j)%Hs + ens(i,j)%Hf
          ensd(i,j)%R=ens(i,j)%Rm + ens(i,j)%Rs
          ensd(i,j)%D=ens(i,j)%D
          ensd(i,j)%C= ensd(i,j)%E  &
@@ -92,10 +92,10 @@ subroutine tecplot(ens,enspar,nt,nrens,nrpar,pri)
                      + ens(i,j)%Qs &
                      + ens(i,j)%Qf &
                      + ens(i,j)%Hs &
+                     + ens(i,j)%Hf &
                      + ens(i,j)%Rm &
                      + ens(i,j)%Rs &
                      + ens(i,j)%D 
-!                     + ens(i,j)%Hf &
          ensd(i,j)=N*ensd(i,j)
       enddo
    enddo

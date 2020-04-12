@@ -7,7 +7,7 @@
  16                       ! Number of ESMDA steps, (1 means standard ES update)
  0.05                     ! Relative measurement error in fraction of observed value
  1.0                      ! Minimum  measurement error absolute value d_j = d + min(MAXERR,max(RELERR*d,MINERR)*eps
- 6.0                      ! Maximum  measurement error
+ 4.0                      ! Maximum  measurement error
  T                        ! Correlated measurement errors
  5.0                      ! Decorrelation half length in time of measurement errors
  0.99                     ! EnKF SVD truncation (around 0.99)
@@ -16,17 +16,17 @@
  15/03-2020               ! Start date of first  phase of intervations
  20/04-2021               ! Start date of second phase of intervations
 #3 First guess model parameters and their std dev -----------------------------------------------------
- 28.0         1.0         ! 1  T2death   : Days to death                                           
- 51.0         4.0         ! 3  I0        : Initial infectious used to initialize the model
- 6.0          1.0         ! 4  R0        : Basic reproduction number with no interventions
- 5.5          0.5         ! 5  Tinc      : Incubation period 
- 3.8          0.5         ! 6  Tinf      : Duration patient is infectious
- 14.0         0.0         ! 7  Trecm     : Recovery time mild cases
- 6.8          1.0         ! 8  Trecs     : Recovery time severe cases 31.5
- 5.5          1.0         ! 9  Thosp     : Hospitalization time
- 0.004        0.0006      ! 10 CFR       : Case fatality rate %
- 0.014        0.0015      ! 11 P_severe  : Hospitalization rate % for severe cases
- 0.622        0.020       ! 12 Rt        : Basic Reproduction Number during intervention
+ 61.0         4.0         !  I0        : Initial infectious used to initialize the model
+ 6.5          1.0         !  R0        : Basic reproduction number with no interventions
+ 5.5          0.5         !  Tinc      : Incubation period 
+ 3.8          0.5         !  Tinf      : Infection time                 |
+ 14.0         0.0         !  Trecm     : Recovery time mild cases
+ 4.0          1.0         !  Trecs     : Recovery time severe cases 
+ 10.0         1.0         !  Thosp     : Hospitalization time
+ 10.0         1.0         !  Tdead     : Days to death                                           
+ 0.004        0.0006      !  CFR       : Case fatality rate %
+ 0.014        0.0015      !  P_severe  : Hospitalization rate % for severe cases
+ 0.622        0.020       !  Rt        : Basic Reproduction Number during intervention
 #4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters
  1.0                      ! Maximum value of Rt

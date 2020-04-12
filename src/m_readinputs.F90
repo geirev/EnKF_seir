@@ -70,7 +70,6 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       endif
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-      read(10,*)Tdead    , parstd(1);    print '(a,2f10.3)',   'Time to death            and std dev :',Tdead    ,parstd(1)
       read(10,*)I0       , parstd(3);    print '(a,2f10.3)',   'Initial infected I0      and std dev :',I0       ,parstd(3)
       read(10,*)R0       , parstd(4);    print '(a,2f10.3)',   'Initial R                and std dev :',R0       ,parstd(4)
       read(10,*)Tinc     , parstd(5);    print '(a,2f10.3)',   'Incubation time          and std dev :',Tinc     ,parstd(5)
@@ -78,10 +77,10 @@ subroutine readinputs(parstd,nrpar,nrens,nt)
       read(10,*)Trecm    , parstd(7);    print '(a,2f10.3)',   'Recovery time mild       and std dev :',Trecm    ,parstd(7)
       read(10,*)Trecs    , parstd(8);    print '(a,2f10.3)',   'Recovery time severe     and std dev :',Trecs    ,parstd(8)
       read(10,*)Thosp    , parstd(9);    print '(a,2f10.3)',   'Hospitalization time     and std dev :',Thosp    ,parstd(9)
+      read(10,*)Tdead    , parstd(1);    print '(a,2f10.3)',   'Time to death            and std dev :',Tdead    ,parstd(1)
       read(10,*)CFR      , parstd(10);   print '(a,2f10.3)',   'Critical fatality ratio  and std dev :',CFR      ,parstd(10)
       read(10,*)p_severe , parstd(11);   print '(a,2f10.3)',   'Fraction of severe cases and std dev :',p_severe ,parstd(11)
       read(10,*)Rt       , parstd(12);   print '(a,2f10.3)',   'R during interventions   and std dev :',Rt       ,parstd(12)
-!      read(10,*)Tinterv  , parstd(13);   print '(a,2f10.3)',   'Intervention time        and std dev :',Tinterv  ,parstd(13)
 
       read(10,'(a)')ca      
       if (ca /= '#4') then

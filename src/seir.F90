@@ -113,13 +113,14 @@ subroutine f(neqq, t, y, ydot)
    ydot%I  =    (1.0/Tinc ) * y%E   - (1.0/Tinf) * y%I
    ydot%Qm =  - (1.0/Trecm) * y%Qm  + (1.0/Tinf) * dot_product(pm,y%I)
    ydot%Qs =  - (1.0/Thosp) * y%Qs  + (1.0/Tinf) * dot_product(ps,y%I)
-   ydot%Qf =  - (1.0/Tdead) * y%Qf  + (1.0/Tinf) * dot_product(pf,y%I)
+   ydot%Qf =  - (1.0/Thosp) * y%Qf  + (1.0/Tinf) * dot_product(pf,y%I)
    ydot%Hs =    (1.0/Thosp) * y%Qs  - (1.0/Trecs) * y%Hs
+   ydot%Hf =    (1.0/Thosp) * y%Qf  - (1.0/Tdead) * y%Hf
    ydot%Rm =    (1.0/Trecm) * y%Qm
    ydot%Rs =    (1.0/Trecs) * y%Hs
-   ydot%D  =    (1.0/Tdead) * y%Qf
+   ydot%D  =    (1.0/Tdead) * y%Hf
 
-   !print *,'sum ydot',sum(ydot)
+!   print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)
 
 end subroutine
  
