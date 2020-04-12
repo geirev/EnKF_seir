@@ -16,7 +16,7 @@
  15/03-2020               ! Start date of first  phase of intervations
  20/04-2021               ! Start date of second phase of intervations
 #3 First guess model parameters and their std dev -----------------------------------------------------
- 32.0         1.0         ! 1  T2death   : Days to death                                           
+ 28.0         1.0         ! 1  T2death   : Days to death                                           
  51.0         4.0         ! 3  I0        : Initial infectious used to initialize the model
  6.0          1.0         ! 4  R0        : Basic reproduction number with no interventions
  5.5          0.5         ! 5  Tinc      : Incubation period 
