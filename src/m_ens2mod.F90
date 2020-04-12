@@ -1,16 +1,15 @@
 module m_ens2mod
 contains
-subroutine ens2mod(nrpar, nrens, neq, enspar , j)
+subroutine ens2mod(nrpar, nrens, enspar , j)
 ! sets the local model parameters used in the function for the ode solver
    use mod_parameters
    implicit none
    integer, intent(in) :: nrpar
    integer, intent(in) :: nrens
-   integer, intent(in) :: neq
    integer, intent(in) :: j
-   real,    intent(in) :: enspar(nrpar+neq,nrens)
+   real,    intent(in) :: enspar(nrpar,nrens)
 
-   T2death           = enspar(1,j)    ! Days to death
+   Tdead             = enspar(1,j)    ! Days to death
    I0                = enspar(3,j)    ! Initial infectious
    R0                = enspar(4,j)    ! Basic Reproduction Number
    Tinc              = enspar(5,j)    ! Incubation period (Tinc)

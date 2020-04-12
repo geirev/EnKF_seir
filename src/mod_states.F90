@@ -41,8 +41,28 @@ module mod_states
       module procedure sqrt_states
    end interface
 
+   interface sum
+      module procedure sum_states
+   end interface
+
 
 contains
+
+   function sum_states(A)
+      real sum_states
+      type(states), intent(in) :: A
+      sum_states = sum(A%S) &
+                 + sum(A%E) &
+                 + sum(A%I) &
+                 + A%Qm     &
+                 + A%Qs     &
+                 + A%Qf     &
+                 + A%Hs     &
+                 + A%Rm     &
+                 + A%Rs     &
+                 + A%D 
+!                + A%Hf     &
+   end function sum_states
 
    function sqrt_states(A)
       type(states) sqrt_states

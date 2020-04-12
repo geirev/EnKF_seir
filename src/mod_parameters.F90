@@ -1,5 +1,4 @@
 module mod_parameters
-   real :: T2death
    real :: N
    real :: I0                
    real :: R0                

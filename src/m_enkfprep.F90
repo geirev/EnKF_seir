@@ -2,6 +2,7 @@ module m_enkfprep
 contains
 subroutine enkfprep(ens,enspar,nrpar,nrens,nt)
    use mod_dimensions
+   use mod_states
    use mod_parameters
    use m_enkfini
    use m_agegroups
@@ -11,15 +12,15 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt)
    integer, intent(in) :: nrpar
    integer, intent(in) :: nt
    integer, intent(in) :: nrens
-   real,    intent(in) :: ens(0:neq-1,0:nt,nrens)
-   real,    intent(in) :: enspar(1:nrpar+neq,nrens)
+   type(states), intent(in) :: ens(0:nt,nrens)
+   real,    intent(in) :: enspar(1:nrpar,nrens)
    real avepar(nrpar)
    real, allocatable :: obspertd(:,:)
    real, allocatable :: obsperth(:,:)
    integer i,m
    logical, save :: lprt =.true.
    character(len=9) parname(nrpar)
-   parname(:)=(/'  T2death','        N','       I0','       R0','     Tinc','     Tinf','    Trecm',&
+   parname(:)=(/'    Tdead','        N','       I0','       R0','     Tinc','     Tinf','    Trecm',&
                &'    Trecs','    Thosp','      CFR',' p_severe','       Rt'/)
  
    print *
@@ -73,17 +74,23 @@ subroutine enkfprep(ens,enspar,nrpar,nrens,nt)
    do m=1,nrobs
       select case (cobs(m))
       case('d')
-         D(m,:) = D(m,:)-N*ens(3*na+6,iobs(m),:)
-         S(m,:) = N*( ens(3*na+6,iobs(m),:) - sum(ens(3*na+6,iobs(m),:))/real(nrens) )
+         D(m,:) = D(m,:)-N*ens(iobs(m),:)%D
+         S(m,:) = N*( ens(iobs(m),:)%D - sum(ens(iobs(m),:)%D )*(1.0/real(nrens)) )
       case('h')
-         D(m,:) = D(m,:)-N*(ens(3*na+2,iobs(m),:)+ens(3*na+3,iobs(m),:))
-         S(m,:) = N*( ens(3*na+2,iobs(m),:) - sum(ens(3*na+2,iobs(m),:))/real(nrens) &
-                &    +ens(3*na+3,iobs(m),:) - sum(ens(3*na+3,iobs(m),:))/real(nrens) )
+!         D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Hf)
+         D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Qf)
+         S(m,:) = N*( ens(iobs(m),:)%Hs - sum(ens(iobs(m),:)%Hs)*(1.0/real(nrens)) &
+                &    +ens(iobs(m),:)%Qf - sum(ens(iobs(m),:)%Qf)*(1.0/real(nrens)) )
+!                &    +ens(iobs(m),:)%Hf - sum(ens(iobs(m),:)%Hf)*(1.0/real(nrens)) )
       case default
          stop 'Measurement type not found'
       end select
+      print '(a,f12.2)','N=',N
+      print '(a,i3,10f10.2)','D',m,D(m,1:10)
+      print '(a,i3,10f10.2)','S',m,S(m,1:10)
       innovation(m)=sum(D(m,:))/real(nrens)
    enddo
+
 
 end subroutine
 end module

@@ -1,7 +1,8 @@
 program seir
+   use mod_dimensions
+   use mod_states
    use mod_parameters
    use m_ens2mod
-   use m_mod2ens
    use m_tecplot
    use m_random
    use m_agegroups
@@ -12,7 +13,7 @@ program seir
    use m_enkfpost
    use m_solve
    use m_readinputs
-   use m_inipar
+   use m_inienspar
    use m_iniens
 
    implicit none
@@ -23,29 +24,29 @@ program seir
    integer i,k,j,m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   real, allocatable :: ens(:,:,:)             ! Storage of the ensemble of solutions for printing
+   type(states), allocatable :: ens(:,:)       ! Storage of the ensemble of solutions for printing
    real, allocatable :: enspar(:,:)            ! Ensemble of state variables ( parameters + initial conditions)
    real parstd(nrpar)                          ! Standard deviations of parameters
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initialization 
    call readinputs(parstd,nrpar,nrens,nt)      ! Reads infile.in
-   allocate( ens(0:neq-1,0:nt,nrens)   )       ! Allocate ensemble for the model solutions
-   allocate( enspar(1:nrpar+neq,nrens) )       ! Allocate ensemble of model parameters
+   allocate( ens(0:nt,nrens)   )               ! Allocate ensemble for the model solutions
+   allocate( enspar(1:nrpar,nrens) )       ! Allocate ensemble of model parameters
    call agegroups                              ! Define agegroups and population numbers
    call Rmatrix                                ! Define R infection rates between agegroups used in phase 3
    call pfactors                               ! Define fraction of mild, severe, or fatal, for each agegroup
    call enkfini(nrens,nt,time)                 ! Reading data from corona.dat
-   call inipar(enspar,parstd,nrpar,nrens,neq)  ! Initialize ensemble of parameters
-   call iniens(ens,enspar,nrens,nt,nrpar)  ! Initialize ensemble of models
+   call inienspar(enspar,parstd,nrpar,nrens)   ! Initialize ensemble of parameters
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    print '(a)','Computing prior ensemble prediction'
+   call iniens(ens,enspar,nrens,nt,nrpar)      ! Initialize ensemble of models
    do j=1,nrens
-      call ens2mod(nrpar,nrens,neq,enspar,j)   ! copy ensemble member j to model parameters
+      call ens2mod(nrpar,nrens,enspar,j)   ! copy ensemble member j to model parameters
       call pfactors                            ! copy member j of pfactors to model 
-      call solve(ens,neq,nrens,nt,j)           ! solve ODEs for member j
+      call solve(ens,nrens,nt,j)               ! solve ODEs for member j
    enddo
    print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,nt,nrens,nrpar,0) ! Dump prior solution to files
@@ -58,15 +59,16 @@ program seir
       print '(a,2I3)','ESMDA step:',i,nesmda
 ! Analysis step
       call enkfprep(ens,enspar,nrpar,nrens,nt) ! Compute S and D matrices
-      call analysis(enspar, R, E, S, D, innovation, nrpar+neq, nrens, nrobs, .true., truncation, mode_analysis, &
+      call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
                     lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
-      call enkfpost(ens,enspar,nrpar,nrens,nt,neq) ! Check parameters
+      call enkfpost(ens,enspar,nrpar,nrens,nt) ! Check parameters
   
 ! Posterior ensemble prediction
+      call iniens(ens,enspar,nrens,nt,nrpar)  ! Initialize ensemble of models from updated parameters
       do j=1,nrens
-         call ens2mod(nrpar, nrens, neq, enspar , j)
+         call ens2mod(nrpar, nrens, enspar , j)
          call pfactors 
-         call solve(ens,neq,nrens,nt,j)
+         call solve(ens,nrens,nt,j)
       enddo
    print '(a)','Done..'
    enddo
@@ -103,16 +105,6 @@ subroutine f(neqq, t, y, ydot)
       R=Rmat
    endif
 
-!   S_i        = y(0    : na-1   ) ! Susectable
-!   E_i        = y(na   : 2*na-1 ) ! Exposed
-!   I_i        = y(2*na : 3*na-1 ) ! Infected
-!   Q_m        = y(3*na) ! Recovering (Mild)
-!   Q_s        = y(3*na+1) ! Recovering (Severe at home)
-!   Q_h        = y(3*na+2) ! Recovering (Severe in hospital)
-!   Q_f        = y(3*na+3) ! fatally sick to die
-!   R_m        = y(3*na+4) ! Recovered
-!   R_s        = y(3*na+5) ! Recovered 
-!   D          = y(3*na+6) ! Dead
    
    ydot=0.0
 
@@ -127,7 +119,7 @@ subroutine f(neqq, t, y, ydot)
    ydot%Rs =    (1.0/Trecs) * y%Hs
    ydot%D  =    (1.0/Tdead) * y%Qf
 
-   !print *,'sumydot',sum(ydot(0:neq-1))
+   !print *,'sum ydot',sum(ydot)
 
 end subroutine
  

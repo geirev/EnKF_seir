@@ -80,7 +80,7 @@ subroutine enkfini(nrens,nt,time)
    allocate(iobs(nrobs))
    allocate(cobs(nrobs))
    m=0
-   dt= time/real(nt)                     ! Timestep of outputs
+   dt= time/real(nt-1)                     ! Timestep of outputs
 
    do i=1,nrlines
       read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
@@ -120,11 +120,11 @@ subroutine enkfini(nrens,nt,time)
    allocate(R(nrobs,nrobs))
 
 ! For printing perturbed observations
+   call random(E,nrobs*nrens)
    do m=1,nrobs
       R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
       E(m,:)=sqrt(R(m,m))*E(m,:)          
       Dprt(m,:)=dobs(m)+E(m,:)
    enddo
-
 end subroutine
 end module
