@@ -46,8 +46,10 @@ program seir
    enddo
    print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,nt,nrens,0) ! Dump prior solution to files
+   print *,'A'
    if (.not.lenkf) stop                        ! If not doing assimilation stop here
 
+   print *,'B'
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! ESMDA update
@@ -74,7 +76,7 @@ program seir
 
 end program
 
-subroutine f(neqq, t, y, ydot)
+subroutine f(neq, t, y, ydot)
    use mod_params
    use mod_parameters
    use m_agegroups
@@ -85,12 +87,12 @@ subroutine f(neqq, t, y, ydot)
    use mod_states
    implicit none
    integer i,k,ii,kk
-   integer neqq
+   integer neq
    real t
    type(states) y
    type(states) ydot
 
-   real R(0:na-1,0:na-1)
+   real R(na,na)
 
    if (t <= Tinterv) then
       R=p%R0
@@ -99,10 +101,9 @@ subroutine f(neqq, t, y, ydot)
    elseif (t > Tinterv2) then
       R=Rmat
    endif
-
    
 
-   ydot%S  =                        - (1.0/p%Tinf) * matmul(R,y%I) * y%S
+   ydot%S  =                          - (1.0/p%Tinf) * matmul(R,y%I) * y%S
    ydot%E  =  - (1.0/p%Tinc ) * y%E   + (1.0/p%Tinf) * matmul(R,y%I) * y%S
    ydot%I  =    (1.0/p%Tinc ) * y%E   - (1.0/p%Tinf) * y%I
    ydot%Qm =  - (1.0/p%Trecm) * y%Qm  + (1.0/p%Tinf) * dot_product(pm,y%I)
@@ -119,9 +120,18 @@ subroutine f(neqq, t, y, ydot)
 end subroutine
  
 subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
+   use mod_params
    use mod_parameters
+   use m_agegroups
+   use m_Rmatrix
+   use m_pfactors
+   use m_random
+   use mod_dimensions
+   use mod_states
    implicit none
    integer neq, ml, mu, nrowpd
-   real t, y(0:neq-1), pd(0:neq-1,0:neq-1)
+   type(states) y
+   real pd(1,1)
+   real t
 
 end subroutine

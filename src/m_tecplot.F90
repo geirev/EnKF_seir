@@ -29,6 +29,7 @@ subroutine tecplot(ens,enspar,nt,nrens,pri)
    real t,dt
    character(len=1) tag
    character(len=3) tag3
+CHARACTER(len=30) fm
 
    write(tag,'(i1.1)')pri
    dt= time/real(nt-1)
@@ -50,12 +51,14 @@ subroutine tecplot(ens,enspar,nt,nrens,pri)
    enddo
 
 ! Big tecplot dump
+   write(fm,'(a,i2.2,a)')'(a,3(',na,'(a,i2.2,a)),a)'   
    open(10,file='bigdump'//tag//'.dat')
       write(10,*)'TITLE = "Bigdump"'
-      write(10,*)'VARIABLES = "i" "time" "S1" "S2" "S3" "S4" "S5" "S6" "S7" "S8" "S9" "S10" "S11" &
-                                    &"E1" "E2" "E3" "E4" "E5" "E6" "E7" "E8" "E9" "E10" "E11" &
-                                    &"I1" "I2" "I3" "I4" "I5" "I6" "I7" "I8" "I9" "I10" "I11" &
-                                    &"Qm" "Qs" "Qh" "Qf" "Rm" "Rs" "D"'
+      write(10,fm)'VARIABLES = "i" "time" ', &
+                          & ('"S',i,'" ',i=1,na),  &
+                          & ('"E',i,'" ',i=1,na),  &
+                          & ('"I',i,'" ',i=1,na),  &
+                          &' "Qm" "Qs" "Qf" "Hs" "Hf" "Rm" "Rs" "D"'
       write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -68,14 +71,14 @@ subroutine tecplot(ens,enspar,nt,nrens,pri)
          write(10,'(i5,f10.2,50g13.5)')i,t,N*std(i)
       enddo
  
-!      do j=1,min(nrens,100)
-!         write(tag3,'(i3.3)')j
-!         write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
-!         do i=0,nt
-!            t=0+real(i)*dt
-!            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(i,j)
-!         enddo
-!      enddo
+      do j=1,min(nrens,100)
+         write(tag3,'(i3.3)')j
+         write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
+         do i=0,nt
+            t=0+real(i)*dt
+            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(i,j)
+         enddo
+      enddo
    close(10)
 
    do j=1,nrens

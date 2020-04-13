@@ -5,6 +5,7 @@ Runs
 run0/*
 run/*
 !run/infile.in
-!run/corona.dat
+!run/corona.in
 !run/README
+!run/RELEASE_NOTES
 

@@ -27,6 +27,7 @@ subroutine solve(ens,enspar,nrens,nt,j)
    integer :: mf=10
    integer lrw,liw
    integer i
+   integer :: neq=3*na+8
 
    real,    allocatable  :: rwork(:) 
    integer, allocatable  :: iwork(:)  
