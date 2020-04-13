@@ -47,8 +47,8 @@ subroutine enkfini(nrens,nt,time)
 !  Observations
    inquire(file='corona.in',exist=ex)
    if (.not.ex) then
-      print '(a)','For EnKF, you must supply the fole corona.in (example in src dir)'
-      print '(a)','Running prior ensemble prediction'
+      print '(a)','WARNING: For EnKF, you must supply the file corona.in'
+      print '(a)','WARNING: Running only prior ensemble prediction'
       lenkf=.false.
       return
    endif

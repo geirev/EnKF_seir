@@ -7,3 +7,4 @@ run/*
 !run/infile.in
 !run/corona.in
 !run/README
+!run/RELEASE_NOTES

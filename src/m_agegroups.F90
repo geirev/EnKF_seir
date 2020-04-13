@@ -269,12 +269,12 @@ subroutine agegroups
 
 
 
-!   do i=1,na
-!      agegroup(i)=sum(ages_male(ia(i)+1:ib(i)+1))    + sum(ages_female(ia(i)+1:ib(i)+1))
-!      print '(a,i2,a,a,f9.0)','Population in agegroup: ',i,' agerange: ', agerange(i),agegroup(i)
-!   enddo
-!   N=sum(agegroup(:))
-!   print '(a,2f13.0)','Total population: ',sum(ages_male(:)) + sum(ages_female(:)) , N
+   do i=1,na
+      agegroup(i)=sum(ages_male(ia(i)+1:ib(i)+1))    + sum(ages_female(ia(i)+1:ib(i)+1))
+      print '(a,i2,a,a,f9.0)','Population in agegroup: ',i,' agerange: ', agerange(i),agegroup(i)
+   enddo
+   N=sum(agegroup(:))
+   print '(a,2f13.0)','Total population: ',sum(ages_male(:)) + sum(ages_female(:)) , N
 
 
    inquire(file='agegroups.in',exist=ex)
