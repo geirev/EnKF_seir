@@ -1,16 +1,19 @@
 module m_solve
 contains
-subroutine solve(ens,neq,nrens,nt,j)
+subroutine solve(ens,enspar,nrens,nt,j)
+   use mod_dimensions
+   use mod_states
+   use mod_params
    use mod_parameters
+   use m_pfactors
    implicit none
    external f,jac
-   integer, intent(in) :: neq
    integer, intent(in) :: nrens
    integer, intent(in) :: nt
    integer, intent(in) :: j
-
-   real, allocatable :: y(:)
-   real, intent(inout) :: ens(0:neq-1,0:nt,nrens)
+   type(states), intent(inout) :: ens(0:nt,nrens)
+   type(params), intent(inout) :: enspar(nrens)
+   type(states) y
 
    real t,dt,tout
 
@@ -24,26 +27,29 @@ subroutine solve(ens,neq,nrens,nt,j)
    integer :: mf=10
    integer lrw,liw
    integer i
+   integer :: neq=3*na+8
 
    real,    allocatable  :: rwork(:) 
    integer, allocatable  :: iwork(:)  
 
-   dt= time/real(nt)
+   dt= time/real(nt-1)
 
    lrw =max(20+16*neq, 22+9*neq+neq**2)
    liw = 20 + neq
    allocate(rwork(lrw))
    allocate(iwork(liw))
-   allocate (y(0:neq-1))
 
-   y(:)=ens(:,0,j) 
+   p=enspar(j)
+   y=ens(0,j) 
+   call pfactors 
+
    istate=1
    do i=1,nt 
       t=0+real(i)*dt
       tout=t+dt
       call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
-      ens(:,i,j)=y(:)
-!        print '(a,4f12.2)','SUM=',sum(y(0:neq-1))
+      ens(i,j)=y
+!        print '(a,4f12.2)','SUM=',sum(y)
       if (istate < 0) then
          print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
          stop
@@ -52,6 +58,5 @@ subroutine solve(ens,neq,nrens,nt,j)
 
    deallocate(rwork)
    deallocate(iwork)
-   deallocate (y)
 end subroutine
 end module

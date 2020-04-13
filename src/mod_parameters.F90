@@ -1,20 +1,14 @@
 module mod_parameters
-   real :: T2death
+   use mod_params
+   type (params) p
+   type (params) parstd
+   type (paramnames) parnames
+  
+   integer, parameter :: nrpar=11
    real :: N
-   real :: I0                
-   real :: R0                
-   real :: Rt                
-   real :: Tinc
-   real :: Tinf
-   real :: Trecm
-   real :: Trecs
-   real :: Thosp
-   real :: Tdead             
    real :: Tinterv
    real :: Tinterv2
    real :: Xmax              
-   real :: p_severe
-   real :: CFR               
    real :: time
    real :: minpar
    real :: rtmax
