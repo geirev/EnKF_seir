@@ -1,6 +1,7 @@
 module m_agegroups
 use mod_dimensions
 real, save         :: agegroup(na)
+character(len=10)  :: agerange(na) 
 contains
 subroutine agegroups
    use mod_parameters
@@ -9,6 +10,7 @@ subroutine agegroups
    real               :: ages_male(1:nrages)
    real               :: ages_female(1:nrages)
    integer i,k
+   logical ex
 
 
 
@@ -26,6 +28,18 @@ subroutine agegroups
 
    integer ia(na)
    integer ib(na)
+
+   agerange(1)= ' 0-5   '
+   agerange(2)= ' 6-12  '
+   agerange(3)= ' 13-19 '
+   agerange(4)= ' 20-29 '
+   agerange(5)= ' 30-39 '
+   agerange(6)= ' 40-49 '
+   agerange(7)= ' 50-59 '
+   agerange(8)= ' 60-69 '
+   agerange(9)= ' 70-79 '
+   agerange(10)=' 80-89 '
+   agerange(11)=' 90-105'
 
    ia( 1)=0 ; ib( 1)=5
    ia( 2)=6 ; ib( 2)=12
@@ -253,12 +267,34 @@ subroutine agegroups
    ages_female(105)=  51.0
    ages_female(106)=  54.0
 
-   do i=1,na
-      agegroup(i)=sum(ages_male(ia(i):ib(i)))    + sum(ages_female(ia(i):ib(i)))
-      print '(a,i2,a,i2,a,i3,a,f9.0)','Population in agegroup: ',i,' agerange(',ia(i),'--',ib(i),')= ',agegroup(i)
-   enddo
+
+
+!   do i=1,na
+!      agegroup(i)=sum(ages_male(ia(i)+1:ib(i)+1))    + sum(ages_female(ia(i)+1:ib(i)+1))
+!      print '(a,i2,a,a,f9.0)','Population in agegroup: ',i,' agerange: ', agerange(i),agegroup(i)
+!   enddo
+!   N=sum(agegroup(:))
+!   print '(a,2f13.0)','Total population: ',sum(ages_male(:)) + sum(ages_female(:)) , N
+
+
+   inquire(file='agegroups.in',exist=ex)
+   open(10,file='agegroups.in')
+      if (ex) then
+         print *,'Reading agegroups and population from agegroups.in'
+         do i=1,na
+            read(10,*)agerange(i),agegroup(i)
+            write(*,'(a6,f13.4)')agerange(i),agegroup(i)
+         enddo
+      else
+         print *,'Writing defaule Norwegian agegroups and population to agegroups.in'
+         do i=1,na
+            write(10,'(a6,100f13.4)')agerange(i),agegroup(i)
+            write(*,'(a6,f13.4)')agerange(i),agegroup(i)
+         enddo
+      endif
+   close(10)
    N=sum(agegroup(:))
-   print '(a,2f13.0)','Total Norwegan population: ',sum(ages_male(:)) + sum(ages_female(:)) , N
+   print '(a,2f13.0)','Total population: ',sum(agegroup(:)), N
    print *
 
 end subroutine

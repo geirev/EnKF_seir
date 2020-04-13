@@ -29,5 +29,5 @@
  0.622        0.020       !  Rt        : Basic Reproduction Number during intervention
 #4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters
- 1.0                      ! Maximum value of Rt
+ 10.0                     ! Maximum value of Rt
 #5 End of input file ----------------------------------------------------------------------------------

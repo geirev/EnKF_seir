@@ -45,18 +45,18 @@ subroutine enkfini(nrens,nt,time)
    if (.not.lenkf) return
 
 !  Observations
-   inquire(file='corona.dat',exist=ex)
+   inquire(file='corona.in',exist=ex)
    if (.not.ex) then
-      print '(a)','For EnKF, you must supply the fole corona.dat (example in src dir)'
+      print '(a)','For EnKF, you must supply the fole corona.in (example in src dir)'
       print '(a)','Running prior ensemble prediction'
       lenkf=.false.
       return
    endif
    print *
-   print '(a)','Reading corona.dat'
-   open(10,file='corona.dat')
+   print '(a)','Reading corona.in'
+   open(10,file='corona.in')
 
-! Counting number of lines in corona.dat
+! Counting number of lines in corona.in
    nrobs=0
    nrobsd=0
    nrobsh=0

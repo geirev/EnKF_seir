@@ -1,0 +1,22 @@
+This version of the code is a major upgrade that includes:
+
+1. Completely redefined underlying data structure using types (classes) and overloading of operators
+   to allow for operating directly on the types. There are now three classes, one for the model state,
+   one for the model parameters, and one for diagnostic variables.  Check the files:
+      mod_states.F90, mod_params.F90, and mod_diag.F90
+   The main benefit is the simple representation of the equations in the function f at the end
+   of seir.F90, and the reference to different model variables in the measurement operator and for
+   diagnostocs.
+
+2. Another equation is added to the system, representing the fatally ill while in hospital. This gives 
+   a more realistic representation of the number of hospitalized. In fact with the new data structure
+   it took five min to update the model with another equation.
+
+3. The code now allows for reading input files
+      infile.in      (input parameters: Note change in order of lines since previous version.)
+      corona.in      (previously corona.dat)
+      agegroups.in   (definition of agegroups and population per age group) 
+      pfactors.in    (the fractions of mild, severe, fatal desease per agegroup)
+      Rmatrix.in     (the transmission factors between agegroups after second intervention, for predictions)
+   The three last files are generated automatically (with Norwegian numbers) unless they are already there.
+   Note that the number of agegroups is hard coded in mod_dimensions.F90.
