@@ -158,10 +158,10 @@ def parse_arguments():
     
     parser.add_argument(
             "--variables", 
-            default=None, 
+            default=available_variables, 
             nargs='+',
             help="The variables to be plot",
-            required=True,
+            required=False,
             choices=available_variables)
     
     args = parser.parse_args()
