@@ -8,3 +8,5 @@ run/*
 !run/corona.in
 !run/README
 !run/RELEASE_NOTES
+!run/*.lay
+!run/plots.mcr

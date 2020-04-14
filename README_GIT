@@ -1,0 +1,74 @@
+Git instructions:
+When working with git repositories other than the ones you own and you expect to contribute to the code,
+a good way got organize your git project is described in the link:
+   https://opensource.com/article/19/7/create-pull-request-github
+
+This organization will allow you to make changes and suggest them to be taken into the original code through a pull request.
+
+So, you need a github account.
+Then you fork the repository to your account (make your personal copy of it) (fork button on github.com).
+This you clone to your local system where you can compile and run.
+
+git clone https://github.com/<YourUserName>/EnKF_seir
+git remote add upstream https://github.com/kedark3/demo
+git remote -v                                               should list both your local and remote repository
+
+
+To keep your local master branch up to date with the upstream code (my original repository)
+   git checkout master                 (unless you are not already there)
+   git fetch upstream                  (get info about upstream repo)
+   git merge upstream/master           (merges upstream master with your local master)
+
+
+If you want to make changes to the code:
+   git branch -a branchname            (Makes a new branch and moves to it
+Make your changes
+   git add .                           (In the root of your repo, stage for commit)
+   git status                          (Tells you status)
+   git commit                          (Commits your changes to the local repo)
+
+Push to your remote origin repo
+   git push -u origin branchname       (FIRST TIME to create the branch on the remote origin)
+   git push                            (Thereafter: push your local changes to your forked  origin repo)
+
+
+To make a pull request:
+1. Commit your changes on the local branch
+   git add .                           (In the root of your repo, stage for commit)
+   git status                          (Tells you status)
+   git commit                          (Commits your changes to the local repo)
+
+2. Update the branch where you are working to be consistent with the upstream master
+   git checkout master                 (unless you are not already there)
+   git fetch upstream                  (get info about upstream repo)
+   git merge upstream/master           (merges upstream master with your local master)
+   git checkout brancname              (back to your local branch)
+   git rebase master                   (your branch is updated by adding your local changes to the updated master)
+
+3. squash commits into one (if you have many commits)
+   git log                             (lists commits)
+   git rebase -i indexofcommitbeforeyourfirstcommit
+       Change pick to squash for all commits except the latest one.
+       save and then make a new unified commit message.
+   git push --force                    (force push branch to origin)
+
+4. open github.com, chose your branch, make pullrequest, check that there are no conflicts
+
+Then we are all synced.
+
+If you manage all this you are a git guru.
+Every time you need to know something just search for git "how to do something" and there are tons of examples out there.
+
+
+
+For advanced users:
+Set the sshkey so you don't have to write a passwd everytime you push to your remote repo: check settings / keys tab
+Follow instructions in
+   https://help.github.com/en/github/using-git/changing-a-remotes-url
+
+To make your Linux terminal show you the current branch in the prompt include the follwoing in your .bashrc
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[1;31m\]\w\[\033[0;93m\]\$(parse_git_branch)\[\033[0;97m\]\$ "
+
