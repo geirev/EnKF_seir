@@ -10,7 +10,7 @@ Then you fork the repository to your account (make your personal copy of it) (fo
 This you clone to your local system where you can compile and run.
 
 git clone https://github.com/<YourUserName>/EnKF_seir
-git remote add upstream https://github.com/kedark3/demo
+git remote add upstream https://github.com/geirev/EnKF_seir
 git remote -v                                               should list both your local and remote repository
 
 
@@ -21,7 +21,7 @@ To keep your local master branch up to date with the upstream code (my original 
 
 
 If you want to make changes to the code:
-   git branch -a branchname            (Makes a new branch and moves to it
+   git checkout -b branchname            (Makes a new branch and moves to it
 Make your changes
    git add .                           (In the root of your repo, stage for commit)
    git status                          (Tells you status)
