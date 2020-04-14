@@ -80,6 +80,8 @@ subroutine readinputs(nrens,nt)
       read(10,*)p%p_sev, parstd%p_sev; print '(a,2f10.3)', 'Fraction of severe cases and std dev :',p%p_sev  ,parstd%p_sev
       read(10,*)p%Rt   , parstd%Rt   ; print '(a,2f10.3)', 'R during interventions   and std dev :',p%Rt     ,parstd%Rt   
 
+      pfg=p ! store first guess of parameters
+
       read(10,'(a)')ca      
       if (ca /= '#4') then
          print *,'#4: error in infile.in'

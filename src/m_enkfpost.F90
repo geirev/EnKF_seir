@@ -22,6 +22,7 @@ subroutine enkfpost(ens,enspar,nrens,nt)
    print *
    print '(a)','Posterior ensemble mean of parameters:'
    print '(100a10)',parnames
+   print '(100f10.3)',pfg
    print '(100f10.3)',avepar
    print *
 end subroutine

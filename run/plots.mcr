@@ -31,7 +31,7 @@ $!Export
 
 $!ActiveLineMaps -= [1-1606]
 $!ActiveLineMaps += [101-300,901-1100]
-$!XYLineAxis YDetail 1 {RangeMax = 200000}
+$!XYLineAxis YDetail 1 {RangeMax = 100000}
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/CR.eps'
 $!Export 
   ExportRegion = AllFrames

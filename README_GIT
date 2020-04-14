@@ -11,7 +11,7 @@ This you clone to your local system where you can compile and run.
 
 git clone https://github.com/<YourUserName>/EnKF_seir
 git remote add upstream https://github.com/geirev/EnKF_seir
-git remote -v                                               should list both your local and remote repository
+git remote -v                          should list both your local and remote repository
 
 
 To keep your local master branch up to date with the upstream code (my original repository)

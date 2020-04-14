@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  13 APR 2020 02:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  14 APR 2020 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1034,85 +1034,224 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 295.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<closed.png, id=20, 1379.1525pt x 681.54625pt>
-File: closed.png Graphic file (type png)
-<use closed.png>
-Package pdftex.def Info: closed.png  used on input line 298.
-(pdftex.def)             Requested size: 462.7511pt x 228.67558pt.
-<closed1.png, id=21, 1379.1525pt x 681.54625pt>
-File: closed1.png Graphic file (type png)
-<use closed1.png>
-Package pdftex.def Info: closed1.png  used on input line 299.
-(pdftex.def)             Requested size: 462.7511pt x 228.67558pt.
- [1
+Package epstopdf Info: Source file: <ClosedHD.eps>
+(epstopdf)                    date: 2020-04-14 12:24:16
+(epstopdf)                    size: 1207894 bytes
+(epstopdf)             Output file: <ClosedHD-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:22:25
+(epstopdf)                    size: 314889 bytes
+(epstopdf)             Command: <repstopdf --outfile=ClosedHD-eps-converted-to.
+pdf ClosedHD.eps>
+(epstopdf)             \includegraphics on input line 297.
+runsystem(repstopdf --outfile=ClosedHD-eps-converted-to.pdf ClosedHD.eps)...exe
+cuted safely (allowed).
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./closed.png (PNG copy)> <
-./closed1.png (PNG copy)>]
+Package epstopdf Info: Result file: <ClosedHD-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:26:13
+(epstopdf)                    size: 314536 bytes.
+
+
+pdfTeX warning: pdflatex (file ./ClosedHD-eps-converted-to.pdf): PDF inclusion:
+ found PDF version <1.7>, but at most version <1.5> allowed
+<ClosedHD-eps-converted-to.pdf, id=20, 582.175pt x 289.08pt>
+File: ClosedHD-eps-converted-to.pdf Graphic file (type pdf)
+<use ClosedHD-eps-converted-to.pdf>
+Package pdftex.def Info: ClosedHD-eps-converted-to.pdf  used on input line 297.
+
+(pdftex.def)             Requested size: 462.7511pt x 229.78662pt.
+Package epstopdf Info: Source file: <OpenHD.eps>
+(epstopdf)                    date: 2020-04-14 12:25:42
+(epstopdf)                    size: 1201607 bytes
+(epstopdf)             Output file: <OpenHD-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:22:26
+(epstopdf)                    size: 313770 bytes
+(epstopdf)             Command: <repstopdf --outfile=OpenHD-eps-converted-to.pd
+f OpenHD.eps>
+(epstopdf)             \includegraphics on input line 298.
+runsystem(repstopdf --outfile=OpenHD-eps-converted-to.pdf OpenHD.eps)...execute
+d safely (allowed).
+
+Package epstopdf Info: Result file: <OpenHD-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:26:14
+(epstopdf)                    size: 314911 bytes.
+
+
+pdfTeX warning: pdflatex (file ./OpenHD-eps-converted-to.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+<OpenHD-eps-converted-to.pdf, id=21, 582.175pt x 289.08pt>
+File: OpenHD-eps-converted-to.pdf Graphic file (type pdf)
+<use OpenHD-eps-converted-to.pdf>
+Package pdftex.def Info: OpenHD-eps-converted-to.pdf  used on input line 298.
+(pdftex.def)             Requested size: 462.7511pt x 229.78662pt.
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./ClosedHD-eps-converted-t
+o.pdf> <./OpenHD-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <ClosedIE.eps>
+(epstopdf)                    date: 2020-04-14 12:24:16
+(epstopdf)                    size: 816430 bytes
+(epstopdf)             Output file: <ClosedIE-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:22:27
+(epstopdf)                    size: 204896 bytes
+(epstopdf)             Command: <repstopdf --outfile=ClosedIE-eps-converted-to.
+pdf ClosedIE.eps>
+(epstopdf)             \includegraphics on input line 302.
+runsystem(repstopdf --outfile=ClosedIE-eps-converted-to.pdf ClosedIE.eps)...exe
+cuted safely (allowed).
+
+Package epstopdf Info: Result file: <ClosedIE-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:26:15
+(epstopdf)                    size: 199124 bytes.
+
+
+pdfTeX warning: pdflatex (file ./ClosedIE-eps-converted-to.pdf): PDF inclusion:
+ found PDF version <1.7>, but at most version <1.5> allowed
+<ClosedIE-eps-converted-to.pdf, id=44, 582.175pt x 289.08pt>
+File: ClosedIE-eps-converted-to.pdf Graphic file (type pdf)
+<use ClosedIE-eps-converted-to.pdf>
+Package pdftex.def Info: ClosedIE-eps-converted-to.pdf  used on input line 302.
+
+(pdftex.def)             Requested size: 462.7511pt x 229.78662pt.
+Package epstopdf Info: Source file: <OpenIE.eps>
+(epstopdf)                    date: 2020-04-14 12:25:43
+(epstopdf)                    size: 816430 bytes
+(epstopdf)             Output file: <OpenIE-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:22:28
+(epstopdf)                    size: 205322 bytes
+(epstopdf)             Command: <repstopdf --outfile=OpenIE-eps-converted-to.pd
+f OpenIE.eps>
+(epstopdf)             \includegraphics on input line 303.
+runsystem(repstopdf --outfile=OpenIE-eps-converted-to.pdf OpenIE.eps)...execute
+d safely (allowed).
+
+Package epstopdf Info: Result file: <OpenIE-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:26:16
+(epstopdf)                    size: 205127 bytes.
+
+
+pdfTeX warning: pdflatex (file ./OpenIE-eps-converted-to.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+<OpenIE-eps-converted-to.pdf, id=45, 582.175pt x 289.08pt>
+File: OpenIE-eps-converted-to.pdf Graphic file (type pdf)
+<use OpenIE-eps-converted-to.pdf>
+Package pdftex.def Info: OpenIE-eps-converted-to.pdf  used on input line 303.
+(pdftex.def)             Requested size: 462.7511pt x 229.78662pt.
+[2 <./ClosedIE-eps-converted-to.pdf> <./OpenIE-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <ClosedCR.eps>
+(epstopdf)                    date: 2020-04-14 12:24:17
+(epstopdf)                    size: 813695 bytes
+(epstopdf)             Output file: <ClosedCR-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:22:29
+(epstopdf)                    size: 214042 bytes
+(epstopdf)             Command: <repstopdf --outfile=ClosedCR-eps-converted-to.
+pdf ClosedCR.eps>
+(epstopdf)             \includegraphics on input line 307.
+runsystem(repstopdf --outfile=ClosedCR-eps-converted-to.pdf ClosedCR.eps)...exe
+cuted safely (allowed).
+
+Package epstopdf Info: Result file: <ClosedCR-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:26:17
+(epstopdf)                    size: 214606 bytes.
+
+
+pdfTeX warning: pdflatex (file ./ClosedCR-eps-converted-to.pdf): PDF inclusion:
+ found PDF version <1.7>, but at most version <1.5> allowed
+<ClosedCR-eps-converted-to.pdf, id=66, 582.175pt x 289.08pt>
+File: ClosedCR-eps-converted-to.pdf Graphic file (type pdf)
+<use ClosedCR-eps-converted-to.pdf>
+Package pdftex.def Info: ClosedCR-eps-converted-to.pdf  used on input line 307.
+
+(pdftex.def)             Requested size: 462.7511pt x 229.78662pt.
+Package epstopdf Info: Source file: <OpenCR.eps>
+(epstopdf)                    date: 2020-04-14 12:25:43
+(epstopdf)                    size: 808935 bytes
+(epstopdf)             Output file: <OpenCR-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:22:30
+(epstopdf)                    size: 213037 bytes
+(epstopdf)             Command: <repstopdf --outfile=OpenCR-eps-converted-to.pd
+f OpenCR.eps>
+(epstopdf)             \includegraphics on input line 308.
+runsystem(repstopdf --outfile=OpenCR-eps-converted-to.pdf OpenCR.eps)...execute
+d safely (allowed).
+
+Package epstopdf Info: Result file: <OpenCR-eps-converted-to.pdf>
+(epstopdf)                    date: 2020-04-14 12:26:18
+(epstopdf)                    size: 214742 bytes.
+
+
+pdfTeX warning: pdflatex (file ./OpenCR-eps-converted-to.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+<OpenCR-eps-converted-to.pdf, id=67, 582.175pt x 289.08pt>
+File: OpenCR-eps-converted-to.pdf Graphic file (type pdf)
+<use OpenCR-eps-converted-to.pdf>
+Package pdftex.def Info: OpenCR-eps-converted-to.pdf  used on input line 308.
+(pdftex.def)             Requested size: 462.7511pt x 229.78662pt.
+[3 <./ClosedCR-eps-converted-to.pdf> <./OpenCR-eps-converted-to.pdf>]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 14.4pt on input line 303.
+(Font)              scaled to size 14.4pt on input line 312.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 303.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 312.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 303.
+(Font)              scaled to size 14.4pt on input line 312.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.95pt on input line 305.
+(Font)              scaled to size 10.95pt on input line 314.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 305.
+(Font)              scaled to size 8.0pt on input line 314.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.1pt on input line 305.
+(Font)              scaled to size 6.1pt on input line 314.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 305.
+(Font)              scaled to size 10.95pt on input line 314.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 8.0pt on input line 305.
+(Font)              scaled to size 8.0pt on input line 314.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 6.1pt on input line 305.
+(Font)              scaled to size 6.1pt on input line 314.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 336.
+(Font)              scaled to size 8.0pt on input line 345.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.1pt on input line 336.
- [2]
+(Font)              scaled to size 6.1pt on input line 345.
+ [4]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 344.
+(Font)              scaled to size 10.0pt on input line 353.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 346.
+(Font)              scaled to size 10.0pt on input line 355.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 346.
+(Font)              scaled to size 7.3pt on input line 355.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 346.
+(Font)              scaled to size 5.5pt on input line 355.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 346.
+(Font)              scaled to size 10.0pt on input line 355.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 7.3pt on input line 346.
+(Font)              scaled to size 7.3pt on input line 355.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
-(Font)              scaled to size 5.5pt on input line 346.
+(Font)              scaled to size 5.5pt on input line 355.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 362.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 371.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 362.
+(Font)              scaled to size 10.95pt on input line 371.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <12> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 400.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 409.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 400.
+(Font)              scaled to size 12.0pt on input line 409.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 407.
+(Font)              scaled to size 7.3pt on input line 416.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 407.
+(Font)              scaled to size 5.5pt on input line 416.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [3
+ [5
 
 ]
 No file model.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 439.
-[4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 439.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 448.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 448.
  (./model.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 439.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 439.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 448.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 448.
 Package rerunfilecheck Info: File `model.out' has not changed.
 (rerunfilecheck)             Checksum: 7C5F0FDEFB0A5B4040130173A2285C88;255.
 
@@ -1121,10 +1260,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10664 strings out of 494923
- 146917 string characters out of 6180742
+ 10686 strings out of 494923
+ 147782 string characters out of 6180742
  238732 words of memory out of 5000000
- 13703 multiletter control sequences out of 15000+600000
+ 13719 multiletter control sequences out of 15000+600000
  113035 words of font info for 205 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,12n,37p,838b,407s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1137,10 +1276,10 @@ are/texlive/texmf-dist/fonts/type1/public/newtx/rntxmi7.pfb></usr/share/texlive
 /fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx
 /txsys.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on model.pdf (4 pages, 345370 bytes).
+Output written on model.pdf (6 pages, 1537387 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
- 23 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 163 PDF objects out of 1000 (max. 8388607)
+ 127 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 63 words of extra memory for PDF output out of 10000 (max. 10000000)
 
