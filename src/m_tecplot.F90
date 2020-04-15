@@ -222,7 +222,41 @@ CHARACTER(len=30) fm
          enddo
       endif
    close(10)
+ 
+   open(10,file='obs.dat')
+      write(10,*)'TITLE = "Observations"'
+      write(10,*)'VARIABLES = "i" "time" "ave" "std" '
 
+      m=0
+      do i=1,nrobs
+         if (cobs(i)=='d') m=m+1
+      enddo
+      if (m==0) then
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
+         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+      else
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
+         do i=1,nrobs
+            if (cobs(i)=='d') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), 3.0*sqrt(R(i,i))
+         enddo
+      endif
+
+      m=0
+      do i=1,nrobs
+         if (cobs(i)=='h') m=m+1
+      enddo
+      if (m==0) then
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
+         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+      else
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
+         do i=1,nrobs
+            if (cobs(i)=='h') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), 3.0*sqrt(R(i,i))
+         enddo
+      endif
+
+      close(10)
+  
 ! Parameters   
    open(10,file='par'//tag//'.dat')
       write(10,*)'TITLE = "Parameters_'//tag//'"'

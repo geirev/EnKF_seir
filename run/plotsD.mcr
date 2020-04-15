@@ -37,3 +37,13 @@ $!XYLineAxis XDetail 1 {RangeMax = 43991}
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/CR.eps'
 $!Export 
   ExportRegion = AllFrames
+
+
+
+
+
+
+$!OpenLayout  "/home/geve/Dropbox/EnKF_seir/run/bigD.lay"
+$!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/BIG.eps'
+$!Export 
+  ExportRegion = AllFrames
