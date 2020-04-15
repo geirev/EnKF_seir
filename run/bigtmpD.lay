@@ -232,6 +232,8 @@ $!RemoveVar |LFDSVL1|
 $!RemoveVar |LFDSFN1|
 $!AlterData 
   Equation = 'V44=V40+V39'
+$!AlterData 
+  Equation = 'V2=V2+43891'
 $!FrameLayout 
   ShowBorder = No
   ShowHeader = No
@@ -273,7 +275,7 @@ $!GlobalLinePlot
       }
     }
 $!LineMap  [1]
-  Name = 'Deaths C'
+  Name = 'Deaths Closed'
   Assign
     {
     Zone = 1
@@ -283,7 +285,7 @@ $!LineMap  [1]
   Lines
     {
     Color = Custom28
-    LineThickness = 0.4
+    LineThickness = 0.8
     }
   Symbols
     {
@@ -315,7 +317,7 @@ $!LineMap  [2]
   Lines
     {
     Color = Custom36
-    LineThickness = 0.4
+    LineThickness = 0.8
     }
   Symbols
     {
@@ -347,7 +349,7 @@ $!LineMap  [3]
   Lines
     {
     Color = Custom52
-    LineThickness = 0.4
+    LineThickness = 0.8
     }
   Symbols
     {
@@ -411,7 +413,8 @@ $!LineMap  [5]
   Lines
     {
     Color = Custom28
-    LineThickness = 0.4
+    LinePattern = Dashed
+    LineThickness = 0.8
     }
   Symbols
     {
@@ -443,7 +446,8 @@ $!LineMap  [6]
   Lines
     {
     Color = Custom36
-    LineThickness = 0.4
+    LinePattern = Dashed
+    LineThickness = 0.8
     }
   Symbols
     {
@@ -475,7 +479,8 @@ $!LineMap  [7]
   Lines
     {
     Color = Custom52
-    LineThickness = 0.4
+    LinePattern = Dashed
+    LineThickness = 0.8
     }
   Symbols
     {
@@ -507,6 +512,7 @@ $!LineMap  [8]
   Lines
     {
     Color = Custom55
+    LinePattern = Dashed
     LineThickness = 0.8
     }
   Symbols
@@ -545,20 +551,25 @@ $!XYLineAxis
 $!XYLineAxis 
   XDetail 1
     {
-    RangeMin = 0
-    RangeMax = 365.03649999999998954
-    GRSpacing = 50
+    RangeMin = 43891
+    RangeMax = 44175
+    GRSpacing = 60
     TickLabel
       {
       TextShape
         {
         Height = 4
         }
+      NumFormat
+        {
+        Formatting = TimeDate
+        TimeDateFormat = 'd-mmm-yyyy'
+        }
+      Offset = 3
       }
     Title
       {
       TitleMode = UseText
-      Text = 'Time (days from March 1st, 2020)'
       TextShape
         {
         Height = 4.6
@@ -598,7 +609,7 @@ $!XYLineAxis
   YDetail 1
     {
     RangeMin = 0
-    RangeMax = 650
+    RangeMax = 700
     GRSpacing = 200
     TickLabel
       {
@@ -666,6 +677,8 @@ $!ReadDataSet  '|LFDSFN2|'
   VarNameList = '|LFDSVL2|'
 $!RemoveVar |LFDSVL2|
 $!RemoveVar |LFDSFN2|
+$!AlterData 
+  Equation = 'V1=V1+43891'
 $!FrameLayout 
   ShowBorder = No
   ShowHeader = No
@@ -799,20 +812,25 @@ $!XYLineAxis
 $!XYLineAxis 
   XDetail 1
     {
-    RangeMin = 0
-    RangeMax = 365.03649999999998954
-    GRSpacing = 50
+    RangeMin = 43891
+    RangeMax = 44175
+    GRSpacing = 60
     TickLabel
       {
       TextShape
         {
         Height = 4
         }
+      NumFormat
+        {
+        Formatting = TimeDate
+        TimeDateFormat = 'd-mmm-yyyy'
+        }
+      Offset = 3
       }
     Title
       {
       TitleMode = UseText
-      Text = 'Time (days from March 1st, 2020)'
       TextShape
         {
         Height = 4.6
@@ -852,7 +870,7 @@ $!XYLineAxis
   YDetail 1
     {
     RangeMin = 0
-    RangeMax = 650
+    RangeMax = 700
     GRSpacing = 200
     TickLabel
       {

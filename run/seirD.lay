@@ -228,6 +228,8 @@ $!ReadDataSet  '|LFDSFN1|'
   VarNameList = '|LFDSVL1|'
 $!RemoveVar |LFDSVL1|
 $!RemoveVar |LFDSFN1|
+$!AlterData 
+  Equation = 'V1=V1+43891'
 $!FrameLayout 
   ShowBorder = No
   ShowHeader = No
@@ -262,8 +264,8 @@ $!GlobalLinePlot
       }
     XYPos
       {
-      X = 96.55
-      Y = 96.483
+      X = 71.681
+      Y = 96.325
       }
     }
 $!LineMap  [1]
@@ -51695,15 +51697,23 @@ $!XYLineAxis
 $!XYLineAxis 
   XDetail 1
     {
-    RangeMin = 0
-    RangeMax = 100
-    GRSpacing = 20
+    RangeMin = 43890
+    RangeMax = 44016
+    AutoGrid = No
+    GRSpacing = 30
     TickLabel
       {
       TextShape
         {
         Height = 4
         }
+      NumFormat
+        {
+        Formatting = TimeDate
+        ShowNegativeSign = No
+        TimeDateFormat = 'd-mmm-yyyy'
+        }
+      Offset = 3
       }
     Gridlines
       {
@@ -51712,7 +51722,6 @@ $!XYLineAxis
     Title
       {
       TitleMode = UseText
-      Text = 'Time (days from March 1st, 2020)'
       TextShape
         {
         Height = 4.6

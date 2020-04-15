@@ -1,5 +1,5 @@
 #!MC 1410
-$!VarSet |LFDSFN1| = '"bigdump0.dat"'
+$!VarSet |LFDSFN1| = '"bigdump1.dat"'
 $!VarSet |LFDSVL1| = '"i" "time" "S01" "S02" "S03" "S04" "S05" "S06" "S07" "S08" "S09" "S10" "S11" "E01" "E02" "E03" "E04" "E05" "E06" "E07" "E08" "E09" "E10" "E11" "I01" "I02" "I03" "I04" "I05" "I06" "I07" "I08" "I09" "I10" "I11" "Qm" "Qs" "Qf" "Hs" "Hf" "Rm" "Rs" "D"'
 $!SetStyleBase Factory
 $!BasicColor 
@@ -247,7 +247,7 @@ $!FrameName  = 'Frame 001'
 $!GlobalTime 
   SolutionTime = 0
 $!DeleteLineMaps 
-$!ActiveLineMaps  =  [12-33,40-41]
+$!ActiveLineMaps  =  [12-33,37-38,41]
 $!GlobalLinePlot 
   DataLabels
     {
