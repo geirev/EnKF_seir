@@ -5,7 +5,7 @@ Created on Sat Apr 11 09:29:20 2020
 @author: rafaeljmoraes
 """
 
-import pandas as pd
+from tecplot_loader import reader as tecplot_reader
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
@@ -21,6 +21,18 @@ available_variables = [
         'expos',
         ]
 
+available_observations = [
+        'Observed deaths',
+        'Observed hospitalized',
+        None,
+        None,
+        None,
+        None,
+        None,
+        ]
+
+variable2observation = dict(zip(available_variables, available_observations))
+
 variable_colors = [
         (0, 0, 1), 
         (0, 1, 0),
@@ -33,27 +45,17 @@ variable_colors = [
 
 variable_colors = dict(zip(available_variables, variable_colors))
 
+        
 def lighter(color, percent):
     '''assumes color is rgb between (0, 0, 0) and (1, 1, 1)'''
     color = np.array(color)
     white = np.array([1, 1, 1])
     vector = white-color
     return color + vector * percent
-    
-def load(file_name, header, skipfooter):
-    data = pd.read_csv(
-            filepath_or_buffer=file_name, 
-            delim_whitespace=True, 
-            header=header, 
-            skipfooter=skipfooter)
-    
-    return data
+
         
-def load_ensemble_from_tecplot_file(file_name):
-    #TODO: the header footer lines are hardcoded 
-    header=53
-    skipfooter=33
-    df = load(file_name, header, skipfooter)
+def load_ensemble_from_tecplot_file(tecplot_file_name, variable):
+    df = tecplot_reader(tecplot_file_name, variable)
     time = df.iloc[:, 0]
     mean = df.iloc[:, 1]
     std_dev = df.iloc[:, 2]
@@ -61,17 +63,13 @@ def load_ensemble_from_tecplot_file(file_name):
     
     return time, mean, std_dev, ensemble
 
-def load_observed_data_from_tecplot_file(file_name):
-    #TODO: the header footer lines are hardcoded 
-    header=421
-    skipfooter=0
-    df = load(file_name, header, skipfooter)
-    time = df.iloc[:, 0]
-    mean = df.iloc[:, 1]
-    std_dev = df.iloc[:, 2]
-    obs_data = df.iloc[:, 3]
+def load_observed_data_from_tecplot_file(tecplot_file_name, obs_data_name):
+    df = tecplot_reader(tecplot_file_name, obs_data_name)
+    time = df.iloc[:, 1]
+    obs_data = df.iloc[:, 2]
+    std_dev = df.iloc[:, 3]
     
-    return time, mean, std_dev, obs_data
+    return time, obs_data, std_dev
     
 def plot_ensemble(time, mean, std_dev, ensemble, color, fading):
     ensemble_color = lighter(color, fading)
@@ -80,7 +78,7 @@ def plot_ensemble(time, mean, std_dev, ensemble, color, fading):
     plt.plot(time, mean+std_dev, color=color, linestyle='dashed')
     plt.plot(time, mean-std_dev, color=color, linestyle='dashed')
         
-def plot_observed_data(time, mean, std_dev, observed_data, color):
+def plot_observed_data(time, observed_data, std_dev, color):
     plt.errorbar(
             time, 
             observed_data, 
@@ -89,30 +87,29 @@ def plot_observed_data(time, mean, std_dev, observed_data, color):
             markerfacecolor=color, 
             color=color)
     
-def plot_variable(data_source, variable):
+def plot_variable(data_source, variable, obs_file_name, obs_name):
     post_file_name  = data_source + variable + '_1.dat'
     prior_file_name = data_source + variable + '_0.dat'
-    obs_file_name   = data_source + variable + '_0.dat'
     
     color = variable_colors[variable]
     
-    # plot prior data first becasue, since it is more spread than the posterior
-    # it won't be cover it
-    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(prior_file_name)
+    # plot prior data first because, since it is more spread than the posterior
+    # it won't be covered by it
+    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(prior_file_name, variable + '_0')
     prior_fading = 0.9
+    print("Ploting prior for: ", variable)
     plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading)
     
-    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(post_file_name)
+    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(post_file_name, variable + '_1')
     prior_fading = 0.6
+    print("Ploting posterior for: ", variable)
     plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading)
     
-    # not all variables have observed data
-    # TODO: better error handling
-    try:
-        time, mean, std_dev, observed_data = load_observed_data_from_tecplot_file(obs_file_name)
-        plot_observed_data(time, mean, std_dev, observed_data, color)
-    except:
-        print("Could not parse observed data")
+    # note: not all variables have observed data
+    if (obs_name is not None):
+        print("Ploting observation for: ", variable)
+        time, observed_data, std_dev = load_observed_data_from_tecplot_file(obs_file_name, obs_name)
+        plot_observed_data(time, observed_data, std_dev, color)
     
     patch = mpatches.Patch(color=color, label=variable)
     plt.legend(handles=[patch])
@@ -177,16 +174,19 @@ def save_figures(figs_out_dir, figures, format, dpi, show):
         
 def main():
    data_dir, requested_vars, figs_out_dir, format, dpi, show = parse_arguments()
-   figures = plot_variables(data_dir, requested_vars)
+   obs_file_name = data_dir + '/obs.dat'
+   figures = plot_variables(data_dir, requested_vars, obs_file_name)
    save_figures(figs_out_dir, figures, format, dpi, show)
    
-def plot_variables(data_source, variables):
+def plot_variables(data_source, variables, obs_file_name):
     figures = {}
     for variable in variables:
         fig = plt.figure()
         plt.xlabel('Time (days)')
         plt.ylabel('Number of people (-)')
-        plot_variable(data_source, variable)
+        obs_data_name = variable2observation[variable]
+        print("Observed data: ", obs_data_name)
+        plot_variable(data_source, variable, obs_file_name, obs_data_name)
         figures[variable] = fig
         
     return figures
