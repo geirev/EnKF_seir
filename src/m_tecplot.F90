@@ -47,7 +47,6 @@ CHARACTER(len=30) fm
       enddo
       std(i)=std(i)*(1.0/real(nrens-1))
       std(i)=sqrt(std(i))
-      std(i)=2.0*std(i)
    enddo
 
 ! Big tecplot dump
@@ -115,7 +114,6 @@ CHARACTER(len=30) fm
       enddo
       stdd(i)=stdd(i)*(1.0/real(nrens-1))
       stdd(i)=sqrt(stdd(i))
-      stdd(i)=2.0*stdd(i)
    enddo
 
    open(10,file='susc_'//tag//'.dat')
@@ -172,19 +170,19 @@ CHARACTER(len=30) fm
          t=0+real(i)*dt
          write(10,'(2000g13.5)')t, aved(i)%H, stdd(i)%H, (ensd(i,j)%H,j=1,nrens)
       enddo
-      m=0
-      do i=1,nrobs
-         if (cobs(i)=='h') m=m+1
-      enddo
-      if (m==0) then
-         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
-         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
-      else
-         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
-         do i=1,nrobs
-            if (cobs(i)=='h') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
-         enddo
-      endif
+!     m=0
+!     do i=1,nrobs
+!        if (cobs(i)=='h') m=m+1
+!     enddo
+!     if (m==0) then
+!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
+!        write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+!     else
+!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
+!        do i=1,nrobs
+!           if (cobs(i)=='h') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
+!        enddo
+!     endif
    close(10)
 
    open(10,file='recov_'//tag//'.dat')
@@ -208,19 +206,19 @@ CHARACTER(len=30) fm
          write(10,'(2000g13.5)')t, aved(i)%D, stdd(i)%D, (ensd(i,j)%D,j=1,nrens)
       enddo
 
-      m=0
-      do i=1,nrobs
-         if (cobs(i)=='d') m=m+1
-      enddo
-      if (m==0) then
-         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
-         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
-      else
-         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
-         do i=1,nrobs
-            if (cobs(i)=='d') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
-         enddo
-      endif
+!     m=0
+!     do i=1,nrobs
+!        if (cobs(i)=='d') m=m+1
+!     enddo
+!     if (m==0) then
+!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
+!        write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+!     else
+!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
+!        do i=1,nrobs
+!           if (cobs(i)=='d') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
+!        enddo
+!     endif
    close(10)
  
    open(10,file='obs.dat')
@@ -237,7 +235,7 @@ CHARACTER(len=30) fm
       else
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='d') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), 3.0*sqrt(R(i,i))
+            if (cobs(i)=='d') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), sqrt(R(i,i))
          enddo
       endif
 
@@ -251,7 +249,7 @@ CHARACTER(len=30) fm
       else
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='h') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), 3.0*sqrt(R(i,i))
+            if (cobs(i)=='h') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), sqrt(R(i,i))
          enddo
       endif
 
