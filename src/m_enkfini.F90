@@ -24,11 +24,11 @@ use m_random
    real, allocatable    :: dobs(:)       ! Observation values
    integer, allocatable :: tobs(:)       ! Observation times (days from 1. March)
    character(len=1), allocatable :: cobs(:)      ! Observation times (days from 1. March)
-   real, allocatable    :: Dprt(:,:)     ! dobs+eps
    real, allocatable    :: D(:,:)        ! dobs+eps - y
    real, allocatable    :: S(:,:)        ! Ensemble of predicted observation anomalies
    real, allocatable    :: E(:,:)        ! Ensemble of measurement perturbations
    real, allocatable    :: R(:,:)        ! Measurement error covariance matrix
+   real, allocatable    :: Rprt(:)       ! Measurement error covariance matrix
    integer nrobsh,nrobsd
 
 contains
@@ -114,17 +114,14 @@ subroutine enkfini(nrens,nt,time)
 
    allocate(innovation(nrobs))
    allocate(D(nrobs,nrens))
-   allocate(Dprt(nrobs,nrens))
    allocate(S(nrobs,nrens))
    allocate(E(nrobs,nrens))
    allocate(R(nrobs,nrobs))
+   allocate(Rprt(nrobs))
 
 ! For printing perturbed observations
-   call random(E,nrobs*nrens)
    do m=1,nrobs
-      R(m,m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
-      E(m,:)=sqrt(R(m,m))*E(m,:)          
-      Dprt(m,:)=dobs(m)+E(m,:)
+      Rprt(m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
    enddo
 end subroutine
 end module

@@ -1,5 +1,33 @@
 module m_tecplot
 contains
+subroutine saveresult(fname,varname,aved,stdd,ensd,tag,nrens,nt,dt)
+   implicit none
+   integer, intent(in) :: nrens
+   integer, intent(in) :: nt
+   real, intent(in)    :: dt
+   real, intent(in) :: aved(0:nt)
+   real, intent(in) :: stdd(0:nt)
+   real, intent(in) :: ensd(0:nt,nrens)
+   character(len=1), intent(in) :: tag
+   character(len=*), intent(in) :: fname
+   character(len=*), intent(in) :: varname
+   integer i,j
+   real t
+   
+   open(10,file=fname//'_'//tag//'.dat')
+      write(10,'(5a)')'TITLE = "'//varname//'_'//tag//'"'
+      write(10,'(a)')'VARIABLES = "time" "ave" "std" '
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,min(nrens,1000))
+!      write(10,'(5a,i5,a)')'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
+      write(10,*)'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
+      do i=0,nt
+         t=0.0+real(i)*dt
+         write(10,'(2000E13.5)')t, aved(i), stdd(i), (ensd(i,j),j=1,min(nrens,1000))
+      enddo
+   close(10)
+
+end subroutine
+
 subroutine tecplot(ens,enspar,nt,nrens,pri)
    use mod_dimensions
    use mod_states
@@ -116,114 +144,24 @@ CHARACTER(len=30) fm
       stdd(i)=sqrt(stdd(i))
    enddo
 
-   open(10,file='susc_'//tag//'.dat')
-      write(10,*)'TITLE = "Susceptible_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Susceptible_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%S, stdd(i)%S, (ensd(i,j)%S,j=1,nrens)
-      enddo
-   close(10)
+   call saveresult('susc' ,'Susceptible'  ,aved(:)%S,stdd(:)%S,ensd(:,:)%S,tag,nrens,nt,dt)
+   call saveresult('expos','Exposed'      ,aved(:)%E,stdd(:)%E,ensd(:,:)%E,tag,nrens,nt,dt)
+   call saveresult('infec','Infecteus'    ,aved(:)%I,stdd(:)%I,ensd(:,:)%I,tag,nrens,nt,dt)
+   call saveresult('recov','Recovered'    ,aved(:)%R,stdd(:)%R,ensd(:,:)%R,tag,nrens,nt,dt)
+   call saveresult('hosp' ,'Hosepitalized',aved(:)%H,stdd(:)%H,ensd(:,:)%H,tag,nrens,nt,dt)
+   call saveresult('dead' ,'Dead'         ,aved(:)%D,stdd(:)%D,ensd(:,:)%D,tag,nrens,nt,dt)
+   call saveresult('case' ,'Cases'        ,aved(:)%C,stdd(:)%C,ensd(:,:)%C,tag,nrens,nt,dt)
 
-   open(10,file='expos_'//tag//'.dat')
-      write(10,*)'TITLE = "Exposed_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Exposed_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%E, stdd(i)%E, (ensd(i,j)%E,j=1,nrens)
-      enddo
-   close(10)
-
-   open(10,file='infec_'//tag//'.dat')
-      write(10,*)'TITLE = "Infected_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Infected_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%I, stdd(i)%I, (ensd(i,j)%I,j=1,nrens)
-      enddo
-   close(10)
-
-   open(10,file='case_'//tag//'.dat')
-      write(10,*)'TITLE = "Cases_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Cases_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%C, stdd(i)%C, (ensd(i,j)%C,j=1,nrens)
-      enddo
-   close(10)
-
-
-   open(10,file='hosp_'//tag//'.dat')
-      write(10,*)'TITLE = "Hospitalized_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Hospitalized_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%H, stdd(i)%H, (ensd(i,j)%H,j=1,nrens)
-      enddo
-!     m=0
-!     do i=1,nrobs
-!        if (cobs(i)=='h') m=m+1
-!     enddo
-!     if (m==0) then
-!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
-!        write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
-!     else
-!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
-!        do i=1,nrobs
-!           if (cobs(i)=='h') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
-!        enddo
-!     endif
-   close(10)
-
-   open(10,file='recov_'//tag//'.dat')
-      write(10,*)'TITLE = "Recovered_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Recovered_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%R, stdd(i)%R, (ensd(i,j)%R,j=1,nrens)
-      enddo
-   close(10)
-   
-   open(10,file='dead_'//tag//'.dat')
-      write(10,*)'TITLE = "Dead_'//tag//'"'
-      write(10,*)'VARIABLES = "time" "ave" "std" '
-      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,nrens)
-      write(10,'(a,i5,a,i5,a)')' ZONE T="Dead_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(2000g13.5)')t, aved(i)%D, stdd(i)%D, (ensd(i,j)%D,j=1,nrens)
-      enddo
-
-!     m=0
-!     do i=1,nrobs
-!        if (cobs(i)=='d') m=m+1
-!     enddo
-!     if (m==0) then
-!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
-!        write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
-!     else
-!        write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
-!        do i=1,nrobs
-!           if (cobs(i)=='d') write(10,'(2000g13.5)')tobs(i), dobs(i), 3.0*sqrt(R(i,i)), Dprt(i,1:nrens)
-!        enddo
-!     endif
-   close(10)
  
    open(10,file='obs.dat')
+   open(11,file='obsD.dat')
+   open(12,file='obsH.dat')
       write(10,*)'TITLE = "Observations"'
       write(10,*)'VARIABLES = "i" "time" "ave" "std" '
+      write(11,*)'TITLE = "Observations"'
+      write(11,*)'VARIABLES = "i" "time" "ave" "std" '
+      write(12,*)'TITLE = "Observations"'
+      write(12,*)'VARIABLES = "i" "time" "ave" "std" '
 
       m=0
       do i=1,nrobs
@@ -232,10 +170,14 @@ CHARACTER(len=30) fm
       if (m==0) then
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
          write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+         write(11,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',1,', J=1, K=1'
+         write(11,'(2000g13.5)')(0.0,i=1,nrens+3)
       else
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
+         write(11,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='d') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), sqrt(R(i,i))
+            if (cobs(i)=='d') write(10,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
+            if (cobs(i)=='d') write(11,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
          enddo
       endif
 
@@ -246,14 +188,20 @@ CHARACTER(len=30) fm
       if (m==0) then
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
          write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+         write(12,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',1,', J=1, K=1'
+         write(12,'(2000g13.5)')(0.0,i=1,nrens+3)
       else
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
+         write(12,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='h') write(10,'(i5,2000g13.5)')i,tobs(i), dobs(i), sqrt(R(i,i))
+            if (cobs(i)=='h') write(10,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
+            if (cobs(i)=='h') write(12,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
          enddo
       endif
 
       close(10)
+      close(11)
+      close(12)
   
 ! Parameters   
    open(10,file='par'//tag//'.dat')
