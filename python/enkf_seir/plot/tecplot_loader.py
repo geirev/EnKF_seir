@@ -7,9 +7,43 @@ Created on Sat Apr 15 23:29:20 2020
 import pandas as pd
 import re
 
+available_variables = [
+        'dead',
+        'hosp',
+        'case',
+        'susc',
+        'recov',
+        'infec',
+        'expos',
+        ]
+
+available_observations = [
+        'Observed deaths',
+        'Observed hospitalized',
+        None,
+        None,
+        None,
+        None,
+        None,
+        ]
+
+available_output = [
+        'Dead',
+        'Hosepitalized',
+        'Cases',
+        'Susceptible',
+        'Recovered',
+        'Infecteus',
+        'Exposed',
+        ]
+
+variable2output = dict(zip(available_variables, available_output))
+
+variable2observation = dict(zip(available_variables, available_observations))
+
 def parse_title(file, match):
     print("Parsing file with title: '", match['title'], "'." )
-    return file, match
+    return file, None
     
 def parse_zone(tecplot_file, match):
     print("Parsing ZONE '", match['name'], "'.")
@@ -32,15 +66,15 @@ def parse_variable(file, match):
     # the total number of data columns, or use the variable names as column
     # headers in the data frame
     print("Parsing VARIABLE")
-    return file, match
+    return file, None
     
 def reader(teplot_file_name, variable):
     
     tecplot_keywords = {}
     tecplot_keywords['TITLE']       = re.compile(r'\s*TITLE\s+\=\s+\"(?P<title>.+?)\"')
     tecplot_keywords['VARIABLES']   = re.compile(r'\s*VARIABLES\s+\=\s+(".+?")+')
-    tecplot_keywords['ZONE']        = re.compile(r'\s*ZONE\s+T="(?P<name>.+?)"\s+F\s*=\s*(.+?)\,\s*I\s*=\s*(?P<I>\d+),\s*J\s*=(?P<J>\d+),\s*K\s*=\s*(?P<K>\d+)')
-    
+    tecplot_keywords['ZONE']        = re.compile(r'\s*ZONE\s+T="(?P<name>.+?)"\s+F\s*=\s*(.+?)\,\s*I\s*=\s*(?P<I>\d+)\s*\,\s*J\s*=(?P<J>\d+)\s*\,\s*K\s*=\s*(?P<K>\d+)')
+
     parsers = {}
     parsers['TITLE']       = parse_title
     parsers['VARIABLES']   = parse_variable
@@ -56,12 +90,17 @@ def reader(teplot_file_name, variable):
             if (match is not None):
                 tecplot_file, df = parsers[keyword](tecplot_file, match)
                 if(keyword == 'ZONE'):
-                    if(match['name'] == variable):
+                    variable_found = str(match['name']) == variable
+                    print("Variable " + str(match['name']) + ", " + variable + ": ", variable_found)
+                    if(variable_found):
                         stop_parsing = True
                         break
         if (stop_parsing):
             break
-                
+    
+    if df is None:
+        raise Exception('Could not load data for variable ' + variable + ' from file ' + teplot_file_name + '.')
+
     print(r'Done!')
     
     tecplot_file.close()

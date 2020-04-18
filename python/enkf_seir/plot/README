@@ -1,3 +1,40 @@
 plot.py      :  Python plotting from Rafael
 makePlot.py  :  Modified Rafael version by Geir Naevdal  (Not tested yet)
 covid.ipynb  :  A jupyter notebook for plotting the model outputs.
+
+# REQUIREMENTS
+
+pandas (https://pandas.pydata.org/)
+matplotlib (https://matplotlib.org/)
+
+# USAGE:
+
+- plot.py:
+
+In a command line/prompt/shell, from the 'run' directory, run
+
+python ..\python\enkf_seir\plot\plot.py
+
+This will load the tecplot files located in the 'run' directory and save the figures for all available plots
+(currently dead, hosp, case, susc, recov, infec, expos) in png format, dpi = 300.
+
+For more options run 
+
+python ..\python\enkf_seir\plot\plot.py -h
+
+- makePlot.py:
+In a command line/prompt/shell, from the 'run' directory, run
+
+python ..\python\enkf_seir\plot\makePlot.py --data_dir .\ --figs_out_dir .\
+
+This will load the tecplot files located in the 'run' directory and save the figures for all available plots
+(currently dead, hosp, case, susc, recov, infec, expos) in png format, dpi = 1200.
+
+NOTE: this script has the number of lines that must be read from the tecplot files.
+Adjust the variables 'skipfooter' and 'header' according to your run.
+
+# FOR MORE PLOTTING OPTIONS
+
+The above scripts create plots following a fixed plot template for all the variables.
+But you can create your own plot by reading the data from the tecplot files using
+the teclplot_loader module. Pandas data frames can be manipulated to create any desired plot.
