@@ -12,4 +12,4 @@ run/*
 !run/*.lay
 !run/*.mcr
 python/enkf_seir/plot/__pycache__/
-python/enkf_seir/plot/covid.ipynb
+python/enkf_seir/plot/.ipynb_checkpoints/
