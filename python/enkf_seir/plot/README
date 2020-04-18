@@ -1,8 +1,20 @@
 plot.py      :  Python plotting from Rafael
-makePlot.py  :  Modified Rafael version by Geir Naevdal  (Not tested yet)
-covid.ipynb  :  A jupyter notebook for plotting the model outputs.
+   pip install pandas
+   pip install matplotlib
+   python ..\python\enkf_seir\plot\plot.py
+
+covid.ipynb  :  Camille's jupyter notebook for interactive plotting of model outputs.
+   pip install numpy
+   pip install pandas
+   pip install bokeh
+   jupyter notebook ../python/enkf_seir/plot/covid.ipynb
+
+makePlot.py  :  Modified Rafael version by Geir Naevdal
+
+
 
 # REQUIREMENTS
+plot.py
 
 pandas (https://pandas.pydata.org/)
 matplotlib (https://matplotlib.org/)
