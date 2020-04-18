@@ -6,32 +6,12 @@ Created on Sat Apr 11 09:29:20 2020
 """
 
 from tecplot_loader import reader as tecplot_reader
+from tecplot_loader import available_observations, available_variables, variable2output, variable2observation
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
 import argparse
-
-available_variables = [
-        'dead',
-        'hosp',
-        'case',
-        'susc',
-        'recov',
-        'infec',
-        'expos',
-        ]
-
-available_observations = [
-        'Observed deaths',
-        'Observed hospitalized',
-        None,
-        None,
-        None,
-        None,
-        None,
-        ]
-
-variable2observation = dict(zip(available_variables, available_observations))
 
 variable_colors = [
         (0, 0, 1), 
@@ -95,12 +75,14 @@ def plot_variable(data_source, variable, obs_file_name, obs_name):
     
     # plot prior data first because, since it is more spread than the posterior
     # it won't be covered by it
-    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(prior_file_name, variable + '_0')
+    output_variable = variable2output[variable] + '_0'
+    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(prior_file_name, output_variable)
     prior_fading = 0.9
     print("Ploting prior for: ", variable)
     plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading)
     
-    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(post_file_name, variable + '_1')
+    output_variable = variable2output[variable] + '_1'
+    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(post_file_name, output_variable)
     prior_fading = 0.6
     print("Ploting posterior for: ", variable)
     plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading)
@@ -119,17 +101,17 @@ def parse_arguments():
     
     parser.add_argument(
             "--data_dir", 
-            default=None, 
+            default=r'.\\', 
             type=str, 
             help="The directory where the EnKF tecplot files can be found",
-            required=True)
+            required=False)
     
     parser.add_argument(
             "--figs_out_dir", 
-            default=None, 
+            default=r'.\\', 
             type=str, 
             help="The directory where the figures will be output",
-            required=True)
+            required=False)
     
     parser.add_argument(
             "--format", 
@@ -148,7 +130,7 @@ def parse_arguments():
     
     parser.add_argument(
             "--dpi", 
-            default=1200, 
+            default=300, 
             type=int, 
             help="The resolution the figures will be saved.",
             required=False)
@@ -162,7 +144,7 @@ def parse_arguments():
             choices=available_variables)
     
     args = parser.parse_args()
-        
+    
     return args.data_dir, args.variables, args.figs_out_dir, args.format, args.dpi, args.show
     
 def save_figures(figs_out_dir, figures, format, dpi, show):

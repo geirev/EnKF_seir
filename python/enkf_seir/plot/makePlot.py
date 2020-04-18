@@ -139,9 +139,6 @@ def plot_variable(data_source, variable, obs_file_name, obs_name):
             obs_file_fullname = obs_file_name + "D.dat"
         
         time, observed_data, std_dev = load_observed_data_from_tecplot_file(obs_file_fullname)
-        print(time)
-        print(observed_data)
-        print(std_dev)
         plot_observed_data(time, observed_data, std_dev, color)
     
     patch = mpatches.Patch(color=color, label=variable)
@@ -181,7 +178,7 @@ def parse_arguments():
     
     parser.add_argument(
             "--dpi", 
-            default=1200, 
+            default=300, 
             type=int, 
             help="The resolution the figures will be saved.",
             required=False)
