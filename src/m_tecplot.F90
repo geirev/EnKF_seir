@@ -6,7 +6,7 @@ subroutine saveresult(fname,varname,aved,stdd,ensd,tag,nrens,nt,dt)
    integer, intent(in) :: nt
    real, intent(in)    :: dt
    real, intent(in) :: aved(0:nt)
-   real, intent(in) :: stdd(0:nt)
+   real, intent(inout) :: stdd(0:nt)
    real, intent(in) :: ensd(0:nt,nrens)
    character(len=1), intent(in) :: tag
    character(len=*), intent(in) :: fname
@@ -20,6 +20,7 @@ subroutine saveresult(fname,varname,aved,stdd,ensd,tag,nrens,nt,dt)
       write(10,'(20(a,i4,a))')(' "',i,'"',i=1,min(nrens,1000))
 !      write(10,'(5a,i5,a)')'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       write(10,*)'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
+      if (stdd(0) < 1.0E-30) stdd(0)=0.0
       do i=0,nt
          t=0.0+real(i)*dt
          write(10,'(2000E13.5)')t, aved(i), stdd(i), (ensd(i,j),j=1,min(nrens,1000))

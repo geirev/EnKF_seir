@@ -1,2 +1,3 @@
 plot.py      :  Python plotting from Rafael
 makePlot.py  :  Modified Rafael version by Geir Naevdal  (Not tested yet)
+covid.ipynb  :  A jupyter notebook for plotting the model outputs.
