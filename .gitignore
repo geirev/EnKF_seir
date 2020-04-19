@@ -11,5 +11,5 @@ run/*
 !run/RELEASE_NOTES
 !run/*.lay
 !run/*.mcr
-python/enkf_seir/plot/__pycache__/
+__pycache__
 python/enkf_seir/plot/.ipynb_checkpoints/
