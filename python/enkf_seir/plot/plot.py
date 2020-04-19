@@ -5,13 +5,14 @@ Created on Sat Apr 11 09:29:20 2020
 @author: rafaeljmoraes
 """
 
-from tecplot_loader import reader as tecplot_reader
-from tecplot_loader import available_observations, available_variables, variable2output, variable2observation
+from plot.tecplot_loader import reader as tecplot_reader
+from plot.tecplot_loader import available_observations, available_variables, variable2output, variable2observation
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
 import argparse
+from pathlib import Path
 
 variable_colors = [
         (0, 0, 1), 
@@ -24,7 +25,6 @@ variable_colors = [
         ]
 
 variable_colors = dict(zip(available_variables, variable_colors))
-
         
 def lighter(color, percent):
     '''assumes color is rgb between (0, 0, 0) and (1, 1, 1)'''
@@ -32,7 +32,6 @@ def lighter(color, percent):
     white = np.array([1, 1, 1])
     vector = white-color
     return color + vector * percent
-
         
 def load_ensemble_from_tecplot_file(tecplot_file_name, variable):
     df = tecplot_reader(tecplot_file_name, variable)
@@ -68,8 +67,8 @@ def plot_observed_data(time, observed_data, std_dev, color):
             color=color)
     
 def plot_variable(data_source, variable, obs_file_name, obs_name):
-    post_file_name  = data_source + variable + '_1.dat'
-    prior_file_name = data_source + variable + '_0.dat'
+    post_file_name  = data_source / (variable + '_1.dat')
+    prior_file_name = data_source / (variable + '_0.dat')
     
     color = variable_colors[variable]
     
@@ -101,14 +100,14 @@ def parse_arguments():
     
     parser.add_argument(
             "--data_dir", 
-            default=r'.\\', 
+            default='./', 
             type=str, 
             help="The directory where the EnKF tecplot files can be found",
             required=False)
     
     parser.add_argument(
             "--figs_out_dir", 
-            default=r'.\\', 
+            default='./', 
             type=str, 
             help="The directory where the figures will be output",
             required=False)
@@ -145,20 +144,24 @@ def parse_arguments():
     
     args = parser.parse_args()
     
-    return args.data_dir, args.variables, args.figs_out_dir, args.format, args.dpi, args.show
+    return Path(args.data_dir), args.variables, Path(args.figs_out_dir), args.format, args.dpi, args.show
     
 def save_figures(figs_out_dir, figures, format, dpi, show):
     for var, fig in figures.items():
-        fig.savefig(figs_out_dir + var + '.' + format, format=format, dpi=dpi)
+        file_name = var + '.' + format
+        fig.savefig(figs_out_dir / file_name, format=format, dpi=dpi)
         if show == 'true':
             plt.show()
         plt.close(fig)
-        
+
+def plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, show):
+    obs_file_name = data_dir / r'obs.dat'
+    figures = plot_variables(data_dir, requested_vars, obs_file_name)
+    save_figures(figs_out_dir, figures, format, dpi, show)
+
 def main():
    data_dir, requested_vars, figs_out_dir, format, dpi, show = parse_arguments()
-   obs_file_name = data_dir + '/obs.dat'
-   figures = plot_variables(data_dir, requested_vars, obs_file_name)
-   save_figures(figs_out_dir, figures, format, dpi, show)
+   plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, show)
    
 def plot_variables(data_source, variables, obs_file_name):
     figures = {}
