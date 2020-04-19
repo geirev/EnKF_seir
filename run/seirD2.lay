@@ -5,6 +5,145 @@ $!VarSet |LFDSFN2| = '"obsH.dat" "obsD.dat"'
 $!VarSet |LFDSVL2| = '"i" "time" "ave" "std"'
 $!SetStyleBase Factory
 $!BasicColor 
+  Custom1
+    {
+    R = 119
+    G = 119
+    B = 119
+    }
+  Custom2
+    {
+    R = 77
+    G = 175
+    B = 74
+    }
+  Custom3
+    {
+    R = 254
+    G = 229
+    B = 217
+    }
+  Custom4
+    {
+    R = 255
+    B = 212
+    }
+  Custom5
+    {
+    R = 237
+    G = 248
+    B = 233
+    }
+  Custom6
+    {
+    R = 240
+    G = 249
+    B = 232
+    }
+  Custom7
+    {
+    R = 239
+    G = 243
+    }
+  Custom8
+    {
+    R = 242
+    G = 240
+    B = 247
+    }
+  Custom9
+    {
+    R = 102
+    G = 102
+    B = 102
+    }
+  Custom10
+    {
+    R = 152
+    G = 67
+    B = 163
+    }
+  Custom11
+    {
+    R = 252
+    G = 187
+    B = 161
+    }
+  Custom12
+    {
+    R = 254
+    G = 227
+    B = 145
+    }
+  Custom13
+    {
+    R = 199
+    G = 233
+    B = 192
+    }
+  Custom14
+    {
+    R = 204
+    G = 235
+    B = 197
+    }
+  Custom15
+    {
+    R = 198
+    G = 219
+    B = 239
+    }
+  Custom16
+    {
+    R = 218
+    G = 218
+    B = 235
+    }
+  Custom17
+    {
+    B = 85
+    }
+  Custom18
+    {
+    G = 165
+    B = 0
+    }
+  Custom19
+    {
+    R = 252
+    G = 146
+    B = 114
+    }
+  Custom20
+    {
+    R = 254
+    G = 196
+    B = 79
+    }
+  Custom21
+    {
+    R = 161
+    G = 217
+    B = 155
+    }
+  Custom22
+    {
+    R = 168
+    G = 221
+    B = 181
+    }
+  Custom23
+    {
+    R = 158
+    G = 202
+    B = 225
+    }
+  Custom24
+    {
+    R = 188
+    G = 189
+    B = 220
+    }
   Custom25
     {
     R = 27
@@ -149,6 +288,17 @@ $!BasicColor
     G = 204
     B = 204
     }
+  Custom49
+    {
+    R = 17
+    G = 17
+    B = 17
+    }
+  Custom50
+    {
+    R = 0
+    G = 255
+    }
   Custom51
     {
     R = 255
@@ -251,7 +401,7 @@ $!FrameName  = 'Frame 001'
 $!GlobalTime 
   SolutionTime = 0
 $!DeleteLineMaps 
-$!ActiveLineMaps  =  [501-700,1201-1404]
+$!ActiveLineMaps  =  [801-1000,1410,1412]
 $!GlobalLinePlot 
   DataLabels
     {
@@ -46618,6 +46768,302 @@ $!LineMap  [1404]
     LineThickness = 0.4
     Size = 0.5
     }
+$!LineMap  [1405]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 4
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LinePattern = Dashed
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [1406]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 11
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [1407]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 5
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LinePattern = Dashed
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    Show = No
+    SymbolShape
+      {
+      GeomShape = Circle
+      }
+    Color = Black
+    FillMode = UseSpecificColor
+    FillColor = Yellow
+    Size = 1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Size = 0.5
+    }
+$!LineMap  [1408]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 12
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    SymbolShape
+      {
+      GeomShape = Circle
+      }
+    Color = Black
+    FillMode = UseSpecificColor
+    FillColor = Yellow
+    Size = 1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Size = 0.5
+    }
+$!LineMap  [1409]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LinePattern = Dashed
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [1410]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 9
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [1411]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 3
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LinePattern = Dashed
+    LineThickness = 0.2
+    }
+  Symbols
+    {
+    Show = No
+    SymbolShape
+      {
+      GeomShape = Circle
+      }
+    Color = Black
+    FillMode = UseSpecificColor
+    FillColor = Yellow
+    Size = 1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Size = 0.5
+    }
+$!LineMap  [1412]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 10
+    XAxisVar = 1
+    YAxisVar = 2
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Black
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    SymbolShape
+      {
+      GeomShape = Circle
+      }
+    Color = Black
+    FillMode = UseSpecificColor
+    FillColor = Yellow
+    Size = 1
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Black
+    FillColor = Custom1
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Black
+    LineThickness = 0.4
+    Size = 0.5
+    }
 $!XYLineAxis 
   DepXToYRatio = 1
   GridArea
@@ -46626,7 +47072,7 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 9.5885
+    X1 = 10.368
     Y1 = 10.308
     X2 = 98.278
     Y2 = 97.829
@@ -46636,8 +47082,8 @@ $!XYLineAxis
   XDetail 1
     {
     RangeMin = 43891
-    RangeMax = 44002.5
-    GRSpacing = 30
+    RangeMax = 44257.036599999999453
+    GRSpacing = 60
     TickLabel
       {
       TextShape
@@ -46790,8 +47236,8 @@ $!XYLineAxis
   YDetail 1
     {
     RangeMin = 0
-    RangeMax = 400
-    GRSpacing = 50
+    RangeMax = 373537.34999999997672
+    GRSpacing = 50000
     TickLabel
       {
       TextShape
@@ -46817,7 +47263,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 7
+      Offset = 8
       }
     }
 $!XYLineAxis 
@@ -47035,7 +47481,7 @@ $!LineMap  [1]
       }
     Color = Black
     FillMode = UseSpecificColor
-    FillColor = Yellow
+    FillColor = Custom42
     Size = 0.75
     }
   BarCharts
@@ -47096,7 +47542,7 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 9.5885
+    X1 = 10.368
     Y1 = 10.308
     X2 = 98.278
     Y2 = 97.829
@@ -47106,8 +47552,8 @@ $!XYLineAxis
   XDetail 1
     {
     RangeMin = 43891
-    RangeMax = 44002.5
-    GRSpacing = 30
+    RangeMax = 44257.036599999999453
+    GRSpacing = 60
     TickLabel
       {
       TextShape
@@ -47235,8 +47681,8 @@ $!XYLineAxis
   YDetail 1
     {
     RangeMin = 0
-    RangeMax = 400
-    GRSpacing = 50
+    RangeMax = 373537.34999999997672
+    GRSpacing = 50000
     TickLabel
       {
       TextShape
@@ -47256,7 +47702,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 7
+      Offset = 8
       }
     }
 $!XYLineAxis 
@@ -47378,5 +47824,5 @@ $!Linking
     LinkAxisPosition = Yes
     }
 $!FrameControl ActivateByNumber
-  Frame = 1
+  Frame = 2
 $!SetStyleBase Config

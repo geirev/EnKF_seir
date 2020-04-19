@@ -149,7 +149,7 @@ CHARACTER(len=30) fm
    call saveresult('expos','Exposed'      ,aved(:)%E,stdd(:)%E,ensd(:,:)%E,tag,nrens,nt,dt)
    call saveresult('infec','Infecteus'    ,aved(:)%I,stdd(:)%I,ensd(:,:)%I,tag,nrens,nt,dt)
    call saveresult('recov','Recovered'    ,aved(:)%R,stdd(:)%R,ensd(:,:)%R,tag,nrens,nt,dt)
-   call saveresult('hosp' ,'Hosepitalized',aved(:)%H,stdd(:)%H,ensd(:,:)%H,tag,nrens,nt,dt)
+   call saveresult('hosp' ,'Hospitalized' ,aved(:)%H,stdd(:)%H,ensd(:,:)%H,tag,nrens,nt,dt)
    call saveresult('dead' ,'Dead'         ,aved(:)%D,stdd(:)%D,ensd(:,:)%D,tag,nrens,nt,dt)
    call saveresult('case' ,'Cases'        ,aved(:)%C,stdd(:)%C,ensd(:,:)%C,tag,nrens,nt,dt)
 
