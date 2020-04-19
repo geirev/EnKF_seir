@@ -29,7 +29,7 @@ available_observations = [
 
 available_output = [
         'Dead',
-        'Hosepitalized',
+        'Hospitalized',
         'Cases',
         'Susceptible',
         'Recovered',
