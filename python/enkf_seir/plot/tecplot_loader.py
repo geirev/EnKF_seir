@@ -95,11 +95,13 @@ def reader(teplot_file_name, variable):
                     if(variable_found):
                         stop_parsing = True
                         break
+                    else:
+                        df = None
         if (stop_parsing):
             break
     
     if df is None:
-        raise Exception('Could not load data for variable ' + variable + ' from file ' + teplot_file_name + '.')
+        raise Exception('Could not load data for variable ' + variable + ' from file ' + str(teplot_file_name) + '.')
 
     print(r'Done!')
     
