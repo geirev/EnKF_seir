@@ -1,39 +1,61 @@
 EnKF_seir code
 
-# Installation:
+# 1a. Simple installation:
 # Make a directory where you will install the following
 git clone git@github.com:geirev/EnKF_seir.git
 git clone git@github.com:geirev/EnKF_analysis.git
 git clone git@github.com:geirev/EnKF_sampling.git
 
-# Install blas, lapack, libfftw3, and Fortran95
+
+
+#1b. Best installation option
+# -  Make a personal github account unless you already have one.
+# Fork the three repositorys listed above replacing the userid with your github account id.
+# Next clone the repositories and set upstream to the original repositories
+git clone git@github.com:<userid>/EnKF_seir.git
+cd EnKF_seir; git remote add upstream https://github.com/geirev/EnKF_seir
+
+git clone git@github.com:<userid>/EnKF_analysis.git
+cd EnKF_analysis; git remote add upstream https://github.com/geirev/EnKF_analysis
+
+git clone git@github.com:<userid>/EnKF_sampling.git
+cd EnKF_sampling; git remote add upstream https://github.com/geirev/EnKF_sampling
+# If you are new to git read the README_GIT file
+
+
+# 2. Install blas, lapack, libfftw3, and Fortran95
 sudo apt-get update
 sudo apt-get install libblas-dev liblapack-dev libfftw3-dev gfortran
 
-# Compile the EnKF_analysis library
+# 3. Compile the EnKF_analysis library
 cd EnKF_analysis/lib
 # in the makefile: change build dir to dir where EnKF_seir will be build"
 #   BUILD = ../../EnKF_seir/build
 # This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
 make
 
-# Compile the EnKF_sampling library
+# 4. Compile the EnKF_sampling library
 cd EnKF_sampling/lib
 # in the makefile: change build dir to dir where EnKF_seir will be build"
 #   BUILD = ../../EnKF_seir/build
 # This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
 make
 
-cd EnKF_seir/src
+cd 5. EnKF_seir/src
 # change target install dir which is currently $HOME/bin to where you want it to reside
 make
 
 cd ../run
 seir
 
+For some plotting options check python/enkf_seir/plot
+  plot.py
+  covid.ipynb
+
 good luck and ask when you get stuck.
 
 ################################################################################
+# If you plan to change the code note the follwing:
 
 I always define subroutines in new modules:
 

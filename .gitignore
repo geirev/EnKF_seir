@@ -5,6 +5,7 @@ doc/model.out
 doc/texput.log
 build
 run/*
+runQuebec/*
 !run/infile.in
 !run/corona.in
 !run/README

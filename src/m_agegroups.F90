@@ -9,7 +9,7 @@ subroutine agegroups
    integer, parameter :: nrages=106
    real               :: ages_male(1:nrages)
    real               :: ages_female(1:nrages)
-   integer i,k
+   integer i,k,im,if
    logical ex
 
 
@@ -267,30 +267,65 @@ subroutine agegroups
    ages_female(105)=  51.0
    ages_female(106)=  54.0
 
-
-
-   do i=1,na
-      agegroup(i)=sum(ages_male(ia(i)+1:ib(i)+1))    + sum(ages_female(ia(i)+1:ib(i)+1))
-   enddo
-   N=sum(agegroup(:))
-
-
-   inquire(file='agegroups.in',exist=ex)
-   open(10,file='agegroups.in')
-      if (ex) then
-         print *,'Reading agegroups and population from agegroups.in'
-         do i=1,na
-            read(10,*)agerange(i),agegroup(i)
-            write(*,'(a6,f13.4)')agerange(i),agegroup(i)
+   
+! If the file "population.in" with annual distribution of males and females exist it will be read.
+! Alternatively the populations per agegroup will be read from agegroups.in
+! If none of the files exist, the Norwegian defaults are used and template files are generated.
+   inquire(file='population.in',exist=ex)
+   if (ex) then
+      open(10,file='population.in')
+         print '(a)','Reading annual population numbers of males and females from population.in'
+         ages_male=0.0
+         ages_female=0.0
+         do i=1,nrages
+            read(10,*,end=100)im,if
+            ages_male(i)=real(im)
+            ages_female(i)=real(if)
          enddo
-      else
-         print *,'Writing defaule Norwegian agegroups and population to agegroups.in'
+         100 close(10)
+
+      do i=1,na
+         agegroup(i)=sum(ages_male(ia(i)+1:ib(i)+1))    + sum(ages_female(ia(i)+1:ib(i)+1))
+      enddo
+
+      open(10,file='agegroups.out')
          do i=1,na
-            write(10,'(a6,100f13.4)')agerange(i),agegroup(i)
-            write(*,'(a6,f13.4)')agerange(i),agegroup(i)
+            write(10,*)agerange(i),agegroup(i)
+            write(*,'(tr3,a10,a,f13.4)')agerange(i),': ',agegroup(i)
          enddo
+      close(10)
+
+   else
+      open(10,file='population.template')
+         do i=1,nrages
+            write(10,*)nint(ages_male(i)),nint(ages_female(i))
+         enddo
+      close(10)
+      
+      inquire(file='agegroups.in',exist=ex)
+      if (ex) then  ! reading supplied file with population per agegroup from agegroup.in
+         print '(a)','Reading agegroups and population from agegroups.in'
+         open(10,file='agegroups.in')
+            do i=1,na
+               read(10,*)agerange(i),agegroup(i)
+               write(*,'(tr3,a10,a,f13.4)')agerange(i),': ',agegroup(i)
+            enddo
+         close(10)
+      else  ! using hardcoded defaults for norway
+         print '(a)','Neither population.in nor  agegroups.in exists. Running with defaults'
+         do i=1,na
+            agegroup(i)=sum(ages_male(ia(i)+1:ib(i)+1))    + sum(ages_female(ia(i)+1:ib(i)+1))
+         enddo
+
+         open(10,file='agegroups.template')
+            do i=1,na
+               write(10,*)agerange(i),agegroup(i)
+            enddo
+         close(10)
+
       endif
-   close(10)
+   endif
+
    N=sum(agegroup(:))
    print '(a,2f13.0)','Total population: ',sum(agegroup(:)), N
    print *
