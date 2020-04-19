@@ -1,1 +1,4 @@
-
+pandas
+matplotlib
+numpy
+argparse
