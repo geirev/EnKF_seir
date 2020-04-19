@@ -5,8 +5,8 @@ Created on Sat Apr 11 09:29:20 2020
 @author: rafaeljmoraes
 """
 
-from tecplot_loader import reader as tecplot_reader
-from tecplot_loader import available_observations, available_variables, variable2output, variable2observation
+from plot.tecplot_loader import reader as tecplot_reader
+from plot.tecplot_loader import available_observations, available_variables, variable2output, variable2observation
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
