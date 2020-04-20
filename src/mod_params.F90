@@ -2,8 +2,7 @@ module mod_params
 ! model parameters to be tuned by EnKF
    type paramnames
       character(len=9) ::   I0    =' "    I0"'   
-      character(len=9) ::   R0    =' "    R0"' 
-      character(len=9) ::   Rt    =' "    Rt"'
+      character(len=9) ::   R(3)  =(/' "    R1"',' "    R2"',' "    R3"'/)   
       character(len=9) ::   Tinf  =' "  Tinf"'
       character(len=9) ::   Tinc  =' "  Tinc"'
       character(len=9) ::   Trecm =' " Trecm"'
@@ -16,8 +15,7 @@ module mod_params
 
    type params
       real I0   
-      real R0   
-      real Rt   
+      real R(3)
       real Tinf 
       real Tinc 
       real Trecm
@@ -58,8 +56,7 @@ contains
       type(params), intent(in) :: A
       real,         intent(in) :: B
       max_params%I0          = max(A%I0   ,B)
-      max_params%R0          = max(A%R0   ,B)
-      max_params%Rt          = max(A%Rt   ,B)
+      max_params%R           = max(A%R    ,B)
       max_params%Tinf        = max(A%Tinf ,B)
       max_params%Tinc        = max(A%Tinc ,B)
       max_params%Trecm       = max(A%Trecm,B)
@@ -75,14 +72,13 @@ contains
       type(params), intent(in) :: A
       type(params), intent(in) :: B
       add_params%I0          = A%I0     + B%I0    
-      add_params%R0          = A%R0     + B%R0   
-      add_params%Rt          = A%Rt     + B%Rt   
+      add_params%R           = A%R      + B%R   
       add_params%Tinf        = A%Tinf   + B%Tinf 
       add_params%Tinc        = A%Tinc   + B%Tinc 
       add_params%Trecm       = A%Trecm  + B%Trecm
       add_params%Trecs       = A%Trecs  + B%Trecs
-      add_params%Thosp       = A%Thosp + B% Thosp
-      add_params%Tdead       = A%Tdead + B% Tdead
+      add_params%Thosp       = A%Thosp  + B%Thosp
+      add_params%Tdead       = A%Tdead  + B%Tdead
       add_params%p_sev       = A%p_sev  + B%p_sev
       add_params%CFR         = A%CFR    + B%CFR 
    end function add_params
@@ -92,8 +88,7 @@ contains
       type(params), intent(in) :: A
       type(params), intent(in) :: B
       subtract_params%I0          = A%I0     - B%I0    
-      subtract_params%R0          = A%R0     - B%R0    
-      subtract_params%Rt          = A%Rt     - B%Rt    
+      subtract_params%R           = A%R      - B%R    
       subtract_params%Tinf        = A%Tinf   - B%Tinf  
       subtract_params%Tinc        = A%Tinc   - B%Tinc  
       subtract_params%Trecm       = A%Trecm  - B%Trecm
@@ -109,8 +104,7 @@ contains
       type(params), intent(in) :: A
       real, intent(in) :: B
       params_real_mult%I0          = B*A%I0    
-      params_real_mult%R0          = B*A%R0    
-      params_real_mult%Rt          = B*A%Rt    
+      params_real_mult%R           = B*A%R    
       params_real_mult%Tinf        = B*A%Tinf  
       params_real_mult%Tinc        = B*A%Tinc  
       params_real_mult%Trecm       = B*A%Trecm 
@@ -126,8 +120,7 @@ contains
       type(params), intent(in) :: A
       real, intent(in) :: B
       real_params_mult%I0          = B*A%I0    
-      real_params_mult%R0          = B*A%R0    
-      real_params_mult%Rt          = B*A%Rt    
+      real_params_mult%R           = B*A%R    
       real_params_mult%Tinf        = B*A%Tinf  
       real_params_mult%Tinc        = B*A%Tinc  
       real_params_mult%Trecm       = B*A%Trecm 
@@ -143,10 +136,9 @@ contains
       type(params), intent(in) :: A
       type(params), intent(in) :: B
       params_params_mult%I0          = A%I0     * B%I0    
-      params_params_mult%R0          = A%R0     * B%R0    
-      params_params_mult%Rt          = A%Rt     * B%Rt    
-      params_params_mult%Tinf        = A%Tinf  *  B%Tinf 
-      params_params_mult%Tinc        = A%Tinc  *  B%Tinc 
+      params_params_mult%R           = A%R      * B%R    
+      params_params_mult%Tinf        = A%Tinf   * B%Tinf 
+      params_params_mult%Tinc        = A%Tinc   * B%Tinc 
       params_params_mult%Trecm       = A%Trecm  * B%Trecm 
       params_params_mult%Trecs       = A%Trecs  * B%Trecs 
       params_params_mult%Thosp       = A%Thosp  * B%Thosp 
@@ -160,8 +152,7 @@ contains
       type(params), intent(out) :: A
       real, intent(in) :: r
       A%I0          = r
-      A%R0          = r
-      A%Rt          = r
+      A%R           = r
       A%Tinf        = r
       A%Tinc        = r
       A%Trecm       = r

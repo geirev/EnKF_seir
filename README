@@ -1,3 +1,15 @@
+NOTE IN THIS RELEASE:
+infile.in has changed:
+There are three reproductions factors for the three periods.
+There are Rmatrix_01.in, Rmatrix_02.in, and Rmatrix_03.in generated with numbers 1.00 at first run.
+These matrices can be edited to set different reproductions factors between different agegroups.
+They are read into Rmat(:,:,1:3).
+The effective R between agegroups i and j, for the period k, is then  R(i,j) = p%R(k) * Rmat(i,j,k)
+This modificaiton provides a significantly improved flexibilty, and adds uncertainty for simulations after
+the second intervention.
+
+
+
 EnKF_seir code
 
 # 1a. Simple installation:

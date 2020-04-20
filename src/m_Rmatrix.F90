@@ -1,61 +1,52 @@
 module m_Rmatrix
+! The R matrices are used to define the reproduction number for and inbetween the different
+! age groups. The matrices can be different for different intervention time periods, and their
+! uncertainty is modeled using a stochastic factor multiplied with the matrices. See the f function 
+! at the end of seir.F90.
 use m_agegroups
-real, save         :: Rmat(na,na)
+real Rmat(na,na,nrint)
 contains
 subroutine Rmatrix
    implicit none
-   integer i,j
-   logical :: lpread=.true.
+   integer i,j,k
    logical ex
    character(len=10) ctmp
-! Transmission factors when opening kindergardens after easter.
-!                   1    2    3    4    5   6    7    7    9    10   11 
-   Rmat( 1,:)= (/ 3.7, 2.0, 2.0, 1.5, 1.5, 1.1, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 2,:)= (/ 0.0, 3.7, 2.0, 1.5, 1.5, 1.5, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 3,:)= (/ 0.0, 0.0, 1.0, 1.0, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 4,:)= (/ 0.0, 0.0, 0.0, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 5,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 6,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 7,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 8,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.9, 0.9, 0.9 /)
-   Rmat( 9,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.9, 0.9 /)
-   Rmat(10,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.9 /)
-   Rmat(11,:)= (/ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9 /)
-   do j=1,na
-   do i=j+1,na
-      Rmat(i,j)=Rmat(j,i)
-   enddo
-   enddo
+   character(len=2)  tag2
 
-   if (lpread) then
-      inquire(file='Rmatrix.in',exist=ex)
-      open(10,file='Rmatrix.in')
+! Set default Rmatrices identical to one meaning same R number for and between all agegroups 
+   Rmat(:,:,:) = 1.0
+
+! Reading user defined R matrices if they exist, otherwise save the default one
+   do k=1,nrint
+      write(tag2,'(i2.2)')k
+      inquire(file='Rmatrix_'//tag2//'.in',exist=ex)
+      open(10,file='Rmatrix_'//tag2//'.in')
          if (ex) then
             print *,'reading Rmat from Rmatrix.in'
             read(10,*)
             do i=1,na
-               read(10,*)ctmp,Rmat(i,:)
+               read(10,*)ctmp,Rmat(i,:,k)
             enddo
          else
             write(10,'(a12,100(a))')'Age ranges: ',(agerange(i),i=1,na)
             do i=1,na
-               write(10,'(a,100f10.2)')agerange(i),Rmat(i,:)
+               write(10,'(a,100f10.2)')agerange(i),Rmat(i,:,k)
             enddo
          endif
       close(10)
-      lpread=.false.
-   endif
 
-   do j=1,na
-   do i=j+1,na
-      Rmat(i,j)=Rmat(j,i)
+! ensure a symmetric R matrix
+      do j=1,na
+      do i=j+1,na
+         Rmat(i,j,k)=Rmat(j,i,k)
+      enddo
+      enddo
+      
+      print *
+      print *,'Rmat:'
+      print '(11f10.2)',Rmat(:,:,k)
+      print *
    enddo
-   enddo
-   
-   print *
-   print *,'Rmat:'
-   print '(11f10.2)',Rmat
-   print *
 
 end subroutine
 end module

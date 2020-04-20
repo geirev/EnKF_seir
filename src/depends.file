@@ -36,6 +36,7 @@ m_iniens.o:      mod_parameters.o
 m_iniens.o:      mod_params.o
 m_iniens.o:      mod_states.o
 m_inienspar.o:      makefile
+m_inienspar.o:      mod_dimensions.o
 m_inienspar.o:      MODEL.CPP
 m_inienspar.o:      mod_parameters.o
 m_inienspar.o:      mod_params.o

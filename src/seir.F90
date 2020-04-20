@@ -94,12 +94,12 @@ subroutine f(neq, t, y, ydot)
 
    real R(na,na)
 
-   if (t <= Tinterv) then
-      R=p%R0
-   elseif (Tinterv < t .and. t <= Tinterv2 ) then
-      R=p%Rt 
-   elseif (t > Tinterv2) then
-      R=Rmat
+   if (t <= Tinterv(1)) then
+      R=p%R(1)*Rmat(:,:,1)
+   elseif (Tinterv(1) < t .and. t <= Tinterv(2) ) then
+      R=p%R(2)*Rmat(:,:,2)
+   elseif (t > Tinterv(2)) then
+      R=p%R(3)*Rmat(:,:,3)
    endif
    
 

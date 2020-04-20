@@ -42,7 +42,7 @@ subroutine readinputs(nrens,nt)
          stop
       endif
 
-! Read startday of simulation
+! Read startday of simulation - Running with Rmat(:,:,1)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
       startday=getday(id,im,iy)
       print '(a,i3,i3,i5,i5)',       'Start date of simulation        :',id,im,iy
@@ -50,15 +50,15 @@ subroutine readinputs(nrens,nt)
 
 
 
-! Read startday of 1 intervention
+! Read startday of 1st intervention - switching to Rmat(:,:,2)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      Tinterv=real(getday(id,im,iy))
-      print '(a,i3,i3,i5,f10.2,i5)',    'Start date of first intervention:',id,im,iy,Tinterv
+      Tinterv(1)=real(getday(id,im,iy))
+      print '(a,i3,i3,i5,f10.2,i5)',    'Start date of first  intervention:',id,im,iy,Tinterv(1)
 
-! Read endday of intervention
+! Read startdate of 2nd intervention- switching to Rmat(:,:,3)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      Tinterv2=real(getday(id,im,iy))
-      print '(a,i3,i3,i5,f10.2,i5)',    'End   date of first intervention:',id,im,iy,Tinterv2
+      Tinterv(2)=real(getday(id,im,iy))
+      print '(a,i3,i3,i5,f10.2,i5)',    'Start date of second intervention:',id,im,iy,Tinterv(2)
 
 
       read(10,'(a)')ca      
@@ -68,8 +68,10 @@ subroutine readinputs(nrens,nt)
       endif
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
+      read(10,*)p%R(1) , parstd%R(1) ; print '(a,2f10.3)', 'R until 1st intervention and std dev :',p%R(1)   ,parstd%R(1)   
+      read(10,*)p%R(2) , parstd%R(2) ; print '(a,2f10.3)', 'R 1st-2nd intervention   and std dev :',p%R(2)   ,parstd%R(2)   
+      read(10,*)p%R(3) , parstd%R(3) ; print '(a,2f10.3)', 'R 2nd-3rd intervention   and std dev :',p%R(3)   ,parstd%R(3)   
       read(10,*)p%I0   , parstd%I0   ; print '(a,2f10.3)', 'Initial infected I0      and std dev :',p%I0     ,parstd%I0   
-      read(10,*)p%R0   , parstd%R0   ; print '(a,2f10.3)', 'Initial R                and std dev :',p%R0     ,parstd%R0   
       read(10,*)p%Tinc , parstd%Tinc ; print '(a,2f10.3)', 'Incubation time          and std dev :',p%Tinc   ,parstd%Tinc 
       read(10,*)p%Tinf , parstd%Tinf ; print '(a,2f10.3)', 'Infection time           and std dev :',p%Tinf   ,parstd%Tinf 
       read(10,*)p%Trecm, parstd%Trecm; print '(a,2f10.3)', 'Recovery time mild       and std dev :',p%Trecm  ,parstd%Trecm
@@ -78,7 +80,6 @@ subroutine readinputs(nrens,nt)
       read(10,*)p%Tdead, parstd%Tdead; print '(a,2f10.3)', 'Time to death            and std dev :',p%Tdead  ,parstd%Tdead
       read(10,*)p%CFR  , parstd%CFR  ; print '(a,2f10.3)', 'Critical fatality ratio  and std dev :',p%CFR    ,parstd%CFR  
       read(10,*)p%p_sev, parstd%p_sev; print '(a,2f10.3)', 'Fraction of severe cases and std dev :',p%p_sev  ,parstd%p_sev
-      read(10,*)p%Rt   , parstd%Rt   ; print '(a,2f10.3)', 'R during interventions   and std dev :',p%Rt     ,parstd%Rt   
 
       pfg=p ! store first guess of parameters
 

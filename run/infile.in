@@ -16,8 +16,10 @@
  15/03-2020               ! Start date of first  phase of intervations
  20/04-2020               ! Start date of second phase of intervations
 #3 First guess model parameters and their std dev -----------------------------------------------------
- 43.0         4.0         !  I0        : Initial infectious used to initialize the model
  5.0          1.0         !  R0        : Basic reproduction number with no interventions
+ 0.662        0.1         !  R1        : Basic reproduction number with no interventions
+ 0.7          0.1         !  R2        : Basic reproduction number with no interventions
+ 43.0         4.0         !  I0        : Initial infectious used to initialize the model
  5.5          0.5         !  Tinc      : Incubation period 
  3.8          0.5         !  Tinf      : Infection time                 |
  14.0         0.0         !  Trecm     : Recovery time mild cases
@@ -26,7 +28,6 @@
  16.0         1.0         !  Tdead     : Days to death                                           
  0.009        0.001       !  CFR       : Case fatality rate %
  0.039        0.003       !  P_severe  : Hospitalization rate % for severe cases
- 0.622        0.020       !  Rt        : Basic Reproduction Number during intervention
 #4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters
  10.0                     ! Maximum value of Rt

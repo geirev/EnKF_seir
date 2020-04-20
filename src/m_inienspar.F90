@@ -1,6 +1,7 @@
 module m_inienspar
 contains
 subroutine inienspar(enspar,nrens)
+   use mod_dimensions
    use m_random
    use mod_params
    use mod_parameters
@@ -10,8 +11,9 @@ subroutine inienspar(enspar,nrens)
    integer j
 
    call random(enspar%I0   ,nrens)
-   call random(enspar%R0   ,nrens)
-   call random(enspar%Rt   ,nrens)
+   do j=1,nrint
+      call random(enspar%R(j) ,nrens)
+   enddo
    call random(enspar%Tinf ,nrens)
    call random(enspar%Tinc ,nrens)
    call random(enspar%Trecm,nrens)
@@ -24,7 +26,7 @@ subroutine inienspar(enspar,nrens)
    do j=1,nrens
       enspar(j)   =  p     + parstd * enspar(j) 
       enspar(j)=max(enspar(j),minpar)        ! Ensure positive parameters
-      enspar(j)%Rt=min(enspar(j)%Rt,rtmax)   ! Ensure Rt < Rtmax
+      enspar(j)%R=min(enspar(j)%R,rtmax)   ! Ensure Rt < Rtmax
    enddo
 
 end subroutine
