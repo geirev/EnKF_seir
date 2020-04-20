@@ -5,6 +5,145 @@ $!VarSet |LFDSFN2| = '"obs.dat"'
 $!VarSet |LFDSVL2| = '"i" "time" "ave" "std"'
 $!SetStyleBase Factory
 $!BasicColor 
+  Custom1
+    {
+    R = 119
+    G = 119
+    B = 119
+    }
+  Custom2
+    {
+    R = 77
+    G = 175
+    B = 74
+    }
+  Custom3
+    {
+    R = 254
+    G = 229
+    B = 217
+    }
+  Custom4
+    {
+    R = 255
+    B = 212
+    }
+  Custom5
+    {
+    R = 237
+    G = 248
+    B = 233
+    }
+  Custom6
+    {
+    R = 240
+    G = 249
+    B = 232
+    }
+  Custom7
+    {
+    R = 239
+    G = 243
+    }
+  Custom8
+    {
+    R = 242
+    G = 240
+    B = 247
+    }
+  Custom9
+    {
+    R = 102
+    G = 102
+    B = 102
+    }
+  Custom10
+    {
+    R = 152
+    G = 67
+    B = 163
+    }
+  Custom11
+    {
+    R = 252
+    G = 187
+    B = 161
+    }
+  Custom12
+    {
+    R = 254
+    G = 227
+    B = 145
+    }
+  Custom13
+    {
+    R = 199
+    G = 233
+    B = 192
+    }
+  Custom14
+    {
+    R = 204
+    G = 235
+    B = 197
+    }
+  Custom15
+    {
+    R = 198
+    G = 219
+    B = 239
+    }
+  Custom16
+    {
+    R = 218
+    G = 218
+    B = 235
+    }
+  Custom17
+    {
+    B = 85
+    }
+  Custom18
+    {
+    G = 165
+    B = 0
+    }
+  Custom19
+    {
+    R = 252
+    G = 146
+    B = 114
+    }
+  Custom20
+    {
+    R = 254
+    G = 196
+    B = 79
+    }
+  Custom21
+    {
+    R = 161
+    G = 217
+    B = 155
+    }
+  Custom22
+    {
+    R = 168
+    G = 221
+    B = 181
+    }
+  Custom23
+    {
+    R = 158
+    G = 202
+    B = 225
+    }
+  Custom24
+    {
+    R = 188
+    G = 189
+    B = 220
+    }
   Custom25
     {
     R = 27
@@ -148,6 +287,17 @@ $!BasicColor
     R = 204
     G = 204
     B = 204
+    }
+  Custom49
+    {
+    R = 17
+    G = 17
+    B = 17
+    }
+  Custom50
+    {
+    R = 0
+    G = 255
     }
   Custom51
     {
@@ -542,7 +692,7 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 8.8869
+    X1 = 10.368
     Y1 = 10.308
     X2 = 98.278
     Y2 = 97.829
@@ -610,7 +760,7 @@ $!XYLineAxis
     {
     RangeMin = 0
     RangeMax = 700
-    GRSpacing = 200
+    GRSpacing = 100
     TickLabel
       {
       TextShape
@@ -626,6 +776,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
+      Offset = 8
       }
     }
 $!XYLineAxis 
@@ -679,6 +830,8 @@ $!RemoveVar |LFDSVL2|
 $!RemoveVar |LFDSFN2|
 $!AlterData 
   Equation = 'V2=V2+43891'
+$!AlterData 
+  Equation = 'V4=3.0*V4'
 $!FrameLayout 
   ShowBorder = No
   ShowHeader = No
@@ -729,7 +882,7 @@ $!LineMap  [1]
     }
   Lines
     {
-    Color = Custom28
+    Color = Black
     LineThickness = 0.4
     }
   Symbols
@@ -738,24 +891,23 @@ $!LineMap  [1]
       {
       GeomShape = Circle
       }
-    Color = Red
+    Color = Black
     FillMode = UseSpecificColor
-    FillColor = Yellow
-    Size = 0.75
+    FillColor = Custom42
+    Size = 0.5
     }
   BarCharts
     {
-    Color = Cyan
+    Color = Black
     FillColor = Cyan
     }
   ErrorBars
     {
-    Var = 3
+    Var = 4
     Show = Yes
     Color = Black
-    LineThickness = 0.4
-    Skipping = 3
-    Size = 1
+    LineThickness = 0.2
+    Size = 0.5
     }
 $!LineMap  [2]
   Name = 'Deaths Rmat=0.7'
@@ -767,7 +919,7 @@ $!LineMap  [2]
     }
   Lines
     {
-    Color = Custom27
+    Color = Black
     LineThickness = 0.4
     }
   Symbols
@@ -776,24 +928,23 @@ $!LineMap  [2]
       {
       GeomShape = Circle
       }
-    Color = Red
+    Color = Black
     FillMode = UseSpecificColor
     FillColor = Yellow
-    Size = 0.75
+    Size = 0.5
     }
   BarCharts
     {
-    Color = Cyan
+    Color = Black
     FillColor = Cyan
     }
   ErrorBars
     {
-    Var = 3
+    Var = 4
     Show = Yes
     Color = Black
-    LineThickness = 0.4
-    Skipping = 3
-    Size = 1
+    LineThickness = 0.2
+    Size = 0.5
     }
 $!XYLineAxis 
   DepXToYRatio = 1
@@ -803,7 +954,7 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 8.8869
+    X1 = 10.368
     Y1 = 10.308
     X2 = 98.278
     Y2 = 97.829
@@ -844,6 +995,24 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   XDetail 3
@@ -851,6 +1020,24 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   XDetail 4
@@ -858,6 +1045,24 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   XDetail 5
@@ -865,18 +1070,40 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   YDetail 1
     {
     RangeMin = 0
     RangeMax = 700
-    GRSpacing = 200
+    GRSpacing = 100
     TickLabel
       {
       TextShape
         {
         Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
         }
       }
     Title
@@ -887,6 +1114,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
+      Offset = 8
       }
     }
 $!XYLineAxis 
@@ -895,6 +1123,24 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   YDetail 3
@@ -902,6 +1148,24 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   YDetail 4
@@ -909,6 +1173,24 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!XYLineAxis 
   YDetail 5
@@ -916,11 +1198,35 @@ $!XYLineAxis
     RangeMin = 0
     RangeMax = 1
     GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        }
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
     }
 $!LinePlotLayers 
   ShowLines = No
   ShowSymbols = Yes
+  ShowErrorBars = Yes
 $!Linking 
+  WithinFrame
+    {
+    LinkGridlineStyle = Yes
+    LinkLayerLineColor = Yes
+    }
   BetweenFrames
     {
     LinkFrameSizeAndPosition = Yes

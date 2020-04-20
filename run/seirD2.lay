@@ -46962,25 +46962,25 @@ $!LineMap  [1410]
     }
   Lines
     {
-    Color = Custom38
+    Color = Black
     LineThickness = 0.4
     }
   Symbols
     {
     Show = No
-    Color = Custom38
+    Color = Black
     FillColor = Custom1
     }
   BarCharts
     {
     Show = No
-    Color = Custom38
+    Color = Black
     FillColor = Custom1
     }
   ErrorBars
     {
     Var = 2
-    Color = Custom38
+    Color = Black
     LineThickness = 0.4
     Skipping = 3
     Size = 0.5
@@ -47036,7 +47036,7 @@ $!LineMap  [1412]
     }
   Lines
     {
-    Color = Custom55
+    Color = Black
     LineThickness = 0.4
     }
   Symbols
@@ -47046,7 +47046,7 @@ $!LineMap  [1412]
       {
       GeomShape = Circle
       }
-    Color = Custom55
+    Color = Black
     FillMode = UseSpecificColor
     FillColor = Yellow
     Size = 1
@@ -47054,13 +47054,13 @@ $!LineMap  [1412]
   BarCharts
     {
     Show = No
-    Color = Custom55
+    Color = Black
     FillColor = Custom1
     }
   ErrorBars
     {
     Var = 2
-    Color = Custom55
+    Color = Black
     LineThickness = 0.4
     Size = 0.5
     }
