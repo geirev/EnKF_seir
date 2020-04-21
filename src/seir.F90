@@ -84,25 +84,27 @@ subroutine f(neq, t, y, ydot)
    use mod_dimensions
    use mod_states
    implicit none
-   integer i,k,ii,kk
+   integer i,k,ii,kk,ir
    integer neq
    real t
    type(states) y
    type(states) ydot
 
    real R(na,na)
+   real :: qminf=0.0
 
    if (t <= Tinterv(1)) then
-      R=p%R(1)*Rmat(:,:,1)
+      ir=1
    elseif (Tinterv(1) < t .and. t <= Tinterv(2) ) then
-      R=p%R(2)*Rmat(:,:,2)
+      ir=2
    elseif (t > Tinterv(2)) then
-      R=p%R(3)*Rmat(:,:,3)
+      ir=3
    endif
+   R=p%R(ir)*Rmat(:,:,ir)
    
 
-   ydot%S  =                          - (1.0/p%Tinf) * matmul(R,y%I) * y%S
-   ydot%E  =  - (1.0/p%Tinc ) * y%E   + (1.0/p%Tinf) * matmul(R,y%I) * y%S
+   ydot%S  =                          - (1.0/p%Tinf) * matmul(R,y%I) * y%S - qminf*(1.0/p%Tinf) * p%R(ir)*y%Qm * y%S
+   ydot%E  =  - (1.0/p%Tinc ) * y%E   + (1.0/p%Tinf) * matmul(R,y%I) * y%S + qminf*(1.0/p%Tinf) * p%R(ir)*y%Qm * y%S
    ydot%I  =    (1.0/p%Tinc ) * y%E   - (1.0/p%Tinf) * y%I
    ydot%Qm =  - (1.0/p%Trecm) * y%Qm  + (1.0/p%Tinf) * dot_product(pm,y%I)
    ydot%Qs =  - (1.0/p%Thosp) * y%Qs  + (1.0/p%Tinf) * dot_product(ps,y%I)
