@@ -22,7 +22,7 @@ subroutine Rmatrix
       inquire(file='Rmatrix_'//tag2//'.in',exist=ex)
       open(10,file='Rmatrix_'//tag2//'.in')
          if (ex) then
-            print *,'reading Rmat from Rmatrix.in'
+            print '(a,i1,a,a,a)','reading Rmat(:,:,',k,') from Rmatrix_'//tag2//'.in'
             read(10,*)
             do i=1,na
                read(10,*)ctmp,Rmat(i,:,k)
@@ -42,8 +42,6 @@ subroutine Rmatrix
       enddo
       enddo
       
-      print *
-      print *,'Rmat:'
       print '(11f10.2)',Rmat(:,:,k)
       print *
    enddo
