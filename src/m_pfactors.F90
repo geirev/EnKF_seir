@@ -17,7 +17,7 @@ subroutine pfactors
    real dead, seve
    integer i
    integer, save :: iprt=0
-   logical :: lprt=.false.
+   logical :: lprt=.true.
    logical ex
    character(len=6) ctmp
 
@@ -42,6 +42,7 @@ subroutine pfactors
       inquire(file='pfactors.in',exist=ex)
       open(10,file='pfactors.in')
          if (ex) then
+            print '(a)','Reading p-factors from pfactors.in'
             read(10,*)
             read(10,*)ctmp,pmorig(:)
             read(10,*)ctmp,pforig(:)
