@@ -14,6 +14,7 @@ subroutine enkfpost(ens,enspar,nrens,nt)
    integer j
 
 ! Ensure all parameters are larger than minpar (from infile.in)
+   avepar=0.0
    do j=1,nrens
       enspar(j)=max(enspar(j),minpar)
       avepar=avepar+enspar(j)*(1.0/real(nrens))

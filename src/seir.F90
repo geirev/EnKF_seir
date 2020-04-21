@@ -46,10 +46,8 @@ program seir
    enddo
    print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,nt,nrens,0) ! Dump prior solution to files
-   print *,'A'
    if (.not.lenkf) stop                        ! If not doing assimilation stop here
 
-   print *,'B'
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! ESMDA update

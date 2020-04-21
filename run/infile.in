@@ -17,8 +17,8 @@
  20/04-2020               ! Start date of second phase of intervations
 #3 First guess model parameters and their std dev -----------------------------------------------------
  5.0          1.0         !  R0        : Basic reproduction number with no interventions
- 0.662        0.1         !  R1        : Basic reproduction number with no interventions
- 0.7          0.1         !  R2        : Basic reproduction number with no interventions
+ 0.662        0.05        !  R1        : Basic reproduction number with no interventions
+ 0.90         0.1         !  R2        : Basic reproduction number with no interventions
  43.0         4.0         !  I0        : Initial infectious used to initialize the model
  5.5          0.5         !  Tinc      : Incubation period 
  3.8          0.5         !  Tinf      : Infection time                 |
