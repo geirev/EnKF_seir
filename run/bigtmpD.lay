@@ -1,5 +1,5 @@
 #!MC 1410
-$!VarSet |LFDSFN1| = '"bigdumpC.dat" "bigdumpO_70.dat" "bigdumpO_80.dat" "bigdumpO_90.dat"'
+$!VarSet |LFDSFN1| = '"bigdumpO_70.dat" "bigdumpO_80.dat" "bigdumpO_90.dat"'
 $!VarSet |LFDSVL1| = '"i" "time" "S01" "S02" "S03" "S04" "S05" "S06" "S07" "S08" "S09" "S10" "S11" "E01" "E02" "E03" "E04" "E05" "E06" "E07" "E08" "E09" "E10" "E11" "I01" "I02" "I03" "I04" "I05" "I06" "I07" "I08" "I09" "I10" "I11" "Qm" "Qs" "Qf" "Hs" "Hf" "Rm" "Rs" "D"'
 $!VarSet |LFDSFN2| = '"obs.dat"'
 $!VarSet |LFDSVL2| = '"i" "time" "ave" "std"'
@@ -403,7 +403,7 @@ $!FrameName  = 'Frame 001'
 $!GlobalTime 
   SolutionTime = 0
 $!DeleteLineMaps 
-$!ActiveLineMaps  =  [1-8]
+$!ActiveLineMaps  =  [1-6]
 $!GlobalLinePlot 
   DataLabels
     {
@@ -425,7 +425,7 @@ $!GlobalLinePlot
       }
     }
 $!LineMap  [1]
-  Name = 'Deaths Closed'
+  Name = 'Deaths R2=0.70'
   Assign
     {
     Zone = 1
@@ -457,7 +457,7 @@ $!LineMap  [1]
     Size = 1
     }
 $!LineMap  [2]
-  Name = 'Deaths R=0.70'
+  Name = 'Deaths R2=0.80'
   Assign
     {
     Zone = 103
@@ -489,7 +489,7 @@ $!LineMap  [2]
     Size = 1
     }
 $!LineMap  [3]
-  Name = 'Deaths R=0.80'
+  Name = 'Deaths R2=0.90'
   Assign
     {
     Zone = 205
@@ -521,39 +521,7 @@ $!LineMap  [3]
     Size = 1
     }
 $!LineMap  [4]
-  Name = 'Deaths R=0.90'
-  Assign
-    {
-    Zone = 307
-    XAxisVar = 2
-    YAxisVar = 43
-    }
-  Lines
-    {
-    Color = Custom55
-    LineThickness = 0.8
-    }
-  Symbols
-    {
-    Show = No
-    Color = Cyan
-    FillColor = Cyan
-    }
-  BarCharts
-    {
-    Color = Cyan
-    FillColor = Cyan
-    }
-  ErrorBars
-    {
-    Var = 2
-    Color = Custom36
-    LineThickness = 0.4
-    Skipping = 3
-    Size = 1
-    }
-$!LineMap  [5]
-  Name = 'Hospitalized Closed'
+  Name = 'Hospitalized R2=0.70'
   Assign
     {
     Zone = 1
@@ -585,8 +553,8 @@ $!LineMap  [5]
     Skipping = 3
     Size = 1
     }
-$!LineMap  [6]
-  Name = 'Hospitalized R=0.70'
+$!LineMap  [5]
+  Name = 'Hospitalized R2=0.80'
   Assign
     {
     Zone = 103
@@ -618,8 +586,8 @@ $!LineMap  [6]
     Skipping = 3
     Size = 1
     }
-$!LineMap  [7]
-  Name = 'Hospitalized R=0.80'
+$!LineMap  [6]
+  Name = 'Hospitalized R2=0.90'
   Assign
     {
     Zone = 205
@@ -629,39 +597,6 @@ $!LineMap  [7]
   Lines
     {
     Color = Custom52
-    LinePattern = Dashed
-    LineThickness = 0.8
-    }
-  Symbols
-    {
-    Show = No
-    Color = Cyan
-    FillColor = Cyan
-    }
-  BarCharts
-    {
-    Color = Cyan
-    FillColor = Cyan
-    }
-  ErrorBars
-    {
-    Var = 2
-    Color = Custom36
-    LineThickness = 0.4
-    Skipping = 3
-    Size = 1
-    }
-$!LineMap  [8]
-  Name = 'Hospitalized R=0.90'
-  Assign
-    {
-    Zone = 307
-    XAxisVar = 2
-    YAxisVar = 44
-    }
-  Lines
-    {
-    Color = Custom55
     LinePattern = Dashed
     LineThickness = 0.8
     }
@@ -776,7 +711,6 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 8
       }
     }
 $!XYLineAxis 
@@ -1114,7 +1048,6 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 8
       }
     }
 $!XYLineAxis 
@@ -1236,5 +1169,5 @@ $!Linking
     LinkAxisPosition = Yes
     }
 $!FrameControl ActivateByNumber
-  Frame = 2
+  Frame = 1
 $!SetStyleBase Config

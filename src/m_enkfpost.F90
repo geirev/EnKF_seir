@@ -1,13 +1,11 @@
 module m_enkfpost
 contains 
-subroutine enkfpost(ens,enspar,nrens,nt)
+subroutine enkfpost(ens,enspar)
    use mod_dimensions
    use mod_states
    use mod_params
    use mod_parameters
    implicit none
-   integer, intent(in) :: nt
-   integer, intent(in) :: nrens
    type(states), intent(inout) :: ens(0:nt,nrens)
    type(params), intent(inout) :: enspar(nrens)
    type(params) avepar
@@ -22,9 +20,26 @@ subroutine enkfpost(ens,enspar,nrens,nt)
 
    print *
    print '(a)','Posterior ensemble mean of parameters:'
-   print '(100a10)',parnames
-   print '(100f10.3)',pfg
-   print '(100f10.3)',avepar
+   print '(100a10)',parnames%I0,parnames%Tinf,parnames%Tinc,parnames%Trecm,parnames%Trecs,parnames%Thosp,&
+                                             parnames%Tdead,parnames%p_sev,parnames%CFR
+   print '(100f10.3)', pfg%I0,      &
+                       pfg%Tinf,    &
+                       pfg%Tinc,    &
+                       pfg%Trecm,   &
+                       pfg%Trecs,   &
+                       pfg%Thosp,   &
+                       pfg%Tdead,   &
+                       pfg%p_sev,   &
+                       pfg%CFR 
+   print '(100f10.3)', avepar%I0,      &
+                       avepar%Tinf,    &
+                       avepar%Tinc,    &
+                       avepar%Trecm,   &
+                       avepar%Trecs,   &
+                       avepar%Thosp,   &
+                       avepar%Tdead,   &
+                       avepar%p_sev,   &
+                       avepar%CFR 
    print *
 end subroutine
 end module

@@ -1,16 +1,19 @@
 module m_readinputs
+logical lrtime
+real rdcorr
 contains
-subroutine readinputs(nrens,nt)
+subroutine readinputs()
+   use mod_dimensions
    use mod_params
    use mod_parameters 
    use m_enkfini 
    use m_getday
    implicit none
-   integer, intent(out) :: nrens
-   integer, intent(out) :: nt
    logical ex
    character(len=2) ca
    integer id,im,iy,k,day
+   integer ir,i
+   real stdR(nrint),fgR(nrint),dt,t
 
    inquire(file='infile.in',exist=ex)
    if (.not.ex) then
@@ -32,8 +35,8 @@ subroutine readinputs(nrens,nt)
       read(10,*)relobserr           ;    print '(a,f10.4)',    'Realative obs error        :',relobserr
       read(10,*)minobserr           ;    print '(a,f10.4)',    'Minimum   obs error        :',minobserr
       read(10,*)maxobserr           ;    print '(a,f10.4)',    'Maximum   obs error        :',maxobserr
-      read(10,*)lmeascorr           ;    print '(a,l1)',       'Activate correated obs err :',lmeascorr
-      read(10,*)rh                  ;    print '(a,f10.4)',    'Obs error correation       :',rh
+      read(10,*)lmeascorr           ;    print '(a,l1)',       'Activate corr. obs. err.   :',lmeascorr
+      read(10,*)rh                  ;    print '(a,f10.4)',    'Obs error decorrelation    :',rh
       read(10,*)truncation          ;    print '(a,f10.4)',    'EnKF SVD truncation (0.99) :',truncation
 
       read(10,'(a)')ca      
@@ -68,20 +71,35 @@ subroutine readinputs(nrens,nt)
       endif
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
-      read(10,*)p%R(1) , parstd%R(1) ; print '(a,2f10.3)', 'R until 1st intervention and std dev :',p%R(1)   ,parstd%R(1)   
-      read(10,*)p%R(2) , parstd%R(2) ; print '(a,2f10.3)', 'R 1st-2nd intervention   and std dev :',p%R(2)   ,parstd%R(2)   
-      read(10,*)p%R(3) , parstd%R(3) ; print '(a,2f10.3)', 'R 2nd-3rd intervention   and std dev :',p%R(3)   ,parstd%R(3)   
-      read(10,*)p%I0   , parstd%I0   ; print '(a,2f10.3)', 'Initial infected I0      and std dev :',p%I0     ,parstd%I0   
-      read(10,*)p%Tinc , parstd%Tinc ; print '(a,2f10.3)', 'Incubation time          and std dev :',p%Tinc   ,parstd%Tinc 
-      read(10,*)p%Tinf , parstd%Tinf ; print '(a,2f10.3)', 'Infection time           and std dev :',p%Tinf   ,parstd%Tinf 
-      read(10,*)p%Trecm, parstd%Trecm; print '(a,2f10.3)', 'Recovery time mild       and std dev :',p%Trecm  ,parstd%Trecm
-      read(10,*)p%Trecs, parstd%Trecs; print '(a,2f10.3)', 'Recovery time severe     and std dev :',p%Trecs  ,parstd%Trecs
-      read(10,*)p%Thosp, parstd%Thosp; print '(a,2f10.3)', 'Hospitalization time     and std dev :',p%Thosp  ,parstd%Thosp
-      read(10,*)p%Tdead, parstd%Tdead; print '(a,2f10.3)', 'Time to death            and std dev :',p%Tdead  ,parstd%Tdead
-      read(10,*)p%CFR  , parstd%CFR  ; print '(a,2f10.3)', 'Critical fatality ratio  and std dev :',p%CFR    ,parstd%CFR  
-      read(10,*)p%p_sev, parstd%p_sev; print '(a,2f10.3)', 'Fraction of severe cases and std dev :',p%p_sev  ,parstd%p_sev
+      read(10,*)lrtime , rdcorr      ; print '(a,tr9,l1,f10.3)','R(t) (TF) and decorrelation legnth   :',lrtime   ,rdcorr
+      read(10,*)fgR(1) , stdR(1)     ; print '(a,2f10.3)',  'prior R until 1st interv and std dev :',fgR(1)   ,stdR(1)
+      read(10,*)fgR(2) , stdR(2)     ; print '(a,2f10.3)',  'prior R 1st-2nd interv   and std dev :',fgR(2)   ,stdR(2)
+      read(10,*)fgR(3) , stdR(3)     ; print '(a,2f10.3)',  'prior R 2nd-3rd interv   and std dev :',fgR(3)   ,stdR(3)
+      read(10,*)p%I0   , parstd%I0   ; print '(a,2f10.3)',  'Initial infected I0      and std dev :',p%I0     ,parstd%I0
+      read(10,*)p%Tinc , parstd%Tinc ; print '(a,2f10.3)',  'Incubation time          and std dev :',p%Tinc   ,parstd%Tinc
+      read(10,*)p%Tinf , parstd%Tinf ; print '(a,2f10.3)',  'Infection time           and std dev :',p%Tinf   ,parstd%Tinf
+      read(10,*)p%Trecm, parstd%Trecm; print '(a,2f10.3)',  'Recovery time mild       and std dev :',p%Trecm  ,parstd%Trecm
+      read(10,*)p%Trecs, parstd%Trecs; print '(a,2f10.3)',  'Recovery time severe     and std dev :',p%Trecs  ,parstd%Trecs
+      read(10,*)p%Thosp, parstd%Thosp; print '(a,2f10.3)',  'Hospitalization time     and std dev :',p%Thosp  ,parstd%Thosp
+      read(10,*)p%Tdead, parstd%Tdead; print '(a,2f10.3)',  'Time to death            and std dev :',p%Tdead  ,parstd%Tdead
+      read(10,*)p%CFR  , parstd%CFR  ; print '(a,2f10.3)',  'Critical fatality ratio  and std dev :',p%CFR    ,parstd%CFR
+      read(10,*)p%p_sev, parstd%p_sev; print '(a,2f10.3)',  'Fraction of severe cases and std dev :',p%p_sev  ,parstd%p_sev
 
-      pfg=p ! store first guess of parameters
+      do i=0,min(nt,rdim)
+         dt= time/real(nt-1)
+         t= 0 + real(i)*dt
+         if (t <= Tinterv(1)) then
+            ir=1
+         elseif (Tinterv(1) < t .and. t <= Tinterv(2) ) then
+            ir=2
+         elseif (t > Tinterv(2)) then
+            ir=3
+         endif
+         p%R(i)=fgR(ir)     
+         parstd%R(i) = stdR(ir) 
+      enddo
+
+      pfg=p          ! store first guess of parameters
 
       read(10,'(a)')ca      
       if (ca /= '#4') then
@@ -97,7 +115,6 @@ subroutine readinputs(nrens,nt)
          print *,'#5: error in infile.in'
          stop
       endif
-
 
    close(10)
    print *

@@ -1,9 +1,8 @@
 module m_tecplot
 contains
-subroutine saveresult(fname,varname,aved,stdd,ensd,tag,nrens,nt,dt)
+subroutine saveresult(fname,varname,aved,stdd,ensd,tag,dt)
+   use mod_dimensions
    implicit none
-   integer, intent(in) :: nrens
-   integer, intent(in) :: nt
    real, intent(in)    :: dt
    real, intent(in) :: aved(0:nt)
    real, intent(inout) :: stdd(0:nt)
@@ -18,7 +17,6 @@ subroutine saveresult(fname,varname,aved,stdd,ensd,tag,nrens,nt,dt)
       write(10,'(5a)')'TITLE = "'//varname//'_'//tag//'"'
       write(10,'(a)')'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i4,a))')(' "',i,'"',i=1,min(nrens,1000))
-!      write(10,'(5a,i5,a)')'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       write(10,*)'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
       if (stdd(0) < 1.0E-30) stdd(0)=0.0
       do i=0,nt
@@ -29,7 +27,7 @@ subroutine saveresult(fname,varname,aved,stdd,ensd,tag,nrens,nt,dt)
 
 end subroutine
 
-subroutine tecplot(ens,enspar,nt,nrens,pri)
+subroutine tecplot(ens,enspar,pri)
    use mod_dimensions
    use mod_states
    use mod_diag
@@ -40,8 +38,6 @@ subroutine tecplot(ens,enspar,nt,nrens,pri)
    use m_ensstd
    use m_enkfini
    implicit none
-   integer, intent(in) :: nt
-   integer, intent(in) :: nrens
    integer, intent(in) :: pri
 
    type(params), intent(in) :: enspar(nrens)
@@ -56,9 +52,10 @@ subroutine tecplot(ens,enspar,nt,nrens,pri)
 
    integer i,j,m
    real t,dt
+   real aveR(0:nt),stdR(0:nt)
    character(len=1) tag
    character(len=3) tag3
-CHARACTER(len=30) fm
+   character(len=30) fm
 
    write(tag,'(i1.1)')pri
    dt= time/real(nt-1)
@@ -132,26 +129,30 @@ CHARACTER(len=30) fm
    enddo
 
    do i=0,nt
+
       aved(i)=0.0
-      stdd(i)=0.0
       do j=1,nrens
          aved(i)=aved(i) + ensd(i,j)
       enddo
       aved(i)=aved(i)*(1.0/real(nrens))
+
+      stdd(i)=0.0
       do j=1,nrens
          stdd(i)=stdd(i) + (ensd(i,j)-aved(i))*(ensd(i,j)-aved(i))
       enddo
       stdd(i)=stdd(i)*(1.0/real(nrens-1))
       stdd(i)=sqrt(stdd(i))
+
    enddo
 
-   call saveresult('susc' ,'Susceptible'  ,aved(:)%S,stdd(:)%S,ensd(:,:)%S,tag,nrens,nt,dt)
-   call saveresult('expos','Exposed'      ,aved(:)%E,stdd(:)%E,ensd(:,:)%E,tag,nrens,nt,dt)
-   call saveresult('infec','Infecteus'    ,aved(:)%I,stdd(:)%I,ensd(:,:)%I,tag,nrens,nt,dt)
-   call saveresult('recov','Recovered'    ,aved(:)%R,stdd(:)%R,ensd(:,:)%R,tag,nrens,nt,dt)
-   call saveresult('hosp' ,'Hospitalized' ,aved(:)%H,stdd(:)%H,ensd(:,:)%H,tag,nrens,nt,dt)
-   call saveresult('dead' ,'Dead'         ,aved(:)%D,stdd(:)%D,ensd(:,:)%D,tag,nrens,nt,dt)
-   call saveresult('case' ,'Cases'        ,aved(:)%C,stdd(:)%C,ensd(:,:)%C,tag,nrens,nt,dt)
+
+   call saveresult('susc' ,'Susceptible'  ,aved(:)%S,stdd(:)%S,ensd(:,:)%S,tag,dt)
+   call saveresult('expos','Exposed'      ,aved(:)%E,stdd(:)%E,ensd(:,:)%E,tag,dt)
+   call saveresult('infec','Infecteus'    ,aved(:)%I,stdd(:)%I,ensd(:,:)%I,tag,dt)
+   call saveresult('recov','Recovered'    ,aved(:)%R,stdd(:)%R,ensd(:,:)%R,tag,dt)
+   call saveresult('hosp' ,'Hospitalized' ,aved(:)%H,stdd(:)%H,ensd(:,:)%H,tag,dt)
+   call saveresult('dead' ,'Dead'         ,aved(:)%D,stdd(:)%D,ensd(:,:)%D,tag,dt)
+   call saveresult('case' ,'Cases'        ,aved(:)%C,stdd(:)%C,ensd(:,:)%C,tag,dt)
 
  
    open(10,file='obs.dat')
@@ -207,12 +208,46 @@ CHARACTER(len=30) fm
 ! Parameters   
    open(10,file='par'//tag//'.dat')
       write(10,*)'TITLE = "Parameters_'//tag//'"'
-      write(10,*)'VARIABLES = "iens" "pri" ',parnames
+      write(10,*)'VARIABLES = "iens" "pri" ',parnames%I0,parnames%Tinf,parnames%Tinc,parnames%Trecm,parnames%Trecs,parnames%Thosp,&
+                                             parnames%Tdead,parnames%p_sev,parnames%CFR
       write(10,'(a,i5,a,i5,a)')' ZONE T="Parameters_'//tag//'"  F=POINT, I=',nrens,', J=1, K=1'
       do j=1,nrens
-         write(10,'(2i5,200f13.6)')j,pri,enspar(j)
+         write(10,'(2i5,200f13.6)')j,pri,enspar(j)%I0,      &
+                                         enspar(j)%Tinf,    &
+                                         enspar(j)%Tinc,    &
+                                         enspar(j)%Trecm,   &
+                                         enspar(j)%Trecs,   &
+                                         enspar(j)%Thosp,   &
+                                         enspar(j)%Tdead,   &
+                                         enspar(j)%p_sev,   &
+                                         enspar(j)%CFR 
+      enddo 
+   close(10)
+   
+   aveR=0.0
+   stdR=0.0
+   do i=0,nt
+      do j=1,nrens
+         aveR(i)=aveR(i) + enspar(j)%R(i)
+      enddo
+      aveR(i)=aveR(i)/real(nrens)
+
+      do j=1,nrens
+         stdR(i)=stdR(i) + (enspar(j)%R(i)-aveR(i))**2
+      enddo
+      stdR(i)=stdR(i)/real(nrens-1) 
+      stdR(i)=sqrt(stdR(i))
+   enddo
+
+   open(10,file='Rens_'//tag//'.dat')
+   write(10,*)'TITLE = "Rens_'//tag//'"'
+      write(10,'(a)')'VARIABLES = "time" "ave" "std" '
+      write(10,'(20(a,i4,a))')(' "',i,'"',i=1,min(nrens,1000))
+      write(10,*)'ZONE T="Rens_'//tag//'"  F=POINT, I=',min(nt+1,rdim+1),', J=1, K=1'
+      do i=0,min(rdim,nt)
+         write(10,'(2000f10.5)')real(i)*dt,aveR(i),stdR(i),enspar(1:min(nrens,1000))%R(i)
       enddo
    close(10)
   
 end subroutine
-end module
+end module 

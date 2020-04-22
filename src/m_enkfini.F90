@@ -32,11 +32,10 @@ use m_random
    integer nrobsh,nrobsd
 
 contains
-subroutine enkfini(nrens,nt,time)
+subroutine enkfini(time)
+   use mod_dimensions
    use m_getday
    implicit none
-   integer, intent (in) :: nrens
-   integer, intent (in) :: nt
    real,    intent (in) :: time
    real dt
    integer i,j,k,m
@@ -108,7 +107,7 @@ subroutine enkfini(nrens,nt,time)
    print '(a)','List of observations:'
    print '(a)','  number   gridp obstime obstype  obsval  stddev'
    do m=1,nrobs
-      print '(3i8,a8,2f8.3)',m,iobs(m),tobs(m),cobs(m),dobs(m),min(maxobserr,max(relobserr*dobs(m),minobserr)) 
+      print '(3i8,a8,2f10.3)',m,iobs(m),tobs(m),cobs(m),dobs(m),min(maxobserr,max(relobserr*dobs(m),minobserr)) 
    enddo
    print *
 

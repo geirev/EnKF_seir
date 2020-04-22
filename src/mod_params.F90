@@ -1,8 +1,9 @@
 module mod_params
 ! model parameters to be tuned by EnKF
+   use mod_dimensions
    type paramnames
       character(len=9) ::   I0    =' "    I0"'   
-      character(len=9) ::   R(3)  =(/' "    R1"',' "    R2"',' "    R3"'/)   
+      character(len=9) ::   R     =' "    R0"'
       character(len=9) ::   Tinf  =' "  Tinf"'
       character(len=9) ::   Tinc  =' "  Tinc"'
       character(len=9) ::   Trecm =' " Trecm"'
@@ -15,7 +16,7 @@ module mod_params
 
    type params
       real I0   
-      real R(3)
+      real R(0:rdim)
       real Tinf 
       real Tinc 
       real Trecm

@@ -15,11 +15,13 @@ available_variables = [
         'recov',
         'infec',
         'expos',
+        'Rens',
         ]
 
 available_observations = [
         'Observed deaths',
         'Observed hospitalized',
+        None,
         None,
         None,
         None,
@@ -35,6 +37,7 @@ available_output = [
         'Recovered',
         'Infecteus',
         'Exposed',
+        'Rens',
         ]
 
 variable2output = dict(zip(available_variables, available_output))

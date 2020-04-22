@@ -22,6 +22,7 @@ variable_colors = [
         (0, 0, 0),
         (0, 1, 1),
         (1, 0, 1),
+        (1, 0, 1),
         ]
 
 variable_colors = dict(zip(available_variables, variable_colors))
@@ -54,8 +55,8 @@ def plot_ensemble(time, mean, std_dev, ensemble, color, fading):
     ensemble_color = lighter(color, fading)
     plt.plot(time, ensemble, color=ensemble_color)
     plt.plot(time, mean, color=color)
-    plt.plot(time, mean+std_dev, color=color, linestyle='dashed')
-    plt.plot(time, mean-std_dev, color=color, linestyle='dashed')
+    #plt.plot(time, mean+std_dev, color=color, linestyle='dashed')
+    #plt.plot(time, mean-std_dev, color=color, linestyle='dashed')
         
 def plot_observed_data(time, observed_data, std_dev, color):
     plt.errorbar(
@@ -66,7 +67,7 @@ def plot_observed_data(time, observed_data, std_dev, color):
             markerfacecolor=color, 
             color=color)
     
-def plot_variable(data_source, variable, obs_file_name, obs_name):
+def plot_variable(data_source, variable, obs_file_name, obs_name, prior):
     post_file_name  = data_source / (variable + '_1.dat')
     prior_file_name = data_source / (variable + '_0.dat')
     
@@ -74,11 +75,12 @@ def plot_variable(data_source, variable, obs_file_name, obs_name):
     
     # plot prior data first because, since it is more spread than the posterior
     # it won't be covered by it
-    output_variable = variable2output[variable] + '_0'
-    time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(prior_file_name, output_variable)
-    prior_fading = 0.9
-    print("Ploting prior for: ", variable)
-    plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading)
+    if prior == 'true':
+        output_variable = variable2output[variable] + '_0'
+        time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(prior_file_name, output_variable)
+        prior_fading = 0.9
+        print("Ploting prior for: ", variable)
+        plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading)
     
     output_variable = variable2output[variable] + '_1'
     time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(post_file_name, output_variable)
@@ -120,6 +122,14 @@ def parse_arguments():
             required=False)
     
     parser.add_argument(
+            "--prior", 
+            default='false', 
+            type=str, 
+            help="Wheter to include the prior ensemble in the plots",
+            choices=['true', 'false'],
+            required=False)
+    
+    parser.add_argument(
             "--show", 
             default='false', 
             type=str, 
@@ -144,7 +154,7 @@ def parse_arguments():
     
     args = parser.parse_args()
     
-    return Path(args.data_dir), args.variables, Path(args.figs_out_dir), args.format, args.dpi, args.show
+    return Path(args.data_dir), args.variables, Path(args.figs_out_dir), args.format, args.dpi, args.prior, args.show
     
 def save_figures(figs_out_dir, figures, format, dpi, show):
     for var, fig in figures.items():
@@ -154,24 +164,26 @@ def save_figures(figs_out_dir, figures, format, dpi, show):
             plt.show()
         plt.close(fig)
 
-def plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, show):
+def plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, prior, show):
     obs_file_name = data_dir / r'obs.dat'
-    figures = plot_variables(data_dir, requested_vars, obs_file_name)
+    figures = plot_variables(data_dir, requested_vars, obs_file_name, prior)
     save_figures(figs_out_dir, figures, format, dpi, show)
 
 def main():
-   data_dir, requested_vars, figs_out_dir, format, dpi, show = parse_arguments()
-   plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, show)
+   data_dir, requested_vars, figs_out_dir, format, dpi, prior,  show = parse_arguments()
+   plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, prior, show)
    
-def plot_variables(data_source, variables, obs_file_name):
+def plot_variables(data_source, variables, obs_file_name, prior):
     figures = {}
     for variable in variables:
         fig = plt.figure()
-        plt.xlabel('Time (days)')
         plt.ylabel('Number of people (-)')
+        if variable == 'Rens':
+            plt.ylabel('Reproduction factor R(t)')
+        plt.xlabel('Time (days)')
         obs_data_name = variable2observation[variable]
         print("Observed data: ", obs_data_name)
-        plot_variable(data_source, variable, obs_file_name, obs_data_name)
+        plot_variable(data_source, variable, obs_file_name, obs_data_name, prior)
         figures[variable] = fig
         
     return figures

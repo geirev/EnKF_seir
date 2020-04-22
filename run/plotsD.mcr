@@ -69,3 +69,10 @@ $!XYLineAxis XDetail 1 {RangeMax = 44100}
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/BIG.eps'
 $!Export 
   ExportRegion = AllFrames
+
+
+$!OpenLayout  "/home/geve/Dropbox/EnKF_seir/run/Rens.lay"
+$!RedrawAll 
+$!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/RENS.eps'
+$!Export 
+  ExportRegion = AllFrames

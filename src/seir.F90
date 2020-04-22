@@ -17,9 +17,6 @@ program seir
    use m_iniens
 
    implicit none
-   integer  nrens                              ! Ensemble size (from infile.in)
-   integer  nt                                 ! Number of output times (from infile.in)
-
    integer i,k,j,m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -28,24 +25,24 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initialization 
-   call readinputs(nrens,nt)                   ! Reads infile.in
+   call readinputs()                           ! Reads infile.in
    allocate( ens(0:nt,nrens)   )               ! Allocate ensemble for the model solutions
    allocate( enspar(nrens) )                   ! Allocate ensemble of model parameters
    call agegroups                              ! Define agegroups and population numbers
    call Rmatrix                                ! Define R infection rates between agegroups used in phase 3
    call pfactors                               ! Define fraction of mild, severe, or fatal, for each agegroup
-   call enkfini(nrens,nt,time)                 ! Reading data from corona.dat
-   call inienspar(enspar,nrens)   ! Initialize ensemble of parameters
+   call enkfini(time)                          ! Reading data from corona.dat
+   call inienspar(enspar)                      ! Initialize ensemble of parameters
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    print '(a)','Computing prior ensemble prediction'
-   call iniens(ens,enspar,nrens,nt)                   ! Initialize ensemble of models
+   call iniens(ens,enspar)                     ! Initialize ensemble of models
    do j=1,nrens
-      call solve(ens,enspar,nrens,nt,j)               ! solve ODEs for member j
+      call solve(ens,enspar,j)                 ! solve ODEs for member j
    enddo
    print '(a)','Dumping tecplot files.'
-   call tecplot(ens,enspar,nt,nrens,0) ! Dump prior solution to files
+   call tecplot(ens,enspar,0)                  ! Dump prior solution to files
    if (.not.lenkf) stop                        ! If not doing assimilation stop here
 
 
@@ -54,21 +51,21 @@ program seir
    do i=1,nesmda
       print '(a,2I3)','ESMDA step:',i,nesmda
 ! Analysis step
-      call enkfprep(ens,enspar,nrens,nt) ! Compute S and D matrices
+      call enkfprep(ens,enspar)                ! Compute S and D matrices
       call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
                     lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
-      call enkfpost(ens,enspar,nrens,nt) ! Check parameters
+      call enkfpost(ens,enspar)                ! Check parameters
   
 ! Posterior ensemble prediction
-      call iniens(ens,enspar,nrens,nt)                ! Initialize ensemble of models from updated parameters
+      call iniens(ens,enspar)                  ! Initialize ensemble of models from updated parameters
       do j=1,nrens
-         call solve(ens,enspar,nrens,nt,j)
+         call solve(ens,enspar,j)
       enddo
    print '(a)','Done..'
    enddo
 
    print '(a)','Dumping tecplot files.'
-   call tecplot(ens,enspar,nt,nrens,1)
+   call tecplot(ens,enspar,1)
    print '(a)','Done..'
 
 
@@ -81,17 +78,23 @@ subroutine f(neq, t, y, ydot)
    use m_Rmatrix
    use m_pfactors
    use m_random
+   use m_readinputs
    use mod_dimensions
    use mod_states
    implicit none
-   integer i,k,ii,kk,ir
    integer neq
    real t
    type(states) y
    type(states) ydot
 
    real R(na,na)
-   real :: qminf=0.0
+   real :: qminf=0.0 ! if set to 0.0 < qminf <= 1.0 then qminf fraction of Qm contributes to spreading virus
+   real dt
+   integer i,ir
+
+
+   dt= time/real(nt-1)
+   i= min(nint(t/dt), rdim)
 
    if (t <= Tinterv(1)) then
       ir=1
@@ -100,8 +103,8 @@ subroutine f(neq, t, y, ydot)
    elseif (t > Tinterv(2)) then
       ir=3
    endif
-   R=p%R(ir)*Rmat(:,:,ir)
-   
+
+   R(:,:)= p%R(i) * Rmat(:,:,ir)  
 
    ydot%S  =                          - (1.0/p%Tinf) * matmul(R,y%I) * y%S - qminf*(1.0/p%Tinf) * p%R(ir)*y%Qm * y%S
    ydot%E  =  - (1.0/p%Tinc ) * y%E   + (1.0/p%Tinf) * matmul(R,y%I) * y%S + qminf*(1.0/p%Tinf) * p%R(ir)*y%Qm * y%S

@@ -1,14 +1,12 @@
 module m_iniens
 contains
-subroutine iniens(ens,enspar,nrens,nt)
+subroutine iniens(ens,enspar)
    use mod_dimensions
    use mod_states
    use mod_params
    use mod_parameters
    use m_agegroups
    implicit none
-   integer, intent(in)   ::  nrens
-   integer, intent(in)   ::  nt
    type(states), intent(out)  ::  ens(0:nt,nrens)
    type(params), intent(in)   ::  enspar(nrens)
    integer j

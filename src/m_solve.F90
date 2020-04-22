@@ -1,6 +1,6 @@
 module m_solve
 contains
-subroutine solve(ens,enspar,nrens,nt,j)
+subroutine solve(ens,enspar,j)
    use mod_dimensions
    use mod_states
    use mod_params
@@ -8,8 +8,6 @@ subroutine solve(ens,enspar,nrens,nt,j)
    use m_pfactors
    implicit none
    external f,jac
-   integer, intent(in) :: nrens
-   integer, intent(in) :: nt
    integer, intent(in) :: j
    type(states), intent(inout) :: ens(0:nt,nrens)
    type(params), intent(inout) :: enspar(nrens)
