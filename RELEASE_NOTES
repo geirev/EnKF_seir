@@ -1,8 +1,8 @@
 26/4 2020
 infile.in has changed.
 Added the support for R being a picewise continous function of time rather than picewise constant
-in time.  A parameter is added to infile.in to switch on (T) or switch of (F) the continuous 
-in time R. If set to false the code behave as before.
+in time.  A parameter is added to infile.in to switch on (T) or switch of (F) the continuous-in-time R.
+If set to false the code behaves as before.
 
 plot.py and the covid notebook also plots the R(t) ensemble
 

@@ -416,7 +416,7 @@ $!GlobalLinePlot
       }
     XYPos
       {
-      X = 71.681
+      X = 63.73
       Y = 96.325
       }
     }
@@ -47824,5 +47824,5 @@ $!Linking
     LinkAxisPosition = Yes
     }
 $!FrameControl ActivateByNumber
-  Frame = 2
+  Frame = 1
 $!SetStyleBase Config

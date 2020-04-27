@@ -1,16 +1,16 @@
 EnKF_seir
 
-This code uses an extended SEIR model with ageclasses in an ensemble 
-data assimilation system for predicting the spreading of the Corona virus.
-The ensemble method is the ESMDA (Ensemble Smoother with multiple data
-assimilation). The measurements are the accumulated number of deaths and the 
-daily number of hospitalized. 
+This code uses an extended SEIR model with age classes in an ensemble data
+assimilation system for predicting the spreading of the Coronavirus.  The ensemble
+method is the ESMDA (Ensemble Smoother with multiple data assimilation). The
+measurements are the accumulated number of deaths and the daily number of
+hospitalized.
 
-Initially, model parameters are sampled from prescribed normal distributions.
-The ensemble is integrated forward in time to make a prior ensemble prediction.
-The ESMDA is then used to update the ensemble of model parameters.
-Thereafter the posterior ensemble is integrated a final time to produce the posterior
-prediction.
+Initially, model parameters are sampled from prescribed normal distributions.  The
+ensemble is integrated forward in time to make a prior ensemble prediction.  The
+ESMDA is then used to update the ensemble of model parameters.  After that, the
+posterior ensemble is integrated a final time to produce the posterior prediction.
+
 
 See the files:
 README_SETUP for setting up a simulation with the code.
