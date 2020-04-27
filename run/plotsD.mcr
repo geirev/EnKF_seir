@@ -18,7 +18,7 @@ $!XYLineAxis YDetail 1 {RangeMax = 400}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
 $!XYLineAxis XDetail 1 {RangeMax = 43991}
-$!XYLineAxis XDetail 1 {RangeMax = 44100}
+$!XYLineAxis XDetail 1 {RangeMax = 44070}
 $!RedrawAll 
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/HD.eps'
 $!Export 
@@ -37,7 +37,7 @@ $!XYLineAxis YDetail 1 {RangeMax = 20000}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
 $!XYLineAxis XDetail 1 {RangeMax = 43991}
-$!XYLineAxis XDetail 1 {RangeMax = 44100}
+$!XYLineAxis XDetail 1 {RangeMax = 44070}
 $!RedrawAll 
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/IE.eps'
 $!Export 
@@ -55,7 +55,7 @@ $!XYLineAxis YDetail 1 {RangeMax = 70000}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
 $!XYLineAxis XDetail 1 {RangeMax = 43991}
-$!XYLineAxis XDetail 1 {RangeMax = 44100}
+$!XYLineAxis XDetail 1 {RangeMax = 44070}
 $!RedrawAll 
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/CR.eps'
 $!Export 
@@ -72,6 +72,8 @@ $!Export
 
 
 $!OpenLayout  "/home/geve/Dropbox/EnKF_seir/run/Rens.lay"
+$!XYLineAxis YDetail 1 {RangeMin = 0}
+$!XYLineAxis XDetail 1 {RangeMax = 44070}
 $!RedrawAll 
 $!ExportSetup ExportFName = '/home/geve/Dropbox/EnKF_seir/run/RENS.eps'
 $!Export 

@@ -386,6 +386,7 @@ $!RemoveVar |LFDSFN1|
 $!AlterData 
   Equation = 'V1=V1+43891'
 $!FrameLayout 
+  ShowBorder = No
   ShowHeader = No
   HeaderColor = Red
   XYPos
@@ -52507,7 +52508,7 @@ $!LineMap  [2004]
     }
   Lines
     {
-    Color = Custom17
+    Color = Custom29
     LineThickness = 0.4
     }
   Symbols
@@ -52544,8 +52545,7 @@ $!XYLineAxis
     {
     RangeMin = 43891
     RangeMax = 43956
-    AutoGrid = No
-    GRSpacing = 10
+    GRSpacing = 14
     TickLabel
       {
       TextShape
@@ -52557,6 +52557,7 @@ $!XYLineAxis
         Formatting = TimeDate
         TimeDateFormat = 'd-mmm-yyyy'
         }
+      Offset = 3
       }
     Title
       {
@@ -52577,6 +52578,8 @@ $!XYLineAxis
         }
       NumFormat
         {
+        Formatting = FixedFloat
+        Precision = 1
         TimeDateFormat = ''
         }
       }
@@ -52588,6 +52591,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
+      Offset = 8
       }
     }
 $!FrameControl ActivateByNumber
