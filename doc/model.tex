@@ -313,7 +313,8 @@
 \begin{cases}
 \bmQ_\rmm                     &  \hpil \bmR_\rmm  \\
 \bmQ_\rms    \hpil \bmH_\rms  &  \hpil \bmR_\rms  \\
-\bmQ_\rmf    \hpil \bmH_\rmf  &  \hpil \bmD
+\bmQ_\rmf    \hpil \bmH_\rmf  &  \hpil \bmD       \\
+\bmQ_\rmf    \hpil            &  \hpil \bmD
 \end{cases}
 \label{eq:}
 \end{equation}
@@ -321,17 +322,19 @@
 The model equations are as follows:
 %
 \begin{align}
-\Dp{\bmS_i}{t}    &=   -\frac{1}{\Tinf} \bigg(\sum_{j=1}^n R_{ij}(t)\,\bmI_j\bigg) \, \bmS_i                           \label{eq:Si} \\
-\Dp{\bmE_i}{t}    &=    \frac{1}{\Tinf} \bigg(\sum_{j=1}^n R_{ij}(t)\,\bmI_j\bigg) \, \bmS_i - \frac{1}{\Tinc}\, \bmE_i      \label{eq:Ei} \\
+\Dp{\bmS_i}{t}    &=   -\frac{1}{\Tinf} \bigg(\sum_{j=1}^n R_{ij}(t)\,\bmI_j\bigg) \, \bmS_i 
+                        - \frac{q_\rmm R(t)}{\Tinf} \bmQ_\rmm \bmS_i     \label{eq:Si} \\
+\Dp{\bmE_i}{t}    &=    \frac{1}{\Tinf} \bigg(\sum_{j=1}^n R_{ij}(t)\,\bmI_j\bigg) \, \bmS_i - \frac{1}{\Tinc}\, \bmE_i  
+                        + \frac{q_\rmm R(t)}{\Tinf} \bmQ_\rmm \bmS_i        \label{eq:Ei} \\
 \Dp{\bmI_i}{t}    &=    \frac{1}{\Tinc}  \, \bmE_i          - \frac{1}{\Tinf}  \, \bmI_i                                     \label{eq:Ii} \\
 \Dp{\bmQ_\rmm}{t} &=    \sum_{i=1}^n\frac{p_\rmm^i}{\Tinf} \, \bmI_i          - (1/\Trecm)  \, \bmQ_\rmm         \label{eq:Sm} \\
 \Dp{\bmQ_\rms}{t} &=    \sum_{i=1}^n\frac{p_\rms^i}{\Tinf} \, \bmI_i          - (1/\Thosp)  \, \bmQ_\rms         \label{eq:Sh} \\
 \Dp{\bmQ_\rmf}{t} &=    \sum_{i=1}^n\frac{p_\rmf^i}{\Tinf} \, \bmI_i          - (1/\Thosp)  \, \bmQ_\rmf          \label{eq:Sdead} \\
 \Dp{\bmH_\rms}{t} &=    (1/\Thosp)     \, \bmQ_\rms     - (1/\Trecs)  \, \bmH_\rms         \label{eq:Shos} \\
-\Dp{\bmH_\rmf}{t} &=    (1/\Thosp)     \, \bmQ_\rmf     - (1/\Tdeath) \, \bmH_\rmf         \label{eq:Fhos} \\
+\Dp{\bmH_\rmf}{t} &=    (h/\Thosp)     \, \bmQ_\rmf     - (1/\Tdeath) \, \bmH_\rmf         \label{eq:Fhos} \\
 \Dp{\bmR_\rmm }{t}&=    (1/\Trecm)     \, \bmQ_\rmm                                        \label{eq:Rm} \\
 \Dp{\bmR_\rms}{t} &=    (1/\Trecs)     \, \bmH_\rms                                        \label{eq:E} \\
-\Dp{\bmD     }{t} &=    (1/\Tdeath)    \, \bmH_\rmf                                        \label{eq:E} 
+\Dp{\bmD     }{t} &=    (1/\Tdeath)    \, \bmH_\rmf   + ((1-h)/\Thosp) \bmQ_\rmf                                     \label{eq:E} 
 \end{align}
 
 

@@ -22,7 +22,7 @@ subroutine enkfpost(ens,enspar)
    print '(a)','Posterior ensemble mean of parameters:'
    print '(100a10)',parnames%I0,parnames%Tinf,parnames%Tinc,parnames%Trecm,parnames%Trecs,parnames%Thosp,&
                                              parnames%Tdead,parnames%p_sev,parnames%CFR
-   print '(100f10.3)', pfg%I0,      &
+   print '(100f10.4)', pfg%I0,      &
                        pfg%Tinf,    &
                        pfg%Tinc,    &
                        pfg%Trecm,   &
@@ -31,7 +31,7 @@ subroutine enkfpost(ens,enspar)
                        pfg%Tdead,   &
                        pfg%p_sev,   &
                        pfg%CFR 
-   print '(100f10.3)', avepar%I0,      &
+   print '(100f10.4)', avepar%I0,      &
                        avepar%Tinf,    &
                        avepar%Tinc,    &
                        avepar%Trecm,   &

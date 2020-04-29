@@ -1,6 +1,8 @@
 module m_readinputs
-logical lrtime
-real rdcorr
+logical lrtime    ! Continuous R(t) 
+real rdcorr       ! decorrelation time for R(t)
+real :: qminf     ! If set to 0.0 < qminf <= 1.0 then qminf fraction of Qm contributes to spreading virus
+real :: hos       ! The fraction of fatally ill that actually goes to the hospital.
 contains
 subroutine readinputs()
    use mod_dimensions
@@ -84,6 +86,10 @@ subroutine readinputs()
       read(10,*)p%Tdead, parstd%Tdead; print '(a,2f10.3)',  'Time to death            and std dev :',p%Tdead  ,parstd%Tdead
       read(10,*)p%CFR  , parstd%CFR  ; print '(a,2f10.3)',  'Critical fatality ratio  and std dev :',p%CFR    ,parstd%CFR
       read(10,*)p%p_sev, parstd%p_sev; print '(a,2f10.3)',  'Fraction of severe cases and std dev :',p%p_sev  ,parstd%p_sev
+
+! Some other model parameter that are not estimated
+      read(10,*)hos                  ; print '(a,2f10.3)',  'Fraction of Qf that go to hospital   :',hos
+      read(10,*)qminf                ; print '(a,2f10.3)',  'Fraction of Qm that is infecteous    :',qminf
 
       do i=0,min(nt,rdim)
          dt= time/real(nt-1)

@@ -88,7 +88,6 @@ subroutine f(neq, t, y, ydot)
    type(states) ydot
 
    real R(na,na)
-   real :: qminf=0.0 ! if set to 0.0 < qminf <= 1.0 then qminf fraction of Qm contributes to spreading virus
    real dt
    integer i,ir
 
@@ -113,10 +112,10 @@ subroutine f(neq, t, y, ydot)
    ydot%Qs =  - (1.0/p%Thosp) * y%Qs  + (1.0/p%Tinf) * dot_product(ps,y%I)
    ydot%Qf =  - (1.0/p%Thosp) * y%Qf  + (1.0/p%Tinf) * dot_product(pf,y%I)
    ydot%Hs =    (1.0/p%Thosp) * y%Qs  - (1.0/p%Trecs) * y%Hs
-   ydot%Hf =    (1.0/p%Thosp) * y%Qf  - (1.0/p%Tdead) * y%Hf
+   ydot%Hf =    (hos/p%Thosp) * y%Qf  - (1.0/p%Tdead) * y%Hf
    ydot%Rm =    (1.0/p%Trecm) * y%Qm
    ydot%Rs =    (1.0/p%Trecs) * y%Hs
-   ydot%D  =    (1.0/p%Tdead) * y%Hf
+   ydot%D  =    (1.0/p%Tdead) * y%Hf  + ((1.0-hos)/p%Thosp) * y%Qf
 
 !   print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)
 
