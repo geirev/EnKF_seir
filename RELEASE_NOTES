@@ -1,3 +1,8 @@
+29/4 2020
+infile.in has changed.
+Added a fraction of Qf going to hospital before dying. This allows to let a fraction of Qf die in
+elderly homes or at home, without being counted as hospitalized.
+
 26/4 2020
 infile.in has changed.
 Added the support for R being a picewise continous function of time rather than picewise constant
