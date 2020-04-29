@@ -22,7 +22,8 @@ subroutine iniens(ens,enspar)
       ens(0,j)%Qs = 0.0               ! Sick (Severe at home)                    Q_s
       ens(0,j)%Qf = 0.0               ! Sick (Severe at hospital)                Q_h
       ens(0,j)%Hs = 0.0               ! Sick (Severe at hospital that will die)  Q_f
-      ens(0,j)%Hf = 0.0               ! Sick (Fatal at hospital that will die)  H_f
+      ens(0,j)%Hf = 0.0               ! Sick (Fatal at hospital that will die)   H_f
+      ens(0,j)%C  = 0.0               ! Sick (Fatal at Care home that will die)  C
       ens(0,j)%Rm = 0.0               ! Removed_mild   (recovered)               R_m
       ens(0,j)%Rs = 0.0               ! Removed_severe (recovered)               R_s
       ens(0,j)%D  = 0.0               ! Removed_fatal (dead)                     D

@@ -1,6 +1,7 @@
 module mod_states
 ! Modelstate definition for ECLIPSE
    use mod_dimensions
+   integer :: neq=3*na+9
 
    type states
 ! Solution data
@@ -12,6 +13,7 @@ module mod_states
       real Qf           ! Quarantened fatal sickness (will die)
       real Hs           ! Hospitalized with severe sickness
       real Hf           ! Hospitalized with fatal sickness
+      real C            ! In Care home with fatal sickness
       real Rm           ! Recovered from mild sickness
       real Rs           ! Recovered from severe sickness (from hospital)
       real D            ! Dead
@@ -59,6 +61,7 @@ contains
                  + A%Qf     &
                  + A%Hs     &
                  + A%Hf     &
+                 + A%C      &
                  + A%Rm     &
                  + A%Rs     &
                  + A%D 
@@ -76,6 +79,7 @@ contains
       sqrt_states%Qf      = sqrt(A%Qf+eps)
       sqrt_states%Hs      = sqrt(A%Hs+eps)
       sqrt_states%Hf      = sqrt(A%Hf+eps)
+      sqrt_states%C       = sqrt(A%C+eps)
       sqrt_states%Rm      = sqrt(A%Rm+eps)
       sqrt_states%Rs      = sqrt(A%Rs+eps)
       sqrt_states%D       = sqrt(A%D+eps)
@@ -93,6 +97,7 @@ contains
       add_states%Qf      = A%Qf + B%Qf
       add_states%Hs      = A%Hs + B%Hs
       add_states%Hf      = A%Hf + B%Hf
+      add_states%C       = A%C  + B%C 
       add_states%Rm      = A%Rm + B%Rm
       add_states%Rs      = A%Rs + B%Rs
       add_states%D       = A%D  + B%D
@@ -110,6 +115,7 @@ contains
       subtract_states%Qf      = A%Qf - B%Qf
       subtract_states%Hs      = A%Hs - B%Hs
       subtract_states%Hf      = A%Hf - B%Hf
+      subtract_states%C       = A%C  - B%C 
       subtract_states%Rm      = A%Rm - B%Rm
       subtract_states%Rs      = A%Rs - B%Rs
       subtract_states%D       = A%D  - B%D
@@ -127,6 +133,7 @@ contains
       states_real_mult%Qf      = B*A%Qf
       states_real_mult%Hs      = B*A%Hs
       states_real_mult%Hf      = B*A%Hf
+      states_real_mult%C       = B*A%C
       states_real_mult%Rm      = B*A%Rm
       states_real_mult%Rs      = B*A%Rs
       states_real_mult%D       = B*A%D 
@@ -144,6 +151,7 @@ contains
       real_states_mult%Qf      = B*A%Qf
       real_states_mult%Hs      = B*A%Hs
       real_states_mult%Hf      = B*A%Hf
+      real_states_mult%C       = B*A%C
       real_states_mult%Rm      = B*A%Rm
       real_states_mult%Rs      = B*A%Rs
       real_states_mult%D       = B*A%D 
@@ -161,6 +169,7 @@ contains
       states_states_mult%Qf      = A%Qf * B%Qf
       states_states_mult%Hs      = A%Hs * B%Hs
       states_states_mult%Hf      = A%Hf * B%Hf
+      states_states_mult%C       = A%C  * B%C
       states_states_mult%Rm      = A%Rm * B%Rm
       states_states_mult%Rs      = A%Rs * B%Rs
       states_states_mult%D       = A%D  * B%D 
@@ -178,6 +187,7 @@ contains
       A%Qf      = r
       A%Hs      = r
       A%Hf      = r
+      A%C       = r
       A%Rm      = r
       A%Rs      = r
       A%D       = r

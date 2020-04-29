@@ -71,7 +71,7 @@ program seir
 
 end program
 
-subroutine f(neq, t, y, ydot)
+subroutine f(neqq, t, y, ydot)
    use mod_params
    use mod_parameters
    use m_agegroups
@@ -82,7 +82,7 @@ subroutine f(neq, t, y, ydot)
    use mod_dimensions
    use mod_states
    implicit none
-   integer neq
+   integer neqq
    real t
    type(states) y
    type(states) ydot
@@ -113,15 +113,16 @@ subroutine f(neq, t, y, ydot)
    ydot%Qf =  - (1.0/p%Thosp) * y%Qf  + (1.0/p%Tinf) * dot_product(pf,y%I)
    ydot%Hs =    (1.0/p%Thosp) * y%Qs  - (1.0/p%Trecs) * y%Hs
    ydot%Hf =    (hos/p%Thosp) * y%Qf  - (1.0/p%Tdead) * y%Hf
+   ydot%C  =    ((1.0-hos)/p%Thosp) * y%Qf - (1.0/p%Tdead) * y%C
    ydot%Rm =    (1.0/p%Trecm) * y%Qm
    ydot%Rs =    (1.0/p%Trecs) * y%Hs
-   ydot%D  =    (1.0/p%Tdead) * y%Hf  + ((1.0-hos)/p%Thosp) * y%Qf
+   ydot%D  =    (1.0/p%Tdead) * y%Hf  + (1.0/p%Tdead) * y%C
 
 !   print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)
 
 end subroutine
  
-subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
+subroutine jac(neqq, t, y, ml, mu, pd, nrowpd)
    use mod_params
    use mod_parameters
    use m_agegroups
@@ -131,7 +132,7 @@ subroutine jac(neq, t, y, ml, mu, pd, nrowpd)
    use mod_dimensions
    use mod_states
    implicit none
-   integer neq, ml, mu, nrowpd
+   integer neqq, ml, mu, nrowpd
    type(states) y
    real pd(1,1)
    real t

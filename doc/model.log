@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  29 APR 2020 12:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.19)  29 APR 2020 20:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,7 +841,7 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 10.95pt on input line 280.
  (./model.aux
 
-LaTeX Warning: Label `eq:E' multiply defined.
+LaTeX Warning: Label `eq:Fhos' multiply defined.
 
 )
 \openout1 = `model.aux'.
@@ -1078,17 +1078,17 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 6.1pt on input line 304.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 338.
+(Font)              scaled to size 8.0pt on input line 339.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.1pt on input line 338.
+(Font)              scaled to size 6.1pt on input line 339.
 
 No file model.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 343.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 344.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 343.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 344.
  (./model.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 343.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 343.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 344.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 344.
 Package rerunfilecheck Info: File `model.out' has not changed.
 (rerunfilecheck)             Checksum: 7180D0777770A01A984F3B2AA16DAE10;66.
 
@@ -1097,10 +1097,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10590 strings out of 494923
- 145894 string characters out of 6180742
- 233690 words of memory out of 5000000
- 13654 multiletter control sequences out of 15000+600000
+ 10592 strings out of 494923
+ 145913 string characters out of 6180742
+ 235751 words of memory out of 5000000
+ 13655 multiletter control sequences out of 15000+600000
  73560 words of font info for 140 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  34i,12n,37p,842b,350s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1113,10 +1113,10 @@ are/texlive/texmf-dist/fonts/type1/public/newtx/rntxmi7.pfb></usr/share/texlive
 /fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/newtx/txexs.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx
 /txsys.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on model.pdf (2 pages, 156890 bytes).
+Output written on model.pdf (2 pages, 157284 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
+ 81 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
+ 17 named destinations out of 1000 (max. 500000)
  29 words of extra memory for PDF output out of 10000 (max. 10000000)
 

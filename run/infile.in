@@ -29,7 +29,7 @@
  16.0         1.0         !  Tdead     : Days to death                                           
  0.009        0.001       !  CFR       : Case fatality rate %
  0.039        0.003       !  P_severe  : Hospitalization rate % for severe cases
- 1.0                      !  hos       : Fraction of Qf that go to hospital
+ 0.7                      !  hos       : Fraction of Qf that go to hospital
  0.0                      !  qminf     : Fraction of Qm that is infecteous
 #4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters

@@ -314,7 +314,7 @@
 \bmQ_\rmm                     &  \hpil \bmR_\rmm  \\
 \bmQ_\rms    \hpil \bmH_\rms  &  \hpil \bmR_\rms  \\
 \bmQ_\rmf    \hpil \bmH_\rmf  &  \hpil \bmD       \\
-\bmQ_\rmf    \hpil            &  \hpil \bmD
+\bmQ_\rmf    \hpil \bmC_\rmf  &  \hpil \bmD
 \end{cases}
 \label{eq:}
 \end{equation}
@@ -330,11 +330,12 @@ The model equations are as follows:
 \Dp{\bmQ_\rmm}{t} &=    \sum_{i=1}^n\frac{p_\rmm^i}{\Tinf} \, \bmI_i          - (1/\Trecm)  \, \bmQ_\rmm         \label{eq:Sm} \\
 \Dp{\bmQ_\rms}{t} &=    \sum_{i=1}^n\frac{p_\rms^i}{\Tinf} \, \bmI_i          - (1/\Thosp)  \, \bmQ_\rms         \label{eq:Sh} \\
 \Dp{\bmQ_\rmf}{t} &=    \sum_{i=1}^n\frac{p_\rmf^i}{\Tinf} \, \bmI_i          - (1/\Thosp)  \, \bmQ_\rmf          \label{eq:Sdead} \\
-\Dp{\bmH_\rms}{t} &=    (1/\Thosp)     \, \bmQ_\rms     - (1/\Trecs)  \, \bmH_\rms         \label{eq:Shos} \\
-\Dp{\bmH_\rmf}{t} &=    (h/\Thosp)     \, \bmQ_\rmf     - (1/\Tdeath) \, \bmH_\rmf         \label{eq:Fhos} \\
-\Dp{\bmR_\rmm }{t}&=    (1/\Trecm)     \, \bmQ_\rmm                                        \label{eq:Rm} \\
-\Dp{\bmR_\rms}{t} &=    (1/\Trecs)     \, \bmH_\rms                                        \label{eq:E} \\
-\Dp{\bmD     }{t} &=    (1/\Tdeath)    \, \bmH_\rmf   + ((1-h)/\Thosp) \bmQ_\rmf                                     \label{eq:E} 
+\Dp{\bmH_\rms}{t} &=    \frac{1}{\Thosp}     \, \bmQ_\rms     - \frac{1}{\Trecs}  \, \bmH_\rms         \label{eq:Shos} \\
+\Dp{\bmH_\rmf}{t} &=    \frac{h}{\Thosp}     \, \bmQ_\rmf     - \frac{1}{\Tdeath} \, \bmH_\rmf         \label{eq:Fhos} \\
+\Dp{\bmC_\rmf}{t} &=    \frac{(1-h)}{\Thosp} \, \bmQ_\rmf     - \frac{1}{\Tdeath} \, \bmC_\rmf         \label{eq:Fhos} \\
+\Dp{\bmR_\rmm }{t}&=    \frac{1}{\Trecm}     \, \bmQ_\rmm                                        \label{eq:Rm} \\
+\Dp{\bmR_\rms}{t} &=    \frac{1}{\Trecs}     \, \bmH_\rms                                        \label{eq:E} \\
+\Dp{\bmD     }{t} &=    \frac{1}{\Tdeath}    \, \bmH_\rmf   + \frac{1}{\Tdeath} \bmC_\rmf                                     \label{eq:D} 
 \end{align}
 
 
