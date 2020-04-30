@@ -19,7 +19,7 @@
  T            4.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
  4.0          0.5         !  R1        : Reproduction number with no interventions 
  0.66         0.05        !  R2        : Reproduction number during lockdown
- 0.85         0.1         !  R3        : Reproduction number during opening
+ 0.66         0.1         !  R3        : Reproduction number during opening
  43.0         4.0         !  I0        : Initial infectious used to initialize the model
  5.5          0.5         !  Tinc      : Incubation period 
  3.8          0.5         !  Tinf      : Infection time                 |

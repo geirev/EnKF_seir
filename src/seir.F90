@@ -68,6 +68,10 @@ program seir
    call tecplot(ens,enspar,1)
    print '(a)','Done..'
 
+   lpost_pfactors=.true.
+   p%p_sev=sum(enspar(1:nrens)%p_sev)/real(nrens)
+   p%cfr  =sum(enspar(1:nrens)%cfr)/real(nrens)
+   call pfactors 
 
 end program
 
