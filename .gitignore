@@ -5,12 +5,12 @@ doc/model.out
 doc/texput.log
 build
 run/*
-runQuebec/*
-runHolland/*
+runUK
+runQuebec
+runHolland
 !run/infile.in
 !run/corona.in
 !run/README
-!run/RELEASE_NOTES
 !run/*.lay
 !run/*.mcr
 __pycache__

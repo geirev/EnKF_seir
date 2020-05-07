@@ -12,6 +12,7 @@ subroutine inienspar(enspar)
    type(params), intent(out)  :: enspar(nrens)
    integer j
 
+   call random(enspar%E0   ,nrens)
    call random(enspar%I0   ,nrens)
    if (lrtime) then
       print *,'lrtime=',lrtime

@@ -1,12 +1,13 @@
-The corona.dat file contains 
+The corona.in file contains 
 "date"  "number of deaths" "Number of hospitalized" "Registred number of infected"
 only the deaths and hospitalized columns are read and used in the conditioning.
 A value of zero or negative means the measurement is ignored.
 
-The output files are all in the run dir, in a Tecplot format (for my plotting software.
-I am waiting for someone to make outputs for pyplot and matlab. 
+The output files are all in the run dir, in a Tecplot format (for my plotting software).
+They can be plotted using plots.py or the notebook, both in python/enkf_seir/plot
 
 I am normally plotting data from 
+rens_1.dat  ensemble of estimated R(t)
 case_1.dat  Number of cases
 dead_1.dat  Number of dead
 expos_1.dat Number of exposed

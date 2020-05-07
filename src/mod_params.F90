@@ -2,6 +2,7 @@ module mod_params
 ! model parameters to be tuned by EnKF
    use mod_dimensions
    type paramnames
+      character(len=9) ::   E0    =' "    E0"'   
       character(len=9) ::   I0    =' "    I0"'   
       character(len=9) ::   R     =' "    R0"'
       character(len=9) ::   Tinf  =' "  Tinf"'
@@ -15,6 +16,7 @@ module mod_params
    end type paramnames
 
    type params
+      real E0   
       real I0   
       real R(0:rdim)
       real Tinf 
@@ -56,6 +58,7 @@ contains
       type(params) max_params
       type(params), intent(in) :: A
       real,         intent(in) :: B
+      max_params%E0          = max(A%E0   ,B)
       max_params%I0          = max(A%I0   ,B)
       max_params%R           = max(A%R    ,B)
       max_params%Tinf        = max(A%Tinf ,B)
@@ -72,6 +75,7 @@ contains
       type(params) add_params
       type(params), intent(in) :: A
       type(params), intent(in) :: B
+      add_params%E0          = A%E0     + B%E0    
       add_params%I0          = A%I0     + B%I0    
       add_params%R           = A%R      + B%R   
       add_params%Tinf        = A%Tinf   + B%Tinf 
@@ -88,6 +92,7 @@ contains
       type(params) subtract_params
       type(params), intent(in) :: A
       type(params), intent(in) :: B
+      subtract_params%E0          = A%E0     - B%E0    
       subtract_params%I0          = A%I0     - B%I0    
       subtract_params%R           = A%R      - B%R    
       subtract_params%Tinf        = A%Tinf   - B%Tinf  
@@ -104,6 +109,7 @@ contains
       type(params) params_real_mult
       type(params), intent(in) :: A
       real, intent(in) :: B
+      params_real_mult%E0          = B*A%E0    
       params_real_mult%I0          = B*A%I0    
       params_real_mult%R           = B*A%R    
       params_real_mult%Tinf        = B*A%Tinf  
@@ -120,6 +126,7 @@ contains
       type(params) real_params_mult
       type(params), intent(in) :: A
       real, intent(in) :: B
+      real_params_mult%E0          = B*A%E0    
       real_params_mult%I0          = B*A%I0    
       real_params_mult%R           = B*A%R    
       real_params_mult%Tinf        = B*A%Tinf  
@@ -136,6 +143,7 @@ contains
       type(params) params_params_mult
       type(params), intent(in) :: A
       type(params), intent(in) :: B
+      params_params_mult%E0          = A%E0     * B%E0    
       params_params_mult%I0          = A%I0     * B%I0    
       params_params_mult%R           = A%R      * B%R    
       params_params_mult%Tinf        = A%Tinf   * B%Tinf 
@@ -152,6 +160,7 @@ contains
    subroutine assign_params(A,r)
       type(params), intent(out) :: A
       real, intent(in) :: r
+      A%E0          = r
       A%I0          = r
       A%R           = r
       A%Tinf        = r

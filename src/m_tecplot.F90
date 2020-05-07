@@ -83,7 +83,7 @@ subroutine tecplot(ens,enspar,pri)
                           & ('"S',i,'" ',i=1,na),  &
                           & ('"E',i,'" ',i=1,na),  &
                           & ('"I',i,'" ',i=1,na),  &
-                          &' "Qm" "Qs" "Qf" "Hs" "Hf" "Rm" "Rs" "D"'
+                          &' "Qm" "Qs" "Qf" "Hs" "Hf" "C" "Rm" "Rs" "D"'
       write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
       do i=0,nt
          t=0+real(i)*dt
@@ -208,11 +208,12 @@ subroutine tecplot(ens,enspar,pri)
 ! Parameters   
    open(10,file='par'//tag//'.dat')
       write(10,*)'TITLE = "Parameters_'//tag//'"'
-      write(10,*)'VARIABLES = "iens" "pri" ',parnames%I0,parnames%Tinf,parnames%Tinc,parnames%Trecm,parnames%Trecs,parnames%Thosp,&
-                                             parnames%Tdead,parnames%p_sev,parnames%CFR
+      write(10,*)'VARIABLES = "iens" "pri" ',parnames%E0,parnames%I0,parnames%Tinf,parnames%Tinc,parnames%Trecm,&
+                                             parnames%Trecs,parnames%Thosp, parnames%Tdead,parnames%p_sev,parnames%CFR
       write(10,'(a,i5,a,i5,a)')' ZONE T="Parameters_'//tag//'"  F=POINT, I=',nrens,', J=1, K=1'
       do j=1,nrens
-         write(10,'(2i5,200f13.6)')j,pri,enspar(j)%I0,      &
+         write(10,'(2i5,200f13.6)')j,pri,enspar(j)%E0,      &
+                                         enspar(j)%I0,      &
                                          enspar(j)%Tinf,    &
                                          enspar(j)%Tinc,    &
                                          enspar(j)%Trecm,   &

@@ -16,20 +16,22 @@
  15/03-2020               ! Start date of first  phase of intervations
  20/04-2020               ! Start date of second phase of intervations
 #3 First guess model parameters and their std dev -----------------------------------------------------
- T            4.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
- 4.0          0.5         !  R1        : Reproduction number with no interventions 
+ T                        !  Rescaling of Rmatrix                                                                 
+ T            3.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
+ 5.0          0.5         !  R1        : Reproduction number with no interventions 
  0.66         0.05        !  R2        : Reproduction number during lockdown
- 0.66         0.1         !  R3        : Reproduction number during opening
- 43.0         4.0         !  I0        : Initial infectious used to initialize the model
+ 0.70         0.1         !  R3        : Reproduction number during opening
+ 90.0         9.0        !  E0        : Initial Exposed used to initialize the model
+ 25.0         2.5         !  I0        : Initial Infectious used to initialize the model
  5.5          0.5         !  Tinc      : Incubation period 
  3.8          0.5         !  Tinf      : Infection time                 |
- 14.0         0.0         !  Trecm     : Recovery time mild cases
- 5.0          1.0         !  Trecs     : Recovery time severe cases 
- 6.0          1.0         !  Thosp     : Hospitalization time
+ 14.0         1.0         !  Trecm     : Recovery time mild cases
+ 5.0          0.5         !  Trecs     : Recovery time severe cases 
+ 6.0          0.5         !  Thosp     : Hospitalization time
  16.0         1.0         !  Tdead     : Days to death                                           
  0.009        0.001       !  CFR       : Case fatality rate %
  0.039        0.003       !  P_severe  : Hospitalization rate % for severe cases
- 0.7                      !  hos       : Fraction of Qf that go to hospital
+ 0.4                      !  hos       : Fraction of Qf that go to hospital
  0.0                      !  qminf     : Fraction of Qm that is infecteous
 #4 Div ------------------------------------------------------------------------------------------------
  0.00001                  ! Minimum value of all parameters

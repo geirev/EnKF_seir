@@ -3,6 +3,7 @@ logical lrtime    ! Continuous R(t)
 real rdcorr       ! decorrelation time for R(t)
 real :: qminf     ! If set to 0.0 < qminf <= 1.0 then qminf fraction of Qm contributes to spreading virus
 real :: hos       ! The fraction of fatally ill that actually goes to the hospital.
+logical lRrescale ! Rescales the Rmatrix_0? such that the effective R(t) is not dependent on Rmatrix
 contains
 subroutine readinputs()
    use mod_dimensions
@@ -73,10 +74,12 @@ subroutine readinputs()
       endif
 
 ! MODEL PARAMETERS (Set first guess (ensemble mean) of parameters (decleared in mod_parameters.F90) and their stddev 
+      read(10,*)lRrescale            ; print '(a,tr9,l1,f10.3)','Rescaling of Rmatrix_0?              :',lRrescale
       read(10,*)lrtime , rdcorr      ; print '(a,tr9,l1,f10.3)','R(t) (TF) and decorrelation legnth   :',lrtime   ,rdcorr
       read(10,*)fgR(1) , stdR(1)     ; print '(a,2f10.3)',  'prior R until 1st interv and std dev :',fgR(1)   ,stdR(1)
       read(10,*)fgR(2) , stdR(2)     ; print '(a,2f10.3)',  'prior R 1st-2nd interv   and std dev :',fgR(2)   ,stdR(2)
       read(10,*)fgR(3) , stdR(3)     ; print '(a,2f10.3)',  'prior R 2nd-3rd interv   and std dev :',fgR(3)   ,stdR(3)
+      read(10,*)p%E0   , parstd%E0   ; print '(a,2f10.3)',  'Initial exposed E0       and std dev :',p%E0     ,parstd%E0
       read(10,*)p%I0   , parstd%I0   ; print '(a,2f10.3)',  'Initial infected I0      and std dev :',p%I0     ,parstd%I0
       read(10,*)p%Tinc , parstd%Tinc ; print '(a,2f10.3)',  'Incubation time          and std dev :',p%Tinc   ,parstd%Tinc
       read(10,*)p%Tinf , parstd%Tinf ; print '(a,2f10.3)',  'Infection time           and std dev :',p%Tinf   ,parstd%Tinf

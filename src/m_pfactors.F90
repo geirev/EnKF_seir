@@ -2,6 +2,9 @@ module m_pfactors
 ! The factors pm, ps, and pf determine the fractions of mild, severe, and fatal sick for each agegroup.
 ! A first guess is defined here and dumped to file the first time.
 ! Later this file is read and can be edited by the user
+! CFR numbers are taken from https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/
+! Hospitalization numbers comes from https://www.fhi.no/sv/smittsomme-sykdommer/corona/koronavirus-modellering/
+
 use mod_dimensions
 use m_agegroups
 

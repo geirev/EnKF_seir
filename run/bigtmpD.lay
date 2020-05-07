@@ -1,6 +1,6 @@
 #!MC 1410
-$!VarSet |LFDSFN1| = '"bigdumpO_70.dat" "bigdumpO_80.dat" "bigdumpO_90.dat"'
-$!VarSet |LFDSVL1| = '"i" "time" "S01" "S02" "S03" "S04" "S05" "S06" "S07" "S08" "S09" "S10" "S11" "E01" "E02" "E03" "E04" "E05" "E06" "E07" "E08" "E09" "E10" "E11" "I01" "I02" "I03" "I04" "I05" "I06" "I07" "I08" "I09" "I10" "I11" "Qm" "Qs" "Qf" "Hs" "Hf" "Rm" "Rs" "D"'
+$!VarSet |LFDSFN1| = '"bigdumpO_70.dat" "bigdumpO_85.dat" "bigdumpO_95.dat"'
+$!VarSet |LFDSVL1| = '"i" "time" "S01" "S02" "S03" "S04" "S05" "S06" "S07" "S08" "S09" "S10" "S11" "E01" "E02" "E03" "E04" "E05" "E06" "E07" "E08" "E09" "E10" "E11" "I01" "I02" "I03" "I04" "I05" "I06" "I07" "I08" "I09" "I10" "I11" "Qm" "Qs" "Qf" "Hs" "Hf" "C" "Rm" "Rs" "D"'
 $!VarSet |LFDSFN2| = '"obs.dat"'
 $!VarSet |LFDSVL2| = '"i" "time" "ave" "std"'
 $!SetStyleBase Factory
@@ -381,7 +381,7 @@ $!ReadDataSet  '|LFDSFN1|'
 $!RemoveVar |LFDSVL1|
 $!RemoveVar |LFDSFN1|
 $!AlterData 
-  Equation = 'V44=V40+V39'
+  Equation = 'V45=V40+V39'
 $!AlterData 
   Equation = 'V2=V2+43891'
 $!FrameLayout 
@@ -430,7 +430,7 @@ $!LineMap  [1]
     {
     Zone = 1
     XAxisVar = 2
-    YAxisVar = 43
+    YAxisVar = 44
     }
   Lines
     {
@@ -457,12 +457,12 @@ $!LineMap  [1]
     Size = 1
     }
 $!LineMap  [2]
-  Name = 'Deaths R2=0.80'
+  Name = 'Deaths R2=0.85'
   Assign
     {
     Zone = 103
     XAxisVar = 2
-    YAxisVar = 43
+    YAxisVar = 44
     }
   Lines
     {
@@ -489,12 +489,12 @@ $!LineMap  [2]
     Size = 1
     }
 $!LineMap  [3]
-  Name = 'Deaths R2=0.90'
+  Name = 'Deaths R2=0.95'
   Assign
     {
     Zone = 205
     XAxisVar = 2
-    YAxisVar = 43
+    YAxisVar = 44
     }
   Lines
     {
@@ -526,7 +526,7 @@ $!LineMap  [4]
     {
     Zone = 1
     XAxisVar = 2
-    YAxisVar = 44
+    YAxisVar = 45
     }
   Lines
     {
@@ -554,12 +554,12 @@ $!LineMap  [4]
     Size = 1
     }
 $!LineMap  [5]
-  Name = 'Hospitalized R2=0.80'
+  Name = 'Hospitalized R2=0.85'
   Assign
     {
     Zone = 103
     XAxisVar = 2
-    YAxisVar = 44
+    YAxisVar = 45
     }
   Lines
     {
@@ -587,12 +587,12 @@ $!LineMap  [5]
     Size = 1
     }
 $!LineMap  [6]
-  Name = 'Hospitalized R2=0.90'
+  Name = 'Hospitalized R2=0.95'
   Assign
     {
     Zone = 205
     XAxisVar = 2
-    YAxisVar = 44
+    YAxisVar = 45
     }
   Lines
     {
