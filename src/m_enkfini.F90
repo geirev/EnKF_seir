@@ -29,7 +29,6 @@ use m_random
    real, allocatable    :: E(:,:)        ! Ensemble of measurement perturbations
    real, allocatable    :: R(:,:)        ! Measurement error covariance matrix
    real, allocatable    :: Rprt(:)       ! Measurement error covariance matrix
-   integer nrobsh,nrobsd
 
 contains
 subroutine enkfini(time)
@@ -57,17 +56,14 @@ subroutine enkfini(time)
 
 ! Counting number of lines in corona.in
    nrobs=0
-   nrobsd=0
-   nrobsh=0
    do i=1,10000
-      read(10,'(i2,tr1,i2,tr1,i4,2i6)',end=200)iday,imonth,iyear,ideath,ihosp
+      read(10,'(i2,tr1,i2,tr1,i4)',advance='no',end=200)iday,imonth,iyear
+      read(10,*)ideath,ihosp
       if (ideath > 0) then
          nrobs=nrobs+1
-         nrobsd=nrobsd+1
       endif
       if (ihosp  > 0) then
          nrobs=nrobs+1
-         nrobsh=nrobsh+1
       endif
    enddo
    200 nrlines=i-1; print '(a,i5)','nrlines=',nrlines
@@ -82,7 +78,8 @@ subroutine enkfini(time)
    dt= time/real(nt-1)                     ! Timestep of outputs
 
    do i=1,nrlines
-      read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
+      read(10,'(i2,tr1,i2,tr1,i4)',advance='no')iday,imonth,iyear
+      read(10,*)ideath,ihosp
       if (ideath > 0) then
          m=m+1
          tobs(m)=real(getday(iday,imonth,iyear))
@@ -93,7 +90,8 @@ subroutine enkfini(time)
    enddo
    rewind(10)
    do i=1,nrlines
-      read(10,'(i2,tr1,i2,tr1,i4,2i6)')iday,imonth,iyear,ideath,ihosp
+      read(10,'(i2,tr1,i2,tr1,i4)',advance='no')iday,imonth,iyear
+      read(10,*)ideath,ihosp
       if (ihosp > 0) then
          m=m+1
          tobs(m)=real(getday(iday,imonth,iyear))
@@ -107,7 +105,7 @@ subroutine enkfini(time)
    print '(a)','List of observations:'
    print '(a)','  number   gridp obstime obstype  obsval  stddev'
    do m=1,nrobs
-      print '(3i8,a8,2f10.3)',m,iobs(m),tobs(m),cobs(m),dobs(m),min(maxobserr,max(relobserr*dobs(m),minobserr)) 
+      print '(3i8,a8,2f12.3)',m,iobs(m),tobs(m),cobs(m),dobs(m),min(maxobserr,max(relobserr*dobs(m),minobserr)) 
    enddo
    print *
 

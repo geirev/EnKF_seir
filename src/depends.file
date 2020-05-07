@@ -77,6 +77,7 @@ m_readinputs.o:      mod_params.o
 m_Rmatrix.o:      m_agegroups.o
 m_Rmatrix.o:      makefile
 m_Rmatrix.o:      MODEL.CPP
+m_Rmatrix.o:      m_readinputs.o
 m_solve.o:      makefile
 m_solve.o:      mod_dimensions.o
 m_solve.o:      MODEL.CPP

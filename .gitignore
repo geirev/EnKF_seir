@@ -8,6 +8,7 @@ run/*
 runUK
 runQuebec
 runHolland
+runFR
 !run/infile.in
 !run/corona.in
 !run/README
