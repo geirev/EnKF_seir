@@ -9,15 +9,16 @@ use m_random
    logical    lenkf
    logical lmeascorr
    real    rh
+   logical ld,lh,lc  ! True for conditioning on deaths, hopsitalized and total number of cases
+   real relerrd, minerrd, maxerrd 
+   real relerrh, minerrh, maxerrh 
+   real relerrc, minerrc, maxerrc, cfrac      
    integer  mode_analysis
    logical :: lrandrot=.true.
    logical :: lupdate_randrot=.true.
    logical :: lsymsqrt=.true.
    integer :: inflate=0
    integer :: infmult=1.0
-   real :: relobserr
-   real :: minobserr
-   real :: maxobserr
    real :: truncation                    ! singular value truncation
    real, allocatable    :: innovation(:) ! Observation innovation dobs-y
    integer, allocatable :: iobs(:)      ! Observation time index
@@ -38,7 +39,7 @@ subroutine enkfini(time)
    real,    intent (in) :: time
    real dt
    integer i,j,k,m
-   integer iyear,imonth,iday,ideath,ihosp,iobst
+   integer iyear,imonth,iday,ideath,ihosp,icase,iobst
    logical ex
    if (.not.lenkf) return
 
@@ -58,11 +59,14 @@ subroutine enkfini(time)
    nrobs=0
    do i=1,10000
       read(10,'(i2,tr1,i2,tr1,i4)',advance='no',end=200)iday,imonth,iyear
-      read(10,*)ideath,ihosp
-      if (ideath > 0) then
+      read(10,*)ideath,ihosp,icase
+      if (ld .and. ideath > 0) then
          nrobs=nrobs+1
       endif
-      if (ihosp  > 0) then
+      if (lh .and. ihosp  > 0) then
+         nrobs=nrobs+1
+      endif
+      if (lc .and. icase  > 0) then
          nrobs=nrobs+1
       endif
    enddo
@@ -79,8 +83,8 @@ subroutine enkfini(time)
 
    do i=1,nrlines
       read(10,'(i2,tr1,i2,tr1,i4)',advance='no')iday,imonth,iyear
-      read(10,*)ideath,ihosp
-      if (ideath > 0) then
+      read(10,*)ideath,ihosp,icase
+      if (ld .and. ideath > 0) then
          m=m+1
          tobs(m)=real(getday(iday,imonth,iyear))
          iobs(m)=nint(real(tobs(m))/dt)
@@ -91,8 +95,8 @@ subroutine enkfini(time)
    rewind(10)
    do i=1,nrlines
       read(10,'(i2,tr1,i2,tr1,i4)',advance='no')iday,imonth,iyear
-      read(10,*)ideath,ihosp
-      if (ihosp > 0) then
+      read(10,*)ideath,ihosp,icase
+      if (lh .and. ihosp > 0) then
          m=m+1
          tobs(m)=real(getday(iday,imonth,iyear))
          iobs(m)=nint(real(tobs(m))/dt)
@@ -100,12 +104,24 @@ subroutine enkfini(time)
          dobs(m)=real(ihosp)
       endif
    enddo
+   rewind(10)
+   do i=1,nrlines
+      read(10,'(i2,tr1,i2,tr1,i4)',advance='no')iday,imonth,iyear
+      read(10,*)ideath,ihosp,icase
+      if (lc .and. icase > 0) then
+         m=m+1
+         tobs(m)=real(getday(iday,imonth,iyear))
+         iobs(m)=nint(real(tobs(m))/dt)
+         cobs(m)='c'
+         dobs(m)=real(icase)
+      endif
+   enddo
    close(10)
 
    print '(a)','List of observations:'
    print '(a)','  number   gridp obstime obstype  obsval  stddev'
    do m=1,nrobs
-      print '(3i8,a8,2f12.3)',m,iobs(m),tobs(m),cobs(m),dobs(m),min(maxobserr,max(relobserr*dobs(m),minobserr)) 
+      print '(3i8,a8,f12.3)',m,iobs(m),tobs(m),cobs(m),dobs(m) !min(maxobserr,max(relobserr*dobs(m),minobserr)) 
    enddo
    print *
 
@@ -118,7 +134,14 @@ subroutine enkfini(time)
 
 ! For printing perturbed observations
    do m=1,nrobs
-      Rprt(m)=min(maxobserr,max(relobserr*dobs(m),minobserr))**2 
+      select case (cobs(m))
+      case ('d')
+         Rprt(m)=min(maxerrd,max(relerrd*dobs(m),minerrd))**2 
+      case ('h')
+         Rprt(m)=min(maxerrh,max(relerrh*dobs(m),minerrh))**2 
+      case ('c')
+         Rprt(m)=min(maxerrc,max(relerrc*dobs(m),minerrc))**2 
+      end select
    enddo
 end subroutine
 end module

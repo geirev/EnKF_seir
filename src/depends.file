@@ -23,6 +23,7 @@ m_enkfprep.o:      mod_parameters.o
 m_enkfprep.o:      mod_params.o
 m_enkfprep.o:      mod_states.o
 m_enkfprep.o:      m_pseudo1D.o
+m_enkfprep.o:      m_readinputs.o
 m_ensave.o:      makefile
 m_ensave.o:      MODEL.CPP
 m_ensstd.o:      makefile
@@ -96,6 +97,7 @@ m_tecplot.o:      MODEL.CPP
 m_tecplot.o:      mod_parameters.o
 m_tecplot.o:      mod_params.o
 m_tecplot.o:      mod_states.o
+m_tecplot.o:      m_readinputs.o
 seir.o:      m_agegroups.o
 seir.o:      makefile
 seir.o:      m_enkfini.o

@@ -9,12 +9,16 @@ subroutine enkfprep(ens,enspar)
    use m_agegroups
    use m_pseudo1D
    use m_fixsample1D
+   use m_readinputs
    implicit none
    type(states), intent(in) :: ens(0:nt,nrens)
    type(params), intent(in) :: enspar(nrens)
+   type(states) aveens
    type(params)  avepar
    real, allocatable :: obspertd(:,:)
    real, allocatable :: obsperth(:,:)
+   real, allocatable :: obspertc(:,:)
+   real, allocatable :: scaling(:)
    integer i,m,j
    logical, save :: lprt =.false.
  
@@ -35,10 +39,13 @@ subroutine enkfprep(ens,enspar)
    if (lmeascorr) then
       allocate(obspertd(0:nt,nrens))
       allocate(obsperth(0:nt,nrens))
+      allocate(obspertc(0:nt,nrens))
       call pseudo1D(obspertd,nt+1,nrens,rh,1.0,nt+10)
       call pseudo1D(obsperth,nt+1,nrens,rh,1.0,nt+10)
-      call fixsample1D(obspertd,nrobs,nrens)
-      call fixsample1D(obsperth,nrobs,nrens)
+      call pseudo1D(obspertc,nt+1,nrens,rh,1.0,nt+10)
+      call fixsample1D(obspertd,nt+1,nrens)
+      call fixsample1D(obsperth,nt+1,nrens)
+      call fixsample1D(obspertc,nt+1,nrens)
    else
       call random(E,nrobs*nrens)
       call fixsample1D(E,nrobs,nrens)
@@ -46,19 +53,20 @@ subroutine enkfprep(ens,enspar)
 
    R=0.0
    do m=1,nrobs
-      R(m,m)=real(nesmda)*min(maxobserr,max(relobserr*dobs(m),minobserr))**2
-      if (lmeascorr) then
-         select case (cobs(m))
-         case('d')
-            E(m,:)=sqrt(R(m,m))*obspertd(iobs(m),:)
-         case('h')
-            E(m,:)=sqrt(R(m,m))*obsperth(iobs(m),:)
-         case default
-            stop 'Measurement type not found'
-         end select
-      else
-         E(m,:)=sqrt(R(m,m))*E(m,:)
-      endif
+      select case (cobs(m))
+      case('d')
+         R(m,m)=real(nesmda)*min(maxerrd,max(relerrd*dobs(m),minerrd))**2
+         if (lmeascorr) E(m,:)=sqrt(R(m,m))*obspertd(iobs(m),:)
+      case('h')
+         R(m,m)=real(nesmda)*min(maxerrh,max(relerrh*dobs(m),minerrh))**2
+         if (lmeascorr) E(m,:)=sqrt(R(m,m))*obsperth(iobs(m),:)
+      case('c')
+         R(m,m)=real(nesmda)*min(maxerrc,max(relerrc*dobs(m),minerrc))**2
+         if (lmeascorr) E(m,:)=sqrt(R(m,m))*obspertc(iobs(m),:)
+      case default
+         stop 'Measurement type not found'
+      end select
+      if (.not.lmeascorr) E(m,:)=sqrt(R(m,m))*E(m,:)
       D(m,:)=dobs(m)+E(m,:)
    enddo
 
@@ -67,15 +75,49 @@ subroutine enkfprep(ens,enspar)
       deallocate(obspertd,obsperth)
    endif
 
+
    do m=1,nrobs
+! ensemble average of state for observation m
+      aveens=0.0
+      do j=1,nrens
+         aveens= aveens + ens(iobs(m),j)
+      enddo
+      aveens=aveens*(1.0/real(nrens))
+
+! ensemble average of state for observation m
       select case (cobs(m))
       case('d')
          D(m,:) = D(m,:)-N*ens(iobs(m),:)%D
-         S(m,:) = N*( ens(iobs(m),:)%D - sum(ens(iobs(m),:)%D )*(1.0/real(nrens)) )
+         S(m,:) = N*( ens(iobs(m),:)%D - aveens%D )
       case('h')
          D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Hf)
-         S(m,:) = N*( ens(iobs(m),:)%Hs - sum(ens(iobs(m),:)%Hs)*(1.0/real(nrens)) &
-                &    +ens(iobs(m),:)%Hf - sum(ens(iobs(m),:)%Hf)*(1.0/real(nrens)) )
+         S(m,:) = N*( ens(iobs(m),:)%Hs - aveens%Hs &
+                &    +ens(iobs(m),:)%Hf - aveens%Hf )
+      case('c')
+         do j=1,nrens
+            D(m,j) = D(m,j)- &
+                        cfrac*N*(sum(ens(iobs(m),j)%I(1:na)) &
+                                    +ens(iobs(m),j)%Qm       &
+                                    +ens(iobs(m),j)%Qs       &
+                                    +ens(iobs(m),j)%Qf       &
+                                    +ens(iobs(m),j)%Hs       &
+                                    +ens(iobs(m),j)%Hf       &
+                                    +ens(iobs(m),j)%C        &
+                                    +ens(iobs(m),j)%Rm       &
+                                    +ens(iobs(m),j)%Rs       &
+                                    +ens(iobs(m),j)%D        )
+
+            S(m,j) =         N*( sum(ens(iobs(m),j)%I(:)) - sum(aveens%I(:))  &
+                                    +ens(iobs(m),j)%Qm         -aveens%Qm     &
+                                    +ens(iobs(m),j)%Qs         -aveens%Qs     &
+                                    +ens(iobs(m),j)%Qf         -aveens%Qf     &
+                                    +ens(iobs(m),j)%Hs         -aveens%Hs     &
+                                    +ens(iobs(m),j)%Hf         -aveens%Hf     &
+                                    +ens(iobs(m),j)%C          -aveens%C      &
+                                    +ens(iobs(m),j)%Rm         -aveens%Rm     &
+                                    +ens(iobs(m),j)%Rs         -aveens%Rs     &
+                                    +ens(iobs(m),j)%D          -aveens%D      )
+               enddo
       case default
          stop 'Measurement type not found'
       end select
@@ -83,6 +125,22 @@ subroutine enkfprep(ens,enspar)
 !      print '(a,i3,10f10.2)','D',m,D(m,1:10)
 !      print '(a,i3,10f10.2)','S',m,S(m,1:10)
       innovation(m)=sum(D(m,:))/real(nrens)
+   enddo
+! Scaling of matrices
+
+   allocate(scaling(nrobs))
+   do m=1,nrobs
+      scaling(m)=1./sqrt(R(m,m))
+      S(m,:)=scaling(m)*S(m,:)
+      E(m,:)=scaling(m)*E(m,:)
+      D(m,:)=scaling(m)*D(m,:)
+      innovation(m)=scaling(m)*innovation(m)
+   enddo
+
+   do j=1,nrobs
+   do i=1,nrobs
+      R(i,j)=scaling(i)*R(i,j)*scaling(j)
+   enddo
    enddo
 
 

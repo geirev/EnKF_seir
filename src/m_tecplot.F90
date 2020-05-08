@@ -37,6 +37,7 @@ subroutine tecplot(ens,enspar,pri)
    use m_ensave
    use m_ensstd
    use m_enkfini
+   use m_readinputs
    implicit none
    integer, intent(in) :: pri
 
@@ -158,12 +159,15 @@ subroutine tecplot(ens,enspar,pri)
    open(10,file='obs.dat')
    open(11,file='obsD.dat')
    open(12,file='obsH.dat')
+   open(13,file='obsC.dat')
       write(10,*)'TITLE = "Observations"'
       write(10,*)'VARIABLES = "i" "time" "ave" "std" '
       write(11,*)'TITLE = "Observations"'
       write(11,*)'VARIABLES = "i" "time" "ave" "std" '
       write(12,*)'TITLE = "Observations"'
       write(12,*)'VARIABLES = "i" "time" "ave" "std" '
+      write(13,*)'TITLE = "Observations"'
+      write(13,*)'VARIABLES = "i" "time" "ave" "std" '
 
       m=0
       do i=1,nrobs
@@ -201,9 +205,28 @@ subroutine tecplot(ens,enspar,pri)
          enddo
       endif
 
+      m=0
+      do i=1,nrobs
+         if (cobs(i)=='c') m=m+1
+      enddo
+      if (m==0) then
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed cases"  F=POINT, I=',1,', J=1, K=1'
+         write(10,'(2000g13.5)')(0.0,i=1,nrens+3)
+         write(13,'(a,i5,a,i5,a)')' ZONE T="Observed cases"  F=POINT, I=',1,', J=1, K=1'
+         write(13,'(2000g13.5)')(0.0,i=1,nrens+3)
+      else
+         write(10,'(a,i5,a,i5,a)')' ZONE T="Observed cases"  F=POINT, I=',m,', J=1, K=1'
+         write(13,'(a,i5,a,i5,a)')' ZONE T="Observed cases"  F=POINT, I=',m,', J=1, K=1'
+         do i=1,nrobs
+            if (cobs(i)=='c') write(10,'(2i5,2f12.4)')i,tobs(i), dobs(i)/cfrac, sqrt(Rprt(i))
+            if (cobs(i)=='c') write(13,'(2i5,2f12.4)')i,tobs(i), dobs(i)/cfrac, sqrt(Rprt(i))
+         enddo
+      endif
+
       close(10)
       close(11)
       close(12)
+      close(13)
   
 ! Parameters   
    open(10,file='par'//tag//'.dat')

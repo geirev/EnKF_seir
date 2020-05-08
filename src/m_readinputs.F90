@@ -1,9 +1,10 @@
 module m_readinputs
 logical lrtime    ! Continuous R(t) 
 real rdcorr       ! decorrelation time for R(t)
-real :: qminf     ! If set to 0.0 < qminf <= 1.0 then qminf fraction of Qm contributes to spreading virus
-real :: hos       ! The fraction of fatally ill that actually goes to the hospital.
+real qminf        ! If set to 0.0 < qminf <= 1.0 then qminf fraction of Qm contributes to spreading virus
+real hos          ! The fraction of fatally ill that actually goes to the hospital.
 logical lRrescale ! Rescales the Rmatrix_0? such that the effective R(t) is not dependent on Rmatrix
+
 contains
 subroutine readinputs()
    use mod_dimensions
@@ -35,9 +36,12 @@ subroutine readinputs()
       read(10,*)lenkf               ;    print '(a,l1)',       'Run enkf update            :',lenkf
       read(10,*)mode_analysis       ;    print '(a,i2)',       'Analysis mode of EnKF      :',mode_analysis
       read(10,*)nesmda              ;    print '(a,i2)',       'Number of ESMDA steps      :',nesmda
-      read(10,*)relobserr           ;    print '(a,f10.4)',    'Realative obs error        :',relobserr
-      read(10,*)minobserr           ;    print '(a,f10.4)',    'Minimum   obs error        :',minobserr
-      read(10,*)maxobserr           ;    print '(a,f10.4)',    'Maximum   obs error        :',maxobserr
+      read(10,*)ld, relerrd, minerrd, maxerrd 
+               print '(a,l1,3f10.2)','D conditioning, relerr, minerr, maxerr        :',ld, relerrd, minerrd, maxerrd
+      read(10,*)lh, relerrh, minerrh, maxerrh 
+               print '(a,l1,3f10.2)','H conditioning, relerr, minerr, maxerr        :',lh, relerrh, minerrh, maxerrh
+      read(10,*)lc, relerrc, minerrc, maxerrc , cfrac
+               print '(a,l1,4f10.2)','C conditioning, relerr, minerr, maxerr, cfrac :',ld, relerrd, minerrd, maxerrd, cfrac
       read(10,*)lmeascorr           ;    print '(a,l1)',       'Activate corr. obs. err.   :',lmeascorr
       read(10,*)rh                  ;    print '(a,f10.4)',    'Obs error decorrelation    :',rh
       read(10,*)truncation          ;    print '(a,f10.4)',    'EnKF SVD truncation (0.99) :',truncation
