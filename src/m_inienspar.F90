@@ -10,14 +10,32 @@ subroutine inienspar(enspar)
    use mod_parameters
    implicit none
    type(params), intent(out)  :: enspar(nrens)
-   integer j
+   integer j,ia,ib,isize
 
    call random(enspar%E0   ,nrens)
    call random(enspar%I0   ,nrens)
    if (lrtime) then
-      print *,'lrtime=',lrtime
       do j=1,nrens
-         call pseudo1D(enspar(j)%R,rdim+1,1,rdcorr,1.0,rdim+50)
+         ia=0           ; ib=rdim             ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
+         call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
+      enddo
+
+      if (nint(Tinterv(1)) > rdim) then
+         print *,'Tinterv(1)) > rdim: consider increasing rdim=',rdim,' in mod_dimensions to be larger than: ', nint(Tinterv(1))
+      endif
+      if (nint(Tinterv(2)) > rdim) then
+         print *,'Tinterv(2)) > rdim: consider increasing rdim=',rdim,' in mod_dimensions to be larger than: ', nint(Tinterv(2))
+      endif
+
+      do j=1,nrens
+         ia=0           ; ib=min(nint(Tinterv(1)),rdim) ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
+         call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
+
+!        ia=Tinterv(1)+1; ib=min(nint(Tinterv(2)),rdim) ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
+!        if (isize > 0) call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
+!
+!        ia=Tinterv(2)+1; ib=rdim ; isize=ib-ia+1              ; if (j==1)  print *,'ia to ib:',ia,ib,isize
+!        if (isize > 0) call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
       enddo
    else
       call random(enspar%R(0) ,nrens)

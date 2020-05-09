@@ -54554,8 +54554,8 @@ $!XYLineAxis
   XDetail 1
     {
     RangeMin = 43891
-    RangeMax = 43956
-    GRSpacing = 14
+    RangeMax = 44017.5
+    GRSpacing = 30
     TickLabel
       {
       TextShape

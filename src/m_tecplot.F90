@@ -115,7 +115,7 @@ subroutine tecplot(ens,enspar,pri)
          ensd(i,j)%H=ens(i,j)%Hs + ens(i,j)%Hf
          ensd(i,j)%R=ens(i,j)%Rm + ens(i,j)%Rs
          ensd(i,j)%D=ens(i,j)%D
-         ensd(i,j)%C= ensd(i,j)%E  &
+         ensd(i,j)%C=&  !!!!!!! Dont include exposed in cases. ensd(i,j)%E  &
                     + ensd(i,j)%I  &
                      + ens(i,j)%Qm &
                      + ens(i,j)%Qs &
