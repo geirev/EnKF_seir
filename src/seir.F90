@@ -15,6 +15,7 @@ program seir
    use m_readinputs
    use m_inienspar
    use m_iniens
+   use m_set_random_seed2
 
    implicit none
    integer i,k,j,m
@@ -25,6 +26,7 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initialization 
+   call set_random_seed2
    call readinputs()                           ! Reads infile.in
    allocate( ens(0:nt,nrens)   )               ! Allocate ensemble for the model solutions
    allocate( enspar(nrens) )                   ! Allocate ensemble of model parameters

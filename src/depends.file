@@ -114,6 +114,7 @@ seir.o:      m_pfactors.o
 seir.o:      m_random.o
 seir.o:      m_readinputs.o
 seir.o:      m_Rmatrix.o
+seir.o:      m_set_random_seed2.o
 seir.o:      m_solve.o
 seir.o:      m_tecplot.o
 slsode.o:      makefile
