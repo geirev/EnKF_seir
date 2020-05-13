@@ -14,7 +14,7 @@ subroutine Rmatrix
    character(len=10) ctmp
    character(len=2)  tag2
    real sumR
-
+   real a(na),b,c
 ! Set default Rmatrices identical to one meaning same R number for and between all agegroups 
    Rmat(:,:,:) = 1.0
 
@@ -50,22 +50,17 @@ subroutine Rmatrix
          print '(11f10.3)',Rmat(i,:,k)
       enddo
 
-! Rescaling rows of R matrix by age groups such that only the relative
-! difference of elements in each row of Rmatrix matters.  The growt or
-! decline of the epidemic is entirely controlled by the scalar R(t) 
-! multiplied by Rmatrix
+! Rescaling rows of R matrix by age groups such that the norm of the 
+! rescaled a' R a=1.0.  The growt or decline of the epidemic is then
+! entirely controlled by the scalar function R(t) 
       print '(a,i1)','Rescaled Rmatrix_0',k
       do i=1,na
-      sumR=0.0
-      do j=1,na
-         sumR=sumR+Rmat(i,j,k)*agegroup(j)/sum(agegroup(:))
+         a(i)=agegroup(i)/sum(agegroup(:))
       enddo
-      do j=1,na
-         Rmat(i,j,k)=Rmat(i,j,k)/sumR
-      enddo
-      print '(11f10.3)',Rmat(i,:,k)
-      enddo
-      print *
+      c=dot_product(a,matmul(Rmat(:,:,k),a))
+      Rmat(:,:,k)=Rmat(:,:,k)/c
+      print '(11f10.3)',Rmat(:,:,k)
+
    enddo
 
 end subroutine
