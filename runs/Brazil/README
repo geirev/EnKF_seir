@@ -1,0 +1,19 @@
+# Brazil runs
+All Brazil runs correspond to simulations for the São Paulo State.
+
+Confirmed deaths and cases retrieved from https://brasil.io/dataset/covid19/caso_full/, 
+which daily collects data from each State Health Secretary.
+
+Projections for the 2020 age groups retrieved from 
+https://www.ibge.gov.br/estatisticas/sociais/populacao/9109-projecao-da-populacao.html?=&t=resultados
+
+## Case01: 
+Base case that simulates the current level of social distancing in practice in the State of São Paulo.
+
+## Case02:
+Assumes the same setting as in Case01, but simulates an intervention in June 1, 2020 
+that brings down the reproductive number to 0.6.
+
+## Case03:
+Assumes the same setting as in Case01, but considers a larger observation error in order 
+to account for under notification.
