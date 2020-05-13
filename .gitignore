@@ -4,11 +4,14 @@ doc/model.log
 doc/model.out
 doc/texput.log
 build
-run/*
+runs/*/Case??/*
+!runs/*/Case??/*.in
+!run/README
 runUK
 runQuebec
 runHolland
 runFR
+run/*
 !run/infile.in
 !run/corona.in
 !run/README
