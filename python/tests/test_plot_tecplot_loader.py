@@ -26,3 +26,4 @@ def test_enkf_seir_plot_plot(tmp_path):
         
     expected_msg = 'Could not load data for variable ' + variable + ' from file ' + str(file) + '.'
     assert expected_msg in str(excinfo.value)
+    

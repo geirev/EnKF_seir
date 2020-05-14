@@ -63,7 +63,10 @@ VARIABLES = "time" "ave" "std"
     dpi = 300
     prior = 'false'
     show = 'false'
-    enkf_seir.plot.plot.plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, prior, show)
+    t0 = None
+    tf = None
+    daily = 'false'
+    enkf_seir.plot.plot.plot_save_variables(data_dir, requested_vars, figs_out_dir, format, dpi, prior, show, t0, tf, daily)
 
 
     assert Path(tmp_path / 'dead.png').is_file()
