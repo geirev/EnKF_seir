@@ -417,6 +417,10 @@ $!GlobalLinePlot
       {
       Height = 4
       }
+    Box
+      {
+      BoxType = Filled
+      }
     XYPos
       {
       X = 95
@@ -54569,6 +54573,10 @@ $!XYLineAxis
         }
       Offset = 3
       }
+    Gridlines
+      {
+      Show = Yes
+      }
     Title
       {
       TitleMode = UseText
@@ -54592,6 +54600,10 @@ $!XYLineAxis
         Precision = 1
         TimeDateFormat = ''
         }
+      }
+    Gridlines
+      {
+      Show = Yes
       }
     Title
       {

@@ -6,7 +6,9 @@ doc/texput.log
 build
 runs/*/Case??/*
 !runs/*/Case??/*.in
+!runs/run.sh
 !run/README
+!run/README.md
 runUK
 runQuebec
 runHolland
