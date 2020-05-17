@@ -1,6 +1,6 @@
  1000                     ! nrens: Ensemble size
- 366                      ! nt   : Number of output times (one more than days to get daily outputs)
- 365                      ! time : Length of integration in days
+ 166                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 165                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
@@ -18,7 +18,7 @@
 #3 First guess model parameters and their std dev -----------------------------------------------------
  T                        !  Rescaling of Rmatrix                                                                 
  T            3.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
- 4.0          0.2         !  R1        : Reproduction number with no interventions 
+ 4.5          0.2         !  R1        : Reproduction number with no interventions 
  0.80         0.15        !  R2        : Reproduction number during lockdown
  0.80         0.15        !  R3        : Reproduction number during opening
  155.0       20.0         !  E0        : Initial Exposed used to initialize the model

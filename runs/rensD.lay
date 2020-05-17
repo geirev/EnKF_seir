@@ -384,7 +384,7 @@ $!ReadDataSet  '|LFDSFN1|'
 $!RemoveVar |LFDSVL1|
 $!RemoveVar |LFDSFN1|
 $!AlterData 
-  Equation = 'V1=V1+43891'
+  Equation = 'V1=V1+XXXXA'
 $!FrameLayout 
   ShowBorder = No
   ShowHeader = No
@@ -415,12 +415,15 @@ $!GlobalLinePlot
     Show = Yes
     TextShape
       {
-      Height = 4
+      Height = 3.6
       }
     Box
       {
       BoxType = Filled
+      Margin = 5
+      Color = White
       }
+    RowSpacing = 1.1
     XYPos
       {
       X = 95
@@ -54548,12 +54551,12 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 10.368
+    X1 = 9.1427
     Y1 = 10.308
     X2 = 98.278
-    Y2 = 97.829
+    Y2 = 96.671
     }
-  ViewportTopSnapTarget = 97.829
+  ViewportTopSnapTarget = 96.671
 $!XYLineAxis 
   XDetail 1
     {
@@ -54613,7 +54616,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 8
+      Offset = 6
       }
     }
 $!FrameControl ActivateByNumber

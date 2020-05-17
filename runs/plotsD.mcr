@@ -1,5 +1,40 @@
 #!MC 1410
+$!OpenLayout  "./solutionslog.lay"
+$!PrintSetup Palette = Color
+$!ExportSetup ExportFormat = EPS
+$!ExportSetup EPSPreviewImage{ImageType = None}
+
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!ActiveLineMaps -= [1-1500]
+$!ActiveLineMaps += [801-900]
+$!ActiveLineMaps += [1201-1300]
+$!ActiveLineMaps += [1301-1400]
+$!ActiveLineMaps += [1401-1500]
+
+$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
+$!GlobalLinePlot Legend{XYPos{X = 12.0}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.5}}
+
+$!FrameControl ActivateByNumber
+  Frame = 2
+$!ActiveLineMaps += [1-3]
+$!XYLineAxis YDetail 1 {RangeMin = 10}
+$!XYLineAxis YDetail 1 {RangeMax = YYYYC}
+$!XYLineAxis XDetail 1 {RangeMin = XXXXA}
+$!XYLineAxis XDetail 1 {RangeMax = XXXXB}
+$!RedrawAll 
+$!ExportSetup ExportFName = './HDlog.eps'
+$!Export 
+  ExportRegion = AllFrames
+$!PAUSE "HDlog"
+
+
+
+
 $!OpenLayout  "./solutions.lay"
+
+
 
 $!PrintSetup Palette = Color
 $!ExportSetup ExportFormat = EPS
@@ -11,13 +46,20 @@ $!FrameControl ActivateByNumber
 $!ActiveLineMaps -= [1-1412]
 $!ActiveLineMaps -= [501-700]
 $!ActiveLineMaps += [1201-1400,1402,1404]
+
+$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
+$!GlobalLinePlot Legend{XYPos{X = 11}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.5}}
+
+$!View Fit
 $!FrameControl ActivateByNumber
   Frame = 2
 $!ActiveLineMaps += [1-2]
 $!ActiveLineMaps -= [3]
 $!XYLineAxis YDetail 1 {RangeMin = 0}
-$!XYLineAxis XDetail 1 {RangeMin = XXXXX}
-$!XYLineAxis XDetail 1 {RangeMax = YYYYY}
+$!XYLineAxis YDetail 1 {RangeMax = YYYYD}
+$!XYLineAxis XDetail 1 {RangeMin = XXXXA}
+$!XYLineAxis XDetail 1 {RangeMax = XXXXB}
 $!RedrawAll 
 $!ExportSetup ExportFName = './HD.eps'
 $!Export 
@@ -36,8 +78,9 @@ $!FrameControl ActivateByNumber
 $!ActiveLineMaps -= [1-3]
 #$!XYLineAxis YDetail 1 {RangeMax = 20000}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
-$!XYLineAxis XDetail 1 {RangeMin = XXXXX}
-$!XYLineAxis XDetail 1 {RangeMax = YYYYY}
+$!XYLineAxis YDetail 1 {RangeMax = YYYYI}
+$!XYLineAxis XDetail 1 {RangeMin = XXXXA}
+$!XYLineAxis XDetail 1 {RangeMax = XXXXB}
 $!RedrawAll 
 $!ExportSetup ExportFName = './IE.eps'
 $!Export 
@@ -56,9 +99,9 @@ $!FrameControl ActivateByNumber
 $!ActiveLineMaps -= [1-2]
 $!ActiveLineMaps += [3]
 $!XYLineAxis YDetail 1 {RangeMin = 0}
-#$!XYLineAxis YDetail 1 {RangeMax = 70000}
-$!XYLineAxis XDetail 1 {RangeMin = XXXXX}
-$!XYLineAxis XDetail 1 {RangeMax = YYYYY}
+$!XYLineAxis YDetail 1 {RangeMax = YYYYC}
+$!XYLineAxis XDetail 1 {RangeMin = XXXXA}
+$!XYLineAxis XDetail 1 {RangeMax = XXXXB}
 $!RedrawAll 
 $!ExportSetup ExportFName = './CR.eps'
 $!Export 
@@ -68,10 +111,11 @@ $!PAUSE "CR"
 
 
 $!OpenLayout  "./rens.lay"
+$!View Fit
 $!XYLineAxis YDetail 1 {RangeMin = 0}
-$!XYLineAxis YDetail 1 {RangeMax = 6}
-$!XYLineAxis XDetail 1 {RangeMin = XXXXX}
-$!XYLineAxis XDetail 1 {RangeMax = YYYYY}
+#$!XYLineAxis YDetail 1 {RangeMax = 6}
+$!XYLineAxis XDetail 1 {RangeMin = XXXXA}
+$!XYLineAxis XDetail 1 {RangeMax = XXXXB}
 $!RedrawAll 
 $!ExportSetup ExportFName = './RENS.eps'
 $!Export 

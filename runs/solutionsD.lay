@@ -381,7 +381,7 @@ $!ReadDataSet  '|LFDSFN1|'
 $!RemoveVar |LFDSVL1|
 $!RemoveVar |LFDSFN1|
 $!AlterData 
-  Equation = 'V1=V1+43891'
+  Equation = 'V1=V1+XXXXA'
 $!FrameLayout 
   ShowBorder = No
   ShowHeader = No
@@ -47072,7 +47072,7 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 10.368
+    X1 = 11.511
     Y1 = 10.308
     X2 = 98.278
     Y2 = 97.829
@@ -47263,7 +47263,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 8
+      Offset = 9
       }
     }
 $!XYLineAxis 
@@ -47417,7 +47417,7 @@ $!ReadDataSet  '|LFDSFN2|'
 $!RemoveVar |LFDSVL2|
 $!RemoveVar |LFDSFN2|
 $!AlterData 
-  Equation = 'V2=V2+43891'
+  Equation = 'V2=V2+XXXXA'
 $!AlterData 
   Equation = 'V4=2.0*V4'
 $!FrameLayout 
@@ -47579,7 +47579,7 @@ $!XYLineAxis
     }
   ViewportPosition
     {
-    X1 = 10.368
+    X1 = 11.511
     Y1 = 10.308
     X2 = 98.278
     Y2 = 97.829
@@ -47739,7 +47739,7 @@ $!XYLineAxis
         {
         Height = 4.6
         }
-      Offset = 8
+      Offset = 9
       }
     }
 $!XYLineAxis 

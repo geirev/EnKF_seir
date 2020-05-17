@@ -125,6 +125,7 @@ subroutine tecplot(ens,enspar,pri)
                      + ens(i,j)%Rm &
                      + ens(i,j)%Rs &
                      + ens(i,j)%D 
+         ensd(i,j)%A=ensd(i,j)%C + ensd(i,j)%E - ensd(i,j)%R - ensd(i,j)%D
          ensd(i,j)=N*ensd(i,j)
       enddo
    enddo
@@ -154,6 +155,7 @@ subroutine tecplot(ens,enspar,pri)
    call saveresult('hosp' ,'Hospitalized' ,aved(:)%H,stdd(:)%H,ensd(:,:)%H,tag,dt)
    call saveresult('dead' ,'Dead'         ,aved(:)%D,stdd(:)%D,ensd(:,:)%D,tag,dt)
    call saveresult('case' ,'Cases'        ,aved(:)%C,stdd(:)%C,ensd(:,:)%C,tag,dt)
+   call saveresult('active' ,'Active'     ,aved(:)%A,stdd(:)%A,ensd(:,:)%A,tag,dt)
 
  
    open(10,file='obs.dat')
