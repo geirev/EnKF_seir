@@ -184,8 +184,8 @@ subroutine tecplot(ens,enspar,pri)
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
          write(11,'(a,i5,a,i5,a)')' ZONE T="Observed deaths"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='d') write(10,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
-            if (cobs(i)=='d') write(11,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
+            if (cobs(i)=='d') write(10,'(2i5,2f14.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
+            if (cobs(i)=='d') write(11,'(2i5,2f14.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
          enddo
       endif
 
@@ -202,8 +202,8 @@ subroutine tecplot(ens,enspar,pri)
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
          write(12,'(a,i5,a,i5,a)')' ZONE T="Observed hospitalized"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='h') write(10,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
-            if (cobs(i)=='h') write(12,'(2i5,2f12.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
+            if (cobs(i)=='h') write(10,'(2i5,2f14.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
+            if (cobs(i)=='h') write(12,'(2i5,2f14.4)')i,tobs(i), dobs(i), sqrt(Rprt(i))
          enddo
       endif
 
@@ -220,8 +220,8 @@ subroutine tecplot(ens,enspar,pri)
          write(10,'(a,i5,a,i5,a)')' ZONE T="Observed cases"  F=POINT, I=',m,', J=1, K=1'
          write(13,'(a,i5,a,i5,a)')' ZONE T="Observed cases"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-            if (cobs(i)=='c') write(10,'(2i5,2f12.4)')i,tobs(i), dobs(i)/cfrac, sqrt(Rprt(i))
-            if (cobs(i)=='c') write(13,'(2i5,2f12.4)')i,tobs(i), dobs(i)/cfrac, sqrt(Rprt(i))
+            if (cobs(i)=='c') write(10,'(2i5,2f14.4)')i,tobs(i), dobs(i)/cfrac, sqrt(Rprt(i))
+            if (cobs(i)=='c') write(13,'(2i5,2f14.4)')i,tobs(i), dobs(i)/cfrac, sqrt(Rprt(i))
          enddo
       endif
 

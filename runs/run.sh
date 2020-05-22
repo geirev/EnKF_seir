@@ -1,16 +1,22 @@
 dir=~/Dropbox/Apps/Overleaf/Corona
 
-for country in Norway Brazil France   # for each country
+prior=1
+runseir=1
+
+for country in Netherlands #Brazil #Argentina   Norway Brazil France   # for each country
 do
    if [ -d $country ]
    then
-      for exp in $country/Case*
+    
+      for exp in $country/CaseGE
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
          if [ -f "infile.in" ] && [ -f "corona.in" ]
          then
-#            seir | tee out.dat
+            [ ${runseir} ] && seir | tee out.dat
+            [ ! -f out.dat ] && exit
+            [ ! -f dead_1.dat ] && exit
             startdate=$(grep "Relative start day" out.dat | cut -c36-38)
             echo startdate $startdate
             date=$(($startdate+43466))
@@ -25,20 +31,28 @@ do
                                           -e "s/XXXXB/44060/g"     \
                                           -e "s/YYYYD/${ymaxD}/g"  \
                                           -e "s/YYYYI/${ymaxI}/g"  \
+                                          -e "s/XXPRIXX/${prior}/g"  \
                                           -e "s/YYYYC/${ymaxC}/g"  > ./plots.mcr
-            tec360 -b plots.mcr
+            tec360  plots.mcr
             rm -f batch.log
             case=${PWD##*/}          
 
-#            mv CR.eps ${dir}/${country}_${case}_CR.eps
-            mv HD.eps ${dir}/${country}_${case}_HD.eps
-            mv HDlog.eps ${dir}/${country}_${case}_HDlog.eps
-#            mv IE.eps ${dir}/${country}_${case}_IE.eps
-            mv RENS.eps ${dir}/${country}_${case}_RENS.eps
+            cp HD.eps ${dir}/${country}_${case}_HD.eps
+            cp HDlog.eps ${dir}/${country}_${case}_HDlog.eps
+            cp RENS.eps ${dir}/${country}_${case}_RENS.eps
 
          fi
          popd
       done
+
+      if [ -f ${country}/plots.mcr ]
+      then
+         pushd $country
+         tec360 -b plots.mcr
+         cp *.eps ${dir}
+         popd
+      fi
+
    fi 
 done
 

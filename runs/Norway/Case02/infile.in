@@ -1,0 +1,39 @@
+ 1000                     ! nrens: Ensemble size
+ 166                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 165                      ! time : Length of integration in days
+#1 EnKF parameters ------------------------------------------------------------------------------------
+ T                        ! Run EnKF to update model parameters
+ 13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
+ 16                       ! Number of ESMDA steps, (1 means standard ES update)
+ T 0.05   4.0  6.0        ! Condition on Deaths, realtive error, minerr, maxerr 
+ T 0.05   4.0  6.0        ! Condition on Hosp,   realtive error, minerr, maxerr 
+ T 0.05  100.0 5000.0 0.15 ! Condition on Cases,  realtive error, minerr, maxerr, fraction of real cases 
+ T                        ! Correlated measurement errors
+ 10.0                     ! Decorrelation half length in time of measurement errors
+ 0.98                     ! EnKF SVD truncation (around 0.99)
+#2 Dates ----------------------------------------------------------------------------------------------
+ 01/03-2020               ! Start date of simulation
+ 15/03-2020               ! Start date of first  phase of intervations
+ 21/04-2020               ! Start date of second phase of intervations
+#3 First guess model parameters and their std dev -----------------------------------------------------
+ T                        !  Rescaling of Rmatrix                                                                 
+ T            3.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
+ 0.60         1.0         !  R1        : Reproduction number with no interventions 
+ 0.60         0.25        !  R2        : Reproduction number during lockdown
+ 0.60         0.25        !  R3        : Reproduction number during opening
+ 155.0       20.0         !  E0        : Initial Exposed used to initialize the model
+ 65.0         5.0         !  I0        : Initial Infectious used to initialize the model
+ 5.5          0.5         !  Tinc      : Incubation period 
+ 3.8          0.5         !  Tinf      : Infection time                 |
+ 14.0         1.0         !  Trecm     : Recovery time mild cases
+ 5.0          0.5         !  Trecs     : Recovery time severe cases 
+ 6.0          0.5         !  Thosp     : Hospitalization time
+ 16.0         1.0         !  Tdead     : Days to death                                           
+ 0.009        0.001       !  CFR       : Case fatality rate %
+ 0.039        0.003       !  P_severe  : Hospitalization rate % for severe cases
+ 0.4                      !  hos       : Fraction of Qf that go to hospital
+ 0.0                      !  qminf     : Fraction of Qm that is infecteous
+#4 Div ------------------------------------------------------------------------------------------------
+ 0.00001                  ! Minimum value of all parameters
+ 10.0                     ! Maximum value of Rt
+#5 End of input file ----------------------------------------------------------------------------------
