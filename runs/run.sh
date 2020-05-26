@@ -1,20 +1,20 @@
 dir=~/Dropbox/Apps/Overleaf/Corona
 
-prior=1
-runseir=1
+prior=0
+runseir=0
 
-for country in Netherlands #Brazil #Argentina   Norway Brazil France   # for each country
+for country in Quebec # Netherlands #Brazil #Argentina   Norway Brazil France   # for each country
 do
    if [ -d $country ]
    then
     
-      for exp in $country/CaseGE
+      for exp in $country/Case*
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
          if [ -f "infile.in" ] && [ -f "corona.in" ]
          then
-            [ ${runseir} ] && seir | tee out.dat
+            [ ${runseir} -eq 1 ] && seir | tee out.dat
             [ ! -f out.dat ] && exit
             [ ! -f dead_1.dat ] && exit
             startdate=$(grep "Relative start day" out.dat | cut -c36-38)
@@ -33,7 +33,7 @@ do
                                           -e "s/YYYYI/${ymaxI}/g"  \
                                           -e "s/XXPRIXX/${prior}/g"  \
                                           -e "s/YYYYC/${ymaxC}/g"  > ./plots.mcr
-            tec360  plots.mcr
+            tec360 -b plots.mcr
             rm -f batch.log
             case=${PWD##*/}          
 
