@@ -16,7 +16,7 @@ subroutine readinputs()
    logical ex
    character(len=2) ca
    integer id,im,iy,k,day
-   integer ir,i
+   integer ir,i,j,ii
    real stdR(nrint),fgR(nrint),dt,t
 
    inquire(file='infile.in',exist=ex)
@@ -130,7 +130,29 @@ subroutine readinputs()
       endif
 
    close(10)
-   print *
+
+
+   inquire(file='R.in',exist=ex)
+   if (ex) then
+      print '(a)','Reading prior R and standard deviation from R.in'
+      open(10,file='R.in')
+         do i=0,min(nt,rdim)
+            read(10,*,end=200)ii,p%R(i),parstd%R(i)
+         enddo
+         200 close(10)
+         if (i < min(nt,rdim)) then
+            do j=i,min(nt,rdim)
+               p%R(j)=p%R(i)
+               parstd%R(j)=parstd%R(i)
+            enddo
+         endif
+   endif
+      print '(a)','Writing prior R and standard deviation to R.template'
+      open(10,file='R.template')
+         do i=0,min(nt,rdim)
+            write(10,'(i6,2f13.3)')i,p%R(i),parstd%R(i)
+         enddo
+      close(10)
 end subroutine
 end module
 
