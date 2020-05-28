@@ -57,10 +57,12 @@ $!LineMap [1499]  Lines{LineThickness = 0.80}
 $!LineMap [1500]  Symbols{Size = 0.7 }
 
 
+# LEGEND
 $!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 70.0}}
-$!GlobalLinePlot Legend{XYPos{Y = 83.0}}
+$!GlobalLinePlot Legend{XYPos{X = LEGXX}}
+$!GlobalLinePlot Legend{XYPos{Y = LEGYY}}
 
+# AXIS
 $!XYLineAxis YDetail 1 {CoordScale = Log}
 $!XYLineAxis YDetail 1 {RangeMin = 10}
 $!XYLineAxis YDetail 1 {RangeMax = YYYYC}
@@ -96,8 +98,8 @@ $!LineMap [1499]  Name = 'Total dead'
 $!ActiveLineMaps += [1401-1500]
 
 $!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 70.0}}
-$!GlobalLinePlot Legend{XYPos{Y = 73.0}}
+$!GlobalLinePlot Legend{XYPos{X = 9.19724}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
 
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!XYLineAxis YDetail 1 {RangeMin = 0}

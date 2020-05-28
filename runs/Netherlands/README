@@ -1,0 +1,30 @@
+README EnKF SEIR cases for The Netherlands
+May 27th, 2020, Femke Vossepoel
+
+For NL, the following cases have been analysed:
+
+_______________________________________________________________________
+Case01: NL_case_3.8_0.8
+_______________________________________________________________________
+
+choice of R to reflect situation in Feb 2020 (R=3.8), 
+
+intervention on March 16th (R=0.8) -not considering the effect of the schools partly re-opening on May 11th
+Experiment starts on February 27th
+
+Assumed an initial number of 
+
+Infected of 400 (50), 
+Exposed 500 (50). 
+
+Other settings similar to Norwegian case.
+
+_______________________________________________________________________
+Case02: NL_case_1.0
+_______________________________________________________________________
+
+R set to 1.0 (constant), to see how R would evolve if we let the data shape it. 
+St dev of R is set to 1.5 to represent the uncertainty.
+Experiment started at Feb 27th
+Initially infected: 400 (std dev 50)
+Initially exposed: 500 (std dev 50) 

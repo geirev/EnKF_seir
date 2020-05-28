@@ -8,6 +8,7 @@ runs/*/Case*/*
 !runs/*/Case*/*.in
 !runs/*/Case*/seed.dat
 !runs/*/Case*/ylimits.txt
+!runs/*/Case*/legend.txt
 !runs/run.sh
 !runs/plotsD.mcr
 !runs/solutionsD.lay

@@ -15,19 +15,19 @@ $!LineMap [1-300]  Assign{ShowInLegend = Never}
 $!LineMap [1-300]  Lines{LineThickness = 0.40}
 
 $!LineMap [301]  Assign{YAxisVar = 2}
-$!LineMap [301]  Name = 'Total cases R(t)=1.4'
+$!LineMap [301]  Name = 'Cases R(t)=1.4'
 $!LineMap [301]  Lines{LineThickness = 0.80}
 $!LineMap [301]  Lines{LinePattern = Dashed}
 $!LineMap [301]  Lines{Color = Custom27}
 $!LineMap [301]  Assign{ShowInLegend = Auto}
 
-$!LineMap [302]   Name = 'Total cases R(t)=1.0'
+$!LineMap [302]   Name = 'Cases R(t)=1.0'
 $!LineMap [302]  Lines{LineThickness = 0.80}
 $!LineMap [302]  Lines{LinePattern = LongDash}
 $!LineMap [302]  Lines{Color = Custom27}
 $!LineMap [302]  Assign{ShowInLegend = Auto}
 
-$!LineMap [303]   Name = 'Total cases R(t)=0.8'
+$!LineMap [303]   Name = 'Cases R(t)=0.8'
 $!LineMap [303]  Lines{LineThickness = 0.80}
 $!LineMap [303]  Lines{LinePattern = Solid}
 $!LineMap [303]  Lines{Color = Custom27}
@@ -40,19 +40,19 @@ $!LineMap [304-603]  Assign{ShowInLegend = Never}
 $!LineMap [304-603]  Lines{LineThickness = 0.40}
 
 $!LineMap [604]  Assign{YAxisVar = 2}
-$!LineMap [604]  Name = 'Total deaths R(t)=1.4'
+$!LineMap [604]  Name = 'Dead R(t)=1.4'
 $!LineMap [604]  Lines{LineThickness = 0.80}
 $!LineMap [604]  Lines{LinePattern = Dashed}
 $!LineMap [604]  Lines{Color = Custom25}
 $!LineMap [604]  Assign{ShowInLegend = Auto}
 
-$!LineMap [605]   Name = 'Total deaths R(t)=1.0'
+$!LineMap [605]   Name = 'Dead R(t)=1.0'
 $!LineMap [605]  Lines{LineThickness = 0.80}
 $!LineMap [605]  Lines{LinePattern = LongDash}
 $!LineMap [605]  Lines{Color = Custom25}
 $!LineMap [605]  Assign{ShowInLegend = Auto}
 
-$!LineMap [606]   Name = 'Total deaths R(t)=0.8'
+$!LineMap [606]   Name = 'Dead R(t)=0.8'
 $!LineMap [606]  Lines{LineThickness = 0.80}
 $!LineMap [606]  Lines{LinePattern = Solid}
 $!LineMap [606]  Lines{Color = Custom25}
@@ -63,8 +63,9 @@ $!LineMap [607]  Symbols{Size = 0.7 }
 
 
 $!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 10.0}}
-$!GlobalLinePlot Legend{XYPos{Y = 95.0}}
+$!GlobalLinePlot Legend{XYPos{X = 9.19724}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
+
 
 $!XYLineAxis YDetail 1 {CoordScale = Log}
 $!XYLineAxis YDetail 1 {RangeMin = 10}
