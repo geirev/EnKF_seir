@@ -1,14 +1,14 @@
 dir=~/Dropbox/Apps/Overleaf/Corona
 
 prior=0
-runseir=1
+runseir=0
 endday=44060
 
-for country in Norway  #Netherlands France Argentina Netherlands Quebec Brazil
+for country in Norway #US   #Netherlands France Argentina Netherlands Quebec Brazil
 do
    if [ -d $country ]
    then
-      for exp in $country/Case01B
+      for exp in $country/Case01
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp

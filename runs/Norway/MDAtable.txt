@@ -1,0 +1,9 @@
+                Parameters Observations
+1   MDA-steps : 4.1444     2037.6507
+2   MDA-steps : 4.7390      391.6873
+4   MDA-steps : 5.6172      156.2609
+8   MDA-steps : 6.5147       74.5773
+16  MDA-steps : 7.0288       35.9585
+32  MDA-steps : 7.2752       17.6867
+64  MDA-steps : 7.3624        8.8010
+128 MDA-steps : 7.3664        4.3874

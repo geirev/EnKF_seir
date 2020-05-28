@@ -68,6 +68,8 @@ $!XYLineAxis YDetail 1 {RangeMin = 10}
 $!XYLineAxis YDetail 1 {RangeMax = YYYYC}
 $!XYLineAxis XDetail 1 {RangeMin = XXXXA}
 $!XYLineAxis XDetail 1 {RangeMax = XXXXB}
+$!XYLineAxis YDetail 1 {Title{Offset = 7}}
+
 
 $!RedrawAll 
 $!ExportSetup ExportFName = './HDlog.eps'
@@ -106,6 +108,7 @@ $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis YDetail 1 {RangeMax = YYYYD}
 $!XYLineAxis XDetail 1 {RangeMin = XXXXA}
 $!XYLineAxis XDetail 1 {RangeMax = XXXXB}
+$!XYLineAxis YDetail 1 {Title{Offset = 7}}
  
 $!RedrawAll 
 $!ExportSetup ExportFName = './HD.eps'
@@ -136,6 +139,7 @@ $!XYLineAxis XDetail 1 {RangeMin = XXXXA}
 $!XYLineAxis XDetail 1 {RangeMax = XXXXB}
 $!XYLineAxis YDetail 1 {AutoGrid = No}
 $!XYLineAxis YDetail 1 {GRSpacing = 1}
+$!XYLineAxis YDetail 1 {Title{Offset = 7}}
 
 
 $!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
