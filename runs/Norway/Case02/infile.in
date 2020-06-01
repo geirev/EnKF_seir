@@ -19,8 +19,8 @@
  T                        !  Rescaling of Rmatrix                                                                 
  T            3.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
  4.5          0.2         !  R1        : Reproduction number with no interventions 
- 0.80         0.15        !  R2        : Reproduction number during lockdown
- 0.80         0.15        !  R3        : Reproduction number during opening
+ 0.50         0.15        !  R2        : Reproduction number during lockdown
+ 0.50         0.15        !  R3        : Reproduction number during opening
  155.0       15.5         !  E0        : Initial Exposed used to initialize the model
  65.0         6.5         !  I0        : Initial Infectious used to initialize the model
  5.5          0.5         !  Tinc      : Incubation period 

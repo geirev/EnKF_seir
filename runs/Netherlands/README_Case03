@@ -1,0 +1,13 @@
+README EnKF SEIR cases for The Netherlands
+
+May 30th, 2020, Femke Vossepoel
+
+_______________________________________________________________________
+Case03
+_______________________________________________________________________
+
+R set to 1.825 at the start, gradually changing to 0.8. This is consistent with the estimate of R by the Dutch health institute. This run is meant to see how R would evolve if we let the data shape it. 
+St dev of R is set to 1.5 to represent the uncertainty.
+Experiment started at Feb 20th
+Initially infected: 380 (std dev 38)
+Initially exposed: 480 (std dev 48) 

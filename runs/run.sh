@@ -4,11 +4,11 @@ prior=0
 runseir=0
 endday=44060
 
-for country in Norway #US   #Netherlands France Argentina Netherlands Quebec Brazil
+for country in Netherlands # Norway  England US France Argentina Netherlands Quebec Brazil
 do
    if [ -d $country ]
    then
-      for exp in $country/Case01
+      for exp in $country/Case?3
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
