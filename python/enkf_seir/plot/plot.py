@@ -53,11 +53,13 @@ def load_observed_data_from_tecplot_file(tecplot_file_name, obs_data_name):
     
     return time, obs_data, std_dev
     
-def plot_ensemble(time, mean, std_dev, ensemble, color, fading, tf, daily):
+def plot_ensemble(time, mean, std_dev, ensemble, color, fading, tf, daily, plot_ensemble=True):
     ensemble_color = lighter(color, fading)
-    plt.plot(time, ensemble, color=ensemble_color)
+    if plot_ensemble:
+        plt.plot(time, ensemble, color=ensemble_color)
     plt.plot(time, mean, color=color)
     plt.xlim(None, tf)
+    plt.xticks(rotation=35)
     if daily == 'true':
         rate = [mean[i + 1] - mean[i] for i in range(len(mean)-1)] 
         rate.insert(0, 0.0)
@@ -77,11 +79,12 @@ def plot_observed_data(time, observed_data, std_dev, color):
             markerfacecolor=color, 
             color=color)
     
-def plot_variable(data_source, variable, obs_file_name, obs_name, prior, t0, tf, daily):
+def plot_variable(data_source, variable, obs_file_name, obs_name, prior, t0, tf, daily, color=None, do_plot_ensemble=True):
     post_file_name  = data_source / (variable + '_1.dat')
     prior_file_name = data_source / (variable + '_0.dat')
     
-    color = variable_colors[variable]
+    if color is None:
+        color = variable_colors[variable]
     
     # plot prior data first because, since it is more spread than the posterior
     # it won't be covered by it
@@ -92,7 +95,7 @@ def plot_variable(data_source, variable, obs_file_name, obs_name, prior, t0, tf,
             time = [t0 + timedelta(days=elapsed_days) for elapsed_days in time]
         prior_fading = 0.9
         print("Ploting prior for: ", variable)
-        plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading, tf, daily)
+        plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading, tf, daily, plot_ensemble)
     
     output_variable = variable2output[variable] + '_1'
     time, mean, std_dev, ensemble = load_ensemble_from_tecplot_file(post_file_name, output_variable)
@@ -101,7 +104,7 @@ def plot_variable(data_source, variable, obs_file_name, obs_name, prior, t0, tf,
         
     prior_fading = 0.6
     print("Ploting posterior for: ", variable)
-    plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading, tf, daily)
+    plot_ensemble(time, mean, std_dev, ensemble, color, prior_fading, tf, daily, do_plot_ensemble)
     
     # note: not all variables have observed data
     if (obs_name is not None):
@@ -112,7 +115,7 @@ def plot_variable(data_source, variable, obs_file_name, obs_name, prior, t0, tf,
         plot_observed_data(time, observed_data, std_dev, color)
     
     patch = mpatches.Patch(color=color, label=variable)
-    plt.legend(handles=[patch])
+    #plt.legend(handles=[patch])
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='EnKF_seir input arguments')
