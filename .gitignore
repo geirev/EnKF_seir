@@ -8,6 +8,7 @@ runs/*/*.eps
 runs/*/Case*/*
 !runs/*/Case*/*.in
 !runs/*/Case*/seed.dat
+!runs/*/Case*/xlimit.txt
 !runs/*/Case*/ylimits.txt
 !runs/*/Case*/legend.txt
 !runs/run.sh
