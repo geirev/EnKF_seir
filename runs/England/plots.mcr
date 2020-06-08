@@ -157,13 +157,13 @@ $!ActiveLineMaps += [1-609]
 $!LineMap [1-609]  Assign{ShowInLegend = Never}
 $!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
 #
-$!LineMap [604]  Name = 'Posterior R(t)=0.5'
+$!LineMap [604]  Name = 'R_3=0.5'
 $!LineMap [604]  Lines{LinePattern = DashDot}
 $!LineMap [604]  Assign{ShowInLegend = Auto}
-$!LineMap [605]  Name = 'Posterior R(t)=1.0'
+$!LineMap [605]  Name = 'R_3=1.0'
 $!LineMap [605]  Lines{LinePattern = LongDash}
 $!LineMap [605]  Assign{ShowInLegend = Auto}
-$!LineMap [606]  Name = 'Posterior R(t)=1.2'
+$!LineMap [606]  Name = 'R_3=1.2'
 $!LineMap [606]  Lines{LinePattern = Solid}
 $!LineMap [606]  Assign{ShowInLegend = Auto}
 $!LineMap [604-606]  Lines{LineThickness = 0.80}

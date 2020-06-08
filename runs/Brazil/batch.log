@@ -40,7 +40,12 @@ ACTION: LoadAddOn
 ACTION: LoadAddOn
 ACTION: LoadAddOn
 ACTION: LoadAddOn
-ACTION: OpenLayout: ./solutions.lay
+ACTION: OpenLayout: ./solutions1.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43900
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./solutions2.lay
 ACTION: PageControl: CREATE
 ACTION: AlterData: V1=V1+43900
 ACTION: RedrawAll

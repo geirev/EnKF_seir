@@ -1,5 +1,6 @@
 #!MC 1410
-$!OpenLayout  "./solutions.lay"
+$!LOOP 2
+$!OpenLayout  "./solutions|LOOP|.lay"
 $!PrintSetup Palette = Color
 $!ExportSetup ExportFormat = EPS
 $!ExportSetup EPSPreviewImage{ImageType = None}
@@ -11,7 +12,7 @@ $!AlterData [1-18]
 $!ActiveLineMaps -= [1-910]
 
 # Total deaths
-$!LineMap [304-403]  Lines{Color = Custom44}
+$!LineMap [304-403]  Lines{Color = Custom42}
 $!LineMap [504-603]  Lines{Color = Custom41}
 $!LineMap [304-603]  Assign{ShowInLegend = Never}
 $!LineMap [304-603]  Lines{LineThickness = 0.40}
@@ -26,7 +27,7 @@ $!LineMap [604]  Assign{YAxisVar = 2}
 $!LineMap [604]  Name = 'Deaths 20 % measurement error'
 $!LineMap [604]  Lines{LineThickness = 0.80}
 $!LineMap [604]  Lines{LinePattern = Solid}
-$!LineMap [604]  Lines{Color = Custom28}
+$!LineMap [604]  Lines{Color = Custom26}
 $!LineMap [604]  Assign{ShowInLegend = Auto}
 
 $!LineMap [606]  Name = 'Deaths 5 % measurement error'
@@ -48,12 +49,110 @@ $!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
 
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
-$!XYLineAxis YDetail 1 {RangeMax = 100000}
+$!XYLineAxis YDetail 1 {RangeMax = 50000}
 $!XYLineAxis XDetail 1 {RangeMin = 43900}
 $!XYLineAxis XDetail 1 {RangeMax = 44220}
 $!XYLineAxis YDetail 1 {Title{Offset = 7}}
 
 $!RedrawAll 
-$!ExportSetup ExportFName = './Brazil_scenarioCD.eps'
+$!ExportSetup ExportFName = './Brazil_scenarioCD|LOOP|.eps'
+$!Export 
+  ExportRegion = AllFrames
+
+$!ENDLOOP
+
+#
+################################
+## R E N S
+$!OpenLayout  "./rens.lay"
+
+$!AlterData [1-4]
+  Equation = 'V1=V1+43900'
+
+$!ActiveLineMaps -= [1-404]
+
+$!ActiveLineMaps += [1-100]
+$!ActiveLineMaps += [401]
+
+$!ActiveLineMaps += [201-300]
+$!ActiveLineMaps += [403]
+$!LineMap [1-400]  Assign{ShowInLegend = Never}
+$!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
+#
+$!XYLineAxis YDetail 1 {CoordScale = Linear}
+$!View Fit
+$!XYLineAxis XDetail 1 {RangeMin = 43900}
+$!XYLineAxis XDetail 1 {RangeMax = 44220}
+$!XYLineAxis YDetail 1 {RangeMin = 0}
+$!XYLineAxis YDetail 1 {RangeMax = 5}
+$!XYLineAxis YDetail 1 {GRSpacing = 1}
+#
+#
+$!GlobalLinePlot Legend{AnchorAlignment = TopRight}
+$!GlobalLinePlot Legend{XYPos{X = 98.2363}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.6866}}
+#
+$!AttachGeom
+  AnchorPos
+    {
+    X = 43800.0
+    Y = 1.0
+    }
+  Color = Red
+  LineThickness = 0.2
+  RawData
+1
+2
+0 0
+480.000 0.0
+
+$!RedrawAll 
+$!ExportSetup ExportFName = './Brazil_scenarioRENS1.eps'
+$!Export 
+  ExportRegion = AllFrames
+
+
+
+
+
+$!ActiveLineMaps -= [1-404]
+
+$!ActiveLineMaps += [101-200]
+$!ActiveLineMaps += [402]
+
+$!ActiveLineMaps += [301-400]
+$!ActiveLineMaps += [404]
+$!LineMap [1-400]  Assign{ShowInLegend = Never}
+$!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
+#
+$!XYLineAxis YDetail 1 {CoordScale = Linear}
+$!View Fit
+$!XYLineAxis XDetail 1 {RangeMin = 43900}
+$!XYLineAxis XDetail 1 {RangeMax = 44220}
+$!XYLineAxis YDetail 1 {RangeMin = 0}
+$!XYLineAxis YDetail 1 {RangeMax = 5}
+$!XYLineAxis YDetail 1 {GRSpacing = 1}
+#
+#
+$!GlobalLinePlot Legend{AnchorAlignment = TopRight}
+$!GlobalLinePlot Legend{XYPos{X = 98.2363}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.6866}}
+#
+$!AttachGeom
+  AnchorPos
+    {
+    X = 43800.0
+    Y = 1.0
+    }
+  Color = Red
+  LineThickness = 0.2
+  RawData
+1
+2
+0 0
+480.000 0.0
+
+$!RedrawAll 
+$!ExportSetup ExportFName = './Brazil_scenarioRENS2.eps'
 $!Export 
   ExportRegion = AllFrames

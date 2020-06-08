@@ -5,8 +5,8 @@
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
  32                       ! Number of ESMDA steps, (1 means standard ES update)
- T 0.05   2.0  400.0       ! Condition on Deaths, realtive error, minerr, maxerr 
- T 0.05   2.0  400.0       ! Condition on Hosp,   realtive error, minerr, maxerr 
+ T 0.05   2.0  400.0       ! Condition on Deaths, realtive error, minerr, maxerr
+ T 0.05   2.0  400.0       ! Condition on Hosp,   realtive error, minerr, maxerr
  F 0.1  100.0 50000.0 0.05 ! Condition on Cases,  realtive error, minerr, maxerr, fraction of real cases 
  T                        ! Correlated measurement errors
  10.0                     ! Decorrelation half length in time of measurement errors
@@ -18,7 +18,7 @@
 #3 First guess model parameters and their std dev -----------------------------------------------------
  T                        !  Rescaling of Rmatrix
  T            3.0        !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
- 3.87         0.5         !  R1        : Reproduction number with no interventions 
+ 3.87         0.5         !  R1        : Reproduction number with no interventions
  0.9          0.45        !  R2        : Reproduction number during lockdown
  1.2          0.12        !  R3        : Reproduction number during opening
  240.0        24.0         !  E0        : Initial Exposed used to initialize the model
@@ -26,7 +26,7 @@
  5.5          0.5         !  Tinc      : Incubation period 
  3.8          0.5         !  Tinf      : Infection time
  14.0         0.5         !  Trecm     : Recovery time mild cases
- 5.0          0.41         !  Trecs     : Recovery time severe cases 
+ 5.0          0.41         !  Trecs     : Recovery time severe cases
  6.0          0.5         !  Thosp     : Hospitalization time
  16.0         0.5         !  Tdead     : Days to death
  0.009        0.001       !  CFR       : Case fatality rate %
