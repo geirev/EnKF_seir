@@ -17,3 +17,7 @@ that brings down the reproductive number to 0.6.
 ## Case03:
 Assumes the same setting as in Case01, but considers a larger observation error in order 
 to account for under notification.
+
+## Case04:
+Assumes the same setting as in Case02, but considers a larger observation error in order 
+to account for under notification.
