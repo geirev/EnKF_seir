@@ -1,0 +1,78 @@
+Tecplot 2019.1.0.99403 Batch Log
+ACTION: PageControl: CREATE
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: OpenLayout: ./solutions1.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43881
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./solutions2.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43881
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./solutions3.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43881
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./rens1.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43881
+ACTION: View: Fit
+ACTION: AttachGeom
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./rens2.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43881
+ACTION: View: Fit
+ACTION: AttachGeom
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./rens3.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V1=V1+43881
+ACTION: View: Fit
+ACTION: AttachGeom
+ACTION: RedrawAll
+ACTION: Export

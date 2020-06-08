@@ -1,10 +1,10 @@
- 1000                     ! nrens: Ensemble size
- 181                      ! nt   : Number of output times (one more than days to get daily outputs)
- 180                      ! time : Length of integration in days
+ 5000                     ! nrens: Ensemble size
+ 121                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 120                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
- 16                       ! Number of ESMDA steps, (1 means standard ES update)
+ 32                       ! Number of ESMDA steps, (1 means standard ES update)
  T 0.05   4.0  6.0        ! Condition on Deaths, realtive error, minerr, maxerr 
  F 0.05   4.0  6.0        ! Condition on Hosp,   realtive error, minerr, maxerr 
  F 0.05  100.0 5000.0 0.15 ! Condition on Cases,  realtive error, minerr, maxerr, fraction of real cases 
@@ -20,7 +20,7 @@
  T            3.0         !  lrtime   + rch : R time-continous (T) or picewise constant (F) + decorrelation length
  3.7          0.2         !  R1        : Reproduction number with no interventions 
  1.         0.3        !  R2        : Reproduction number during lockdown
- 1.2         0.3        !  R3        : Reproduction number during opening
+ 1.5         0.15        !  R3        : Reproduction number during opening
  40.0       8.0         !  E0        : Initial Exposed used to initialize the model
  10.0       2.0         !  I0        : Initial Infectious used to initialize the model
  5.5          0.2         !  Tinc      : Incubation period 

@@ -4,7 +4,7 @@
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
- 64                       ! Number of ESMDA steps, (1 means standard ES update)
+ 32                       ! Number of ESMDA steps, (1 means standard ES update)
  T 0.05   4.0  6.0        ! Condition on Deaths, realtive error, minerr, maxerr 
  T 0.05   4.0  6.0        ! Condition on Hosp,   realtive error, minerr, maxerr 
  F 0.05  100.0 5000.0 0.15 ! Condition on Cases,  realtive error, minerr, maxerr, fraction of real cases 

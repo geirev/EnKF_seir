@@ -41,7 +41,7 @@ subroutine readinputs()
       read(10,*)lh, relerrh, minerrh, maxerrh 
                print '(a,l1,3f10.2)','H conditioning, relerr, minerr, maxerr        :',lh, relerrh, minerrh, maxerrh
       read(10,*)lc, relerrc, minerrc, maxerrc , cfrac
-               print '(a,l1,4f10.2)','C conditioning, relerr, minerr, maxerr, cfrac :',ld, relerrd, minerrd, maxerrd, cfrac
+               print '(a,l1,4f10.2)','C conditioning, relerr, minerr, maxerr, cfrac :',lc, relerrd, minerrd, maxerrd, cfrac
       read(10,*)lmeascorr           ;    print '(a,l1)',       'Activate corr. obs. err.   :',lmeascorr
       read(10,*)rh                  ;    print '(a,f10.4)',    'Obs error decorrelation    :',rh
       read(10,*)truncation          ;    print '(a,f10.4)',    'EnKF SVD truncation (0.99) :',truncation

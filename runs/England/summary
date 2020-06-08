@@ -1,9 +1,9 @@
 Case01: Assimilate D, exit R=0.5 
-Case02: Assimilate D, exit R=0.5
-Case03: Assimilate D, exit R=0.5
-Case04: Assimilate DH, exit R=1.0
+Case02: Assimilate D, exit R=1.0
+Case03: Assimilate D, exit R=1.2
+Case04: Assimilate DH, exit R=0.5
 Case05: Assimilate DH, exit R=1.0
-Case06: Assimilate DH, exit R=1.0
-Case07: Assimilate DHPc, exit R=1.2
-Case08: Assimilate DHPc, exit R=1.2
+Case06: Assimilate DH, exit R=1.2
+Case07: Assimilate DHPc, exit R=0.5
+Case08: Assimilate DHPc, exit R=1.0
 Case09: Assimilate DHPc, exit R=1.2

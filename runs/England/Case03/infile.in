@@ -1,10 +1,10 @@
- 1000                     ! nrens: Ensemble size
+ 5000                     ! nrens: Ensemble size
  201                      ! nt   : Number of output times (one more than days to get daily outputs)
  200                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
- 16                       ! Number of ESMDA steps, (1 means standard ES update)
+ 32                       ! Number of ESMDA steps, (1 means standard ES update)
  T 0.05   2.0  400.0       ! Condition on Deaths, realtive error, minerr, maxerr 
  F 0.05   2.0  400.0       ! Condition on Hosp,   realtive error, minerr, maxerr 
  F 0.1  100.0 50000.0 0.05 ! Condition on Cases,  realtive error, minerr, maxerr, fraction of real cases 

@@ -15,19 +15,19 @@ $!LineMap [1-300]  Assign{ShowInLegend = Never}
 $!LineMap [1-300]  Lines{LineThickness = 0.40}
 
 $!LineMap [301]  Assign{YAxisVar = 2}
-$!LineMap [301]  Name = 'Cases R(t)=1.4'
+$!LineMap [301]  Name = 'Cases R(t)=1.3'
 $!LineMap [301]  Lines{LineThickness = 0.80}
 $!LineMap [301]  Lines{LinePattern = Dashed}
 $!LineMap [301]  Lines{Color = Custom27}
 $!LineMap [301]  Assign{ShowInLegend = Auto}
 
-$!LineMap [302]   Name = 'Cases R(t)=1.0'
+$!LineMap [302]   Name = 'Cases R(t)=0.9'
 $!LineMap [302]  Lines{LineThickness = 0.80}
 $!LineMap [302]  Lines{LinePattern = LongDash}
 $!LineMap [302]  Lines{Color = Custom27}
 $!LineMap [302]  Assign{ShowInLegend = Auto}
 
-$!LineMap [303]   Name = 'Cases R(t)=0.8'
+$!LineMap [303]   Name = 'Cases R(t)=1.7'
 $!LineMap [303]  Lines{LineThickness = 0.80}
 $!LineMap [303]  Lines{LinePattern = Solid}
 $!LineMap [303]  Lines{Color = Custom27}
@@ -40,19 +40,19 @@ $!LineMap [304-603]  Assign{ShowInLegend = Never}
 $!LineMap [304-603]  Lines{LineThickness = 0.40}
 
 $!LineMap [604]  Assign{YAxisVar = 2}
-$!LineMap [604]  Name = 'Dead R(t)=1.4'
+$!LineMap [604]  Name = 'Dead R(t)=1.3'
 $!LineMap [604]  Lines{LineThickness = 0.80}
 $!LineMap [604]  Lines{LinePattern = Dashed}
 $!LineMap [604]  Lines{Color = Custom25}
 $!LineMap [604]  Assign{ShowInLegend = Auto}
 
-$!LineMap [605]   Name = 'Dead R(t)=1.0'
+$!LineMap [605]   Name = 'Dead R(t)=0.9'
 $!LineMap [605]  Lines{LineThickness = 0.80}
 $!LineMap [605]  Lines{LinePattern = LongDash}
 $!LineMap [605]  Lines{Color = Custom25}
 $!LineMap [605]  Assign{ShowInLegend = Auto}
 
-$!LineMap [606]   Name = 'Dead R(t)=0.8'
+$!LineMap [606]   Name = 'Dead R(t)=1.7'
 $!LineMap [606]  Lines{LineThickness = 0.80}
 $!LineMap [606]  Lines{LinePattern = Solid}
 $!LineMap [606]  Lines{Color = Custom25}
@@ -69,9 +69,9 @@ $!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
 
 $!XYLineAxis YDetail 1 {CoordScale = Log}
 $!XYLineAxis YDetail 1 {RangeMin = 10}
-$!XYLineAxis YDetail 1 {RangeMax = 1000000}
+$!XYLineAxis YDetail 1 {RangeMax = 10000000}
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
-$!XYLineAxis XDetail 1 {RangeMax = 44050}
+$!XYLineAxis XDetail 1 {RangeMax = 44070}
 
 $!RedrawAll 
 $!ExportSetup ExportFName = './Argentina_scenarioCD.eps'
@@ -85,9 +85,12 @@ $!ActiveLineMaps -= [1-607]
 $!ActiveLineMaps += [608-910]
 $!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
 #
-$!LineMap [908]  Name = 'Posterior R(t)=A'
-$!LineMap [909]  Name = 'Posterior R(t)=B'
-$!LineMap [910]  Name = 'Posterior R(t)=C'
+$!LineMap [908]  Name = 'Posterior R(t)=1.3'
+$!LineMap [908]  Lines{LinePattern = Dashed}
+$!LineMap [909]  Name = 'Posterior R(t)=0.9'
+$!LineMap [909]  Lines{LinePattern = LongDash}
+$!LineMap [910]  Name = 'Posterior R(t)=1.7'
+$!LineMap [910]  Lines{LinePattern = Solid}
 $!LineMap [908]  Assign{ShowInLegend = Auto}
 $!LineMap [909]  Assign{ShowInLegend = Auto}
 $!LineMap [910]  Assign{ShowInLegend = Auto}
@@ -96,15 +99,15 @@ $!LineMap [908-910]  Lines{LineThickness = 0.80}
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!View Fit
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
-$!XYLineAxis XDetail 1 {RangeMax = 44050}
+$!XYLineAxis XDetail 1 {RangeMax = 44070}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis YDetail 1 {RangeMax = 5}
 $!XYLineAxis YDetail 1 {GRSpacing = 1}
 #
 #
-$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 70.0}}
-$!GlobalLinePlot Legend{XYPos{Y = 95.0}}
+$!GlobalLinePlot Legend{AnchorAlignment = TopRight}
+$!GlobalLinePlot Legend{XYPos{X = 98.2363}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.6866}}
 #
 $!AttachGeom
   AnchorPos

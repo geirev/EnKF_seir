@@ -4,11 +4,11 @@ prior=0
 runseir=0
 endday=44060
 
-for country in France # Netherlands # Norway  England US France Argentina Netherlands Quebec Brazil
+for country in Netherlands #Brazil #Argentina Norway England Quebec Netherlands France Brazil Argentina # US 
 do
    if [ -d $country ]
    then
-      for exp in $country/Case*
+      for exp in $country/Case01I
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
@@ -51,6 +51,10 @@ do
                                           -e "s/LEGXX/${legX}/g"  \
                                           -e "s/LEGYY/${legY}/g"  \
                                           -e "s/YYYYC/${ymaxC}/g"  > ./plots.mcr
+
+
+            [ "$exp" == "Netherlands/Case01I" ] && sed -i 's/Hospitalized/ICU patients/g' ./plots.mcr
+
             tec360 -b plots.mcr
             rm -f batch.log
             case=${PWD##*/}          

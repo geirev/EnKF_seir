@@ -142,9 +142,9 @@ $!XYLineAxis YDetail 1 {GRSpacing = 1}
 $!XYLineAxis YDetail 1 {Title{Offset = 7}}
 
 
-$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 70.0}}
-$!GlobalLinePlot Legend{XYPos{Y = 93.0}}
+$!GlobalLinePlot Legend{AnchorAlignment = TopRight}
+$!GlobalLinePlot Legend{XYPos{X = 98.1606}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.5265}}
 
 $!AttachGeom
   AnchorPos

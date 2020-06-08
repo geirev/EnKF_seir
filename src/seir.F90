@@ -52,6 +52,7 @@ program seir
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! ESMDA update
    do i=1,nesmda
+      print '(a)','--------------------------------------------------------------------------------'
       print '(a,2I3)','ESMDA step:',i,nesmda
 ! Analysis step
       if (i==1) then
@@ -89,12 +90,12 @@ program seir
             stop 'Measurement type not found'
          end select
       enddo
-      if (id > 0) print '(a,f10.4)', 'chi-square death:        ',chid
-      if (ih > 0) print '(a,f10.4)', 'chi-square hospitalized: ',chih
-      if (ic > 0) print '(a,f10.4)', 'chi-square cases:        ',chic
+      if (id > 0) print '(a,f13.4)', 'chi-square death:        ',chid
+      if (ih > 0) print '(a,f13.4)', 'chi-square hospitalized: ',chih
+      if (ic > 0) print '(a,f13.4)', 'chi-square cases:        ',chic
       print '(a,i4)','total number of obs: ',nrobs
-      print '(a,f10.4)','total chi-square obs: ',chid+chih+chic
-   print '(a)','Done..'
+      print '(a,f13.4)','total chi-square obs: ',chid+chih+chic
+      print *
    enddo
 
    print '(a)','Dumping tecplot files.'
