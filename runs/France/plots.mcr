@@ -15,19 +15,19 @@ $!LineMap [1-300]  Assign{ShowInLegend = Never}
 $!LineMap [1-300]  Lines{LineThickness = 0.40}
 
 $!LineMap [301]  Assign{YAxisVar = 2}
-$!LineMap [301]  Name = 'Hospitalized R(t)=0.75'
+$!LineMap [301]  Name = 'Hospitalized R_3=0.75'
 $!LineMap [301]  Lines{LineThickness = 0.80}
 $!LineMap [301]  Lines{LinePattern = Dashed}
 $!LineMap [301]  Lines{Color = Custom28}
 $!LineMap [301]  Assign{ShowInLegend = Auto}
 
-$!LineMap [302]   Name = 'Hospitalized R(t)=0.85'
+$!LineMap [302]   Name = 'Hospitalized R_3=0.85'
 $!LineMap [302]  Lines{LineThickness = 0.80}
 $!LineMap [302]  Lines{LinePattern = LongDash}
 $!LineMap [302]  Lines{Color = Custom28}
 $!LineMap [302]  Assign{ShowInLegend = Auto}
 
-$!LineMap [303]   Name = 'Hospitalized R(t)=1.00'
+$!LineMap [303]   Name = 'Hospitalized R_3=1.00'
 $!LineMap [303]  Lines{LineThickness = 0.80}
 $!LineMap [303]  Lines{LinePattern = Solid}
 $!LineMap [303]  Lines{Color = Custom28}
@@ -43,21 +43,21 @@ $!LineMap [304-603]  Lines{LineThickness = 0.10}
 
 $!ActiveLineMaps += [604]
 $!LineMap [604]  Assign{YAxisVar = 2}
-$!LineMap [604]  Name = 'Dead R(t)=0.75'
+$!LineMap [604]  Name = 'Dead R_3=0.75'
 $!LineMap [604]  Lines{LineThickness = 0.80}
 $!LineMap [604]  Lines{LinePattern = Dashed}
 $!LineMap [604]  Lines{Color = Custom25}
 $!LineMap [604]  Assign{ShowInLegend = Auto}
 
 $!ActiveLineMaps += [605]
-$!LineMap [605]   Name = 'Dead R(t)=0.85'
+$!LineMap [605]   Name = 'Dead R_3=0.85'
 $!LineMap [605]  Lines{LineThickness = 0.80}
 $!LineMap [605]  Lines{LinePattern = LongDash}
 $!LineMap [605]  Lines{Color = Custom25}
 $!LineMap [605]  Assign{ShowInLegend = Auto}
 
 $!ActiveLineMaps += [606]
-$!LineMap [606]   Name = 'Dead R(t)=1.00'
+$!LineMap [606]   Name = 'Dead R_3=1.00'
 $!LineMap [606]  Lines{LineThickness = 0.80}
 $!LineMap [606]  Lines{LinePattern = Solid}
 $!LineMap [606]  Lines{Color = Custom25}

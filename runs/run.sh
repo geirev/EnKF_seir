@@ -1,26 +1,50 @@
 dir=~/Dropbox/Apps/Overleaf/Corona
+src=~/Dropbox/EnKF_seir/src
 
+rdim=400
 prior=0
-runseir=0
+runseir=1
 endday=44060
+executable=seir
 
-for country in Netherlands #Brazil #Argentina Norway England Quebec Netherlands France Brazil Argentina # US 
+# Recompile if rdim has been set different from 400
+if ! grep -q "rdim=${rdim}" ${src}/mod_dimensions.F90
+then
+   pushd $src
+   sed -i "s/rdim=.*/rdim=${rdim}/" mod_dimensions.F90
+   make  || (echo "make A failed $$?"; exit 1)
+   popd
+fi
+
+for country in Quebec #Netherlands #Brazil #Argentina Norway England Quebec Netherlands France Brazil Argentina # US 
 do
    if [ -d $country ]
    then
-      for exp in $country/Case01I
+      for exp in $country/Case01
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
          if [ -f "infile.in" ] && [ -f "corona.in" ]
          then
+
+##################################################################
+# Quebec specifics using different rdim values (constant R in predictions)
             if [ $country == "Quebec" ]
             then 
-               executable=seirQuebec
-            else
-               executable=seir
+               [ "${exp}" == "${country}/Case01" ] && newrdim=82
+               [ "${exp}" == "${country}/Case02" ] && newrdim=82
+               [ "${exp}" == "${country}/Case03" ] && newrdim=82
+               echo DIM = ${newrdim}
+               pushd $src
+               sed -i "s/rdim=.*/rdim=${newrdim}/" mod_dimensions.F90
+               make  || (echo "make B failed $$?"; exit 1)
+               popd
             fi
-            [ ${runseir} -eq 1 ] && ${executable} | tee out.dat
+
+##################################################################
+# Running the seir DA system
+            [ ${runseir} -eq 1 ] && ${executable}  | tee out.dat 
+            [ ! ${PIPESTATUS[0]} ] && exit
             [ ! -f out.dat ] && exit
             [ ! -f dead_1.dat ] && exit
 
@@ -67,6 +91,8 @@ do
          popd
       done
 
+##################################################################
+# Scenario plots for ${country} if ${country}/plots.mcr exists
       if [ -f ${country}/plots.mcr ]
       then
          pushd $country
@@ -74,6 +100,18 @@ do
          cp *.eps ${dir}
          popd
       fi
+
+##################################################################
+# Quebec specifics (fix the messup from before)
+      if [ $country == "Quebec" ]
+      then 
+         pushd $src
+         sed -i "s/rdim=.*/rdim=400/" mod_dimensions.F90
+         make  || (echo "make C failed $$?"; exit 1)
+         popd
+      fi
+##################################################################
+
 
    fi 
 done
