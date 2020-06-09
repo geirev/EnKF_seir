@@ -19,6 +19,7 @@ subroutine enkfprep(ens,enspar)
    real, allocatable :: obsperth(:,:)
    real, allocatable :: obspertc(:,:)
    real, allocatable :: scaling(:)
+   real :: ens_conv(nrens)
    integer i,m,j
    logical, save :: lprt =.false.
  
@@ -79,16 +80,26 @@ subroutine enkfprep(ens,enspar)
    do m=1,nrobs
 ! ensemble average of state for observation m
       aveens=0.0
-      do j=1,nrens
-         aveens= aveens + ens(iobs(m),j)
-      enddo
+      select case (cobs(m))
+      case('d')
+         do j=1,nrens
+            aveens = aveens + 0.37*ens(iobs(m)-8,j) + 0.32*ens(iobs(m)-4,j) + 0.31*ens(iobs(m),j)
+         enddo     
+      case default
+         do j=1,nrens
+            aveens= aveens + ens(iobs(m),j)
+         enddo
+      end select
       aveens=aveens*(1.0/real(nrens))
 
 ! ensemble average of state for observation m
       select case (cobs(m))
       case('d')
-         D(m,:) = D(m,:)-N*ens(iobs(m),:)%D
-         S(m,:) = N*( ens(iobs(m),:)%D - aveens%D )
+! accounting for a delay of about 4 days in the processing of observations
+! the coefficients have been determined using linear regression comparing with stable data
+         ens_conv(:) = 0.37 * ens(iobs(m)-8,:)%D + 0.32 * ens(iobs(m)-4,:)%D + 0.31 * ens(iobs(m),:)%D     
+         D(m,:) = D(m,:)-N*ens_conv(:)
+         S(m,:) = N*( ens_conv(:) - aveens%D )
       case('h')
          D(m,:) = D(m,:)-N*(ens(iobs(m),:)%Hs + ens(iobs(m),:)%Hf)
          S(m,:) = N*( ens(iobs(m),:)%Hs - aveens%Hs &
