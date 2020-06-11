@@ -1,6 +1,6 @@
  5000                     ! nrens: Ensemble size
- 166                      ! nt   : Number of output times (one more than days to get daily outputs)
- 165                      ! time : Length of integration in days
+ 186                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 185                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
@@ -30,7 +30,7 @@
  6.0          0.6         !  Thosp     : Hospitalization time
  16.0         1.6         !  Tdead     : Days to death                                           
  0.009        0.0009       !  CFR       : Case fatality rate %
- 0.001        0.0001       !  P_severe  : Hospitalization rate % for severe cases
+ 0.010        0.0010       !  P_severe  : Hospitalization rate % for severe cases
  0.5                      !  hos       : Fraction of Qf that go to hospital
  0.0                      !  qminf     : Fraction of Qm that is infecteous
 #4 Div ------------------------------------------------------------------------------------------------

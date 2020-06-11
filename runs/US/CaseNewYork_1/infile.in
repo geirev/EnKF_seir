@@ -1,10 +1,10 @@
- 1000                      ! nrens: Ensemble size
- 366                       ! nt   : Number of output times (one more than days to get daily outputs)
- 365                       ! time : Length of integration in days
+ 5000                      ! nrens: Ensemble size
+ 213                       ! nt   : Number of output times (one more than days to get daily outputs)
+ 212                       ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                         ! Run EnKF to update model parameters
- 11                        ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
- 16                        ! Number of ESMDA steps, (1 means standard ES update)
+ 13                        ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
+ 32                        ! Number of ESMDA steps, (1 means standard ES update)
  T 0.05   40.0  1000.0         ! Condition on Deaths, relative error, minerr, maxerr 
  T 0.05   4.0   400.0         ! Condition on Hosp,   relative error, minerr, maxerr 
  F 0.05  500.0  20000.0 0.15 ! Condition on Cases,  relative error, minerr, maxerr, fraction of real cases 
@@ -13,23 +13,23 @@
  0.98                      ! EnKF SVD truncation (around 0.99)
 #2 Dates ----------------------------------------------------------------------------------------------
  20/02-2020                ! Start date of simulation
- 16/03-2020                ! Start date of first  phase of interventions
- 24/03-2020                ! Start date of second phase of interventions
+ 17/03-2020                ! Start date of first  phase of interventions
+ 23/03-2020                ! Start date of second phase of interventions
 #3 First guess model parameters and their std dev -----------------------------------------------------
  T                         !  Rescaling of Rmatrix                                                                 
  T            3.0          !  lrtime   + rch : R time-continuous (T) or piecewise constant (F) + decorrelation length
- 4.0          0.2          !  R1        : Reproduction number with no interventions 
+ 5.7          0.2          !  R1        : Reproduction number with no interventions 
  1.0          0.15          !  R2        : Reproduction number during lock-down
  1.0          0.15          !  R3        : Reproduction number during opening
- 500.0        10.0         !  E0        : Initial Exposed used to initialize the model
- 100.0        8.0          !  I0        : Initial Infectious used to initialize the model
+ 50.0        10.0         !  E0        : Initial Exposed used to initialize the model
+ 10.0        8.0          !  I0        : Initial Infectious used to initialize the model
  5.5          0.5          !  Tinc      : Incubation period 
  3.8          0.5          !  Tinf      : Infection time                 |
  14.0         1.0          !  Trecm     : Recovery time mild cases
  5.0          0.5          !  Trecs     : Recovery time severe cases 
  6.0          0.5          !  Thosp     : Hospitalization time
  16.0         1.0          !  Tdead     : Days to death                                           
- 0.009        0.001        !  CFR       : Case fatality rate %
+ 0.018        0.001        !  CFR       : Case fatality rate %
  0.039        0.003        !  P_severe  : Hospitalization rate % for severe cases
  0.4                       !  hos       : Fraction of Qf that go to hospital
  0.0                       !  qminf     : Fraction of Qm that is infectious

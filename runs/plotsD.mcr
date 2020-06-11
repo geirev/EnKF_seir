@@ -15,6 +15,13 @@ $!LineMap [100,200,300,400,500,600,700,800,900,1000]  Assign{YAxisVar = 2}
 $!LineMap [1100,1200,1300,1400,1500,1600,1700,1701]  Assign{YAxisVar = 2}
 
 
+# ('Quebec convolution routine for dead variable')
+#Q$!LOOP 103
+#Q$!IF |LOOP| > 1
+#Q$!AlterData[14]
+#Q  Equation = 'V|LOOP| = 0.37*V|LOOP|(i-8) + 0.32*V|LOOP|(i-4) + 0.31*V|LOOP|(i)'
+#Q$!ENDIF
+#Q$!ENDLOOP
 
 $!AlterData [1-21]
   Equation = 'V1=V1+XXXXA'
@@ -98,6 +105,17 @@ $!IF |PRIOR| == 1
 $!ENDIF
 $!LineMap [1499]  Name = 'Total dead'
 $!ActiveLineMaps += [1401-1500]
+
+
+#Adding prior mean for US cases
+#US$!ActiveLineMaps += [700]
+#US$!ActiveLineMaps += [800]
+#US$!LineMap [700] Lines{LineThickness = 0.80}
+#US$!LineMap [800] Lines{LineThickness = 0.80}
+#US$!LineMap [700] Name = 'Prior hospitalized'
+#US$!LineMap [800] Name = 'Prior total dead'
+#US$!LineMap [700] Assign{ShowInLegend = Auto}
+#US$!LineMap [800] Assign{ShowInLegend = Auto}
 
 $!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
 $!GlobalLinePlot Legend{XYPos{X = 9.19724}}

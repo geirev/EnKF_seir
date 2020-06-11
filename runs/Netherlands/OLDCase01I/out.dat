@@ -1,0 +1,1066 @@
+ random seed set using stored seed from seed.dat:  0.78890487796113329     
+number  of samples         :5000
+nt                         : 166
+Length of integration      :   165.000
+Run enkf update            :T
+Analysis mode of EnKF      :13
+Number of ESMDA steps      :32
+D conditioning, relerr, minerr, maxerr        :T      0.05      4.00    100.00
+H conditioning, relerr, minerr, maxerr        :T      0.05      4.00    100.00
+C conditioning, relerr, minerr, maxerr, cfrac :T      0.05      4.00    100.00      0.02
+Activate corr. obs. err.   :T
+Obs error decorrelation    :   10.0000
+EnKF SVD truncation (0.99) :    0.9900
+Start date of simulation        : 20  2 2020
+Relative start day              :  415  425
+Start date of first  intervention: 16  3 2020     26.00
+Start date of second intervention: 11  5 2021    447.00
+Rescaling of Rmatrix_0?              :         T
+R(t) (TF) and decorrelation legnth   :         T     8.000
+prior R until 1st interv and std dev :     3.800     0.050
+prior R 1st-2nd interv   and std dev :     0.800     0.100
+prior R 2nd-3rd interv   and std dev :     0.800     0.100
+Initial exposed E0       and std dev :   500.000    50.000
+Initial infected I0      and std dev :   400.000    40.000
+Incubation time          and std dev :     5.500     0.550
+Infection time           and std dev :     3.800     0.380
+Recovery time mild       and std dev :    14.000     1.400
+Recovery time severe     and std dev :     5.000     0.500
+Hospitalization time     and std dev :     6.000     0.600
+Time to death            and std dev :    16.000     1.600
+Critical fatality ratio  and std dev :     0.009     0.001
+Fraction of severe cases and std dev :     0.001     0.000
+Fraction of Qf that go to hospital   :     0.500
+Fraction of Qm that is infecteous    :     0.000
+Lower bound on all paramters         :     0.000
+Maximum value of Rt during intervent :    10.000
+Writing prior R and standard deviation to R.template
+Reading agegroups and population from agegroups.in
+   0-5       :  1041272.0000
+   6-12      :  1308961.0000
+   13-19     :  1441605.0000
+   20-29     :  2201788.0000
+   30-39     :  2108199.0000
+   40-49     :  2261107.0000
+   50-59     :  2508388.0000
+   60-69     :  2089913.0000
+   70-79     :  1522110.0000
+   80-89     :   672182.0000
+   90-105    :   126638.0000
+Total population:     17282163.    17282163.
+
+reading Rmat(:,:,1) from Rmatrix_01.in
+
+Input Rmatrix_01
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+Rescaled Rmatrix_01
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+reading Rmat(:,:,2) from Rmatrix_02.in
+
+Input Rmatrix_02
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+Rescaled Rmatrix_02
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+reading Rmat(:,:,3) from Rmatrix_03.in
+
+Input Rmatrix_03
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+Rescaled Rmatrix_03
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000     1.000
+ -ps:   -
+Reading p-factors from pfactors.in
+Relative p-factors: 
+pm0:       1.0000      1.0000      0.9999      0.9943      0.9870      0.9820      0.9600      0.9250      0.8650      0.8050      0.8050
+ps0:       0.0000      0.0000      0.0001      0.0037      0.0110      0.0140      0.0270      0.0390      0.0550      0.0550      0.0550
+pf0:       0.0000      0.0000      0.0000      0.0020      0.0020      0.0040      0.0130      0.0360      0.0800      0.1400      0.1400
+
+Scaled p-factors: 
+pm1:       1.0000      1.0000      1.0000      0.9989      0.9986      0.9976      0.9930      0.9824      0.9626      0.9366      0.9366
+ps1:       0.0000      0.0000      0.0000      0.0002      0.0006      0.0007      0.0014      0.0020      0.0028      0.0028      0.0028
+pf1:       0.0000      0.0000      0.0000      0.0009      0.0009      0.0017      0.0056      0.0156      0.0346      0.0606      0.0606
+Check on p-factors: 
+dead ratio2=    0.0090    0.0090
+seve ratio2=    0.0010    0.0010
+
+
+Reading corona.in
+nrlines=   97
+nrobs=  186
+List of observations:
+  number   gridp obstime obstype  obsval  stddev
+       1      16      16       d       1.000
+       2      17      17       d       2.000
+       3      18      18       d       4.000
+       4      19      19       d       4.000
+       5      20      20       d       5.000
+       6      21      21       d       7.000
+       7      22      22       d      10.000
+       8      23      23       d      16.000
+       9      24      24       d      26.000
+      10      25      25       d      40.000
+      11      26      26       d      64.000
+      12      27      27       d      87.000
+      13      28      28       d     106.000
+      14      29      29       d     150.000
+      15      30      30       d     206.000
+      16      31      31       d     269.000
+      17      32      32       d     330.000
+      18      33      33       d     416.000
+      19      34      34       d     493.000
+      20      35      35       d     607.000
+      21      36      36       d     731.000
+      22      37      37       d     844.000
+      23      38      38       d     997.000
+      24      39      39       d    1120.000
+      25      40      40       d    1273.000
+      26      41      41       d    1448.000
+      27      42      42       d    1610.000
+      28      43      43       d    1783.000
+      29      44      44       d    1955.000
+      30      45      45       d    2124.000
+      31      46      46       d    2286.000
+      32      47      47       d    2452.000
+      33      48      48       d    2603.000
+      34      49      49       d    2753.000
+      35      50      50       d    2871.000
+      36      51      51       d    3028.000
+      37      52      52       d    3168.000
+      38      53      53       d    3312.000
+      39      54      54       d    3441.000
+      40      55      55       d    3571.000
+      41      56      56       d    3695.000
+      42      57      57       d    3832.000
+      43      58      58       d    3961.000
+      44      59      59       d    4078.000
+      45      60      60       d    4192.000
+      46      61      61       d    4287.000
+      47      62      62       d    4415.000
+      48      63      63       d    4532.000
+      49      64      64       d    4636.000
+      50      65      65       d    4728.000
+      51      66      66       d    4809.000
+      52      67      67       d    4887.000
+      53      68      68       d    4962.000
+      54      69      69       d    5032.000
+      55      70      70       d    5091.000
+      56      71      71       d    5158.000
+      57      72      72       d    5211.000
+      58      73      73       d    5266.000
+      59      74      74       d    5310.000
+      60      75      75       d    5367.000
+      61      76      76       d    5401.000
+      62      77      77       d    5454.000
+      63      78      78       d    5498.000
+      64      79      79       d    5537.000
+      65      80      80       d    5576.000
+      66      81      81       d    5601.000
+      67      82      82       d    5634.000
+      68      83      83       d    5667.000
+      69      84      84       d    5693.000
+      70      85      85       d    5714.000
+      71      86      86       d    5737.000
+      72      87      87       d    5757.000
+      73      88      88       d    5773.000
+      74      89      89       d    5787.000
+      75      90      90       d    5806.000
+      76      91      91       d    5828.000
+      77      92      92       d    5839.000
+      78      93      93       d    5860.000
+      79      94      94       d    5876.000
+      80      95      95       d    5887.000
+      81      96      96       d    5902.000
+      82      97      97       d    5921.000
+      83      98      98       d    5936.000
+      84      99      99       d    5941.000
+      85     100     100       d    5951.000
+      86     101     101       d    5955.000
+      87     102     102       d    5958.000
+      88     103     103       d    5960.000
+      89     104     104       d    5960.000
+      90       8       8       h       6.000
+      91       9       9       h       7.000
+      92      10      10       h       8.000
+      93      11      11       h      10.000
+      94      12      12       h       9.000
+      95      13      13       h      10.000
+      96      14      14       h      13.000
+      97      15      15       h      14.000
+      98      16      16       h      17.000
+      99      17      17       h      19.000
+     100      18      18       h      25.000
+     101      19      19       h      29.000
+     102      20      20       h      35.000
+     103      21      21       h      45.000
+     104      22      22       h      67.000
+     105      23      23       h      78.000
+     106      24      24       h      94.000
+     107      25      25       h     118.000
+     108      26      26       h     146.000
+     109      27      27       h     174.000
+     110      28      28       h     224.000
+     111      29      29       h     283.000
+     112      30      30       h     357.000
+     113      31      31       h     427.000
+     114      32      32       h     481.000
+     115      33      33       h     573.000
+     116      34      34       h     653.000
+     117      35      35       h     753.000
+     118      36      36       h     836.000
+     119      37      37       h     923.000
+     120      38      38       h     989.000
+     121      39      39       h    1037.000
+     122      40      40       h    1126.000
+     123      41      41       h    1190.000
+     124      42      42       h    1207.000
+     125      43      43       h    1250.000
+     126      44      44       h    1279.000
+     127      45      45       h    1281.000
+     128      46      46       h    1302.000
+     129      47      47       h    1310.000
+     130      48      48       h    1313.000
+     131      49      49       h    1286.000
+     132      50      50       h    1281.000
+     133      51      51       h    1285.000
+     134      52      52       h    1252.000
+     135      53      53       h    1233.000
+     136      54      54       h    1220.000
+     137      55      55       h    1193.000
+     138      56      56       h    1169.000
+     139      57      57       h    1137.000
+     140      58      58       h    1107.000
+     141      59      59       h    1060.000
+     142      60      60       h    1030.000
+     143      61      61       h    1010.000
+     144      62      62       h     974.000
+     145      63      63       h     918.000
+     146      64      64       h     878.000
+     147      65      65       h     860.000
+     148      66      66       h     831.000
+     149      67      67       h     807.000
+     150      68      68       h     785.000
+     151      69      69       h     762.000
+     152      70      70       h     733.000
+     153      71      71       h     709.000
+     154      72      72       h     674.000
+     155      73      73       h     633.000
+     156      74      74       h     621.000
+     157      75      75       h     611.000
+     158      76      76       h     569.000
+     159      77      77       h     542.000
+     160      78      78       h     521.000
+     161      79      79       h     490.000
+     162      80      80       h     466.000
+     163      81      81       h     449.000
+     164      82      82       h     443.000
+     165      83      83       h     403.000
+     166      84      84       h     385.000
+     167      85      85       h     363.000
+     168      86      86       h     348.000
+     169      87      87       h     333.000
+     170      88      88       h     327.000
+     171      89      89       h     320.000
+     172      90      90       h     287.000
+     173      91      91       h     275.000
+     174      92      92       h     255.000
+     175      93      93       h     242.000
+     176      94      94       h     227.000
+     177      95      95       h     229.000
+     178      96      96       h     219.000
+     179      97      97       h     198.000
+     180      98      98       h     183.000
+     181      99      99       h     177.000
+     182     100     100       h     169.000
+     183     101     101       h     161.000
+     184     102     102       h     160.000
+     185     103     103       h     160.000
+     186     104     104       h     162.000
+
+ Tinterv(2)) > rdim: consider increasing rdim=         400  in mod_dimensions to be larger than:          447
+ ia to ib:           0         400         401
+ Decorrelating R(t) over i=          26  to           27
+Computing prior ensemble prediction
+Simple ensemble initialization
+
+Scaled p-factors: 
+pm1:       1.0000      1.0000      1.0000      0.9988      0.9985      0.9974      0.9923      0.9805      0.9581      0.9286      0.9286
+ps1:       0.0000      0.0000      0.0000      0.0002      0.0005      0.0007      0.0013      0.0019      0.0026      0.0026      0.0026
+pf1:       0.0000      0.0000      0.0000      0.0010      0.0010      0.0020      0.0064      0.0177      0.0393      0.0688      0.0688
+Check on p-factors: 
+dead ratio2=    0.0102    0.0102
+seve ratio2=    0.0009    0.0009
+Scaled p-factors: 
+pm1:       1.0000      1.0000      1.0000      0.9988      0.9984      0.9972      0.9918      0.9788      0.9544      0.9221      0.9221
+ps1:       0.0000      0.0000      0.0000      0.0002      0.0005      0.0006      0.0012      0.0018      0.0025      0.0025      0.0025
+pf1:       0.0000      0.0000      0.0000      0.0011      0.0011      0.0022      0.0070      0.0194      0.0431      0.0754      0.0754
+Check on p-factors: 
+dead ratio2=    0.0112    0.0112
+seve ratio2=    0.0009    0.0009
+Dumping tecplot files.
+--------------------------------------------------------------------------------
+ESMDA step:  1 32
+
+Preparing for analysis computation
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  497.5800  396.3891    3.8138    5.4698   13.9109    4.9812    5.8289   13.8744    0.0010    0.0088
+    0.0023    0.0081    0.0013    0.0030    0.0041    0.0014    0.0813    1.7649    0.0028    0.0513
+chisq summed over all parameters:     1.9206
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:             235.1138
+chi-square hospitalized:       94.8646
+total number of obs:  186
+total chi-square obs:      329.9784
+
+--------------------------------------------------------------------------------
+ESMDA step:  2 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  500.0945  397.1471    3.6754    5.2357   13.8757    5.0017    5.7616   13.3832    0.0010    0.0088
+    0.0000    0.0051    0.1075    0.2309    0.0079    0.0000    0.1578    2.6748    0.0004    0.0349
+chisq summed over all parameters:     3.2195
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              64.1989
+chi-square hospitalized:       45.6192
+total number of obs:  186
+total chi-square obs:      109.8181
+
+--------------------------------------------------------------------------------
+ESMDA step:  3 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  496.8697  393.2691    3.6692    5.1583   13.8647    5.0262    5.8051   13.5715    0.0010    0.0087
+    0.0039    0.0283    0.1185    0.3861    0.0093    0.0028    0.1055    2.3038    0.0025    0.1475
+chisq summed over all parameters:     3.1083
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              58.0543
+chi-square hospitalized:       32.8295
+total number of obs:  186
+total chi-square obs:       90.8838
+
+--------------------------------------------------------------------------------
+ESMDA step:  4 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  493.6652  389.1196    3.6639    5.0861   13.8623    5.0411    5.8611   13.7486    0.0010    0.0085
+    0.0161    0.0740    0.1284    0.5663    0.0097    0.0068    0.0536    1.9801    0.0051    0.3288
+chisq summed over all parameters:     3.1686
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              53.4934
+chi-square hospitalized:       26.0786
+total number of obs:  186
+total chi-square obs:       79.5720
+
+--------------------------------------------------------------------------------
+ESMDA step:  5 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  490.4459  384.8104    3.6608    5.0184   13.8594    5.0527    5.9179   13.8756    0.0010    0.0083
+    0.0365    0.1442    0.1342    0.7669    0.0101    0.0111    0.0187    1.7630    0.0083    0.6018
+chisq summed over all parameters:     3.4947
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              50.1219
+chi-square hospitalized:       21.9097
+total number of obs:  186
+total chi-square obs:       72.0316
+
+--------------------------------------------------------------------------------
+ESMDA step:  6 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  487.4564  380.8178    3.6580    4.9581   13.8579    5.0619    5.9716   13.9815    0.0010    0.0081
+    0.0629    0.2300    0.1396    0.9709    0.0103    0.0153    0.0022    1.5916    0.0111    0.9314
+chisq summed over all parameters:     3.9653
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              47.3926
+chi-square hospitalized:       19.0199
+total number of obs:  186
+total chi-square obs:       66.4125
+
+--------------------------------------------------------------------------------
+ESMDA step:  7 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  484.6100  377.2136    3.6548    4.9045   13.8601    5.0708    6.0210   14.0707    0.0010    0.0080
+    0.0947    0.3245    0.1461    1.1724    0.0100    0.0200    0.0012    1.4540    0.0137    1.3174
+chisq summed over all parameters:     4.5540
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              45.1110
+chi-square hospitalized:       16.9029
+total number of obs:  186
+total chi-square obs:       62.0139
+
+--------------------------------------------------------------------------------
+ESMDA step:  8 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  481.9756  374.1084    3.6514    4.8594   13.8628    5.0784    6.0642   14.1401    0.0010    0.0078
+    0.1300    0.4190    0.1530    1.3567    0.0096    0.0246    0.0115    1.3513    0.0161    1.7215
+chisq summed over all parameters:     5.1932
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              43.2732
+chi-square hospitalized:       15.3270
+total number of obs:  186
+total chi-square obs:       58.6002
+
+--------------------------------------------------------------------------------
+ESMDA step:  9 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  479.4910  371.2756    3.6472    4.8189   13.8665    5.0854    6.1031   14.2092    0.0010    0.0077
+    0.1682    0.5157    0.1617    1.5335    0.0091    0.0291    0.0295    1.2527    0.0188    2.1561
+chisq summed over all parameters:     5.8745
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              41.6862
+chi-square hospitalized:       14.0759
+total number of obs:  186
+total chi-square obs:       55.7621
+
+--------------------------------------------------------------------------------
+ESMDA step: 10 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  477.0853  368.5509    3.6441    4.7801   13.8709    5.0906    6.1414   14.2623    0.0010    0.0075
+    0.2100    0.6182    0.1682    1.7133    0.0085    0.0328    0.0555    1.1795    0.0213    2.6138
+chisq summed over all parameters:     6.6212
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              40.2859
+chi-square hospitalized:       13.0380
+total number of obs:  186
+total chi-square obs:       53.3239
+
+--------------------------------------------------------------------------------
+ESMDA step: 11 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  474.8940  365.9990    3.6412    4.7449   13.8745    5.0946    6.1758   14.3077    0.0010    0.0074
+    0.2521    0.7225    0.1747    1.8847    0.0080    0.0358    0.0859    1.1187    0.0233    3.0722
+chisq summed over all parameters:     7.3780
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              39.0573
+chi-square hospitalized:       12.2026
+total number of obs:  186
+total chi-square obs:       51.2599
+
+--------------------------------------------------------------------------------
+ESMDA step: 12 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  472.8524  363.6564    3.6377    4.7124   13.8798    5.0985    6.2057   14.3497    0.0010    0.0073
+    0.2948    0.8255    0.1825    2.0505    0.0074    0.0388    0.1175    1.0639    0.0260    3.5494
+chisq summed over all parameters:     8.1563
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              37.9243
+chi-square hospitalized:       11.5047
+total number of obs:  186
+total chi-square obs:       49.4290
+
+--------------------------------------------------------------------------------
+ESMDA step: 13 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  470.8814  361.4425    3.6352    4.6816   13.8839    5.1009    6.2351   14.3869    0.0010    0.0072
+    0.3392    0.9292    0.1880    2.2143    0.0069    0.0407    0.1535    1.0164    0.0281    4.0101
+chisq summed over all parameters:     8.9264
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              36.9413
+chi-square hospitalized:       10.9350
+total number of obs:  186
+total chi-square obs:       47.8763
+
+--------------------------------------------------------------------------------
+ESMDA step: 14 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  469.1321  359.3939    3.6328    4.6545   13.8848    5.1033    6.2623   14.4168    0.0010    0.0071
+    0.3811    1.0305    0.1936    2.3631    0.0068    0.0427    0.1911    0.9792    0.0301    4.4543
+chisq summed over all parameters:     9.6724
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              36.1020
+chi-square hospitalized:       10.4518
+total number of obs:  186
+total chi-square obs:       46.5538
+
+--------------------------------------------------------------------------------
+ESMDA step: 15 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  467.6614  357.6710    3.6308    4.6307   13.8866    5.1061    6.2888   14.4427    0.0010    0.0070
+    0.4183    1.1198    0.1983    2.4979    0.0066    0.0451    0.2317    0.9474    0.0308    4.8660
+chisq summed over all parameters:    10.3617
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              35.3371
+chi-square hospitalized:       10.0125
+total number of obs:  186
+total chi-square obs:       45.3496
+
+--------------------------------------------------------------------------------
+ESMDA step: 16 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  466.2604  355.9995    3.6297    4.6074   13.8893    5.1093    6.3150   14.4687    0.0010    0.0069
+    0.4553    1.2100    0.2010    2.6336    0.0062    0.0478    0.2756    0.9160    0.0313    5.2592
+chisq summed over all parameters:    11.0360
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              34.6385
+chi-square hospitalized:        9.6053
+total number of obs:  186
+total chi-square obs:       44.2438
+
+--------------------------------------------------------------------------------
+ESMDA step: 17 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  464.8918  354.3795    3.6282    4.5857   13.8913    5.1119    6.3392   14.4897    0.0010    0.0069
+    0.4930    1.3008    0.2045    2.7633    0.0060    0.0501    0.3196    0.8911    0.0312    5.6591
+chisq summed over all parameters:    11.7186
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              33.9850
+chi-square hospitalized:        9.2560
+total number of obs:  186
+total chi-square obs:       43.2410
+
+--------------------------------------------------------------------------------
+ESMDA step: 18 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  463.6247  352.8765    3.6272    4.5657   13.8927    5.1141    6.3617   14.5092    0.0010    0.0068
+    0.5293    1.3879    0.2067    2.8857    0.0059    0.0521    0.3633    0.8682    0.0311    6.0222
+chisq summed over all parameters:    12.3524
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              33.4156
+chi-square hospitalized:        8.9568
+total number of obs:  186
+total chi-square obs:       42.3725
+
+--------------------------------------------------------------------------------
+ESMDA step: 19 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  462.3988  351.4477    3.6265    4.5463   13.8945    5.1164    6.3832   14.5268    0.0010    0.0067
+    0.5655    1.4733    0.2083    3.0065    0.0057    0.0542    0.4079    0.8477    0.0310    6.3724
+chisq summed over all parameters:    12.9726
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              32.8782
+chi-square hospitalized:        8.6921
+total number of obs:  186
+total chi-square obs:       41.5704
+
+--------------------------------------------------------------------------------
+ESMDA step: 20 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  461.2020  350.0663    3.6265    4.5275   13.8962    5.1182    6.4038   14.5397    0.0010    0.0067
+    0.6021    1.5584    0.2084    3.1268    0.0055    0.0559    0.4530    0.8330    0.0303    6.7040
+chisq summed over all parameters:    13.5773
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              32.3826
+chi-square hospitalized:        8.4672
+total number of obs:  186
+total chi-square obs:       40.8498
+
+--------------------------------------------------------------------------------
+ESMDA step: 21 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  460.1044  348.8257    3.6262    4.5102   13.8975    5.1203    6.4219   14.5535    0.0010    0.0066
+    0.6367    1.6368    0.2092    3.2385    0.0054    0.0579    0.4945    0.8174    0.0298    7.0296
+chisq summed over all parameters:    14.1556
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              31.9268
+chi-square hospitalized:        8.2742
+total number of obs:  186
+total chi-square obs:       40.2010
+
+--------------------------------------------------------------------------------
+ESMDA step: 22 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  459.0095  347.5920    3.6261    4.4934   13.8980    5.1221    6.4398   14.5669    0.0010    0.0066
+    0.6721    1.7166    0.2095    3.3494    0.0053    0.0596    0.5373    0.8023    0.0293    7.3453
+chisq summed over all parameters:    14.7266
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              31.4973
+chi-square hospitalized:        8.0980
+total number of obs:  186
+total chi-square obs:       39.5953
+
+--------------------------------------------------------------------------------
+ESMDA step: 23 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  457.9322  346.3610    3.6259    4.4770   13.8984    5.1236    6.4572   14.5789    0.0010    0.0065
+    0.7079    1.7982    0.2099    3.4598    0.0053    0.0611    0.5806    0.7888    0.0286    7.6652
+chisq summed over all parameters:    15.3054
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              31.0782
+chi-square hospitalized:        7.9407
+total number of obs:  186
+total chi-square obs:       39.0189
+
+--------------------------------------------------------------------------------
+ESMDA step: 24 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  456.8643  345.1373    3.6270    4.4599   13.8990    5.1248    6.4743   14.5871    0.0010    0.0065
+    0.7443    1.8812    0.2073    3.5764    0.0052    0.0623    0.6250    0.7798    0.0277    7.9621
+chisq summed over all parameters:    15.8713
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              30.6768
+chi-square hospitalized:        7.7955
+total number of obs:  186
+total chi-square obs:       38.4723
+
+--------------------------------------------------------------------------------
+ESMDA step: 25 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  455.9324  344.0643    3.6277    4.4450   13.9005    5.1260    6.4898   14.5956    0.0010    0.0064
+    0.7768    1.9555    0.2056    3.6796    0.0051    0.0635    0.6665    0.7704    0.0268    8.2375
+chisq summed over all parameters:    16.3873
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              30.3324
+chi-square hospitalized:        7.6710
+total number of obs:  186
+total chi-square obs:       38.0034
+
+--------------------------------------------------------------------------------
+ESMDA step: 26 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  455.0145  343.0095    3.6282    4.4306   13.9017    5.1271    6.5051   14.6035    0.0010    0.0064
+    0.8095    2.0299    0.2043    3.7806    0.0049    0.0646    0.7088    0.7618    0.0258    8.5118
+chisq summed over all parameters:    16.9022
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              30.0027
+chi-square hospitalized:        7.5560
+total number of obs:  186
+total chi-square obs:       37.5587
+
+--------------------------------------------------------------------------------
+ESMDA step: 27 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  454.1477  342.0084    3.6282    4.4174   13.9029    5.1285    6.5190   14.6117    0.0010    0.0063
+    0.8410    2.1019    0.2044    3.8742    0.0048    0.0661    0.7483    0.7529    0.0250    8.7867
+chisq summed over all parameters:    17.4053
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              29.6951
+chi-square hospitalized:        7.4560
+total number of obs:  186
+total chi-square obs:       37.1511
+
+--------------------------------------------------------------------------------
+ESMDA step: 28 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  453.3067  341.0369    3.6287    4.4044   13.9032    5.1299    6.5325   14.6198    0.0010    0.0063
+    0.8721    2.1729    0.2033    3.9680    0.0048    0.0675    0.7876    0.7441    0.0241    9.0440
+chisq summed over all parameters:    17.8884
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              29.4078
+chi-square hospitalized:        7.3653
+total number of obs:  186
+total chi-square obs:       36.7732
+
+--------------------------------------------------------------------------------
+ESMDA step: 29 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  452.4765  340.0755    3.6297    4.3913   13.9032    5.1312    6.5462   14.6275    0.0010    0.0063
+    0.9034    2.2443    0.2009    4.0635    0.0048    0.0689    0.8287    0.7359    0.0231    9.2785
+chisq summed over all parameters:    18.3519
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              29.1293
+chi-square hospitalized:        7.2826
+total number of obs:  186
+total chi-square obs:       36.4119
+
+--------------------------------------------------------------------------------
+ESMDA step: 30 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  451.6836  339.1552    3.6304    4.3789   13.9026    5.1323    6.5593   14.6342    0.0010    0.0062
+    0.9338    2.3138    0.1991    4.1548    0.0048    0.0700    0.8690    0.7286    0.0220    9.5115
+chisq summed over all parameters:    18.8076
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              28.8676
+chi-square hospitalized:        7.2087
+total number of obs:  186
+total chi-square obs:       36.0763
+
+--------------------------------------------------------------------------------
+ESMDA step: 31 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  450.9350  338.3161    3.6311    4.3678   13.9019    5.1333    6.5714   14.6392    0.0010    0.0062
+    0.9629    2.3781    0.1976    4.2375    0.0049    0.0711    0.9069    0.7234    0.0209    9.7261
+chisq summed over all parameters:    19.2294
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              28.6321
+chi-square hospitalized:        7.1438
+total number of obs:  186
+total chi-square obs:       35.7760
+
+--------------------------------------------------------------------------------
+ESMDA step: 32 32
+   analysis: Representer approach is used
+   analysis: final update
+   analysis: final update done
+
+Posterior ensemble mean of parameters including chisquare value:
+  "    E0"  "    I0"  "  Tinf"  "  Tinc"  " Trecm"  " Trecs"  " Thosp"  " Tdead"  " p_sev"  "   CFR"
+  500.0000  400.0000    3.8000    5.5000   14.0000    5.0000    6.0000   16.0000    0.0010    0.0090
+  450.1950  337.4838    3.6320    4.3566   13.9006    5.1344    6.5835   14.6453    0.0010    0.0062
+    0.9922    2.4427    0.1956    4.3219    0.0050    0.0722    0.9459    0.7169    0.0198    9.9338
+chisq summed over all parameters:    19.6460
+
+Simple ensemble initialization
+
+
+Preparing for analysis computation
+chi-square death:              28.4075
+chi-square hospitalized:        7.0815
+total number of obs:  186
+total chi-square obs:       35.4889
+
+Dumping tecplot files.
+Done..

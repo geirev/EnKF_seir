@@ -1,5 +1,5 @@
 #!MC 1410
-$!LOOP 2
+$!LOOP 3
 $!OpenLayout  "./solutions|LOOP|.lay"
 $!PrintSetup Palette = Color
 $!ExportSetup ExportFormat = EPS
@@ -59,24 +59,18 @@ $!ExportSetup ExportFName = './Brazil_scenarioCD|LOOP|.eps'
 $!Export 
   ExportRegion = AllFrames
 
-$!ENDLOOP
 
 #
 ################################
 ## R E N S
-$!OpenLayout  "./rens.lay"
+$!OpenLayout  "./rens|LOOP|.lay"
 
-$!AlterData [1-4]
-  Equation = 'V1=V1+43900'
+#$!AlterData [1-2]
+#  Equation = 'V1=V1+43900'
 
-$!ActiveLineMaps -= [1-404]
+$!ActiveLineMaps += [1-202]
 
-$!ActiveLineMaps += [1-100]
-$!ActiveLineMaps += [401]
-
-$!ActiveLineMaps += [201-300]
-$!ActiveLineMaps += [403]
-$!LineMap [1-400]  Assign{ShowInLegend = Never}
+$!LineMap [1-200]  Assign{ShowInLegend = Never}
 $!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
 #
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
@@ -107,52 +101,9 @@ $!AttachGeom
 480.000 0.0
 
 $!RedrawAll 
-$!ExportSetup ExportFName = './Brazil_scenarioRENS1.eps'
+$!ExportSetup ExportFName = './Brazil_scenarioRENS|LOOP|.eps'
 $!Export 
   ExportRegion = AllFrames
 
 
-
-
-
-$!ActiveLineMaps -= [1-404]
-
-$!ActiveLineMaps += [101-200]
-$!ActiveLineMaps += [402]
-
-$!ActiveLineMaps += [301-400]
-$!ActiveLineMaps += [404]
-$!LineMap [1-400]  Assign{ShowInLegend = Never}
-$!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
-#
-$!XYLineAxis YDetail 1 {CoordScale = Linear}
-$!View Fit
-$!XYLineAxis XDetail 1 {RangeMin = 43900}
-$!XYLineAxis XDetail 1 {RangeMax = 44220}
-$!XYLineAxis YDetail 1 {RangeMin = 0}
-$!XYLineAxis YDetail 1 {RangeMax = 5}
-$!XYLineAxis YDetail 1 {GRSpacing = 1}
-#
-#
-$!GlobalLinePlot Legend{AnchorAlignment = TopRight}
-$!GlobalLinePlot Legend{XYPos{X = 98.2363}}
-$!GlobalLinePlot Legend{XYPos{Y = 96.6866}}
-#
-$!AttachGeom
-  AnchorPos
-    {
-    X = 43800.0
-    Y = 1.0
-    }
-  Color = Red
-  LineThickness = 0.2
-  RawData
-1
-2
-0 0
-480.000 0.0
-
-$!RedrawAll 
-$!ExportSetup ExportFName = './Brazil_scenarioRENS2.eps'
-$!Export 
-  ExportRegion = AllFrames
+$!ENDLOOP

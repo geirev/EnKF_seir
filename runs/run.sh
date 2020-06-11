@@ -3,24 +3,28 @@ src=~/Dropbox/EnKF_seir/src
 
 rdim=400
 prior=0
-runseir=1
+runseir=0
 endday=44060
 executable=seir
 
 # Recompile if rdim has been set different from 400
-if ! grep -q "rdim=${rdim}" ${src}/mod_dimensions.F90
+if [ ${runseir} -eq 1 ]
 then
-   pushd $src
-   sed -i "s/rdim=.*/rdim=${rdim}/" mod_dimensions.F90
-   make  || (echo "make A failed $$?"; exit 1)
-   popd
+   if ! grep -q "rdim=${rdim}" ${src}/mod_dimensions.F90
+   then
+      pushd $src
+      sed -i "s/rdim=.*/rdim=${rdim}/" mod_dimensions.F90
+      git checkout master -- m_enkfprep.F90
+      make
+      popd
+   fi
 fi
 
-for country in Quebec #Netherlands #Brazil #Argentina Norway England Quebec Netherlands France Brazil Argentina # US 
+for country in  Netherlands #US Quebec Norway Netherlands Brazil Argentina England France # US 
 do
    if [ -d $country ]
    then
-      for exp in $country/Case01
+      for exp in $country/Case01I
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
@@ -29,15 +33,18 @@ do
 
 ##################################################################
 # Quebec specifics using different rdim values (constant R in predictions)
-            if [ $country == "Quebec" ]
+            if [ $country == "Quebec" ] && [ ${runseir} -eq 1 ]
             then 
                [ "${exp}" == "${country}/Case01" ] && newrdim=82
                [ "${exp}" == "${country}/Case02" ] && newrdim=82
                [ "${exp}" == "${country}/Case03" ] && newrdim=82
+               [ -f "rdim.txt" ] && newrdim=$(grep "rdim=" rdim.txt | cut -f2 -d= | cut -f1 -d-)
                echo DIM = ${newrdim}
                pushd $src
                sed -i "s/rdim=.*/rdim=${newrdim}/" mod_dimensions.F90
+               git checkout Quebec -- m_enkfprep.F90
                make  || (echo "make B failed $$?"; exit 1)
+               git checkout master -- m_enkfprep.F90
                popd
             fi
 
@@ -50,7 +57,7 @@ do
 
             refday=$(grep "Relative start day" out.dat | cut -c36-38)
             echo Reference day $refday
-            startday=$(($refday+43466))
+            startday=$(($refday+43465))
             echo "Startday in days from December 30, 1899: " ${startday}
             [ -f xlimit.txt ] && endday=$(grep "MAXX" xlimit.txt | cut -f2 -d"=")
             echo "Endday   in days from December 30, 1899: " ${endday}
@@ -78,6 +85,8 @@ do
 
 
             [ "$exp" == "Netherlands/Case01I" ] && sed -i 's/Hospitalized/ICU patients/g' ./plots.mcr
+            [ "$country" == "Quebec" ]          && sed -i 's/#Q//g' ./plots.mcr
+            [ "$country" == "US" ]              && sed -i 's/#US//g' ./plots.mcr
 
             tec360 -b plots.mcr
             rm -f batch.log
@@ -103,10 +112,11 @@ do
 
 ##################################################################
 # Quebec specifics (fix the messup from before)
-      if [ $country == "Quebec" ]
+      if [ $country == "Quebec" ] && [ ${runseir} -eq 1 ]
       then 
          pushd $src
          sed -i "s/rdim=.*/rdim=400/" mod_dimensions.F90
+         git checkout master -- m_enkfprep.F90
          make  || (echo "make C failed $$?"; exit 1)
          popd
       fi

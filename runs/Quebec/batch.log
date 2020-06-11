@@ -1,0 +1,256 @@
+Tecplot 2019.1.0.99403 Batch Log
+ACTION: PageControl: CREATE
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: LoadAddOn
+ACTION: OpenLayout: ./solutions1.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V2 = 0.37*V2(i-8) + 0.32*V2(i-4) + 0.31*V2(i)
+ACTION: AlterData: V3 = 0.37*V3(i-8) + 0.32*V3(i-4) + 0.31*V3(i)
+ACTION: AlterData: V4 = 0.37*V4(i-8) + 0.32*V4(i-4) + 0.31*V4(i)
+ACTION: AlterData: V5 = 0.37*V5(i-8) + 0.32*V5(i-4) + 0.31*V5(i)
+ACTION: AlterData: V6 = 0.37*V6(i-8) + 0.32*V6(i-4) + 0.31*V6(i)
+ACTION: AlterData: V7 = 0.37*V7(i-8) + 0.32*V7(i-4) + 0.31*V7(i)
+ACTION: AlterData: V8 = 0.37*V8(i-8) + 0.32*V8(i-4) + 0.31*V8(i)
+ACTION: AlterData: V9 = 0.37*V9(i-8) + 0.32*V9(i-4) + 0.31*V9(i)
+ACTION: AlterData: V10 = 0.37*V10(i-8) + 0.32*V10(i-4) + 0.31*V10(i)
+ACTION: AlterData: V11 = 0.37*V11(i-8) + 0.32*V11(i-4) + 0.31*V11(i)
+ACTION: AlterData: V12 = 0.37*V12(i-8) + 0.32*V12(i-4) + 0.31*V12(i)
+ACTION: AlterData: V13 = 0.37*V13(i-8) + 0.32*V13(i-4) + 0.31*V13(i)
+ACTION: AlterData: V14 = 0.37*V14(i-8) + 0.32*V14(i-4) + 0.31*V14(i)
+ACTION: AlterData: V15 = 0.37*V15(i-8) + 0.32*V15(i-4) + 0.31*V15(i)
+ACTION: AlterData: V16 = 0.37*V16(i-8) + 0.32*V16(i-4) + 0.31*V16(i)
+ACTION: AlterData: V17 = 0.37*V17(i-8) + 0.32*V17(i-4) + 0.31*V17(i)
+ACTION: AlterData: V18 = 0.37*V18(i-8) + 0.32*V18(i-4) + 0.31*V18(i)
+ACTION: AlterData: V19 = 0.37*V19(i-8) + 0.32*V19(i-4) + 0.31*V19(i)
+ACTION: AlterData: V20 = 0.37*V20(i-8) + 0.32*V20(i-4) + 0.31*V20(i)
+ACTION: AlterData: V21 = 0.37*V21(i-8) + 0.32*V21(i-4) + 0.31*V21(i)
+ACTION: AlterData: V22 = 0.37*V22(i-8) + 0.32*V22(i-4) + 0.31*V22(i)
+ACTION: AlterData: V23 = 0.37*V23(i-8) + 0.32*V23(i-4) + 0.31*V23(i)
+ACTION: AlterData: V24 = 0.37*V24(i-8) + 0.32*V24(i-4) + 0.31*V24(i)
+ACTION: AlterData: V25 = 0.37*V25(i-8) + 0.32*V25(i-4) + 0.31*V25(i)
+ACTION: AlterData: V26 = 0.37*V26(i-8) + 0.32*V26(i-4) + 0.31*V26(i)
+ACTION: AlterData: V27 = 0.37*V27(i-8) + 0.32*V27(i-4) + 0.31*V27(i)
+ACTION: AlterData: V28 = 0.37*V28(i-8) + 0.32*V28(i-4) + 0.31*V28(i)
+ACTION: AlterData: V29 = 0.37*V29(i-8) + 0.32*V29(i-4) + 0.31*V29(i)
+ACTION: AlterData: V30 = 0.37*V30(i-8) + 0.32*V30(i-4) + 0.31*V30(i)
+ACTION: AlterData: V31 = 0.37*V31(i-8) + 0.32*V31(i-4) + 0.31*V31(i)
+ACTION: AlterData: V32 = 0.37*V32(i-8) + 0.32*V32(i-4) + 0.31*V32(i)
+ACTION: AlterData: V33 = 0.37*V33(i-8) + 0.32*V33(i-4) + 0.31*V33(i)
+ACTION: AlterData: V34 = 0.37*V34(i-8) + 0.32*V34(i-4) + 0.31*V34(i)
+ACTION: AlterData: V35 = 0.37*V35(i-8) + 0.32*V35(i-4) + 0.31*V35(i)
+ACTION: AlterData: V36 = 0.37*V36(i-8) + 0.32*V36(i-4) + 0.31*V36(i)
+ACTION: AlterData: V37 = 0.37*V37(i-8) + 0.32*V37(i-4) + 0.31*V37(i)
+ACTION: AlterData: V38 = 0.37*V38(i-8) + 0.32*V38(i-4) + 0.31*V38(i)
+ACTION: AlterData: V39 = 0.37*V39(i-8) + 0.32*V39(i-4) + 0.31*V39(i)
+ACTION: AlterData: V40 = 0.37*V40(i-8) + 0.32*V40(i-4) + 0.31*V40(i)
+ACTION: AlterData: V41 = 0.37*V41(i-8) + 0.32*V41(i-4) + 0.31*V41(i)
+ACTION: AlterData: V42 = 0.37*V42(i-8) + 0.32*V42(i-4) + 0.31*V42(i)
+ACTION: AlterData: V43 = 0.37*V43(i-8) + 0.32*V43(i-4) + 0.31*V43(i)
+ACTION: AlterData: V44 = 0.37*V44(i-8) + 0.32*V44(i-4) + 0.31*V44(i)
+ACTION: AlterData: V45 = 0.37*V45(i-8) + 0.32*V45(i-4) + 0.31*V45(i)
+ACTION: AlterData: V46 = 0.37*V46(i-8) + 0.32*V46(i-4) + 0.31*V46(i)
+ACTION: AlterData: V47 = 0.37*V47(i-8) + 0.32*V47(i-4) + 0.31*V47(i)
+ACTION: AlterData: V48 = 0.37*V48(i-8) + 0.32*V48(i-4) + 0.31*V48(i)
+ACTION: AlterData: V49 = 0.37*V49(i-8) + 0.32*V49(i-4) + 0.31*V49(i)
+ACTION: AlterData: V50 = 0.37*V50(i-8) + 0.32*V50(i-4) + 0.31*V50(i)
+ACTION: AlterData: V51 = 0.37*V51(i-8) + 0.32*V51(i-4) + 0.31*V51(i)
+ACTION: AlterData: V52 = 0.37*V52(i-8) + 0.32*V52(i-4) + 0.31*V52(i)
+ACTION: AlterData: V53 = 0.37*V53(i-8) + 0.32*V53(i-4) + 0.31*V53(i)
+ACTION: AlterData: V54 = 0.37*V54(i-8) + 0.32*V54(i-4) + 0.31*V54(i)
+ACTION: AlterData: V55 = 0.37*V55(i-8) + 0.32*V55(i-4) + 0.31*V55(i)
+ACTION: AlterData: V56 = 0.37*V56(i-8) + 0.32*V56(i-4) + 0.31*V56(i)
+ACTION: AlterData: V57 = 0.37*V57(i-8) + 0.32*V57(i-4) + 0.31*V57(i)
+ACTION: AlterData: V58 = 0.37*V58(i-8) + 0.32*V58(i-4) + 0.31*V58(i)
+ACTION: AlterData: V59 = 0.37*V59(i-8) + 0.32*V59(i-4) + 0.31*V59(i)
+ACTION: AlterData: V60 = 0.37*V60(i-8) + 0.32*V60(i-4) + 0.31*V60(i)
+ACTION: AlterData: V61 = 0.37*V61(i-8) + 0.32*V61(i-4) + 0.31*V61(i)
+ACTION: AlterData: V62 = 0.37*V62(i-8) + 0.32*V62(i-4) + 0.31*V62(i)
+ACTION: AlterData: V63 = 0.37*V63(i-8) + 0.32*V63(i-4) + 0.31*V63(i)
+ACTION: AlterData: V64 = 0.37*V64(i-8) + 0.32*V64(i-4) + 0.31*V64(i)
+ACTION: AlterData: V65 = 0.37*V65(i-8) + 0.32*V65(i-4) + 0.31*V65(i)
+ACTION: AlterData: V66 = 0.37*V66(i-8) + 0.32*V66(i-4) + 0.31*V66(i)
+ACTION: AlterData: V67 = 0.37*V67(i-8) + 0.32*V67(i-4) + 0.31*V67(i)
+ACTION: AlterData: V68 = 0.37*V68(i-8) + 0.32*V68(i-4) + 0.31*V68(i)
+ACTION: AlterData: V69 = 0.37*V69(i-8) + 0.32*V69(i-4) + 0.31*V69(i)
+ACTION: AlterData: V70 = 0.37*V70(i-8) + 0.32*V70(i-4) + 0.31*V70(i)
+ACTION: AlterData: V71 = 0.37*V71(i-8) + 0.32*V71(i-4) + 0.31*V71(i)
+ACTION: AlterData: V72 = 0.37*V72(i-8) + 0.32*V72(i-4) + 0.31*V72(i)
+ACTION: AlterData: V73 = 0.37*V73(i-8) + 0.32*V73(i-4) + 0.31*V73(i)
+ACTION: AlterData: V74 = 0.37*V74(i-8) + 0.32*V74(i-4) + 0.31*V74(i)
+ACTION: AlterData: V75 = 0.37*V75(i-8) + 0.32*V75(i-4) + 0.31*V75(i)
+ACTION: AlterData: V76 = 0.37*V76(i-8) + 0.32*V76(i-4) + 0.31*V76(i)
+ACTION: AlterData: V77 = 0.37*V77(i-8) + 0.32*V77(i-4) + 0.31*V77(i)
+ACTION: AlterData: V78 = 0.37*V78(i-8) + 0.32*V78(i-4) + 0.31*V78(i)
+ACTION: AlterData: V79 = 0.37*V79(i-8) + 0.32*V79(i-4) + 0.31*V79(i)
+ACTION: AlterData: V80 = 0.37*V80(i-8) + 0.32*V80(i-4) + 0.31*V80(i)
+ACTION: AlterData: V81 = 0.37*V81(i-8) + 0.32*V81(i-4) + 0.31*V81(i)
+ACTION: AlterData: V82 = 0.37*V82(i-8) + 0.32*V82(i-4) + 0.31*V82(i)
+ACTION: AlterData: V83 = 0.37*V83(i-8) + 0.32*V83(i-4) + 0.31*V83(i)
+ACTION: AlterData: V84 = 0.37*V84(i-8) + 0.32*V84(i-4) + 0.31*V84(i)
+ACTION: AlterData: V85 = 0.37*V85(i-8) + 0.32*V85(i-4) + 0.31*V85(i)
+ACTION: AlterData: V86 = 0.37*V86(i-8) + 0.32*V86(i-4) + 0.31*V86(i)
+ACTION: AlterData: V87 = 0.37*V87(i-8) + 0.32*V87(i-4) + 0.31*V87(i)
+ACTION: AlterData: V88 = 0.37*V88(i-8) + 0.32*V88(i-4) + 0.31*V88(i)
+ACTION: AlterData: V89 = 0.37*V89(i-8) + 0.32*V89(i-4) + 0.31*V89(i)
+ACTION: AlterData: V90 = 0.37*V90(i-8) + 0.32*V90(i-4) + 0.31*V90(i)
+ACTION: AlterData: V91 = 0.37*V91(i-8) + 0.32*V91(i-4) + 0.31*V91(i)
+ACTION: AlterData: V92 = 0.37*V92(i-8) + 0.32*V92(i-4) + 0.31*V92(i)
+ACTION: AlterData: V93 = 0.37*V93(i-8) + 0.32*V93(i-4) + 0.31*V93(i)
+ACTION: AlterData: V94 = 0.37*V94(i-8) + 0.32*V94(i-4) + 0.31*V94(i)
+ACTION: AlterData: V95 = 0.37*V95(i-8) + 0.32*V95(i-4) + 0.31*V95(i)
+ACTION: AlterData: V96 = 0.37*V96(i-8) + 0.32*V96(i-4) + 0.31*V96(i)
+ACTION: AlterData: V97 = 0.37*V97(i-8) + 0.32*V97(i-4) + 0.31*V97(i)
+ACTION: AlterData: V98 = 0.37*V98(i-8) + 0.32*V98(i-4) + 0.31*V98(i)
+ACTION: AlterData: V99 = 0.37*V99(i-8) + 0.32*V99(i-4) + 0.31*V99(i)
+ACTION: AlterData: V100 = 0.37*V100(i-8) + 0.32*V100(i-4) + 0.31*V100(i)
+ACTION: AlterData: V101 = 0.37*V101(i-8) + 0.32*V101(i-4) + 0.31*V101(i)
+ACTION: AlterData: V102 = 0.37*V102(i-8) + 0.32*V102(i-4) + 0.31*V102(i)
+ACTION: AlterData: V103 = 0.37*V103(i-8) + 0.32*V103(i-4) + 0.31*V103(i)
+ACTION: AlterData: V1=V1+43897
+ACTION: RedrawAll
+ACTION: Export
+ACTION: OpenLayout: ./solutions2.lay
+ACTION: PageControl: CREATE
+ACTION: AlterData: V2 = 0.37*V2(i-8) + 0.32*V2(i-4) + 0.31*V2(i)
+ACTION: AlterData: V3 = 0.37*V3(i-8) + 0.32*V3(i-4) + 0.31*V3(i)
+ACTION: AlterData: V4 = 0.37*V4(i-8) + 0.32*V4(i-4) + 0.31*V4(i)
+ACTION: AlterData: V5 = 0.37*V5(i-8) + 0.32*V5(i-4) + 0.31*V5(i)
+ACTION: AlterData: V6 = 0.37*V6(i-8) + 0.32*V6(i-4) + 0.31*V6(i)
+ACTION: AlterData: V7 = 0.37*V7(i-8) + 0.32*V7(i-4) + 0.31*V7(i)
+ACTION: AlterData: V8 = 0.37*V8(i-8) + 0.32*V8(i-4) + 0.31*V8(i)
+ACTION: AlterData: V9 = 0.37*V9(i-8) + 0.32*V9(i-4) + 0.31*V9(i)
+ACTION: AlterData: V10 = 0.37*V10(i-8) + 0.32*V10(i-4) + 0.31*V10(i)
+ACTION: AlterData: V11 = 0.37*V11(i-8) + 0.32*V11(i-4) + 0.31*V11(i)
+ACTION: AlterData: V12 = 0.37*V12(i-8) + 0.32*V12(i-4) + 0.31*V12(i)
+ACTION: AlterData: V13 = 0.37*V13(i-8) + 0.32*V13(i-4) + 0.31*V13(i)
+ACTION: AlterData: V14 = 0.37*V14(i-8) + 0.32*V14(i-4) + 0.31*V14(i)
+ACTION: AlterData: V15 = 0.37*V15(i-8) + 0.32*V15(i-4) + 0.31*V15(i)
+ACTION: AlterData: V16 = 0.37*V16(i-8) + 0.32*V16(i-4) + 0.31*V16(i)
+ACTION: AlterData: V17 = 0.37*V17(i-8) + 0.32*V17(i-4) + 0.31*V17(i)
+ACTION: AlterData: V18 = 0.37*V18(i-8) + 0.32*V18(i-4) + 0.31*V18(i)
+ACTION: AlterData: V19 = 0.37*V19(i-8) + 0.32*V19(i-4) + 0.31*V19(i)
+ACTION: AlterData: V20 = 0.37*V20(i-8) + 0.32*V20(i-4) + 0.31*V20(i)
+ACTION: AlterData: V21 = 0.37*V21(i-8) + 0.32*V21(i-4) + 0.31*V21(i)
+ACTION: AlterData: V22 = 0.37*V22(i-8) + 0.32*V22(i-4) + 0.31*V22(i)
+ACTION: AlterData: V23 = 0.37*V23(i-8) + 0.32*V23(i-4) + 0.31*V23(i)
+ACTION: AlterData: V24 = 0.37*V24(i-8) + 0.32*V24(i-4) + 0.31*V24(i)
+ACTION: AlterData: V25 = 0.37*V25(i-8) + 0.32*V25(i-4) + 0.31*V25(i)
+ACTION: AlterData: V26 = 0.37*V26(i-8) + 0.32*V26(i-4) + 0.31*V26(i)
+ACTION: AlterData: V27 = 0.37*V27(i-8) + 0.32*V27(i-4) + 0.31*V27(i)
+ACTION: AlterData: V28 = 0.37*V28(i-8) + 0.32*V28(i-4) + 0.31*V28(i)
+ACTION: AlterData: V29 = 0.37*V29(i-8) + 0.32*V29(i-4) + 0.31*V29(i)
+ACTION: AlterData: V30 = 0.37*V30(i-8) + 0.32*V30(i-4) + 0.31*V30(i)
+ACTION: AlterData: V31 = 0.37*V31(i-8) + 0.32*V31(i-4) + 0.31*V31(i)
+ACTION: AlterData: V32 = 0.37*V32(i-8) + 0.32*V32(i-4) + 0.31*V32(i)
+ACTION: AlterData: V33 = 0.37*V33(i-8) + 0.32*V33(i-4) + 0.31*V33(i)
+ACTION: AlterData: V34 = 0.37*V34(i-8) + 0.32*V34(i-4) + 0.31*V34(i)
+ACTION: AlterData: V35 = 0.37*V35(i-8) + 0.32*V35(i-4) + 0.31*V35(i)
+ACTION: AlterData: V36 = 0.37*V36(i-8) + 0.32*V36(i-4) + 0.31*V36(i)
+ACTION: AlterData: V37 = 0.37*V37(i-8) + 0.32*V37(i-4) + 0.31*V37(i)
+ACTION: AlterData: V38 = 0.37*V38(i-8) + 0.32*V38(i-4) + 0.31*V38(i)
+ACTION: AlterData: V39 = 0.37*V39(i-8) + 0.32*V39(i-4) + 0.31*V39(i)
+ACTION: AlterData: V40 = 0.37*V40(i-8) + 0.32*V40(i-4) + 0.31*V40(i)
+ACTION: AlterData: V41 = 0.37*V41(i-8) + 0.32*V41(i-4) + 0.31*V41(i)
+ACTION: AlterData: V42 = 0.37*V42(i-8) + 0.32*V42(i-4) + 0.31*V42(i)
+ACTION: AlterData: V43 = 0.37*V43(i-8) + 0.32*V43(i-4) + 0.31*V43(i)
+ACTION: AlterData: V44 = 0.37*V44(i-8) + 0.32*V44(i-4) + 0.31*V44(i)
+ACTION: AlterData: V45 = 0.37*V45(i-8) + 0.32*V45(i-4) + 0.31*V45(i)
+ACTION: AlterData: V46 = 0.37*V46(i-8) + 0.32*V46(i-4) + 0.31*V46(i)
+ACTION: AlterData: V47 = 0.37*V47(i-8) + 0.32*V47(i-4) + 0.31*V47(i)
+ACTION: AlterData: V48 = 0.37*V48(i-8) + 0.32*V48(i-4) + 0.31*V48(i)
+ACTION: AlterData: V49 = 0.37*V49(i-8) + 0.32*V49(i-4) + 0.31*V49(i)
+ACTION: AlterData: V50 = 0.37*V50(i-8) + 0.32*V50(i-4) + 0.31*V50(i)
+ACTION: AlterData: V51 = 0.37*V51(i-8) + 0.32*V51(i-4) + 0.31*V51(i)
+ACTION: AlterData: V52 = 0.37*V52(i-8) + 0.32*V52(i-4) + 0.31*V52(i)
+ACTION: AlterData: V53 = 0.37*V53(i-8) + 0.32*V53(i-4) + 0.31*V53(i)
+ACTION: AlterData: V54 = 0.37*V54(i-8) + 0.32*V54(i-4) + 0.31*V54(i)
+ACTION: AlterData: V55 = 0.37*V55(i-8) + 0.32*V55(i-4) + 0.31*V55(i)
+ACTION: AlterData: V56 = 0.37*V56(i-8) + 0.32*V56(i-4) + 0.31*V56(i)
+ACTION: AlterData: V57 = 0.37*V57(i-8) + 0.32*V57(i-4) + 0.31*V57(i)
+ACTION: AlterData: V58 = 0.37*V58(i-8) + 0.32*V58(i-4) + 0.31*V58(i)
+ACTION: AlterData: V59 = 0.37*V59(i-8) + 0.32*V59(i-4) + 0.31*V59(i)
+ACTION: AlterData: V60 = 0.37*V60(i-8) + 0.32*V60(i-4) + 0.31*V60(i)
+ACTION: AlterData: V61 = 0.37*V61(i-8) + 0.32*V61(i-4) + 0.31*V61(i)
+ACTION: AlterData: V62 = 0.37*V62(i-8) + 0.32*V62(i-4) + 0.31*V62(i)
+ACTION: AlterData: V63 = 0.37*V63(i-8) + 0.32*V63(i-4) + 0.31*V63(i)
+ACTION: AlterData: V64 = 0.37*V64(i-8) + 0.32*V64(i-4) + 0.31*V64(i)
+ACTION: AlterData: V65 = 0.37*V65(i-8) + 0.32*V65(i-4) + 0.31*V65(i)
+ACTION: AlterData: V66 = 0.37*V66(i-8) + 0.32*V66(i-4) + 0.31*V66(i)
+ACTION: AlterData: V67 = 0.37*V67(i-8) + 0.32*V67(i-4) + 0.31*V67(i)
+ACTION: AlterData: V68 = 0.37*V68(i-8) + 0.32*V68(i-4) + 0.31*V68(i)
+ACTION: AlterData: V69 = 0.37*V69(i-8) + 0.32*V69(i-4) + 0.31*V69(i)
+ACTION: AlterData: V70 = 0.37*V70(i-8) + 0.32*V70(i-4) + 0.31*V70(i)
+ACTION: AlterData: V71 = 0.37*V71(i-8) + 0.32*V71(i-4) + 0.31*V71(i)
+ACTION: AlterData: V72 = 0.37*V72(i-8) + 0.32*V72(i-4) + 0.31*V72(i)
+ACTION: AlterData: V73 = 0.37*V73(i-8) + 0.32*V73(i-4) + 0.31*V73(i)
+ACTION: AlterData: V74 = 0.37*V74(i-8) + 0.32*V74(i-4) + 0.31*V74(i)
+ACTION: AlterData: V75 = 0.37*V75(i-8) + 0.32*V75(i-4) + 0.31*V75(i)
+ACTION: AlterData: V76 = 0.37*V76(i-8) + 0.32*V76(i-4) + 0.31*V76(i)
+ACTION: AlterData: V77 = 0.37*V77(i-8) + 0.32*V77(i-4) + 0.31*V77(i)
+ACTION: AlterData: V78 = 0.37*V78(i-8) + 0.32*V78(i-4) + 0.31*V78(i)
+ACTION: AlterData: V79 = 0.37*V79(i-8) + 0.32*V79(i-4) + 0.31*V79(i)
+ACTION: AlterData: V80 = 0.37*V80(i-8) + 0.32*V80(i-4) + 0.31*V80(i)
+ACTION: AlterData: V81 = 0.37*V81(i-8) + 0.32*V81(i-4) + 0.31*V81(i)
+ACTION: AlterData: V82 = 0.37*V82(i-8) + 0.32*V82(i-4) + 0.31*V82(i)
+ACTION: AlterData: V83 = 0.37*V83(i-8) + 0.32*V83(i-4) + 0.31*V83(i)
+ACTION: AlterData: V84 = 0.37*V84(i-8) + 0.32*V84(i-4) + 0.31*V84(i)
+ACTION: AlterData: V85 = 0.37*V85(i-8) + 0.32*V85(i-4) + 0.31*V85(i)
+ACTION: AlterData: V86 = 0.37*V86(i-8) + 0.32*V86(i-4) + 0.31*V86(i)
+ACTION: AlterData: V87 = 0.37*V87(i-8) + 0.32*V87(i-4) + 0.31*V87(i)
+ACTION: AlterData: V88 = 0.37*V88(i-8) + 0.32*V88(i-4) + 0.31*V88(i)
+ACTION: AlterData: V89 = 0.37*V89(i-8) + 0.32*V89(i-4) + 0.31*V89(i)
+ACTION: AlterData: V90 = 0.37*V90(i-8) + 0.32*V90(i-4) + 0.31*V90(i)
+ACTION: AlterData: V91 = 0.37*V91(i-8) + 0.32*V91(i-4) + 0.31*V91(i)
+ACTION: AlterData: V92 = 0.37*V92(i-8) + 0.32*V92(i-4) + 0.31*V92(i)
+ACTION: AlterData: V93 = 0.37*V93(i-8) + 0.32*V93(i-4) + 0.31*V93(i)
+ACTION: AlterData: V94 = 0.37*V94(i-8) + 0.32*V94(i-4) + 0.31*V94(i)
+ACTION: AlterData: V95 = 0.37*V95(i-8) + 0.32*V95(i-4) + 0.31*V95(i)
+ACTION: AlterData: V96 = 0.37*V96(i-8) + 0.32*V96(i-4) + 0.31*V96(i)
+ACTION: AlterData: V97 = 0.37*V97(i-8) + 0.32*V97(i-4) + 0.31*V97(i)
+ACTION: AlterData: V98 = 0.37*V98(i-8) + 0.32*V98(i-4) + 0.31*V98(i)
+ACTION: AlterData: V99 = 0.37*V99(i-8) + 0.32*V99(i-4) + 0.31*V99(i)
+ACTION: AlterData: V100 = 0.37*V100(i-8) + 0.32*V100(i-4) + 0.31*V100(i)
+ACTION: AlterData: V101 = 0.37*V101(i-8) + 0.32*V101(i-4) + 0.31*V101(i)
+ACTION: AlterData: V102 = 0.37*V102(i-8) + 0.32*V102(i-4) + 0.31*V102(i)
+ACTION: AlterData: V103 = 0.37*V103(i-8) + 0.32*V103(i-4) + 0.31*V103(i)
+ACTION: AlterData: V1=V1+43897
+ACTION: RedrawAll
+ACTION: Export

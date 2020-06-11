@@ -1,0 +1,7648 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"Case05/Rens_1.dat" "Case06/Rens_1.dat"'
+$!VarSet |LFDSVL1| = '"time" "ave" "std" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30" "31" "32" "33" "34" "35" "36" "37" "38" "39" "40" "41" "42" "43" "44" "45" "46" "47" "48" "49" "50" "51" "52" "53" "54" "55" "56" "57" "58" "59" "60" "61" "62" "63" "64" "65" "66" "67" "68" "69" "70" "71" "72" "73" "74" "75" "76" "77" "78" "79" "80" "81" "82" "83" "84" "85" "86" "87" "88" "89" "90" "91" "92" "93" "94" "95" "96" "97" "98" "99" "100"'
+$!SetStyleBase Factory
+$!BasicColor 
+  Custom1
+    {
+    R = 119
+    G = 119
+    B = 119
+    }
+  Custom2
+    {
+    R = 77
+    G = 175
+    B = 74
+    }
+  Custom3
+    {
+    R = 254
+    G = 229
+    B = 217
+    }
+  Custom4
+    {
+    R = 255
+    B = 212
+    }
+  Custom5
+    {
+    R = 237
+    G = 248
+    B = 233
+    }
+  Custom6
+    {
+    R = 240
+    G = 249
+    B = 232
+    }
+  Custom7
+    {
+    R = 239
+    G = 243
+    }
+  Custom8
+    {
+    R = 242
+    G = 240
+    B = 247
+    }
+  Custom9
+    {
+    R = 102
+    G = 102
+    B = 102
+    }
+  Custom10
+    {
+    R = 152
+    G = 67
+    B = 163
+    }
+  Custom11
+    {
+    R = 252
+    G = 187
+    B = 161
+    }
+  Custom12
+    {
+    R = 254
+    G = 227
+    B = 145
+    }
+  Custom13
+    {
+    R = 199
+    G = 233
+    B = 192
+    }
+  Custom14
+    {
+    R = 204
+    G = 235
+    B = 197
+    }
+  Custom15
+    {
+    R = 198
+    G = 219
+    B = 239
+    }
+  Custom16
+    {
+    R = 218
+    G = 218
+    B = 235
+    }
+  Custom17
+    {
+    B = 85
+    }
+  Custom18
+    {
+    G = 165
+    B = 0
+    }
+  Custom19
+    {
+    R = 252
+    G = 146
+    B = 114
+    }
+  Custom20
+    {
+    R = 254
+    G = 196
+    B = 79
+    }
+  Custom21
+    {
+    R = 161
+    G = 217
+    B = 155
+    }
+  Custom22
+    {
+    R = 168
+    G = 221
+    B = 181
+    }
+  Custom23
+    {
+    R = 158
+    G = 202
+    B = 225
+    }
+  Custom24
+    {
+    R = 188
+    G = 189
+    B = 220
+    }
+  Custom25
+    {
+    R = 27
+    G = 158
+    B = 119
+    }
+  Custom26
+    {
+    R = 217
+    G = 95
+    B = 2
+    }
+  Custom27
+    {
+    R = 117
+    G = 112
+    B = 179
+    }
+  Custom28
+    {
+    R = 231
+    G = 41
+    B = 138
+    }
+  Custom29
+    {
+    R = 102
+    G = 166
+    B = 30
+    }
+  Custom30
+    {
+    R = 230
+    G = 171
+    B = 2
+    }
+  Custom31
+    {
+    R = 166
+    G = 118
+    B = 29
+    }
+  Custom32
+    {
+    R = 102
+    G = 102
+    B = 102
+    }
+  Custom33
+    {
+    R = 102
+    G = 194
+    B = 165
+    }
+  Custom34
+    {
+    R = 252
+    G = 141
+    B = 98
+    }
+  Custom35
+    {
+    R = 141
+    G = 160
+    B = 203
+    }
+  Custom36
+    {
+    R = 231
+    G = 138
+    B = 195
+    }
+  Custom37
+    {
+    R = 166
+    G = 216
+    B = 84
+    }
+  Custom38
+    {
+    R = 255
+    G = 217
+    B = 48
+    }
+  Custom39
+    {
+    R = 229
+    G = 196
+    B = 148
+    }
+  Custom40
+    {
+    R = 179
+    G = 179
+    B = 179
+    }
+  Custom41
+    {
+    R = 179
+    G = 226
+    B = 205
+    }
+  Custom42
+    {
+    R = 253
+    G = 205
+    B = 172
+    }
+  Custom43
+    {
+    R = 203
+    G = 213
+    B = 232
+    }
+  Custom44
+    {
+    R = 244
+    G = 202
+    B = 228
+    }
+  Custom45
+    {
+    R = 230
+    G = 245
+    B = 201
+    }
+  Custom46
+    {
+    R = 255
+    G = 242
+    B = 174
+    }
+  Custom47
+    {
+    R = 241
+    G = 226
+    B = 204
+    }
+  Custom48
+    {
+    R = 204
+    G = 204
+    B = 204
+    }
+  Custom49
+    {
+    R = 17
+    G = 17
+    B = 17
+    }
+  Custom50
+    {
+    R = 0
+    G = 255
+    }
+  Custom51
+    {
+    R = 255
+    G = 177
+    B = 78
+    }
+  Custom52
+    {
+    R = 250
+    G = 135
+    B = 117
+    }
+  Custom53
+    {
+    R = 234
+    G = 95
+    B = 148
+    }
+  Custom54
+    {
+    R = 205
+    G = 52
+    B = 181
+    }
+  Custom55
+    {
+    R = 157
+    G = 2
+    B = 215
+    }
+  Custom56
+    {
+    R = 0
+    G = 0
+    B = 255
+    }
+$!GlobalPaper 
+  PaperSizeInfo
+    {
+    A4
+      {
+      Width = 8.2677
+      Height = 11.693
+      LeftHardClipOffset = 0.125
+      RightHardClipOffset = 0.125
+      TopHardClipOffset = 0.125
+      BottomHardClipOffset = 0.125
+      }
+    }
+$!Page 
+  Name = 'Untitled'
+  PaperAttributes
+    {
+    BackgroundColor = White
+    IsTransparent = No
+    OrientPortrait = No
+    ShowGrid = Yes
+    ShowRuler = No
+    ShowPaper = No
+    PaperSize = A4
+    RulerSpacing = OneInch
+    PaperGridSpacing = HalfInch
+    RegionInWorkArea
+      {
+      X1 = -0.05
+      Y1 = -0.05
+      X2 = 11.74
+      Y2 = 8.318
+      }
+    }
+### Frame Number 1 ###
+$!ReadDataSet  '|LFDSFN1|'
+  InitialPlotType = XYLine
+  IncludeText = No
+  IncludeGeom = No
+  ResetStyle = No
+  AssignStrandIDs = Yes
+  VarLoadMode = ByName
+  VarNameList = '|LFDSVL1|'
+$!RemoveVar |LFDSVL1|
+$!RemoveVar |LFDSFN1|
+$!AlterData 
+  Equation = 'V1=V1+43900'
+$!FrameLayout 
+  ShowBorder = No
+  ShowHeader = No
+  HeaderColor = Red
+  XYPos
+    {
+    X = -1.2163
+    Y = 0.30409
+    }
+  Width = 13.922
+  Height = 6.8737
+$!ThreeDAxis 
+  AspectRatioLimit = 25
+  BoxAspectRatioLimit = 25
+$!PlotType  = XYLine
+$!FrameName  = 'Frame 001'
+$!GlobalTime 
+  SolutionTime = 0
+$!DeleteLineMaps 
+$!ActiveLineMaps  =  [1-202]
+$!GlobalLinePlot 
+  DataLabels
+    {
+    DistanceSkip = 5
+    }
+  Legend
+    {
+    Show = Yes
+    TextShape
+      {
+      Height = 4
+      }
+    Box
+      {
+      BoxType = Filled
+      Margin = 5
+      }
+    RowSpacing = 1
+    XYPos
+      {
+      X = 98.236
+      Y = 96.687
+      }
+    }
+$!LineMap  [1]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 4
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [2]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 5
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [3]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 6
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [4]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 7
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [5]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 8
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [6]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 9
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [7]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 10
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [8]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 11
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [9]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 12
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [10]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 13
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [11]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 14
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [12]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 15
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [13]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 16
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [14]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 17
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [15]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 18
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [16]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 19
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [17]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 20
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [18]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 21
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [19]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 22
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [20]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 23
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [21]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 24
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [22]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 25
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [23]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 26
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [24]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 27
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [25]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 28
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [26]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 29
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [27]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 30
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [28]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 31
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [29]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 32
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [30]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 33
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [31]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 34
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [32]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 35
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [33]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 36
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [34]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 37
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [35]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 38
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [36]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 39
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [37]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 40
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [38]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 41
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [39]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 42
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [40]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 43
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [41]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 44
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [42]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 45
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [43]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 46
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [44]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 47
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [45]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 48
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [46]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 49
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [47]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 50
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [48]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 51
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [49]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 52
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [50]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 53
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [51]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 54
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [52]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 55
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [53]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 56
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [54]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 57
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [55]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 58
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [56]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 59
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [57]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 60
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [58]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 61
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [59]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 62
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [60]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 63
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [61]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 64
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [62]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 65
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [63]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 66
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [64]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 67
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [65]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 68
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [66]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 69
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [67]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 70
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [68]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 71
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [69]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 72
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [70]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 73
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [71]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 74
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [72]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 75
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [73]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 76
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [74]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 77
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [75]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 78
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [76]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 79
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [77]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 80
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [78]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 81
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [79]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 82
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [80]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 83
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [81]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 84
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [82]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 85
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [83]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 86
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [84]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 87
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [85]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 88
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [86]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 89
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [87]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 90
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [88]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 91
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [89]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 92
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [90]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 93
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [91]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 94
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [92]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 95
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [93]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 96
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [94]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 97
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [95]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 98
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [96]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 99
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [97]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 100
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [98]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 101
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [99]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 102
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [100]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 103
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom42
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom42
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom42
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [101]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 4
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [102]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 5
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [103]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 6
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [104]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 7
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [105]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 8
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [106]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 9
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [107]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 10
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [108]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 11
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [109]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 12
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [110]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 13
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [111]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 14
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [112]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 15
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [113]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 16
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [114]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 17
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [115]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 18
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [116]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 19
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [117]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 20
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [118]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 21
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [119]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 22
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [120]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 23
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [121]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 24
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [122]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 25
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [123]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 26
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [124]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 27
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [125]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 28
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [126]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 29
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [127]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 30
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [128]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 31
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [129]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 32
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [130]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 33
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [131]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 34
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [132]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 35
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [133]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 36
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [134]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 37
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [135]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 38
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [136]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 39
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [137]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 40
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [138]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 41
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [139]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 42
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [140]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 43
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [141]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 44
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [142]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 45
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [143]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 46
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [144]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 47
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [145]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 48
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [146]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 49
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [147]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 50
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [148]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 51
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [149]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 52
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [150]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 53
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [151]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 54
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [152]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 55
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [153]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 56
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [154]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 57
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [155]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 58
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [156]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 59
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [157]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 60
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [158]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 61
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [159]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 62
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [160]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 63
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [161]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 64
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [162]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 65
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [163]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 66
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [164]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 67
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [165]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 68
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [166]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 69
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [167]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 70
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [168]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 71
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [169]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 72
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [170]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 73
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [171]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 74
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [172]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 75
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [173]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 76
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [174]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 77
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [175]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 78
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [176]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 79
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [177]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 80
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [178]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 81
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [179]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 82
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [180]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 83
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [181]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 84
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [182]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 85
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [183]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 86
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [184]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 87
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [185]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 88
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [186]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 89
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [187]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 90
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [188]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 91
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [189]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 92
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [190]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 93
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [191]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 94
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [192]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 95
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [193]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 96
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [194]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 97
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [195]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 98
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [196]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 99
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [197]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 100
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [198]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 101
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [199]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 102
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [200]
+  Name = '&ZN&'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 103
+    ShowInLegend = Never
+    }
+  Lines
+    {
+    Color = Custom41
+    LineThickness = 0.4
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom41
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom41
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [201]
+  Name = '20% obs_err, R3=1.0, std=0.2'
+  Assign
+    {
+    Zone = 2
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Custom26
+    LinePattern = Dashed
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom26
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom26
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom26
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!LineMap  [202]
+  Name = '5% obs_err, R3=1.0, std=0.2'
+  Assign
+    {
+    Zone = 1
+    XAxisVar = 1
+    YAxisVar = 2
+    }
+  Lines
+    {
+    Color = Custom25
+    LineThickness = 0.8
+    }
+  Symbols
+    {
+    Show = No
+    Color = Custom25
+    FillColor = Cyan
+    }
+  BarCharts
+    {
+    Show = No
+    Color = Custom25
+    FillColor = Cyan
+    }
+  ErrorBars
+    {
+    Var = 2
+    Color = Custom25
+    LineThickness = 0.4
+    Skipping = 3
+    Size = 0.5
+    }
+$!XYLineAxis 
+  DepXToYRatio = 1
+  GridArea
+    {
+    DrawBorder = Yes
+    }
+  ViewportPosition
+    {
+    X1 = 9.1427
+    Y1 = 10.308
+    X2 = 98.278
+    Y2 = 96.671
+    }
+  ViewportTopSnapTarget = 97.8290423537
+$!XYLineAxis 
+  XDetail 1
+    {
+    RangeMin = 43900
+    RangeMax = 44220
+    GRSpacing = 120
+    GRAnchor = 1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = TimeDate
+        ShowNegativeSign = No
+        TimeDateFormat = 'd-mmm-yyyy'
+        }
+      Offset = 3
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TitleMode = UseText
+      TextShape
+        {
+        Height = 4.6
+        }
+      Offset = 5
+      }
+    }
+$!XYLineAxis 
+  XDetail 2
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  XDetail 3
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  XDetail 4
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  XDetail 5
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 1
+    {
+    RangeMin = 0
+    RangeMax = 5
+    GRSpacing = 1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        TimeDateFormat = ''
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TitleMode = UseText
+      Text = 'Effective R(t)'
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 2
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 3
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 4
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!XYLineAxis 
+  YDetail 5
+    {
+    RangeMin = 0
+    RangeMax = 1
+    GRSpacing = 0.1
+    TickLabel
+      {
+      TextShape
+        {
+        Height = 4
+        }
+      NumFormat
+        {
+        Formatting = Integer
+        ShowNegativeSign = No
+        }
+      }
+    Gridlines
+      {
+      Show = Yes
+      }
+    Title
+      {
+      TextShape
+        {
+        Height = 4.6
+        }
+      }
+    }
+$!LinePlotLayers 
+  ShowSymbols = Yes
+  ShowBarCharts = Yes
+$!Linking 
+  WithinFrame
+    {
+    LinkGridlineStyle = Yes
+    LinkLayerLineColor = Yes
+    }
+  BetweenFrames
+    {
+    LinkFrameSizeAndPosition = Yes
+    LinkSolutionTime = Yes
+    LinkXAxisRange = Yes
+    LinkYAxisRange = Yes
+    LinkAxisPosition = Yes
+    }
+$!AttachGeom 
+  AnchorPos
+    {
+    X = 43800
+    Y = 1
+    }
+  Color = Red
+  LineThickness = 0.2
+  RawData
+1
+2
+0 0 
+480 0 
+$!FrameControl ActivateByNumber
+  Frame = 1
+$!SetStyleBase Config

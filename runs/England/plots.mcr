@@ -6,7 +6,7 @@ $!ExportSetup ExportFormat = EPS
 $!ExportSetup EPSPreviewImage{ImageType = None}
 
 $!AlterData [1-15]
-  Equation = 'V1=V1+43881'
+  Equation = 'V1=V1+43880'
 
 # Active cases
 $!ActiveLineMaps += [1-303]
@@ -151,7 +151,7 @@ $!LOOP 3
 $!OpenLayout  "./rens|LOOP|.lay"
 
 $!AlterData [1-6]
-  Equation = 'V1=V1+43881'
+  Equation = 'V1=V1+43880'
 
 $!ActiveLineMaps += [1-609]
 $!LineMap [1-609]  Assign{ShowInLegend = Never}

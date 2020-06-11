@@ -1,0 +1,16 @@
+cp CaseFC01_D/corona.in CaseFC01_DH
+cp CaseFC02_D/corona.in CaseFC02_DH
+cp CaseFC03_D/corona.in CaseFC03_DH
+cp CaseFC04_D/corona.in CaseFC04_DH
+cp CaseFC05_D/corona.in CaseFC05_DH
+cp CaseFC06_D/corona.in CaseFC06_DH
+cp CaseFC07_D/corona.in CaseFC07_DH
+cp CaseFC08_D/corona.in CaseFC08_DH
+cp CaseFC01_D/corona.in CaseFC01_DHC
+cp CaseFC02_D/corona.in CaseFC02_DHC
+cp CaseFC03_D/corona.in CaseFC03_DHC
+cp CaseFC04_D/corona.in CaseFC04_DHC
+cp CaseFC05_D/corona.in CaseFC05_DHC
+cp CaseFC06_D/corona.in CaseFC06_DHC
+cp CaseFC07_D/corona.in CaseFC07_DHC
+cp CaseFC08_D/corona.in CaseFC08_DHC

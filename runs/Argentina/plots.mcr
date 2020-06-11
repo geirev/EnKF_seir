@@ -6,7 +6,7 @@ $!ExportSetup EPSPreviewImage{ImageType = None}
 
 
 $!AlterData [1-18]
-  Equation = 'V1=V1+43891'
+  Equation = 'V1=V1+43890'
 
 # Total cases
 $!ActiveLineMaps += [1-303]
