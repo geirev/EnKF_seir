@@ -6,7 +6,7 @@ method is the ESMDA (Ensemble Smoother with multiple data assimilation). The
 measurements are the accumulated number of deaths and the daily number of
 hospitalized.
 
-For model and system description and examples see 
+For model, system description, and examples, see 
 https://www.medrxiv.org/content/10.1101/2020.06.11.20128777v1
 
 Initially, model parameters are sampled from prescribed normal distributions.  The
