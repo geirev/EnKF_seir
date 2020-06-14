@@ -5,7 +5,7 @@ doc/model.out
 doc/texput.log
 build
 runs/*/*.eps
-runs/*/Case*/*
+runs/*/*/*
 !runs/*/Case*/*.in
 !runs/*/Case*/seed.dat
 !runs/*/Case*/xlimit.txt
