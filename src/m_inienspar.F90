@@ -30,19 +30,19 @@ subroutine inienspar(enspar)
       enddo
 
 ! introduce discontinuous R(t) if the prior mean changes over intervention times.
-      ia=nint(Tinterv(1))+1
+      ia=nint(Tinterv(1))+0
       if ( p%R(ia) /= p%R(ia-1) ) then
          print *,'Decorrelating R(t) over i=',ia-1,' to ', ia
-         ia=Tinterv(1)+1   ; ib=rdim ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
+         ia=Tinterv(1)+0   ; ib=rdim ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
          do j=1,nrens
             if (isize > 0)   call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
          enddo
       endif
 
-      ia=nint(Tinterv(2))+1
+      ia=nint(Tinterv(2))+0
       if ( p%R(ia-1) /= p%R(ia) ) then
          print *,'Decorrelating R(t) over i=',ia-1,' to ', ia
-         ia=Tinterv(2)+1   ; ib=rdim ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
+         ia=Tinterv(2)+0   ; ib=rdim ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
          do j=1,nrens
             if (isize > 0)   call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
          enddo

@@ -16,7 +16,7 @@ subroutine readinputs()
    logical ex
    character(len=2) ca
    integer id,im,iy,k,day
-   integer ir,i,j,ii
+   integer ir,i,j,ii,nttmp
    real stdR(nrint),fgR(nrint),dt,t
 
    inquire(file='infile.in',exist=ex)
@@ -26,8 +26,9 @@ subroutine readinputs()
    endif
    open(10,file='infile.in')
       read(10,*)nrens               ;    print '(a,i4)',       'number  of samples         :',nrens
-      read(10,*)nt                  ;    print '(a,i4)',       'nt                         :',nt
+      read(10,*)nttmp               ;    print '(a,i4)',       'nt (not used)              :',nttmp
       read(10,*)time                ;    print '(a,f10.3)',    'Length of integration      :',time
+      nt=nint(time)+1               ;    print '(a,i4)',       'nt (computed in seir)      :',nt
       read(10,'(a)')ca      
       if (ca /= '#1') then
          print *,'#1: error in infile.in'
@@ -54,20 +55,20 @@ subroutine readinputs()
 
 ! Read startday of simulation - Running with Rmat(:,:,1)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      startday=getday(id,im,iy)
-      print '(a,i3,i3,i5,i5)',       'Start date of simulation        :',id,im,iy
-      print '(a,2i5)',               'Relative start day              :',startday,365+31+28+1
+      startday=getday(id,im,iy)-1        ! Subtract 1 to get to 00:00am in the morning
+      print '(a,i3,i3,i5,i5)',       'Start of simulation (00:00am)   :',id,im,iy
+      print '(a,2i5)',               'Relative start day              :',startday,365+31+29
 
 
 
 ! Read startday of 1st intervention - switching to Rmat(:,:,2)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      Tinterv(1)=real(getday(id,im,iy))
+      Tinterv(1)=real(getday(id,im,iy))-1  ! Subtract 1 to get to 00:00am in the morning
       print '(a,i3,i3,i5,f10.2,i5)',    'Start date of first  intervention:',id,im,iy,Tinterv(1)
 
 ! Read startdate of 2nd intervention- switching to Rmat(:,:,3)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
-      Tinterv(2)=real(getday(id,im,iy))
+      Tinterv(2)=real(getday(id,im,iy))-1  ! Subtract 1 to get to 00:00am in the morning
       print '(a,i3,i3,i5,f10.2,i5)',    'Start date of second intervention:',id,im,iy,Tinterv(2)
 
 
@@ -98,18 +99,20 @@ subroutine readinputs()
       read(10,*)hos                  ; print '(a,2f10.3)',  'Fraction of Qf that go to hospital   :',hos
       read(10,*)qminf                ; print '(a,2f10.3)',  'Fraction of Qm that is infecteous    :',qminf
 
+      dt= time/real(nt-1) 
+!      print '(a,f10.2)','DT=',dt
       do i=0,min(nt,rdim)
-         dt= time/real(nt-1)
-         t= 0 + real(i)*dt
-         if (t <= Tinterv(1)) then
+         t= 0.0 + real(i)*dt
+         if (t < Tinterv(1)) then
             ir=1
-         elseif (Tinterv(1) < t .and. t <= Tinterv(2) ) then
+         elseif (Tinterv(1) <= t .and. t < Tinterv(2) ) then
             ir=2
-         elseif (t > Tinterv(2)) then
+         elseif (t >= Tinterv(2)) then
             ir=3
          endif
          p%R(i)=fgR(ir)     
          parstd%R(i) = stdR(ir) 
+!         print '(a,f10.2,2i4,f10.2)','Setting R(t): ',t,i,ir,p%R(i)
       enddo
 
       pfg=p          ! store first guess of parameters

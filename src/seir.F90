@@ -131,15 +131,16 @@ subroutine f(neqq, t, y, ydot)
 
 
    dt= time/real(nt-1)
-   i= min(nint(t/dt), rdim)
+   i= min(int(t/dt), rdim)
 
-   if (t <= Tinterv(1)) then
+   if (t < Tinterv(1)) then
       ir=1
-   elseif (Tinterv(1) < t .and. t <= Tinterv(2) ) then
+   elseif (Tinterv(1) <= t .and. t < Tinterv(2) ) then
       ir=2
-   elseif (t > Tinterv(2)) then
+   elseif (t >= Tinterv(2)) then
       ir=3
    endif
+!   print '(a,2f8.2,i5,f10.2,i2)','t: ',t,dt,i,p%R(i),ir
 
    R(:,:)= p%R(i) * Rmat(:,:,ir)  
 

@@ -42,11 +42,10 @@ subroutine solve(ens,enspar,j)
 
    istate=1
    do i=1,nt 
-      t=0+real(i)*dt
+      t=0+real(i-1)*dt
       tout=t+dt
       call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
       ens(i,j)=y
-!        print '(a,4f12.2)','SUM=',sum(y)
       if (istate < 0) then
          print '(a,i3,a,i4)','negative istate, exiting: ',istate,',  it=0,  iens=',j
          stop

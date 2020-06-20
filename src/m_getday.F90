@@ -1,5 +1,5 @@
 module m_getday
-integer :: startday=1
+integer :: startday=0
 contains
 integer function getday(id,im,iy)
    implicit none

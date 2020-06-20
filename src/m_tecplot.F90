@@ -17,9 +17,9 @@ subroutine saveresult(fname,varname,aved,stdd,ensd,tag,dt)
       write(10,'(5a)')'TITLE = "'//varname//'_'//tag//'"'
       write(10,'(a)')'VARIABLES = "time" "ave" "std" '
       write(10,'(20(a,i4,a))')(' "',i,'"',i=1,min(nrens,1000))
-      write(10,*)'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt+1,', J=1, K=1'
+      write(10,*)'ZONE T="'//varname//'_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
       if (stdd(0) < 1.0E-30) stdd(0)=0.0
-      do i=0,nt
+      do i=0,nt-1
          t=0.0+real(i)*dt
          write(10,'(2000E13.5)')t, aved(i), stdd(i), (ensd(i,j),j=1,min(nrens,1000))
       enddo
@@ -62,50 +62,50 @@ subroutine tecplot(ens,enspar,pri)
    dt= time/real(nt-1)
    
 ! ensemble average and std as a function of time
-   do i=0,nt
-      ave(i)=0.0
-      std(i)=0.0
-      do j=1,nrens
-         ave(i)=ave(i) + ens(i,j)
-      enddo
-      ave(i)=ave(i)*(1.0/real(nrens))
-      do j=1,nrens
-         std(i)=std(i) + (ens(i,j)-ave(i))*(ens(i,j)-ave(i))
-      enddo
-      std(i)=std(i)*(1.0/real(nrens-1))
-      std(i)=sqrt(std(i))
-   enddo
+!   do i=0,nt-1
+!      ave(i)=0.0
+!      std(i)=0.0
+!      do j=1,nrens
+!         ave(i)=ave(i) + ens(i,j)
+!      enddo
+!      ave(i)=ave(i)*(1.0/real(nrens))
+!      do j=1,nrens
+!         std(i)=std(i) + (ens(i,j)-ave(i))*(ens(i,j)-ave(i))
+!      enddo
+!      std(i)=std(i)*(1.0/real(nrens-1))
+!      std(i)=sqrt(std(i))
+!   enddo
 
 ! Big tecplot dump
-   write(fm,'(a,i2.2,a)')'(a,3(',na,'(a,i2.2,a)),a)'   
-   open(10,file='bigdump'//tag//'.dat')
-      write(10,*)'TITLE = "Bigdump"'
-      write(10,fm)'VARIABLES = "i" "time" ', &
-                          & ('"S',i,'" ',i=1,na),  &
-                          & ('"E',i,'" ',i=1,na),  &
-                          & ('"I',i,'" ',i=1,na),  &
-                          &' "Qm" "Qs" "Qf" "Hs" "Hf" "C" "Rm" "Rs" "D"'
-      write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(i5,f10.2,50g13.5)')i,t,N*ave(i)
-      enddo
- 
-      write(10,'(a,i5,a,i5,a)')' ZONE T="std"  F=POINT, I=',nt+1,', J=1, K=1'
-      do i=0,nt
-         t=0+real(i)*dt
-         write(10,'(i5,f10.2,50g13.5)')i,t,N*std(i)
-      enddo
- 
-      do j=1,min(nrens,100)
-         write(tag3,'(i3.3)')j
-         write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
-         do i=0,nt
-            t=0+real(i)*dt
-            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(i,j)
-         enddo
-      enddo
-   close(10)
+!   write(fm,'(a,i2.2,a)')'(a,3(',na,'(a,i2.2,a)),a)'   
+!   open(10,file='bigdump'//tag//'.dat')
+!      write(10,*)'TITLE = "Bigdump"'
+!      write(10,fm)'VARIABLES = "i" "time" ', &
+!                          & ('"S',i,'" ',i=1,na),  &
+!                          & ('"E',i,'" ',i=1,na),  &
+!                          & ('"I',i,'" ',i=1,na),  &
+!                          &' "Qm" "Qs" "Qf" "Hs" "Hf" "C" "Rm" "Rs" "D"'
+!      write(10,'(a,i5,a,i5,a)')' ZONE T="ave"  F=POINT, I=',nt+1,', J=1, K=1'
+!      do i=0,nt
+!         t=0+real(i)*dt
+!         write(10,'(i5,f10.2,50g13.5)')i,t,N*ave(i)
+!      enddo
+! 
+!      write(10,'(a,i5,a,i5,a)')' ZONE T="std"  F=POINT, I=',nt+1,', J=1, K=1'
+!      do i=0,nt
+!         t=0+real(i)*dt
+!         write(10,'(i5,f10.2,50g13.5)')i,t,N*std(i)
+!      enddo
+! 
+!      do j=1,min(nrens,100)
+!         write(tag3,'(i3.3)')j
+!         write(10,'(a,i5,a,i5,a)')' ZONE T="mem'//tag3//'"  F=POINT, I=',nt+1,', J=1, K=1'
+!         do i=0,nt
+!            t=0+real(i)*dt
+!            write(10,'(i5,f10.2,50g13.5)')i,t,N*ens(i,j)
+!         enddo
+!      enddo
+!   close(10)
 
    do j=1,nrens
       do i=0,nt
@@ -130,7 +130,7 @@ subroutine tecplot(ens,enspar,pri)
       enddo
    enddo
 
-   do i=0,nt
+   do i=0,nt-1
 
       aved(i)=0.0
       do j=1,nrens

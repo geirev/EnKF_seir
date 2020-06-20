@@ -20,11 +20,11 @@ then
    fi
 fi
 
-for country in  Netherlands #US Quebec Norway Netherlands Brazil Argentina England France # US 
+for country in  Norway #US Quebec Norway Netherlands Brazil Argentina England France # US 
 do
    if [ -d $country ]
    then
-      for exp in $country/Case01I
+      for exp in $country/Case01T
       do
          [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
          pushd $exp
