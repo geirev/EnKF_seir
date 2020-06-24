@@ -42,9 +42,6 @@ $!LineMap [607]  Assign{ShowInLegend = Auto}
 
 
 
-$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 9.19724}}
-$!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
 
 
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
@@ -53,6 +50,18 @@ $!XYLineAxis YDetail 1 {RangeMax = 50000}
 $!XYLineAxis XDetail 1 {RangeMin = 43900}
 $!XYLineAxis XDetail 1 {RangeMax = 44220}
 $!XYLineAxis YDetail 1 {Title{Offset = 7}}
+
+$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {Title{Offset = 8}}
+$!XYLineAxis ViewportPosition{X1 = 10.2}
+$!GlobalLinePlot Legend{TextShape{Height = 5}}
+$!GlobalLinePlot Legend{Box{Margin = 3}}
+$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
+$!GlobalLinePlot Legend{XYPos{X = 10.2757}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.5333}}
 
 $!RedrawAll 
 $!ExportSetup ExportFName = './Brazil_scenarioCD|LOOP|.eps'
@@ -83,8 +92,15 @@ $!XYLineAxis YDetail 1 {GRSpacing = 1}
 #
 #
 $!GlobalLinePlot Legend{AnchorAlignment = TopRight}
-$!GlobalLinePlot Legend{XYPos{X = 98.2363}}
-$!GlobalLinePlot Legend{XYPos{Y = 96.6866}}
+$!GlobalLinePlot Legend{XYPos{X = 98.1616}}
+$!GlobalLinePlot Legend{XYPos{Y = 96.5333}}
+
+$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {Title{Offset = 8}}
+$!GlobalLinePlot Legend{TextShape{Height = 5}}
 #
 $!AttachGeom
   AnchorPos

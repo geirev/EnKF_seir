@@ -73,6 +73,13 @@ $!XYLineAxis YDetail 1 {RangeMax = 10000000}
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
 $!XYLineAxis XDetail 1 {RangeMax = 44070}
 
+$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!GlobalLinePlot Legend{TextShape{Height = 5}}
+$!GlobalLinePlot Legend{Box{Margin = 3}}
+
 $!RedrawAll 
 $!ExportSetup ExportFName = './Argentina_scenarioCD.eps'
 $!Export 

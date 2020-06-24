@@ -77,13 +77,6 @@ $!XYLineAxis XDetail 1 {RangeMin = XXXXA}
 $!XYLineAxis XDetail 1 {RangeMax = XXXXB}
 $!XYLineAxis YDetail 1 {Title{Offset = 7}}
 
-$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
-$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
-$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
-$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
-$!GlobalLinePlot Legend{TextShape{Height = 5}}
-$!GlobalLinePlot Legend{Box{Margin = 3}}
-
 
 $!RedrawAll 
 $!ExportSetup ExportFName = './HDlog.eps'
@@ -125,10 +118,8 @@ $!ActiveLineMaps += [1401-1500]
 #US$!LineMap [800] Assign{ShowInLegend = Auto}
 
 $!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 9.212325}}
+$!GlobalLinePlot Legend{XYPos{X = 9.19724}}
 $!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
-$!GlobalLinePlot Legend{TextShape{Height = 5}}
-$!GlobalLinePlot Legend{Box{Margin = 3}}
 
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
@@ -172,7 +163,6 @@ $!XYLineAxis YDetail 1 {Title{Offset = 7}}
 $!GlobalLinePlot Legend{AnchorAlignment = TopRight}
 $!GlobalLinePlot Legend{XYPos{X = 98.1606}}
 $!GlobalLinePlot Legend{XYPos{Y = 96.5265}}
-$!GlobalLinePlot Legend{Box{Margin = 3}}
 
 $!AttachGeom
   AnchorPos
