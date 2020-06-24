@@ -124,9 +124,9 @@ $!LineMap [1215]  Assign{ShowInLegend = Auto}
 
 
 
-$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
+$!GlobalLinePlot Legend{AnchorAlignment = BottomLeft}
 $!GlobalLinePlot Legend{XYPos{X = 24.1103}}
-$!GlobalLinePlot Legend{XYPos{Y = 31.4469}}
+$!GlobalLinePlot Legend{XYPos{Y = 10.3651}}
 
 
 $!XYLineAxis YDetail 1 {CoordScale = Log}
@@ -134,6 +134,12 @@ $!XYLineAxis YDetail 1 {RangeMin = 10}
 $!XYLineAxis YDetail 1 {RangeMax = 20000000}
 $!XYLineAxis XDetail 1 {RangeMin = 43891}
 $!XYLineAxis XDetail 1 {RangeMax = 44070}
+
+$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!GlobalLinePlot Legend{TextShape{Height = 5}}
 
 $!RedrawAll 
 $!ExportSetup ExportFName = './England_scenario|LOOP|.eps'
@@ -180,6 +186,12 @@ $!XYLineAxis YDetail 1 {GRSpacing = 1}
 $!GlobalLinePlot Legend{AnchorAlignment = TopRight}
 $!GlobalLinePlot Legend{XYPos{X = 98.2363}}
 $!GlobalLinePlot Legend{XYPos{Y = 96.6866}}
+
+$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!GlobalLinePlot Legend{TextShape{Height = 5}}
 #
 $!AttachGeom
   AnchorPos

@@ -42,7 +42,7 @@ ACTION: LoadAddOn
 ACTION: LoadAddOn
 ACTION: OpenLayout: ./solutions1.lay
 ACTION: PageControl: CREATE
-ACTION: AlterData: V1=V1+43900
+ACTION: AlterData: V1=V1+43899
 ACTION: RedrawAll
 ACTION: Export
 ACTION: OpenLayout: ./rens1.lay
@@ -52,7 +52,7 @@ ACTION: RedrawAll
 ACTION: Export
 ACTION: OpenLayout: ./solutions2.lay
 ACTION: PageControl: CREATE
-ACTION: AlterData: V1=V1+43900
+ACTION: AlterData: V1=V1+43899
 ACTION: RedrawAll
 ACTION: Export
 ACTION: OpenLayout: ./rens2.lay
@@ -62,7 +62,7 @@ ACTION: RedrawAll
 ACTION: Export
 ACTION: OpenLayout: ./solutions3.lay
 ACTION: PageControl: CREATE
-ACTION: AlterData: V1=V1+43900
+ACTION: AlterData: V1=V1+43899
 ACTION: RedrawAll
 ACTION: Export
 ACTION: OpenLayout: ./rens3.lay

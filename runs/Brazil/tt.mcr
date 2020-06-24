@@ -1,7 +1,4 @@
 #!MC 1410
-$!Pick AddAtPosition
-  X = -1.06314023372
-  Y = 3.73585642738
-  ConsiderStyle = Yes
-$!XYLineAxis YDetail 1 {Title{Offset = 5}}
-$!Redraw 
+$!XYLineAxis YDetail 1 {Title{Offset = 8}}
+$!XYLineAxis ViewportPosition{X1 = 10.2}
+$!GlobalLinePlot Legend{Box{Margin = 3}}

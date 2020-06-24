@@ -70,17 +70,26 @@ $!LineMap [608]  Symbols{Size = 0.7 }
 
 
 
-$!GlobalLinePlot Legend{AnchorAlignment = TopLeft}
-$!GlobalLinePlot Legend{XYPos{X = 64.1412}}
+$!GlobalLinePlot Legend{AnchorAlignment = TopRight}
+$!GlobalLinePlot Legend{XYPos{X = 98.2065}}
 $!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
+
+$!XYLineAxis ViewportPosition{X1 = 10.5}
+$!XYLineAxis YDetail 1 {Title{Offset = 8.25}}
 
 
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis YDetail 1 {RangeMax = 40000}
-$!XYLineAxis XDetail 1 {RangeMin = 43877}
-$!XYLineAxis XDetail 1 {RangeMax = 44060}
-$!XYLineAxis YDetail 1 {Title{Offset = 7}}
+$!XYLineAxis XDetail 1 {RangeMin = 43890}
+$!XYLineAxis XDetail 1 {RangeMax = 44056}
+
+$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
+$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!GlobalLinePlot Legend{TextShape{Height = 5}}
+$!GlobalLinePlot Legend{Box{Margin = 2}}
 
 $!RedrawAll 
 $!ExportSetup ExportFName = './France_scenarioHD.eps'
