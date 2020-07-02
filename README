@@ -16,11 +16,16 @@ posterior ensemble is integrated a final time to produce the posterior predictio
 
 
 See the files:
+<p align="center">
+  <a href="#installation">Installation</a>
+</p>
+  
 README_SETUP for setting up a simulation with the code.
 README_GIT for git instructions.
 REALEASE_NOTES for information about updates in the code.
 
 
+#installation
 INSTALLATION:
 
 # 1a. Simple installation:

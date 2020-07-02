@@ -74,8 +74,8 @@ $!GlobalLinePlot Legend{AnchorAlignment = TopRight}
 $!GlobalLinePlot Legend{XYPos{X = 98.2065}}
 $!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
 
-$!XYLineAxis ViewportPosition{X1 = 10.5}
-$!XYLineAxis YDetail 1 {Title{Offset = 8.25}}
+#$!XYLineAxis ViewportPosition{X1 = 10.5}
+$!XYLineAxis YDetail 1 {Title{Offset = 7.00}}
 
 
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
@@ -88,6 +88,7 @@ $!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
 $!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
 $!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
 $!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
+$!XYLineAxis YDetail 1 {TickLabel{Angle = 45}}
 $!GlobalLinePlot Legend{TextShape{Height = 5}}
 $!GlobalLinePlot Legend{Box{Margin = 2}}
 

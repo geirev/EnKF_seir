@@ -25,8 +25,8 @@ subroutine inienspar(enspar)
    if (lrtime) then
 ! simulate continous random functions for R(t) ensemble
       do j=1,nrens
-         ia=0           ; ib=rdim             ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
-         call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
+         ia=0           ; ib=rdim             ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize,nint(real(isize)*rdcorr)
+         call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,nint(real(isize)*rdcorr))
       enddo
 
 ! introduce discontinuous R(t) if the prior mean changes over intervention times.
@@ -35,7 +35,7 @@ subroutine inienspar(enspar)
          print *,'Decorrelating R(t) over i=',ia-1,' to ', ia
          ia=Tinterv(1)+0   ; ib=rdim ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
          do j=1,nrens
-            if (isize > 0)   call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
+            if (isize > 0)   call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,nint(real(isize)*rdcorr))
          enddo
       endif
 
@@ -44,7 +44,7 @@ subroutine inienspar(enspar)
          print *,'Decorrelating R(t) over i=',ia-1,' to ', ia
          ia=Tinterv(2)+0   ; ib=rdim ; isize=ib-ia+1  ; if (j==1)  print *,'ia to ib:',ia,ib,isize
          do j=1,nrens
-            if (isize > 0)   call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,isize+50)
+            if (isize > 0)   call pseudo1D(enspar(j)%R(ia:ib),isize,1,rdcorr,1.0,nint(real(isize)*rdcorr))
          enddo
       endif
    else
