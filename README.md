@@ -44,19 +44,32 @@ git clone git@github.com:geirev/EnKF_sampling.git
 ### 1b. Best installation option
 Make a personal github account unless you already have one.
 Fork the three repositorys listed above.
-Next clone the repositories and set upstream to the original repositories
+Next clone the repositories and set upstream to the original repositories where
+you need to replace <userid> with your github userid
 ```bash
 git clone git@github.com:<userid>/EnKF_seir.git
-cd EnKF_seir; git remote add upstream https://github.com/geirev/EnKF_seir
+pushd EnKF_seir
+git remote add upstream https://github.com/geirev/EnKF_seir
+#or, if you have set up git-ssh
+#git remote add upstream git://github.com:geirev/EnKF_seir
+popd
 
 git clone git@github.com:<userid>/EnKF_analysis.git
-cd EnKF_analysis; git remote add upstream https://github.com/geirev/EnKF_analysis
+pushd EnKF_analysis
+git remote add upstream https://github.com/geirev/EnKF_analysis
+#or, if you have set up git-ssh
+#git remote add upstream git://github.com:geirev/EnKF_analysis
+popd
 
 git clone git@github.com:<userid>/EnKF_sampling.git
-cd EnKF_sampling; git remote add upstream https://github.com/geirev/EnKF_sampling
+pushd EnKF_sampling
+git remote add upstream https://github.com/geirev/EnKF_sampling
+#or, if you have set up git-ssh
+#git remote add upstream git://github.com:geirev/EnKF_sampling
+popd
 ```
 
-If you are new to git read the README_GIT file
+If you are new to git, read the section <a href="#git-instructions">Git instructions</a>
 
 
 ## 2. Install blas, lapack, libfftw3, and Fortran95
@@ -65,49 +78,36 @@ sudo apt-get update
 sudo apt-get install libblas-dev liblapack-dev libfftw3-dev gfortran
 ```
 
-## 3. Compile the EnKF_analysis library
-```bash
-cd EnKF_analysis/lib
-```
-In the makefile: change build dir to dir where EnKF_seir will be build
-```bash
-BUILD = ../../EnKF_seir/build
-```
-
-This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
-```bash
-make
-```
-
-## 4. Compile the EnKF_sampling library
+## 3. Compile the EnKF_sampling library
 ```bash
 cd EnKF_sampling/lib
-```
-in the makefile: change build dir to dir where EnKF_seir will be build
-```bash
-BUILD = ../../EnKF_seir/build
+make BUILD=../../EnKF_seir/build
 ```
 This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir
+
+## 4. Compile the EnKF_analysis library
 ```bash
-make
+cd EnKF_analysis/lib
+make BUILD=../../EnKF_seir/build
 ```
+This will put all the .o files as well as libanalysis.a in the same dir as you will use when compiling EnKF_seir.
+Note that EnKF_analysis depends on EnKF sampling.
 
 ## 5. cd EnKF_seir/src
-Change target install dir which is currently $HOME/bin to where you want it to reside
+Compile and install executable in target install dir which defaults to BINDIR=/$HOME/bin
 ```bash
-make
+make BINDIR=$HOME/bin
 cd ../run
 seir
 ```
 
-For some plotting options check python/enkf_seir/plot
+## 6. Plotting
+If you have tecplot (tec360) there are .lay and .mcr files in run.
+For some included plotting options check python/enkf_seir/plot:
 ```bash
-plot.py
-covid.ipynb
+python ../python/enkf_seir/plot/plot.py
+jupyter-notebook ../python/enkf_seir/plot/covid.ipynb
 ```
-
-good luck and ask when you get stuck!
-
 
 ---
 # Setting up an experiment
@@ -180,9 +180,6 @@ par0.dat par1.dat         : Prior and posterior ensemble of parameters
 Rens_0.dat Rens_1.dat     : Prior and posterior ensemble of R(t)
 ```
 
-## Plotting:
-If you have tecplot (tec360) there are .lay and .mcr files in run.
-Python/enkf_seir/plot contains both plot.py and a jupyter notebook for plotting
 
 ---
 # Code standards
