@@ -70,7 +70,7 @@ $!GlobalLinePlot Legend{XYPos{Y = 96.6097}}
 $!XYLineAxis YDetail 1 {CoordScale = Log}
 $!XYLineAxis YDetail 1 {RangeMin = 10}
 $!XYLineAxis YDetail 1 {RangeMax = 10000000}
-$!XYLineAxis XDetail 1 {RangeMin = 43891}
+$!XYLineAxis XDetail 1 {RangeMin = 43890}
 $!XYLineAxis XDetail 1 {RangeMax = 44070}
 
 $!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
@@ -105,7 +105,7 @@ $!LineMap [908-910]  Lines{LineThickness = 0.80}
 #
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!View Fit
-$!XYLineAxis XDetail 1 {RangeMin = 43891}
+$!XYLineAxis XDetail 1 {RangeMin = 43890}
 $!XYLineAxis XDetail 1 {RangeMax = 44070}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis YDetail 1 {RangeMax = 5}

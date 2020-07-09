@@ -7,7 +7,7 @@ $!ExportSetup EPSPreviewImage{ImageType = None}
 
 
 $!AlterData [1-18]
-  Equation = 'V1=V1+43900'
+  Equation = 'V1=V1+43899'
 
 $!ActiveLineMaps -= [1-910]
 
@@ -47,15 +47,15 @@ $!LineMap [607]  Assign{ShowInLegend = Auto}
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis YDetail 1 {RangeMax = 50000}
-$!XYLineAxis XDetail 1 {RangeMin = 43900}
+$!XYLineAxis XDetail 1 {RangeMin = 43899}
 $!XYLineAxis XDetail 1 {RangeMax = 44220}
 $!XYLineAxis YDetail 1 {Title{Offset = 7}}
+$!XYLineAxis YDetail 1 {TickLabel{Angle = 45}}
 
 $!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
 $!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
 $!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
 $!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
-$!XYLineAxis YDetail 1 {Title{Offset = 8}}
 $!XYLineAxis ViewportPosition{X1 = 10.2}
 $!GlobalLinePlot Legend{TextShape{Height = 5}}
 $!GlobalLinePlot Legend{Box{Margin = 3}}
@@ -75,7 +75,7 @@ $!Export
 $!OpenLayout  "./rens|LOOP|.lay"
 
 #$!AlterData [1-2]
-#  Equation = 'V1=V1+43900'
+#  Equation = 'V1=V1+43899'
 
 $!ActiveLineMaps += [1-202]
 
@@ -84,7 +84,7 @@ $!XYLineAxis YDetail 1 {Title{Text = 'Effective R(t)'}}
 #
 $!XYLineAxis YDetail 1 {CoordScale = Linear}
 $!View Fit
-$!XYLineAxis XDetail 1 {RangeMin = 43900}
+$!XYLineAxis XDetail 1 {RangeMin = 43899}
 $!XYLineAxis XDetail 1 {RangeMax = 44220}
 $!XYLineAxis YDetail 1 {RangeMin = 0}
 $!XYLineAxis YDetail 1 {RangeMax = 5}
@@ -99,7 +99,8 @@ $!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
 $!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
 $!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
 $!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
-$!XYLineAxis YDetail 1 {Title{Offset = 8}}
+$!XYLineAxis YDetail 1 {Title{Offset = 7}}
+$!XYLineAxis YDetail 1 {TickLabel{Angle = 0}}
 $!GlobalLinePlot Legend{TextShape{Height = 5}}
 #
 $!AttachGeom

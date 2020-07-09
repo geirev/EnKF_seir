@@ -20,14 +20,14 @@ then
    fi
 fi
 
-for country in US Quebec Netherlands Brazil Argentina France England Norway 
+for country in France #US Quebec Netherlands Brazil Argentina France England Norway 
 do
    if [ -d $country ]
    then
-      for exp in $country/Case*
+      for exp in $country/xase*
       do
-         [ ! -f ${exp}/ylimits.txt ] && cp ylimits.txt ${exp}
-         pushd $exp
+         [ -d $exp ] && pushd $exp
+         [ ! -f ylimits.txt ] && cp ../../ylimits.txt ${exp}
          if [ -f "infile.in" ] && [ -f "corona.in" ]
          then
 
