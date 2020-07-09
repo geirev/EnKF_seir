@@ -92,13 +92,6 @@ $!XYLineAxis YDetail 1 {TickLabel{Angle = 45}}
 $!GlobalLinePlot Legend{TextShape{Height = 5}}
 $!GlobalLinePlot Legend{Box{Margin = 2}}
 
-#$!XYLineAxis YDetail 1 {Title{TextShape{Height = 5.6}}}
-#$!XYLineAxis XDetail 1 {Title{TextShape{Height = 5.6}}}
-#$!XYLineAxis XDetail 1 {TickLabel{TextShape{Height = 5}}}
-#$!XYLineAxis YDetail 1 {TickLabel{TextShape{Height = 5}}}
-#$!GlobalLinePlot Legend{TextShape{Height = 5}}
-#$!GlobalLinePlot Legend{Box{Margin = 3}}
-
 $!RedrawAll 
 $!ExportSetup ExportFName = './France_scenarioHD.eps'
 $!Export 
