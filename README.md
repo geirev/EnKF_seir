@@ -73,6 +73,7 @@ If you are new to git, read the section <a href="#git-instructions">Git instruct
 
 
 ## 2. Install blas, lapack, libfftw3, and Fortran95
+<a href="#Mac-OS-X-installation">Additional instructions for installation on Mac OS X</a>
 ```bash
 sudo apt-get update
 sudo apt-get install libblas-dev liblapack-dev libfftw3-dev gfortran
@@ -341,3 +342,26 @@ corona.in, e.g.,
  03/03-2020    7   154   2206
 ```
 will be located at the same time as the output of day 3, i.e., the end of the day.
+
+---
+# Mac OS X installation
+These are just amendments to GE’s instructions for those on Mac OS X
+(need git and homebrew)
+
+Instead of doing the apt-get for libraries do:
+
+brew install gcc
+brew install fftw
+brew install openblas
+brew install lapack
+
+Follow instructions on the git, with cloning etc, until step 5:
+Still do: cd EnKF_seir/src
+
+But then go into the makefile and delete “/usr/lib/x86_64-linux-gnu/libfftw3.so.3” and replace that with “-lfftw3”
+
+(mine is linked here: https://github.com/clairevalva/EnKF_seir/blob/master/src/makefile)
+
+So the line should look like: “LIBS =  ./libsampling.a ./libenkfanalysis.a -llapack -lblas  -llapack -lfftw3”
+
+Continue following the instructions where GE left off, except you run executables on the mac as ./seir rather than seir
