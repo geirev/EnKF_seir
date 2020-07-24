@@ -28,6 +28,8 @@ subroutine solve(ens,enspar,j)
 
    real,    allocatable  :: rwork(:) 
    integer, allocatable  :: iwork(:)  
+   integer neq
+   neq=sizeof(y)/8
 
    dt= time/real(nt-1)
 
