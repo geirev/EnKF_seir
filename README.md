@@ -121,7 +121,7 @@ make BUILD=../../EnKF_seir/build
 
 ## 4. Compile the `EnKF_analysis` library
 
-Navigate to the `lib` folder of the `EnKF_analysis`:
+Navigate to the `lib` folder of the `EnKF_analysis` repository:
 
 ```bash
 cd EnKF_analysis/lib
@@ -188,7 +188,7 @@ make BINDIR=$HOME/bin
 Navigate to the `run` directory of the `EnKF_seir` repository:
 
 ```bash
-cd ../run
+cd EnKF_seir/run
 ```
 
 and run:
@@ -199,8 +199,8 @@ seir
 
 ### Mac
 
-Create `/usr/local/bin` which allows you to run the `seir` command from anywhere
-on your local file system:
+Create the `/usr/local/bin` directory which allows the `seir` command to be ran
+from anywhere on the local file system:
 
 ```bash
 mkdir -p /usr/local/bin
