@@ -58,6 +58,7 @@ program seir
       if (i==1) then
          call enkfprep(ens,enspar)             ! Compute S and D matrices
       endif
+      nrpar=sizeof(enspar(1))/8
       call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
                     lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
       call enkfpost(ens,enspar)                ! Check parameters
