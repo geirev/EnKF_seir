@@ -56,7 +56,7 @@ subroutine readinputs()
 ! Read startday of simulation - Running with Rmat(:,:,1)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
       startday=getday(id,im,iy)-1        ! Subtract 1 to get to 00:00am in the morning
-      print '(a,i3,i3,i5,i5)',       'Start of simulation (00:00am)   :',id,im,iy
+      print '(a,i3,i3,i5)',       'Start of simulation (00:00am)   :',id,im,iy
       print '(a,2i5)',               'Relative start day              :',startday,365+31+29
 
 
@@ -64,12 +64,12 @@ subroutine readinputs()
 ! Read startday of 1st intervention - switching to Rmat(:,:,2)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
       Tinterv(1)=real(getday(id,im,iy))-1  ! Subtract 1 to get to 00:00am in the morning
-      print '(a,i3,i3,i5,f10.2,i5)',    'Start date of first  intervention:',id,im,iy,Tinterv(1)
+      print '(a,i3,i3,i5,f10.2)',    'Start date of first  intervention:',id,im,iy,Tinterv(1)
 
 ! Read startdate of 2nd intervention- switching to Rmat(:,:,3)
       read(10,'(tr1,i2,tr1,i2,tr1,i4)')id,im,iy
       Tinterv(2)=real(getday(id,im,iy))-1  ! Subtract 1 to get to 00:00am in the morning
-      print '(a,i3,i3,i5,f10.2,i5)',    'Start date of second intervention:',id,im,iy,Tinterv(2)
+      print '(a,i3,i3,i5,f10.2)',    'Start date of second intervention:',id,im,iy,Tinterv(2)
 
 
       read(10,'(a)')ca      
@@ -150,12 +150,14 @@ subroutine readinputs()
             enddo
          endif
    endif
-      print '(a)','Writing prior R and standard deviation to R.template'
-      open(10,file='R.template')
-         do i=0,min(nt,rdim)
-            write(10,'(i6,2f13.3)')i,p%R(i),parstd%R(i)
-         enddo
-      close(10)
+
+   print '(a)','Writing prior R and standard deviation to R.template'
+   open(10,file='R.template')
+      do i=0,min(nt,rdim)
+         write(10,'(i6,2f13.3)')i,p%R(i),parstd%R(i)
+      enddo
+   close(10)
+
 end subroutine
 end module
 
