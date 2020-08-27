@@ -6,7 +6,9 @@ doc/texput.log
 build
 runs/*/*.eps
 runs/*/*/*
-run2
+run2/*
+!run2/infile.in
+!run2/corona*.in
 !runs/*/Case*/*.in
 !runs/*/Case*/seed.dat
 !runs/*/Case*/xlimit.txt
