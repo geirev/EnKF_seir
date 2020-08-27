@@ -32,6 +32,8 @@ subroutine tecplot(ens,enspar,pri)
    character(len=3) tag3
    character(len=100) :: cmd='mkdir -p '
 
+   print '(a)','Dumping tecplot files.'
+
    call execute_command_line (cmd//outdir, exitstat=i)
 
    write(tag,'(i1.1)')pri
@@ -58,7 +60,7 @@ subroutine tecplot(ens,enspar,pri)
 
       call saveR(enspar,ic,tag3,tag,dt,outdir)
    enddo 
-  
+   print '(a)','Tecplot dump done'
 end subroutine
 
 subroutine ensemblediagnostics(ensd,aved,stdd,ens,ic)

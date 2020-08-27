@@ -67,7 +67,7 @@ program seir
       call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
                     lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
 
-! Check and pring updated parameters
+! Check and print updated parameters
       call enkfpost(ens,enspar)
  
 ! Posterior ensemble prediction
@@ -83,9 +83,7 @@ program seir
 
    enddo
 
-   print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,1)
-   print '(a)','Done..'
 
    lpost_pfactors=.true.
    do ic=1,nc
@@ -132,23 +130,20 @@ subroutine f(neqq, t, y, ydot)
 
 
    do ic=1,nc
-   do jc=1,nc
-      if (jc /= ic) then
-         RCI(ic,jc) =  (1.0/p%Tinf) * RC(ic,jc,ir) * sum(y%group(jc)%I) * sum(y%group(ic)%S)
-      else
-         RCI(ic,jc)=0.0
-      endif
-   enddo
-   enddo
-
-   do ic=1,nc
       R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)  
-      ydot%group(ic)%S  =  - (1.0/p%Tinf) * matmul(R,y%group(ic)%I) * y%group(ic)%S &
-                                          &- sum(RCI(ic,:))
-                                         !&- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
-      ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E   + (1.0/p%Tinf) * matmul(R,y%group(ic)%I) * y%group(ic)%S&
-                                          &+ sum(RCI(ic,:))
-                                         !&+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+      ydot%group(ic)%S  =  - (1.0/p%Tinf) * matmul(R,y%group(ic)%I)           * y%group(ic)%S 
+                          !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+      do jc=1,nc
+      ydot%group(ic)%S  = ydot%group(ic)%S  &
+                           - (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
+      enddo
+      ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E   &
+                           + (1.0/p%Tinf) * matmul(R,y%group(ic)%I)           * y%group(ic)%S
+                          !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+      do jc=1,nc
+      ydot%group(ic)%E  = ydot%group(ic)%E  &
+                           + (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
+      enddo
       ydot%group(ic)%I  =    (1.0/p%Tinc ) * y%group(ic)%E   - (1.0/p%Tinf) * y%group(ic)%I
       ydot%group(ic)%Qm =  - (1.0/p%Trecm) * y%group(ic)%Qm  + (1.0/p%Tinf) * dot_product(pm(:,ic),y%group(ic)%I)
       ydot%group(ic)%Qs =  - (1.0/p%Thosp) * y%group(ic)%Qs  + (1.0/p%Tinf) * dot_product(ps(:,ic),y%group(ic)%I)
