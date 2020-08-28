@@ -130,18 +130,18 @@ subroutine f(neqq, t, y, ydot)
 
 
    do ic=1,nc
+      RC(ic,ic,ir)=1.0 ! Diagonal is always one for contry-country interaction
       R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)  
-      ydot%group(ic)%S  =  - (1.0/p%Tinf) * matmul(R,y%group(ic)%I)           * y%group(ic)%S 
-                          !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+
+      ydot%group(ic)%S  = 0.0 !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
       do jc=1,nc
-      ydot%group(ic)%S  = ydot%group(ic)%S  &
+         ydot%group(ic)%S  = ydot%group(ic)%S  &
                            - (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
       enddo
-      ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E   &
-                           + (1.0/p%Tinf) * matmul(R,y%group(ic)%I)           * y%group(ic)%S
-                          !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+
+      ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E  !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
       do jc=1,nc
-      ydot%group(ic)%E  = ydot%group(ic)%E  &
+         ydot%group(ic)%E  = ydot%group(ic)%E  &
                            + (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
       enddo
       ydot%group(ic)%I  =    (1.0/p%Tinc ) * y%group(ic)%E   - (1.0/p%Tinf) * y%group(ic)%I
