@@ -112,7 +112,6 @@ subroutine Rprior()
    enddo
    print '(a)','Done loading R priors (m_Rprior.F90)'
 
-   pfg=p          ! store first guess of parameters
 
 end subroutine
 end module

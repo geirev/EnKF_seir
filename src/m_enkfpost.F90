@@ -11,6 +11,7 @@ subroutine enkfpost(ens,enspar)
    type(params) avepar,nordif,parvar,chisq
    real chisqsum
    integer j,ic
+   character(len=3) tag3
 
 ! Ensure all parameters are larger than minpar (from infile.in)
    avepar=0.0
@@ -20,11 +21,12 @@ subroutine enkfpost(ens,enspar)
    enddo
 
    print '(a)','Posterior ensemble mean of parameters including chisquare value:'
-   print '(100a10)','group ',parnames
+   print '(a,100a10)','         group ',parnames
    do ic=1,nc
-      print '(i8,100f10.4)',ic,    pfg%E0(ic),    pfg%I0(ic),    pfg%Tinf,     pfg%Tinc,       pfg%Trecm,   &
+      write(tag3,'(i3.3)')ic
+      print '(a,a4,100f10.4)','prior    :',tag3,    pfg%E0(ic),    pfg%I0(ic),    pfg%Tinf,     pfg%Tinc,       pfg%Trecm,   &
                                    pfg%Trecs,     pfg%Thosp,     pfg%Tdead,    pfg%sev(ic),    pfg%CFR(ic) 
-      print '(i8,100f10.4)',ic, avepar%E0(ic), avepar%I0(ic), avepar%Tinf,  avepar%Tinc,    avepar%Trecm,   &
+      print '(a,a4,100f10.4)','posterior:',tag3, avepar%E0(ic), avepar%I0(ic), avepar%Tinf,  avepar%Tinc,    avepar%Trecm,   &
                                 avepar%Trecs,  avepar%Thosp,  avepar%Tdead, avepar%sev(ic), avepar%CFR(ic)
    enddo
 

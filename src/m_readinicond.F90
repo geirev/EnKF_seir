@@ -22,6 +22,7 @@ subroutine readinicond()
       inquire(file='inicond'//tag3//'.in',exist=ex)
       if (.not.ex) then
          print '(tr3,a)','Did not find inicond'//tag3//'.in, generates random template file'
+         print '(tr3,a)','You should set appropriate values in this file!'
          open(10,file='inicond'//tag3//'.in')
             write(10,'(2f13.5,a)')infected,0.1*infected,'   #E0 '
             write(10,'(2f13.5,a)')infected,0.1*infected,'   #I0 '
@@ -39,7 +40,6 @@ subroutine readinicond()
          iread=iread+1
       endif
    enddo
-   if (iread /= nc) stop '(Check template inicondxxx.in files)'
    print '(a)','Done reading initial conditons (m_inicond.F90)'
 
 end subroutine

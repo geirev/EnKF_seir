@@ -84,7 +84,7 @@ subroutine Rmatrix()
 
 
 ! Read RC matrix defining interaction among countries
-   print '(tr3,a)','Setting or reading RC matrix of country interactions'
+   print '(tr3,a)','Setting or reading RC matrix of country-country interactions'
    do k=1,nrint
       write(tag2,'(i2.2)')k
       inquire(file='RC_'//tag2//'.in',exist=ex)
@@ -97,8 +97,9 @@ subroutine Rmatrix()
       else
          print '(tr3,a,i1)','Writing default template file RC_'//tag2//'.in'
          open(10,file='RC_'//tag2//'.in')
-            RC(:,:,k)=0.0
+            RC(:,:,k)=0.001
             do i=1,nc
+               RC(i,i,k)=1.0
                write(10,*)RC(i,:,k)
             enddo
          close(10)

@@ -86,10 +86,10 @@ subroutine readinfile()
       read(10,*)p%Trecs, parstd%Trecs; print '(tr3,a,2f10.3)',      'Recovery time severe     and std dev :',p%Trecs  ,parstd%Trecs
       read(10,*)p%Thosp, parstd%Thosp; print '(tr3,a,2f10.3)',      'Hospitalization time     and std dev :',p%Thosp  ,parstd%Thosp
       read(10,*)p%Tdead, parstd%Tdead; print '(tr3,a,2f10.3)',      'Time to death            and std dev :',p%Tdead  ,parstd%Tdead
-      read(10,*)p%CFR(1) , parstd%CFR(1) 
-                  print '(tr3,a,2f10.3)',  'Critical fatality ratio  and std dev :',p%CFR(1) ,parstd%CFR(1)
-      read(10,*)p%sev(1),parstd%sev(1)
-                  print '(tr3,a,2f10.3)','Fraction of severe cases and std dev :',p%sev(1),parstd%sev(1)
+!      read(10,*)p%CFR(1) , parstd%CFR(1) 
+!                  print '(tr3,a,2f10.3)',  'Critical fatality ratio  and std dev :',p%CFR(1) ,parstd%CFR(1)
+!      read(10,*)p%sev(1),parstd%sev(1)
+!                  print '(tr3,a,2f10.3)','Fraction of severe cases and std dev :',p%sev(1),parstd%sev(1)
 
 ! Some other model parameter that are not estimated
       read(10,*)hos                  ; print '(tr3,a,2f10.3)',  'Fraction of Qf that go to hospital   :',hos

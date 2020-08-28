@@ -34,6 +34,7 @@ program seir
    call Rprior()                               ! Sets the prior for R
    call readagegroups()                        ! Reads agegroups and population numbers from agegroupsxxx.in or populationxxx.in
    call readinicond()                          ! Reads initial conditions from inicondxxx.in
+   pfg=p          ! store first guess of parameters
    call pfactors()                             ! Define fraction of mild, severe, or fatal, for each agegroup
    call Rmatrix()                              ! Define R infection rates between agegroups
    call enkfini(time)                          ! Reading data from corona.dat
