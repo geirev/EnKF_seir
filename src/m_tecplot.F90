@@ -34,8 +34,6 @@ subroutine tecplot(ens,enspar,pri)
 
    print '(a)','Dumping tecplot files.'
 
-   call execute_command_line (cmd//outdir, exitstat=i)
-
    write(tag,'(i1.1)')pri
    dt= time/real(nt-1)
 

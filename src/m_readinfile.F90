@@ -19,6 +19,7 @@ subroutine readinfile()
    integer id,im,iy,k,day
    integer ir,i,j,ii,nttmp
    real dt,t
+   character(len=9) :: cmd='mkdir -p '
 
    inquire(file='infile.in',exist=ex)
    if (.not.ex) then
@@ -104,6 +105,7 @@ subroutine readinfile()
       read(10,*)minpar              ;    print '(tr3,a,f10.3)',    'Lower bound on all paramters         :',minpar
       read(10,*)rtmax               ;    print '(tr3,a,f10.3)',    'Maximum value of Rt during intervent :',rtmax
       read(10,*)outdir              ;    print '(tr3,a,a)',        'Output directory for storing results :',trim(outdir)
+      call execute_command_line (cmd//outdir, exitstat=i)
 
       read(10,'(a)')ca      
       if (ca /= '#5') then
