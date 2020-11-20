@@ -4,6 +4,7 @@ doc/model.log
 doc/model.out
 doc/texput.log
 build
+swiss
 runs/*/*.eps
 runs/*/*/*
 run2/*

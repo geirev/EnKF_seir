@@ -15,7 +15,7 @@ subroutine readinicond()
    integer iread,ic,k
 
    print '(a)','--------------------------------------------------------------------------------'
-   print '(a)','Reading initial infected and exposed for all countries'
+   print '(a)','Reading initial infectious and exposed for all countries'
    iread=0
    do ic=1,nc
       write(tag3,'(i3.3)')ic

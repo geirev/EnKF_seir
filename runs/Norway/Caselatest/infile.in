@@ -1,6 +1,6 @@
  5000                     ! nrens: Ensemble size
- 166                      ! nt   : Number of output times (one more than days to get daily outputs)
- 165                      ! time : Length of integration in days
+ 266                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 265                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
