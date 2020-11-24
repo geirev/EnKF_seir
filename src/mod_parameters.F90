@@ -6,7 +6,6 @@ module mod_parameters
    type (params) parstd
    type (paramnames) parnames
   
-   real :: N
    real :: Tinterv(nrint-1)
    real :: Xmax              
    real :: time

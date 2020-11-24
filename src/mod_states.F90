@@ -1,23 +1,14 @@
 module mod_states
-! Modelstate definition for ECLIPSE
    use mod_dimensions
-
+   use mod_substate
+! A full model state is an array of groups/countries/regions represented by a substate
    type states
-! Solution data
-      real S(na)        ! Susceptible age groups
-      real E(na)        ! Exposed age groups
-      real I(na)        ! Infectious age groups
-      real Qm           ! Quarantened mild sickness
-      real Qs           ! Quarantened severe sickness (will be hospitalized)
-      real Qf           ! Quarantened fatal sickness (will die)
-      real Hs           ! Hospitalized with severe sickness
-      real Hf           ! Hospitalized with fatal sickness
-      real C            ! In Care home with fatal sickness
-      real Rm           ! Recovered from mild sickness
-      real Rs           ! Recovered from severe sickness (from hospital)
-      real D            ! Dead
+      type(substate) group(nc)  
    end type states
-
+!  type(states) fullstate
+!  type(states) ensemble(nrens)
+!  fullstate%group(i)
+!  ensemble(j)%group(i)%S(k)
 
 ! Overloaded and generic operators
    interface operator(+)
@@ -49,147 +40,86 @@ module mod_states
 
 contains
 
-   function sum_states(A)
-      real sum_states
+  real function sum_states(A)
+      implicit none
+      integer i
       type(states), intent(in) :: A
-      sum_states = sum(A%S) &
-                 + sum(A%E) &
-                 + sum(A%I) &
-                 + A%Qm     &
-                 + A%Qs     &
-                 + A%Qf     &
-                 + A%Hs     &
-                 + A%Hf     &
-                 + A%C      &
-                 + A%Rm     &
-                 + A%Rs     &
-                 + A%D 
+      sum_states=0.0
+      do i=1,nc
+         sum_states = sum_states + sum(A%group(i))
+      enddo
    end function sum_states
 
-   function sqrt_states(A)
-      type(states) sqrt_states
+   type(states) function sqrt_states(A)
+      implicit none
       type(states), intent(in) :: A
-      real :: eps=0.1E-14
-      sqrt_states%S       = sqrt(A%S+eps)
-      sqrt_states%E       = sqrt(A%E+eps)
-      sqrt_states%I       = sqrt(A%I+eps)
-      sqrt_states%Qm      = sqrt(A%Qm+eps)
-      sqrt_states%Qs      = sqrt(A%Qs+eps)
-      sqrt_states%Qf      = sqrt(A%Qf+eps)
-      sqrt_states%Hs      = sqrt(A%Hs+eps)
-      sqrt_states%Hf      = sqrt(A%Hf+eps)
-      sqrt_states%C       = sqrt(A%C+eps)
-      sqrt_states%Rm      = sqrt(A%Rm+eps)
-      sqrt_states%Rs      = sqrt(A%Rs+eps)
-      sqrt_states%D       = sqrt(A%D+eps)
+      integer i
+      do i=1,nc
+         sqrt_states%group(i)   = sqrt(A%group(i))
+      enddo
    end function sqrt_states
 
-   function add_states(A,B)
-      type(states) add_states
+   type(states) function add_states(A,B)
+      implicit none
+      integer i
       type(states), intent(in) :: A
       type(states), intent(in) :: B
-      add_states%S       = A%S  + B%S 
-      add_states%E       = A%E  + B%E
-      add_states%I       = A%I  + B%I
-      add_states%Qm      = A%Qm + B%Qm
-      add_states%Qs      = A%Qs + B%Qs
-      add_states%Qf      = A%Qf + B%Qf
-      add_states%Hs      = A%Hs + B%Hs
-      add_states%Hf      = A%Hf + B%Hf
-      add_states%C       = A%C  + B%C 
-      add_states%Rm      = A%Rm + B%Rm
-      add_states%Rs      = A%Rs + B%Rs
-      add_states%D       = A%D  + B%D
+      type(states) C
+      do i=1,nc
+         add_states%group(i) = A%group(i)  + B%group(i) 
+      enddo
+         
    end function add_states
 
-   function subtract_states(A,B)
-      type(states) subtract_states
+   type(states) function subtract_states(A,B)
+      implicit none
+      integer i
       type(states), intent(in) :: A
       type(states), intent(in) :: B
-      subtract_states%S       = A%S  - B%S 
-      subtract_states%E       = A%E  - B%E
-      subtract_states%I       = A%I  - B%I
-      subtract_states%Qm      = A%Qm - B%Qm
-      subtract_states%Qs      = A%Qs - B%Qs
-      subtract_states%Qf      = A%Qf - B%Qf
-      subtract_states%Hs      = A%Hs - B%Hs
-      subtract_states%Hf      = A%Hf - B%Hf
-      subtract_states%C       = A%C  - B%C 
-      subtract_states%Rm      = A%Rm - B%Rm
-      subtract_states%Rs      = A%Rs - B%Rs
-      subtract_states%D       = A%D  - B%D
+      do i=1,nc
+         subtract_states%group(i) = A%group(i)  - B%group(i) 
+      enddo
    end function subtract_states
 
-   function states_real_mult(A,B)
-      type(states) states_real_mult
+   type(states) function states_real_mult(A,B)
+      implicit none
+      integer i
       type(states), intent(in) :: A
       real, intent(in) :: B
-      states_real_mult%S       = B*A%S 
-      states_real_mult%E       = B*A%E 
-      states_real_mult%I       = B*A%I 
-      states_real_mult%Qm      = B*A%Qm
-      states_real_mult%Qs      = B*A%Qs
-      states_real_mult%Qf      = B*A%Qf
-      states_real_mult%Hs      = B*A%Hs
-      states_real_mult%Hf      = B*A%Hf
-      states_real_mult%C       = B*A%C
-      states_real_mult%Rm      = B*A%Rm
-      states_real_mult%Rs      = B*A%Rs
-      states_real_mult%D       = B*A%D 
+      do i=1,nc
+         states_real_mult%group(i)       = B*A%group(i) 
+      enddo
    end function states_real_mult
 
-   function real_states_mult(B,A)
-      type(states) real_states_mult
+   type(states) function real_states_mult(B,A)
+      implicit none
+      integer i
       type(states), intent(in) :: A
       real, intent(in) :: B
-      real_states_mult%S       = B*A%S 
-      real_states_mult%E       = B*A%E 
-      real_states_mult%I       = B*A%I 
-      real_states_mult%Qm      = B*A%Qm
-      real_states_mult%Qs      = B*A%Qs
-      real_states_mult%Qf      = B*A%Qf
-      real_states_mult%Hs      = B*A%Hs
-      real_states_mult%Hf      = B*A%Hf
-      real_states_mult%C       = B*A%C
-      real_states_mult%Rm      = B*A%Rm
-      real_states_mult%Rs      = B*A%Rs
-      real_states_mult%D       = B*A%D 
+      do i=1,nc
+         real_states_mult%group(i)       = B*A%group(i) 
+      enddo
    end function real_states_mult
 
-   function states_states_mult(A,B)
-      type(states) states_states_mult
+   type(states) function states_states_mult(A,B)
+      implicit none
+      integer i
       type(states), intent(in) :: A
       type(states), intent(in) :: B
-      states_states_mult%S       = A%S  * B%S 
-      states_states_mult%E       = A%E  * B%E 
-      states_states_mult%I       = A%I  * B%I 
-      states_states_mult%Qm      = A%Qm * B%Qm
-      states_states_mult%Qs      = A%Qs * B%Qs
-      states_states_mult%Qf      = A%Qf * B%Qf
-      states_states_mult%Hs      = A%Hs * B%Hs
-      states_states_mult%Hf      = A%Hf * B%Hf
-      states_states_mult%C       = A%C  * B%C
-      states_states_mult%Rm      = A%Rm * B%Rm
-      states_states_mult%Rs      = A%Rs * B%Rs
-      states_states_mult%D       = A%D  * B%D 
+      do i=1,nc
+         states_states_mult%group(i)       = A%group(i)  * B%group(i) 
+      enddo
    end function states_states_mult
 
 
    subroutine assign_states(A,r)
+      implicit none
+      integer i
       type(states), intent(out) :: A
       real, intent(in) :: r
-      A%S       = r
-      A%E       = r
-      A%I       = r
-      A%Qm      = r
-      A%Qs      = r
-      A%Qf      = r
-      A%Hs      = r
-      A%Hf      = r
-      A%C       = r
-      A%Rm      = r
-      A%Rs      = r
-      A%D       = r
+      do i=1,nc
+         A%group(i)       = r
+      enddo
    end subroutine assign_states
 
 

@@ -4,29 +4,29 @@ module mod_params
    type paramnames
       character(len=9) ::   E0    =' "    E0"'   
       character(len=9) ::   I0    =' "    I0"'   
-      character(len=9) ::   R     =' "    R0"'
+!      character(len=9) ::   R     =' "    R0"'
       character(len=9) ::   Tinf  =' "  Tinf"'
       character(len=9) ::   Tinc  =' "  Tinc"'
       character(len=9) ::   Trecm =' " Trecm"'
       character(len=9) ::   Trecs =' " Trecs"'
       character(len=9) ::   Thosp =' " Thosp"'
       character(len=9) ::   Tdead =' " Tdead"'
-      character(len=9) ::   p_sev =' " p_sev"'
+      character(len=9) ::   sev   =' "   sev"'
       character(len=9) ::   CFR   =' "   CFR"'
    end type paramnames
 
    type params
-      real E0   
-      real I0   
-      real R(0:rdim)
+      real E0(nc)
+      real I0(nc)   
+      real R(0:rdim,nc)
       real Tinf 
       real Tinc 
       real Trecm
       real Trecs
       real Thosp
       real Tdead
-      real p_sev
-      real CFR 
+      real sev(nc)
+      real CFR(nc)
    end type params
 
 ! Overloaded and generic operators
@@ -67,7 +67,7 @@ contains
       max_params%Trecs       = max(A%Trecs,B)
       max_params%Thosp       = max(A%Thosp,B)
       max_params%Tdead       = max(A%Tdead,B)
-      max_params%p_sev       = max(A%p_sev,B)
+      max_params%sev         = max(A%sev,B)
       max_params%CFR         = max(A%CFR  ,B)
    end function max_params
 
@@ -84,7 +84,7 @@ contains
       add_params%Trecs       = A%Trecs  + B%Trecs
       add_params%Thosp       = A%Thosp  + B%Thosp
       add_params%Tdead       = A%Tdead  + B%Tdead
-      add_params%p_sev       = A%p_sev  + B%p_sev
+      add_params%sev         = A%sev  + B%sev
       add_params%CFR         = A%CFR    + B%CFR 
    end function add_params
 
@@ -101,7 +101,7 @@ contains
       subtract_params%Trecs       = A%Trecs  - B%Trecs
       subtract_params%Thosp       = A%Thosp  - B%Thosp
       subtract_params%Tdead       = A%Tdead  - B%Tdead
-      subtract_params%p_sev       = A%p_sev  - B%p_sev
+      subtract_params%sev         = A%sev  - B%sev
       subtract_params%CFR         = A%CFR    - B%CFR 
    end function subtract_params
 
@@ -118,7 +118,7 @@ contains
       params_real_mult%Trecs       = B*A%Trecs 
       params_real_mult%Thosp       = B*A%Thosp
       params_real_mult%Tdead       = B*A%Tdead
-      params_real_mult%p_sev       = B*A%p_sev 
+      params_real_mult%sev         = B*A%sev 
       params_real_mult%CFR         = B*A%CFR   
    end function params_real_mult
 
@@ -135,7 +135,7 @@ contains
       real_params_mult%Trecs       = B*A%Trecs 
       real_params_mult%Thosp       = B*A%Thosp
       real_params_mult%Tdead       = B*A%Tdead
-      real_params_mult%p_sev       = B*A%p_sev 
+      real_params_mult%sev         = B*A%sev 
       real_params_mult%CFR         = B*A%CFR   
    end function real_params_mult
 
@@ -152,7 +152,7 @@ contains
       params_params_mult%Trecs       = A%Trecs  * B%Trecs 
       params_params_mult%Thosp       = A%Thosp  * B%Thosp 
       params_params_mult%Tdead       = A%Tdead  * B%Tdead 
-      params_params_mult%p_sev       = A%p_sev  * B%p_sev 
+      params_params_mult%sev         = A%sev  * B%sev 
       params_params_mult%CFR         = A%CFR    * B%CFR   
    end function params_params_mult
 
@@ -169,7 +169,7 @@ contains
       A%Trecs       = r
       A%Thosp       = r
       A%Tdead       = r
-      A%p_sev       = r
+      A%sev         = r
       A%CFR         = r
    end subroutine assign_params
 

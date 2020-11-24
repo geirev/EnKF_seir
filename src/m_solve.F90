@@ -40,6 +40,7 @@ subroutine solve(ens,enspar,j)
 
    p=enspar(j)
    y=ens(0,j) 
+!   print *,'sum y (1.0)',sum(y)
    call pfactors 
 
    istate=1

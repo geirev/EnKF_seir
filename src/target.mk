@@ -1,1 +1,1 @@
-TARGET = seir
+TARGET = seir2

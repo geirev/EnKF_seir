@@ -1,5 +1,5 @@
 MODULES = \
-	m_agegroups.F90\
+	m_chisquared.F90\
 	m_enkfini.F90\
 	m_enkfpost.F90\
 	m_enkfprep.F90\
@@ -13,10 +13,14 @@ MODULES = \
 	mod_parameters.F90\
 	mod_params.F90\
 	mod_states.F90\
+	mod_substate.F90\
 	m_pfactors.F90\
 	m_random.F90\
-	m_readinputs.F90\
+	m_readagegroups.F90\
+	m_readinfile.F90\
+	m_readinicond.F90\
 	m_Rmatrix.F90\
+	m_Rprior.F90\
 	m_solve.F90\
 	m_tecplot.F90
 

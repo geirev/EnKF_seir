@@ -3,23 +3,25 @@ program seir
    use mod_states
    use mod_params
    use mod_parameters
-   use m_tecplot
-   use m_random
-   use m_agegroups
-   use m_Rmatrix
+   use m_readinfile
+   use m_Rprior
+   use m_readagegroups
+   use m_readinicond
    use m_pfactors
+   use m_Rmatrix
+   use m_random
+   use m_set_random_seed2
    use m_enkfini
-   use m_enkfprep
-   use m_enkfpost
-   use m_solve
-   use m_readinputs
    use m_inienspar
    use m_iniens
-   use m_set_random_seed2
+   use m_solve
+   use m_tecplot
+   use m_enkfprep
+   use m_enkfpost
+   use m_chisquared
 
    implicit none
-   integer i,k,j,m,id,ih,ic
-   real    chid,chih,chic
+   integer i,ic,k,j,m
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    type(states), allocatable :: ens(:,:)       ! Storage of the ensemble of solutions for printing
@@ -28,19 +30,22 @@ program seir
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Initialization 
    call set_random_seed2
-   call readinputs()                           ! Reads infile.in
-   allocate( ens(0:nt,nrens)   )               ! Allocate ensemble for the model solutions
-   allocate( enspar(nrens) )                   ! Allocate ensemble of model parameters
-   call agegroups                              ! Define agegroups and population numbers
-   call Rmatrix                                ! Define R infection rates between agegroups used in phase 3
-   call pfactors                               ! Define fraction of mild, severe, or fatal, for each agegroup
+   call readinfile()                           ! Reads infile.in
+   call Rprior()                               ! Sets the prior for R
+   call readagegroups()                        ! Reads agegroups and population numbers from agegroupsxxx.in or populationxxx.in
+   call readinicond()                          ! Reads initial conditions from inicondxxx.in
+   pfg=p          ! store first guess of parameters
+   call pfactors()                             ! Define fraction of mild, severe, or fatal, for each agegroup
+   call Rmatrix()                              ! Define R infection rates between agegroups
    call enkfini(time)                          ! Reading data from corona.dat
+   allocate( ens(0:nt,nrens) )                 ! Allocate ensemble for the model solutions
+   allocate( enspar(nrens) )                   ! Allocate ensemble of model parameters
    call inienspar(enspar)                      ! Initialize ensemble of parameters
+   call iniens(ens,enspar)                     ! Initialize ensemble of models
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    print '(a)','Computing prior ensemble prediction'
-   call iniens(ens,enspar)                     ! Initialize ensemble of models
    do j=1,nrens
       call solve(ens,enspar,j)                 ! solve ODEs for member j
    enddo
@@ -51,75 +56,55 @@ program seir
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! ESMDA update
+! Prepare for first analysis computation
+   call enkfprep(ens,enspar)
+
    do i=1,nesmda
       print '(a)','--------------------------------------------------------------------------------'
       print '(a,2I3)','ESMDA step:',i,nesmda
+
 ! Analysis step
-      if (i==1) then
-         call enkfprep(ens,enspar)             ! Compute S and D matrices
-      endif
       nrpar=sizeof(enspar(1))/8
       call analysis(enspar, R, E, S, D, innovation, nrpar, nrens, nrobs, .true., truncation, mode_analysis, &
                     lrandrot, lupdate_randrot, lsymsqrt, inflate, infmult, ne)
-      call enkfpost(ens,enspar)                ! Check parameters
-  
+
+! Check and print updated parameters
+      call enkfpost(ens,enspar)
+ 
 ! Posterior ensemble prediction
       call iniens(ens,enspar)                  ! Initialize ensemble of models from updated parameters
       do j=1,nrens
          call solve(ens,enspar,j)
       enddo
-! compute innovations for posterior
+
+! Prepare for next analysis computation
       call enkfprep(ens,enspar)
-      chid = 0.0
-      chih = 0.0
-      chic = 0.0
-      id = 0
-      ih = 0
-      ic = 0
-      do j=1,nrobs
-         select case(cobs(j))
-         case('d')
-            id = id + 1     
-            chid = chid + innovation(j)**2     
-         case('h')
-            ih = ih + 1     
-            chih = chih + innovation(j)**2     
-         case('c')
-            ic = ic + 1     
-            chic = chic + innovation(j)**2     
-         case default
-            stop 'Measurement type not found'
-         end select
-      enddo
-      if (id > 0) print '(a,f13.4)', 'chi-square death:        ',chid
-      if (ih > 0) print '(a,f13.4)', 'chi-square hospitalized: ',chih
-      if (ic > 0) print '(a,f13.4)', 'chi-square cases:        ',chic
-      print '(a,i4)','total number of obs: ',nrobs
-      print '(a,f13.4)','total chi-square obs: ',chid+chih+chic
-      print *
+
+      call chisquared()
+
    enddo
 
-   print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,1)
-   print '(a)','Done..'
 
    lpost_pfactors=.true.
-   p%p_sev=sum(enspar(1:nrens)%p_sev)/real(nrens)
-   p%cfr  =sum(enspar(1:nrens)%cfr)/real(nrens)
+   do ic=1,nc
+      p%sev(ic)=sum(enspar(1:nrens)%sev(ic))/real(nrens)
+      p%cfr(ic)=sum(enspar(1:nrens)%cfr(ic))/real(nrens)
+   enddo
    call pfactors 
 
 end program
 
 subroutine f(neqq, t, y, ydot)
+   use mod_dimensions
+   use mod_states
    use mod_params
    use mod_parameters
-   use m_agegroups
+   use m_readagegroups
    use m_Rmatrix
    use m_pfactors
    use m_random
-   use m_readinputs
-   use mod_dimensions
-   use mod_states
+   use m_readinfile
    implicit none
    integer neqq
    real t
@@ -127,8 +112,9 @@ subroutine f(neqq, t, y, ydot)
    type(states) ydot
 
    real R(na,na)
+   real RCI(nc,nc)
    real dt
-   integer i,ir
+   integer i,ic,jc,ir
 
 
    dt= time/real(nt-1)
@@ -141,34 +127,41 @@ subroutine f(neqq, t, y, ydot)
    elseif (t >= Tinterv(2)) then
       ir=3
    endif
-!   print '(a,2f8.2,i5,f10.2,i2)','t: ',t,dt,i,p%R(i),ir
+!   print '(a,2f8.2,i5,f10.2,i2)','t: ',t,dt,i,p%R(i,ic),ir
 
-   R(:,:)= p%R(i) * Rmat(:,:,ir)  
 
-   ydot%S  =                          - (1.0/p%Tinf) * matmul(R,y%I) * y%S - qminf*(1.0/p%Tinf) * p%R(ir)*y%Qm * y%S
-   ydot%E  =  - (1.0/p%Tinc ) * y%E   + (1.0/p%Tinf) * matmul(R,y%I) * y%S + qminf*(1.0/p%Tinf) * p%R(ir)*y%Qm * y%S
-   ydot%I  =    (1.0/p%Tinc ) * y%E   - (1.0/p%Tinf) * y%I
-   ydot%Qm =  - (1.0/p%Trecm) * y%Qm  + (1.0/p%Tinf) * dot_product(pm,y%I)
-   ydot%Qs =  - (1.0/p%Thosp) * y%Qs  + (1.0/p%Tinf) * dot_product(ps,y%I)
-   ydot%Qf =  - (1.0/p%Thosp) * y%Qf  + (1.0/p%Tinf) * dot_product(pf,y%I)
-   ydot%Hs =    (1.0/p%Thosp) * y%Qs  - (1.0/p%Trecs) * y%Hs
-   ydot%Hf =    (hos/p%Thosp) * y%Qf  - (1.0/p%Tdead) * y%Hf
-   ydot%C  =    ((1.0-hos)/p%Thosp) * y%Qf - (1.0/p%Tdead) * y%C
-   ydot%Rm =    (1.0/p%Trecm) * y%Qm
-   ydot%Rs =    (1.0/p%Trecs) * y%Hs
-   ydot%D  =    (1.0/p%Tdead) * y%Hf  + (1.0/p%Tdead) * y%C
+   do ic=1,nc
+      RC(ic,ic,ir)=1.0 ! Diagonal is always one for contry-country interaction
+      R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)  
 
-!   print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)
+      ydot%group(ic)%S  = 0.0 !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+      do jc=1,nc
+         ydot%group(ic)%S  = ydot%group(ic)%S  &
+                           - (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
+      enddo
+
+      ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E  !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+      do jc=1,nc
+         ydot%group(ic)%E  = ydot%group(ic)%E  &
+                           + (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
+      enddo
+      ydot%group(ic)%I  =    (1.0/p%Tinc ) * y%group(ic)%E   - (1.0/p%Tinf) * y%group(ic)%I
+      ydot%group(ic)%Qm =  - (1.0/p%Trecm) * y%group(ic)%Qm  + (1.0/p%Tinf) * dot_product(pm(:,ic),y%group(ic)%I)
+      ydot%group(ic)%Qs =  - (1.0/p%Thosp) * y%group(ic)%Qs  + (1.0/p%Tinf) * dot_product(ps(:,ic),y%group(ic)%I)
+      ydot%group(ic)%Qf =  - (1.0/p%Thosp) * y%group(ic)%Qf  + (1.0/p%Tinf) * dot_product(pf(:,ic),y%group(ic)%I)
+      ydot%group(ic)%Hs =    (1.0/p%Thosp) * y%group(ic)%Qs  - (1.0/p%Trecs) * y%group(ic)%Hs
+      ydot%group(ic)%Hf =    (hos/p%Thosp) * y%group(ic)%Qf  - (1.0/p%Tdead) * y%group(ic)%Hf
+      ydot%group(ic)%C  =    ((1.0-hos)/p%Thosp) * y%group(ic)%Qf - (1.0/p%Tdead) * y%group(ic)%C
+      ydot%group(ic)%Rm =    (1.0/p%Trecm) * y%group(ic)%Qm
+      ydot%group(ic)%Rs =    (1.0/p%Trecs) * y%group(ic)%Hs
+      ydot%group(ic)%D  =    (1.0/p%Tdead) * y%group(ic)%Hf  + (1.0/p%Tdead) * y%group(ic)%C
+   enddo
+
+!  print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)/real(nc)
 
 end subroutine
  
 subroutine jac(neqq, t, y, ml, mu, pd, nrowpd)
-   use mod_params
-   use mod_parameters
-   use m_agegroups
-   use m_Rmatrix
-   use m_pfactors
-   use m_random
    use mod_dimensions
    use mod_states
    implicit none
