@@ -1,10 +1,14 @@
 # EnKF_seir
 
-This code uses an extended SEIR model with age classes in an ensemble data
-assimilation system for predicting the spreading of the Coronavirus. The ensemble
-method is the ESMDA (Ensemble Smoother with multiple data assimilation). The
-measurements are the accumulated number of deaths and the daily number of
-hospitalized.
+This code uses an extended multigroup SEIR model with age classes in an ensemble data
+assimilation system for predicting the spreading of the Coronavirus.
+"multigroup" means that we can use the model for an arbitrary number of countries or regional compartments. 
+The ensemble method is the ESMDA (Ensemble Smoother with multiple data assimilation). The
+measurements are the accumulated number of deaths, the daily number of hospitalized, and the number of positive tests.
+
+An older single-group implementation used in Evensen et al. (2020) is stored on the branch
+[paper_version](https://github.com/geirev/EnKF_seir/tree/paper_version).
+However the new multigroup code is also recommended when running for a single country or compartent.
 
 <p align="center">
   <a href="#installation">Installation</a> *
@@ -194,35 +198,37 @@ cd EnKF_seir/run
 and run:
 
 ```bash
-seir
+seir2
 ```
 
 ### Mac
 
-Create the `/usr/local/bin` directory which allows the `seir` command to be ran
+Create the `/usr/local/bin` directory which allows the `seir2` command to be ran
 from anywhere on the local file system:
 
 ```bash
 mkdir -p /usr/local/bin
 ```
 
-then create a symlink for `seir`, noting to `$HOME/bin/seir` to the directory
+then create a symlink for `seir2`, noting to `$HOME/bin/seir2` to the directory
 where the compiled program is located:
 
 ```bash
-ln -s $HOME/bin/seir /usr/local/bin/
+ln -s $HOME/bin/seir2 /usr/local/bin/
 ```
 
 then run the project:
 
 ```bash
-seir
+seir2
 ```
 
 ## 7. Plotting
 
 If you have tecplot (tec360) there are `.lay` and `.mcr` files in the `run`
 directory. For more plotting options, view `python/enkf_seir/plot`:
+
+Note that the python plotting needs to be updated to read the multigroup output files.
 
 ```bash
 python ../python/enkf_seir/plot/plot.py
@@ -235,26 +241,90 @@ jupyter-notebook ../python/enkf_seir/plot/covid.ipynb
 
 The following explains how to set up and configure your simulations.
 
+Compile the code after setting the the number of countries you will include in (nc=1 in mod_dimensions.F90).
+
 Make a directory where you will run the code.
 
 Initially you only need the file
 
 ```bash
-infile.in
+run2/infile.in
 ```
 
-copy the example file from the run catalogue and run
+copy the example infile.in from the run2 catalogue and run
 
 ```bash
-seir
+seir2
 ```
 
-This command will then run an ensemble prediction without any data assimilation
-and a number of files are generated.
+This command will run an ensemble prediction without any data assimilation
+and generate a number of files. We use a naming convention where all input files ends with .in, and a 3-digit number
+indicates the country.  If one country is used (nc=1 in mod_dimensions.F90) then seir2 will generate the following files.
+
+
+## Population:
+
+Norwegian population numbers are hard coded and output to two template files.
+
+```bash
+population001.template  : two columns with population of males and females for each age (0-100++)
+agegroups001.template   : total population for each agegroup
+```
+
+You should edit either one of these with your countries' numbers and save the chosen file to either
+
+```bash
+population001.in or agegroups001.in
+```
+Note that you only need to give one of these files per country.
+
+## Initial conditions
+You will need to specify some initial conditions in the file
+```bash
+inicond001.in  
+```
+
+
+## Fraction of mild, severe, and fatally ill per agegroup:
+The file
+
+```bash
+pfactors001.in
+```
+
+is generated with some default values, which can later be edited and changed to reflect different situations in
+different countries.
+
+## R(t) the effective reproductive number per country
+R001.in defines the effective reproductive number for country 001.  It contains an arbitrary number of lines with 
+day R-value std-dev, and uses linear interpolation to generate the resulting prior R(t), which is saved to R001.dat
+the next time you run the program.
+
+The actual R-numbers are R(n,m) = RC(n,m) \*  p%R(k) \* Rmatrix_k 
+
+## R-reproduction in between agegroups:
+
+The model contains 11 age-groups and allows for using different R numbers between different agegroups.
+The default is to use the same and constant transmission numbers equal to one between all agegroups.
+By specifying, the follwing matrices you can alter the transmissions among agegroups, which can also differ for the 
+three different intervention periods.
+The seir2 run generates the template file Rmatrix_01_001.template which you can copy to the following files and edit the numbers.
+Note that the magnitudes doesn't matter since the code normalizes the matrices by an agegroup weighted norm before they are used.
+
+```bash
+Rmatrix_01_001.in
+Rmatrix_02_001.in
+Rmatrix_03_001.in
+```
+
+"" R transmissions among countries.
+The matrices RC_01.in, RC_02.in, and RC_03.in contain the intra-country transmissions for the three intervention periods.
+The diagonal should be 1.0, while the offdiagonal numbers are between 0 and 1.
 
 ## Measurements of deaths, hospitalized and number of positive cases:
 
-The observations are stored in the file corona.in. See example file for Norway in the run directory.
+To condition on observations, you need to supply the measurements for each country.
+corona001.in:  Contains  he observations are stored in the corona001.in file.
 The file contains the following columns:
 
 ```bash
@@ -263,59 +333,29 @@ dd/mm-yyyy  "Accumulated number of deaths" "current number of hospitalized" "Acc
 
 A negative or zero data value will not be used.
 
-## Population:
 
-Norwegian population numbers are hard coded and output to two template files.
-
-```bash
-population.template  : two columns with population of males and females for each age (0-100++)
-agegroups.template   : total population for each agegroup
-```
-
-You should edit either one of these with your numbers and save the chosen file to either
-
-```bash
-population.in or agegroups.in
-```
-
-## Fraction of mild, severe, and fatally ill per age group:
-
-The file
-
-```bash
-pfactors.in
-```
-
-is generated with some default values, which can be edited and changed.
-
-## R-reproduction in between age groups:
-
-The model contains 11 age-groups and allows for using different R numbers between different age groups.
-Currently, three matrices are generated all with the number 1.00 for all transsmission. These can later be
-edited to represent different scenarios.
-
-```bash
-Rmatrix_01.in
-Rmatrix_02.in
-Rmatrix_03.in
-```
-
-The actual R-numbers are R = p%R(k) \* Rmatrix_k where P%R(k) comes from the infile.in
+## Random seed.
+The program stores the random seed in seed.dat. Thus, next time you run the program you will use the same seed. To 
+use a new seed, just delete seed.dat.
 
 ## Output files:
-
+We store all output files in ./Outdir (or whatever you set in infile.in)
 ```bash
-susc_0.dat   susc_1.dat   : Prior and posterior susceptability (accumualted)
-recov_0.dat  recov_1.dat  : Prior and posterior recovered (accumualted)
-case_0.dat   case_1.dat   : Prior and posterior cases (accumualted)
-dead_0.dat   dead_1.dat   : Prior and posterior susceptability (accumualted)
-expos_0.dat  expos_1.dat  : Prior and posterior susceptability (current)
-hosp_0.dat   hosp_1.dat   : Prior and posterior susceptability (current)
-infec_0.dat  infec_1.dat  : Prior and posterior susceptability (current)
-obsD.dat                  : Death observations for plotting
-obsH.dat                  : Hospitalization observations for plotting
-par0.dat par1.dat         : Prior and posterior ensemble of parameters
-Rens_0.dat Rens_1.dat     : Prior and posterior ensemble of R(t)
+susc001_0.dat      susc001_1.dat      : Prior and posterior susceptability (accumualted)
+expos001_0.dat     expos001_1.dat     : Prior and posterior exposed (current)
+infec001_0.dat     infec001_1.dat     : Prior and posterior infectious (current)  
+active001_0.dat    active001_1.dat    : Prior and posterior active cases (current)
+case001_0.dat      case001_1.dat      : Prior and posterior cases (accumualted)
+dead001_0.dat      dead001_1.dat      : Prior and posterior dead (accumualted)
+hosp001_0.dat      hosp001_1.dat      : Prior and posterior hoispitalized (current)
+recov001_0.dat     recov001_1.dat     : Prior and posterior recovered (accumualted)
+Rens001_0.dat      Rens001_1.dat      : Prior and posterior ensemble of R(t)
+par001_0.dat       par001_1.dat       : Prior and posterior ensemble of parameters
+
+obsC001.dat        obsC001.dat        : measurements of accumulated cases (for plotting)
+obsD001.dat        obsD001.dat        : measurements of accumulated deaths (for plotting)
+obsH001.dat        obsH001.dat        : measurements of current hospitalizations (for plotting)
+pfactors001.prior  pfactors001.posterior : The prior and posterior pfactors 
 ```
 
 ---

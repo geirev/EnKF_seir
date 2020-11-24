@@ -5,11 +5,12 @@ doc/model.out
 doc/texput.log
 build
 swiss
+swiss2
 runs/*/*.eps
 runs/*/*/*
 run2/*
-!run2/infile.in
-!run2/corona*.in
+!run2/*.in
+!run2/README.md
 !runs/*/Case*/*.in
 !runs/*/Case*/seed.dat
 !runs/*/Case*/xlimit.txt
