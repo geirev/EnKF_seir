@@ -7,7 +7,8 @@ build
 runs/*/*.eps
 runs/*/*/*
 run2
-swiss*
+swiss
+swiss2
 !runs/*/Case*/*.in
 !runs/*/Case*/seed.dat
 !runs/*/Case*/xlimit.txt
