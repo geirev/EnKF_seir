@@ -7,6 +7,14 @@ runseir=0
 endday=44060
 executable=seir
 
+active_branch=$(git rev-parse --abbrev-ref HEAD)
+if [ $active_branch != "paper_version" ]
+then
+   echo "You need to stash or commit everything and check out the branch paper_version"
+   exit
+fi
+
+
 # Recompile if rdim has been set different from 400
 if [ ${runseir} -eq 1 ]
 then
@@ -14,7 +22,7 @@ then
    then
       pushd $src
       sed -i "s/rdim=.*/rdim=${rdim}/" mod_dimensions.F90
-      git checkout master -- m_enkfprep.F90
+      git checkout paper_version -- m_enkfprep.F90
       make
       popd
    fi
@@ -44,7 +52,7 @@ do
                sed -i "s/rdim=.*/rdim=${newrdim}/" mod_dimensions.F90
                git checkout Quebec -- m_enkfprep.F90
                make  || (echo "make B failed $$?"; exit 1)
-               git checkout master -- m_enkfprep.F90
+               git checkout paper_version -- m_enkfprep.F90
                popd
             fi
 
@@ -116,7 +124,7 @@ do
       then 
          pushd $src
          sed -i "s/rdim=.*/rdim=400/" mod_dimensions.F90
-         git checkout master -- m_enkfprep.F90
+         git checkout paper_version -- m_enkfprep.F90
          make  || (echo "make C failed $$?"; exit 1)
          popd
       fi

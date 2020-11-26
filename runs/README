@@ -1,5 +1,8 @@
 This is the runs directory holding all input files needed to run the cases for the different countries.
 
+NB: TO RERUN THESE CASES, CHECKOUT AND COMPILE THE SEIR MODEL FROM THE BRANCH paper_version
+
+
 Each country has a separate directory with Case* subdirectories for the different cases.
 
 Each Case* directory includes the required *.in files to run a case. As a minimum this should include e.g.,

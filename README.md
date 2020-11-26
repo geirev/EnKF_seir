@@ -5,10 +5,12 @@ assimilation system for predicting the spreading of the Coronavirus.
 "multigroup" means that we can use the model for an arbitrary number of countries or regional compartments. 
 The ensemble method is the ESMDA (Ensemble Smoother with multiple data assimilation). The
 measurements are the accumulated number of deaths, the daily number of hospitalized, and the number of positive tests.
+The document [multimodel.pdf](https://github.com/geirev/EnKF_seir/blob/master/doc/multimodel.pdf) describes the equations solved for
+the multicompartment model configuration.
 
 An older single-group implementation used in Evensen et al. (2020) is stored on the branch
 [paper_version](https://github.com/geirev/EnKF_seir/tree/paper_version).
-However the new multigroup code is also recommended when running for a single country or compartent.
+However, we recommend to use the new multigroup code also when running for a single country or compartent.
 
 <p align="center">
   <a href="#installation">Installation</a> *
@@ -19,13 +21,13 @@ However the new multigroup code is also recommended when running for a single co
   <a href="https://github.com/geirev/EnKF_seir/blob/master/LICENSE">License</a> 
 </p>
 
-For model, system description, and examples, see
+For the basic model and system description, and examples, see
 https://www.medrxiv.org/content/10.1101/2020.06.11.20128777v1
+For the revised version of the manuscript contact the author.
 
-Initially, model parameters are sampled from prescribed normal distributions. The
-ensemble is integrated forward in time to make a prior ensemble prediction. The
-ESMDA is then used to update the ensemble of model parameters. After that, the
-posterior ensemble is integrated a final time to produce the posterior prediction.
+Initially, the system samples the model parameters from prescribed normal distributions.  Integration of the ensemble generates
+the prior ensemble prediction. After that, we obtain the updated ensemble of model parameters from using the ESMDA method.
+Finally, we integrate the model ensemble a final time to produce the posterior prediction.
 
 <p align="center">
 <img src="doc/HDlog.png" width="300"> <img src="doc/RENS.png" width="300">
