@@ -5,6 +5,7 @@ doc/model.out
 doc/texput.log
 build
 swiss
+swiss2
 run2
 !run2/*.in
 !run2/README.md

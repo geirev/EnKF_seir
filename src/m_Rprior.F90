@@ -53,12 +53,20 @@ subroutine Rprior()
             print '(tr3,a)','First line in R'//tag3//'.in should have index=0'
             stop
          endif
+         if (ind(nrlines) /= rdim ) then
+            print '(tr3,a,i5)','Last line in R'//tag3//'.in should have index=rdim=',rdim
+            stop
+         endif
 
 ! Liner interpolation between points in Rxxx.in
          p%R(0,ic)=Rtmp(0); parstd%R(0,ic)=Stmp(0)
          do i=1,nrlines
             i0=ind(i-1)
             i1=ind(i)
+            if (i1 <= i0) then
+               print *,'Check order of times in the file: R'//tag3//'.in'
+               stop
+            endif
             ar=(Rtmp(i)-Rtmp(i-1))/real(i1-i0)
             as=(Stmp(i)-Stmp(i-1))/real(i1-i0)
 

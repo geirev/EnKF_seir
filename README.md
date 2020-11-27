@@ -319,7 +319,7 @@ Rmatrix_02_001.in
 Rmatrix_03_001.in
 ```
 
-"" R transmissions among countries.
+## R transmissions among countries.
 The matrices RC_01.in, RC_02.in, and RC_03.in contain the intra-country transmissions for the three intervention periods.
 The diagonal should be 1.0, while the offdiagonal numbers are between 0 and 1.
 

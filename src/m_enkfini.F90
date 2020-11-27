@@ -47,7 +47,7 @@ subroutine enkfini(time)
    use m_getday
    implicit none
    real,    intent (in) :: time
-   real dt
+   real dt,tmptime
    integer i,j,k,m,ic
    integer iyear,imonth,iday,ideath,ihosp,icase,iobst
    integer nrlines(nc)  ! Number of lines in observations files
@@ -69,6 +69,12 @@ subroutine enkfini(time)
 ! Counting number of lines and observations in coronaxxx.in
             do i=1,10000
                read(10,'(i2,tr1,i2,tr1,i4)',advance='no',end=200)iday,imonth,iyear
+                  tmptime=real(getday(iday,imonth,iyear))
+                  if (tmptime > real(nt)) then
+                     print '(a,i5,a)','Warning: you have set the end of simulation nt=',nt,' earlier than the last measurements'
+                     print *,'Warning: I will skip these measurements in the assimilation'
+                     exit
+                  endif
                read(10,*)ideath,ihosp,icase
                if (ld .and. ideath > 0) then
                   nrobs=nrobs+1
@@ -99,6 +105,8 @@ subroutine enkfini(time)
             open(10,file='corona'//tag3//'.in')
                do i=1,nrlines(ic)
                   read(10,'(i2,tr1,i2,tr1,i4)',advance='no')iday,imonth,iyear
+                  tmptime=real(getday(iday,imonth,iyear))
+                  if (tmptime > real(nt)) exit
                   read(10,*)ideath,ihosp,icase
                   if (ld .and. ideath > 0) then
                      m=m+1
