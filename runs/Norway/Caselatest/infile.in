@@ -1,12 +1,12 @@
  5000                     ! nrens: Ensemble size
- 266                      ! nt   : Number of output times (one more than days to get daily outputs)
- 265                      ! time : Length of integration in days
+ 366                      ! nt   : Number of output times (one more than days to get daily outputs)
+ 365                      ! time : Length of integration in days
 #1 EnKF parameters ------------------------------------------------------------------------------------
  T                        ! Run EnKF to update model parameters
  13                       ! EnKF analysis mode (Perturbed obs: 11 using R, 13 using E; SQRT 21, 23)
  32                       ! Number of ESMDA steps, (1 means standard ES update)
- T 0.05   4.0  6.0        ! Condition on Deaths, realtive error, minerr, maxerr 
- T 0.05   4.0  6.0        ! Condition on Hosp,   realtive error, minerr, maxerr 
+ T 0.05   2.0  5.0        ! Condition on Deaths, realtive error, minerr, maxerr 
+ T 0.05   1.0  5.0        ! Condition on Hosp,   realtive error, minerr, maxerr 
  F 0.05  100.0 5000.0 0.15 ! Condition on Cases,  realtive error, minerr, maxerr, fraction of real cases 
  T                        ! Correlated measurement errors
  10.0                     ! Decorrelation half length in time of measurement errors
@@ -28,7 +28,7 @@
  14.0         1.4         !  Trecm     : Recovery time mild cases
  5.0          0.5         !  Trecs     : Recovery time severe cases 
  6.0          0.6         !  Thosp     : Hospitalization time
- 16.0         1.6         !  Tdead     : Days to death                                           
+ 10.0         1.6         !  Tdead     : Days to death                                           
  0.007        0.001       !  CFR       : Case fatality rate %
  0.039        0.004       !  P_severe  : Hospitalization rate % for severe cases
  0.4                      !  hos       : Fraction of Qf that go to hospital

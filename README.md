@@ -302,7 +302,7 @@ R001.in defines the effective reproductive number for country 001.  It contains 
 day R-value std-dev, and uses linear interpolation to generate the resulting prior R(t), which is saved to R001.dat
 the next time you run the program.
 
-The actual R-numbers are R(n,m) = RC(n,m) \*  p%R(k) \* Rmatrix_k 
+The actual R-numbers are R(n,m) = RC(n,m) \*  R(t)
 
 ## R-reproduction in between agegroups:
 
