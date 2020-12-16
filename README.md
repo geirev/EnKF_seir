@@ -33,6 +33,11 @@ Finally, we integrate the model ensemble a final time to produce the posterior p
 <img src="doc/HDlog.png" width="300"> <img src="doc/RENS.png" width="300">
 </p>
 
+Catching the second wave!
+<p align="center">
+<img src="doc/HD2.png" width="300"> <img src="doc/RENS2.png" width="300">
+</p>
+
 ---
 
 # Installation:
