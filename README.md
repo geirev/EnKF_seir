@@ -10,7 +10,7 @@ the multicompartment model configuration.
 
 An older single-group implementation used in Evensen et al. (2020) is stored on the branch
 [paper_version](https://github.com/geirev/EnKF_seir/tree/paper_version).
-However, we recommend to use the new multigroup code also when running for a single country or compartent.
+However, we recommend to use the new multigroup code also when running for a single country or compartment.
 
 <p align="center">
   <a href="#installation">Installation</a> *
@@ -22,8 +22,7 @@ However, we recommend to use the new multigroup code also when running for a sin
 </p>
 
 For the basic model and system description, and examples, see
-https://www.medrxiv.org/content/10.1101/2020.06.11.20128777v1
-For the revised version of the manuscript contact the author.
+http://www.aimsciences.org/article/doi/10.3934/fods.2021001
 
 Initially, the system samples the model parameters from prescribed normal distributions.  Integration of the ensemble generates
 the prior ensemble prediction. After that, we obtain the updated ensemble of model parameters from using the ESMDA method.
