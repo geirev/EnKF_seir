@@ -198,7 +198,7 @@ make BINDIR=$HOME/bin
 Navigate to the `run` directory of the `EnKF_seir` repository:
 
 ```bash
-cd EnKF_seir/run
+cd EnKF_seir/run2
 ```
 
 and run:
@@ -216,8 +216,7 @@ from anywhere on the local file system:
 mkdir -p /usr/local/bin
 ```
 
-then create a symlink for `seir2`, noting to `$HOME/bin/seir2` to the directory
-where the compiled program is located:
+then create a symlink for `$HOME/bin/seir2` to `/usr/local/bin`
 
 ```bash
 ln -s $HOME/bin/seir2 /usr/local/bin/
@@ -226,6 +225,7 @@ ln -s $HOME/bin/seir2 /usr/local/bin/
 then run the project:
 
 ```bash
+cd EnKF_seir/run2
 seir2
 ```
 
