@@ -4,6 +4,7 @@ module mod_substate
 
    type substate
 ! Solution data
+      real V(na)        ! Vaccinated age groups
       real S(na)        ! Susceptible age groups
       real E(na)        ! Exposed age groups
       real I(na)        ! Infectious age groups
@@ -51,7 +52,9 @@ contains
    function sum_substate(A)
       real sum_substate
       type(substate), intent(in) :: A
-      sum_substate = sum(A%S) &
+      sum_substate =&
+                   sum(A%V) &
+                 + sum(A%S) &
                  + sum(A%E) &
                  + sum(A%I) &
                  + A%Qm     &
@@ -69,6 +72,7 @@ contains
       type(substate) sqrt_substate
       type(substate), intent(in) :: A
       real :: eps=0.1E-14
+      sqrt_substate%V       = sqrt(A%V+eps)
       sqrt_substate%S       = sqrt(A%S+eps)
       sqrt_substate%E       = sqrt(A%E+eps)
       sqrt_substate%I       = sqrt(A%I+eps)
@@ -87,6 +91,7 @@ contains
       type(substate) add_substate
       type(substate), intent(in) :: A
       type(substate), intent(in) :: B
+      add_substate%V       = A%V  + B%V 
       add_substate%S       = A%S  + B%S 
       add_substate%E       = A%E  + B%E
       add_substate%I       = A%I  + B%I
@@ -105,6 +110,7 @@ contains
       type(substate) subtract_substate
       type(substate), intent(in) :: A
       type(substate), intent(in) :: B
+      subtract_substate%V       = A%V  - B%V 
       subtract_substate%S       = A%S  - B%S 
       subtract_substate%E       = A%E  - B%E
       subtract_substate%I       = A%I  - B%I
@@ -123,6 +129,7 @@ contains
       type(substate) substate_real_mult
       type(substate), intent(in) :: A
       real, intent(in) :: B
+      substate_real_mult%V       = B*A%V 
       substate_real_mult%S       = B*A%S 
       substate_real_mult%E       = B*A%E 
       substate_real_mult%I       = B*A%I 
@@ -141,6 +148,7 @@ contains
       type(substate) real_substate_mult
       type(substate), intent(in) :: A
       real, intent(in) :: B
+      real_substate_mult%V       = B*A%V 
       real_substate_mult%S       = B*A%S 
       real_substate_mult%E       = B*A%E 
       real_substate_mult%I       = B*A%I 
@@ -159,6 +167,7 @@ contains
       type(substate) substate_substate_mult
       type(substate), intent(in) :: A
       type(substate), intent(in) :: B
+      substate_substate_mult%V       = A%V  * B%V 
       substate_substate_mult%S       = A%S  * B%S 
       substate_substate_mult%E       = A%E  * B%E 
       substate_substate_mult%I       = A%I  * B%I 
@@ -177,6 +186,7 @@ contains
    subroutine assign_substate(A,r)
       type(substate), intent(out) :: A
       real, intent(in) :: r
+      A%V       = r
       A%S       = r
       A%E       = r
       A%I       = r

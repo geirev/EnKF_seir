@@ -144,13 +144,14 @@ subroutine enkfini(time)
    endif
 
 
-
+   open(10,file='observationlist.out')
    print '(tr3,a)','List of observations:'
    print '(tr3,a)','  number   gridp obstime obstype  country      obsval'
    do m=1,nrobs
       write(tag3,'(i3.3)')obs(m)%ic
-      print '(tr3,3i8,a8,tr6,a3,f12.3)',m,obs(m)%i,obs(m)%t,obs(m)%c,tag3,obs(m)%d 
+      write(10,'(tr3,3i8,a8,tr6,a3,f12.3)')m,obs(m)%i,obs(m)%t,obs(m)%c,tag3,obs(m)%d 
    enddo
+   close(10)
 
 
 ! Allocating variables used in the analysis scheme

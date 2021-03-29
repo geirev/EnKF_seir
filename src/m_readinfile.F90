@@ -16,6 +16,7 @@ subroutine readinfile()
    implicit none
    logical ex
    character(len=2) ca
+   character(len=10) string
    integer id,im,iy,k,day
    integer ir,i,j,ii,nttmp
    real dt,t
@@ -116,6 +117,15 @@ subroutine readinfile()
    close(10)
    print '(a)','Finished reading infile.in (m_readinfile.F90):'
 
+   open(10,file='day_to_date.out')
+      do i=0,nt
+         string=getdate(real(i)+startday)
+         read(string(1:2),'(i2.2)')id
+         read(string(4:5),'(i2.2)')im
+         read(string(7:10),'(i4.4)')iy
+         write(10,*)'day to date =',i,string !,id,im,iy,getday(id,im,iy)
+      enddo
+   close(10)
 
 
 end subroutine

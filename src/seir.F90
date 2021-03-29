@@ -19,6 +19,7 @@ program seir
    use m_enkfprep
    use m_enkfpost
    use m_chisquared
+   use m_readvaccines
 
    implicit none
    integer i,ic,k,j,m
@@ -42,6 +43,7 @@ program seir
    allocate( enspar(nrens) )                   ! Allocate ensemble of model parameters
    call inienspar(enspar)                      ! Initialize ensemble of parameters
    call iniens(ens,enspar)                     ! Initialize ensemble of models
+   call readvaccines                           ! Reading vaccination data
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
@@ -105,6 +107,7 @@ subroutine f(neqq, t, y, ydot)
    use m_pfactors
    use m_random
    use m_readinfile
+   use m_readvaccines
    implicit none
    integer neqq
    real t
@@ -114,8 +117,8 @@ subroutine f(neqq, t, y, ydot)
    real R(na,na)
    real RCI(nc,nc)
    real dt
-   integer i,ic,jc,ir
-
+   real vacc(na)
+   integer i,ia,ic,jc,ir
 
    dt= time/real(nt-1)
    i= min(int(t/dt), rdim)
@@ -131,14 +134,22 @@ subroutine f(neqq, t, y, ydot)
 
 
    do ic=1,nc
+      vacc=0.0
+      do ia=1,na
+         if ((vaccine(ia,ic)%start_day <= t) .and. (t <= vaccine(ia,ic)%end_day) .and. (vaccine(ia,ic)%time > 0.1)) vacc(ia)=1.0/vaccine(ia,ic)%time
+      enddo
+
       RC(ic,ic,ir)=1.0 ! Diagonal is always one for contry-country interaction
       R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)  
+
+      ydot%group(ic)%V(:)  =    vacc(:) * y%group(ic)%S(:)
 
       ydot%group(ic)%S  = 0.0 !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
       do jc=1,nc
          ydot%group(ic)%S  = ydot%group(ic)%S  &
                            - (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
       enddo
+      ydot%group(ic)%S(:)  = ydot%group(ic)%S(:) - vacc(:) * y%group(ic)%S(:)
 
       ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E  !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
       do jc=1,nc

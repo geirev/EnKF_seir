@@ -26,8 +26,8 @@ subroutine tecplot(ens,enspar,pri)
    type(diag) aved(0:nt)
    type(diag) stdd(0:nt)
 
-   integer ic,i
-   real dt
+   integer ic,i,l
+   real dt,t
    character(len=1) tag
    character(len=3) tag3
    character(len=100) :: cmd='mkdir -p '
@@ -57,6 +57,38 @@ subroutine tecplot(ens,enspar,pri)
       call saveparameters(enspar,ic,tag3,pri,outdir)
 
       call saveR(enspar,ic,tag3,tag,dt,outdir)
+
+
+      open(10,file=trim(outdir)//'/'//'Xsusc'//tag3//'_'//tag//'.dat')
+         write(10,'(5a)')'TITLE = "'//'Xsusc'//tag3//'_'//tag//'"'
+         write(10,'(a)')'VARIABLES = "time" '
+         write(10,'(20(a,i4,a))')(' "',l,'"',l=1,na)
+         write(10,*)'ZONE T="'//'Xsusc'//tag3//'_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+         do i=0,nt-1
+            t=0.0+real(i)*dt
+            write(10,'(2000E13.5)',advance='no')t
+            do l=1,na
+               write(10,'(2000E13.5)',advance='no')sum(ens(i,:)%group(ic)%S(l))/real(nrens)
+            enddo
+            write(10,'(a)')' '
+         enddo
+      close(10)
+
+      open(10,file=trim(outdir)//'/'//'Xvacc'//tag3//'_'//tag//'.dat')
+         write(10,'(5a)')'TITLE = "'//'Xvacc'//tag3//'_'//tag//'"'
+         write(10,'(a)')'VARIABLES = "time" '
+         write(10,'(20(a,i4,a))')(' "',l,'"',l=1,na)
+         write(10,*)'ZONE T="'//'Xvacc'//tag3//'_'//tag//'"  F=POINT, I=',nt,', J=1, K=1'
+         do i=0,nt-1
+            t=0.0+real(i)*dt
+            write(10,'(2000E13.5)',advance='no')t
+            do l=1,na
+               write(10,'(2000E13.5)',advance='no')sum(ens(i,:)%group(ic)%V(l))/real(nrens)
+            enddo
+            write(10,'(a)')' '
+         enddo
+      close(10)
+
    enddo 
    print '(a)','Tecplot dump done'
 end subroutine

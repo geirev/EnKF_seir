@@ -92,6 +92,9 @@ m_readinicond.o:      mod_parameters.o
 m_readinicond.o:      mod_params.o
 m_readinicond.o:      mod_states.o
 m_readinicond.o:      m_readagegroups.o
+m_readvaccines.o:      makefile
+m_readvaccines.o:      mod_dimensions.o
+m_readvaccines.o:      MODEL.CPP
 m_Rmatrix.o:      makefile
 m_Rmatrix.o:      mod_dimensions.o
 m_Rmatrix.o:      MODEL.CPP
@@ -138,6 +141,7 @@ seir.o:      m_random.o
 seir.o:      m_readagegroups.o
 seir.o:      m_readinfile.o
 seir.o:      m_readinicond.o
+seir.o:      m_readvaccines.o
 seir.o:      m_Rmatrix.o
 seir.o:      m_Rprior.o
 seir.o:      m_set_random_seed2.o
