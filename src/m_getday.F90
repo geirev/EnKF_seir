@@ -56,7 +56,7 @@ character(len=10) function getdate(time)
       if (t > days_in_year(i)) then
          t=t-days_in_year(i)
       else
-         iy=i-1
+         iy=i
          exit
       endif
    enddo
@@ -67,7 +67,7 @@ character(len=10) function getdate(time)
       if (t > days_in_month(iy,i)) then
          t=t-days_in_month(iy,i)
       else
-         im=i-1
+         im=i
          exit
       endif
    enddo
@@ -76,8 +76,8 @@ character(len=10) function getdate(time)
   id=t
 
   write(getdate,'(i2.2,a,i2.2,a,i4.4)')id,'_',im,'_',iy
-  print '(i2.2,a,i2.2,a,i4.4)',id,'_',im,'_',iy 
-  print '(a)',getdate
+!  print '(i2.2,a,i2.2,a,i4.4)',id,'_',im,'_',iy 
+!  print '(a)',getdate
 
 
 end function

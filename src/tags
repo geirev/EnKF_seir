@@ -57,6 +57,7 @@ Trecm	mod_params.F90	/^      character(len=9) ::   Trecm /;"	k	type:paramnames
 Trecm	mod_params.F90	/^      real Trecm$/;"	k	type:params
 Trecs	mod_params.F90	/^      character(len=9) ::   Trecs /;"	k	type:paramnames
 Trecs	mod_params.F90	/^      real Trecs$/;"	k	type:params
+V	mod_substate.F90	/^      real V(/;"	k	type:substate
 Xmax	mod_parameters.F90	/^   real :: Xmax /;"	v	module:mod_parameters
 add_diag	mod_diag.F90	/^   function add_diag(/;"	f	module:mod_diag
 add_params	mod_params.F90	/^   function add_params(/;"	f	module:mod_params
@@ -78,6 +79,7 @@ days_in_year	m_getday.F90	/^   integer days_in_year(/;"	v	module:m_getday
 diag	mod_diag.F90	/^   type diag$/;"	t	module:mod_diag
 diag_diag_mult	mod_diag.F90	/^   function diag_diag_mult(/;"	f	module:mod_diag
 diag_real_mult	mod_diag.F90	/^   function diag_real_mult(/;"	f	module:mod_diag
+end_day	m_readvaccines.F90	/^   integer end_day$/;"	k	type:vaccine_data
 enkfini	m_enkfini.F90	/^subroutine enkfini(/;"	s	module:m_enkfini
 enkfpost	m_enkfpost.F90	/^subroutine enkfpost(/;"	s	module:m_enkfpost
 enkfprep	m_enkfprep.F90	/^subroutine enkfprep(/;"	s	module:m_enkfprep
@@ -100,6 +102,7 @@ infmult	m_enkfini.F90	/^   integer :: infmult=/;"	v	module:m_enkfini
 iniens	m_iniens.F90	/^subroutine iniens(/;"	s	module:m_iniens
 inienspar	m_inienspar.F90	/^subroutine inienspar(/;"	s	module:m_inienspar
 innovation	m_enkfini.F90	/^   real, allocatable    :: innovation(/;"	v	module:m_enkfini
+inv_time	m_readvaccines.F90	/^   real    inv_time$/;"	k	type:vaccine_data
 j	seir.F90	/^   integer i,ic,k,j,/;"	v	program:seir
 jac	seir.F90	/^subroutine jac(/;"	s
 k	seir.F90	/^   integer i,ic,k,/;"	v	program:seir
@@ -110,6 +113,7 @@ lenkf	m_enkfini.F90	/^   logical lenkf /;"	v	module:m_enkfini
 lh	m_enkfini.F90	/^   logical ld,lh,/;"	v	module:m_enkfini
 lmeascorr	m_enkfini.F90	/^   logical lmeascorr /;"	v	module:m_enkfini
 lpost_pfactors	m_pfactors.F90	/^logical :: lpost_pfactors=/;"	v	module:m_pfactors
+lpost_pfactors	m_readvaccines.F90	/^logical :: lpost_pfactors=/;"	v	module:m_readvaccines
 lrandrot	m_enkfini.F90	/^   logical :: lrandrot=/;"	v	module:m_enkfini
 lrtime	m_readinfile.F90	/^logical lrtime /;"	v	module:m_readinfile
 lsymsqrt	m_enkfini.F90	/^   logical :: lsymsqrt=/;"	v	module:m_enkfini
@@ -131,6 +135,7 @@ m_random	m_random.F90	/^module m_random$/;"	m
 m_readagegroups	m_readagegroups.F90	/^module m_readagegroups$/;"	m
 m_readinfile	m_readinfile.F90	/^module m_readinfile$/;"	m
 m_readinicond	m_readinicond.F90	/^module m_readinicond$/;"	m
+m_readvaccines	m_readvaccines.F90	/^module m_readvaccines$/;"	m
 m_solve	m_solve.F90	/^module m_solve$/;"	m
 m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
 max_params	mod_params.F90	/^   function max_params(/;"	f	module:mod_params
@@ -181,6 +186,7 @@ rdim	mod_dimensions.F90	/^   integer, parameter :: rdim=/;"	v	module:mod_dimensi
 readagegroups	m_readagegroups.F90	/^subroutine readagegroups$/;"	s	module:m_readagegroups
 readinfile	m_readinfile.F90	/^subroutine readinfile(/;"	s	module:m_readinfile
 readinicond	m_readinicond.F90	/^subroutine readinicond(/;"	s	module:m_readinicond
+readvaccines	m_readvaccines.F90	/^subroutine readvaccines$/;"	s	module:m_readvaccines
 real_diag_mult	mod_diag.F90	/^   function real_diag_mult(/;"	f	module:mod_diag
 real_params_mult	mod_params.F90	/^   function real_params_mult(/;"	f	module:mod_params
 real_states_mult	mod_states.F90	/^   type(states) function real_states_mult(/;"	f	module:mod_states
@@ -203,6 +209,7 @@ solve	m_solve.F90	/^subroutine solve(/;"	s	module:m_solve
 sqrt_diag	mod_diag.F90	/^   function sqrt_diag(/;"	f	module:mod_diag
 sqrt_states	mod_states.F90	/^   type(states) function sqrt_states(/;"	f	module:mod_states
 sqrt_substate	mod_substate.F90	/^   function sqrt_substate(/;"	f	module:mod_substate
+start_day	m_readvaccines.F90	/^   integer start_day$/;"	k	type:vaccine_data
 startday	m_getday.F90	/^   integer :: startday=/;"	v	module:m_getday
 states	mod_states.F90	/^   type states$/;"	t	module:mod_states
 states_real_mult	mod_states.F90	/^   type(states) function states_real_mult(/;"	f	module:mod_states
@@ -220,3 +227,5 @@ t	m_enkfini.F90	/^      inte/;"	k	type:observation
 tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
 time	mod_parameters.F90	/^   real :: time$/;"	v	module:mod_parameters
 truncation	m_enkfini.F90	/^   real :: truncation /;"	v	module:m_enkfini
+vaccine	m_readvaccines.F90	/^type (vaccine_/;"	v	module:m_readvaccines
+vaccine_data	m_readvaccines.F90	/^type vaccine_data$/;"	t	module:m_readvaccines

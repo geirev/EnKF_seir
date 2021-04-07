@@ -301,6 +301,15 @@ pfactors001.in
 is generated with some default values, which can later be edited and changed to reflect different situations in
 different countries.
 
+## Vaccinations
+Vaccinations can be included by including the file
+
+```bash
+vaccines001.in
+```
+
+A template file vaccines001.temp is generated with some default values.
+
 ## R(t) the effective reproductive number per country
 R001.in defines the effective reproductive number for country 001.  It contains an arbitrary number of lines with 
 day R-value std-dev, and uses linear interpolation to generate the resulting prior R(t), which is saved to R001.dat
