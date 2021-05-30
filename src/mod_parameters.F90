@@ -4,7 +4,7 @@ module mod_parameters
    type (params) p
    type (params) pfg
    type (params) parstd
-   type (paramnames) parnames
+   type (paramnames), save :: parnames
   
    real :: Tinterv(nrint-1)
    real :: Xmax              

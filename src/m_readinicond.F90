@@ -8,11 +8,10 @@ subroutine readinicond()
    use m_readagegroups
    implicit none
    logical ex
-   character(len=2) ca
    character(len=3) tag3
-   real :: infected=100.0,dix=10.0
+   real :: infected=100.0
    real :: cfr=0.0090,sev=0.039
-   integer iread,ic,k
+   integer iread,ic
 
    print '(a)','--------------------------------------------------------------------------------'
    print '(a)','Reading initial infectious and exposed for all countries'

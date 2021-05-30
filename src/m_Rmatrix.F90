@@ -15,8 +15,7 @@ subroutine Rmatrix()
    character(len=10) ctmp
    character(len=2)  tag2
    character(len=3)  tag3
-   real sumR
-   real a(na),b,c
+   real a(na),c
 
    print '(a)','--------------------------------------------------------------------------------'
    print '(a)','Definition or R matrices for each country (m_Rmatrix.F90)'

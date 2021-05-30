@@ -1,6 +1,9 @@
 module mod_states
    use mod_dimensions
    use mod_substate
+   private
+   public :: states, operator(+), operator(-), operator(*), assignment(=), sum, sqrt
+
 ! A full model state is an array of groups/countries/regions represented by a substate
    type states
       type(substate) group(nc)  
@@ -64,7 +67,6 @@ contains
       integer i
       type(states), intent(in) :: A
       type(states), intent(in) :: B
-      type(states) C
       do i=1,nc
          add_states%group(i) = A%group(i)  + B%group(i) 
       enddo

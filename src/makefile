@@ -10,14 +10,14 @@ LD = gfortran
 CF90 = gfortran
 CF77 = gfortran
 
-OPT_FFLAGS = -c -fdefault-real-8 -O3
 
 PAR = 
-#DEBUG_FFLAGS = -c -g -fdefault-real-8 -C -u -Xlist -O2 -std=gnu -fimplicit-none -frange-check -fmax-errors=10 -pedantic -pedantic-errors -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
-DEBUG_FFLAGS = -c -g -fdefault-real-8 -C -u -Xlist -O2 -frange-check -fmax-errors=10 -O3 
+#DEBUG_FFLAGS = -c -g -fdefault-real-8 -C -u -Xlist -O2 -std=f2003 -fimplicit-none -frange-check -fmax-errors=10 -pedantic -pedantic-errors -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
+DEBUG_FFLAGS = -c -g -fdefault-real-8 -C -u -Xlist -O2            -fimplicit-none -frange-check -fmax-errors=10 -pedantic -pedantic-errors -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
+DEBUG_FFLAGF = -c -g -fdefault-real-8 -C -u -Xlist -O2                            -frange-check -fmax-errors=10                            -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
 
-FFLAGS =  $(OPT_FFLAGS)
 FFLAGS =  $(DEBUG_FFLAGS)
+FFLAGF =  $(DEBUG_FFLAGF)
 
 # run ulimit -c unlimited
 
@@ -39,7 +39,6 @@ CPPFLAGS = -traditional -P $(CPPARCH) $(CPPMODEL)
 #LIBDIR = /h/geve/lib/linux  -L /usr/lib/gcc-lib/i386-redhat-linux/3.2.3 
 #LIBDIR = -L /h/geve/lib/linux  -L /usr/lib/gcc/x86_64-redhat-linux/3.4.3/32 -L/h/a152128/lib/linux 
 
-LIBS =  -lg2c  -lblas -llapack -lfftw3 -lecl -lhash -lpthread
 LIBS =  ./libsampling.a ./libenkfanalysis.a -llapack -lblas  -llapack /usr/lib/x86_64-linux-gnu/libfftw3.so.3
 
 
@@ -65,7 +64,7 @@ CPP = /usr/bin/cpp
 	@mkdir -p $(BUILD)
 	@rm -f ./$(BUILD)/$*.f
 	@cat MODEL.CPP $*.F | $(CPP) $(CPPFLAGS) > ./$(BUILD)/$*.f
-	cd $(BUILD) ; $(CF77) $(FFLAGS) $(F77FLG) -o $*.o $*.f  
+	cd $(BUILD) ; $(CF77) $(FFLAGF) $(F77FLG) -o $*.o $*.f  
 
 
 
@@ -88,7 +87,6 @@ $(TARGET): $(INC2) $(OMOD) $(OBJECTS)
 	cd ./$(BUILD) ; $(LD) $(LINKFLAGS) -o $(TARGET) $(OMOD) $(OBJECTS) $(LIBDIR) $(LIBS) 
 
 install:
-	@mkdir -p $(BINDIR)
 	cp $(BUILD)/$(TARGET) $(BINDIR)
 
 

@@ -13,7 +13,7 @@ subroutine readagegroups
    integer, parameter :: nrages=106
    real               :: ages_male(1:nrages)
    real               :: ages_female(1:nrages)
-   integer i,k,ic,im,if
+   integer i,ic,im,if
    logical lpop,lage
    character(len=3) tag3
 

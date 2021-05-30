@@ -1,6 +1,8 @@
 module mod_substate
 ! Model state definition for a country or group.
    use mod_dimensions
+   private
+   public :: substate, operator(+), operator(-), operator(*), assignment(=), sum, sqrt
 
    type substate
 ! Solution data

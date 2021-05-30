@@ -48,8 +48,8 @@ subroutine enkfini(time)
    implicit none
    real,    intent (in) :: time
    real dt,tmptime
-   integer i,j,k,m,ic
-   integer iyear,imonth,iday,ideath,ihosp,icase,iobst
+   integer i,m,ic
+   integer iyear,imonth,iday,ideath,ihosp,icase
    integer nrlines(nc)  ! Number of lines in observations files
    logical ex
    character(len=3) tag3
@@ -110,7 +110,7 @@ subroutine enkfini(time)
                   read(10,*)ideath,ihosp,icase
                   if (ld .and. ideath > 0) then
                      m=m+1
-                     obs(m)%t=real(getday(iday,imonth,iyear))
+                     obs(m)%t=(getday(iday,imonth,iyear))
                      obs(m)%i=nint(real(obs(m)%t)/dt)
                      obs(m)%c='d'
                      obs(m)%ic=ic
@@ -118,7 +118,7 @@ subroutine enkfini(time)
                   endif
                   if (lh .and. ihosp > 0) then
                      m=m+1
-                     obs(m)%t=real(getday(iday,imonth,iyear))
+                     obs(m)%t=(getday(iday,imonth,iyear))
                      obs(m)%i=nint(real(obs(m)%t)/dt)
                      obs(m)%c='h'
                      obs(m)%ic=ic
@@ -126,7 +126,7 @@ subroutine enkfini(time)
                   endif
                   if (lc .and. icase > 0) then
                      m=m+1
-                     obs(m)%t=real(getday(iday,imonth,iyear))
+                     obs(m)%t=(getday(iday,imonth,iyear))
                      obs(m)%i=nint(real(obs(m)%t)/dt)
                      obs(m)%c='c'
                      obs(m)%ic=ic

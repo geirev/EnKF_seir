@@ -7,6 +7,7 @@ real hos          ! The fraction of fatally ill that actually goes to the hospit
 logical lRrescale ! Rescales the Rmatrix_0? such that the effective R(t) is not dependent on Rmatrix
 character(len=25) outdir
 
+
 contains
 subroutine readinfile()
    use mod_params
@@ -17,9 +18,8 @@ subroutine readinfile()
    logical ex
    character(len=2) ca
    character(len=10) string
-   integer id,im,iy,k,day
-   integer ir,i,j,ii,nttmp
-   real dt,t
+   integer id,im,iy
+   integer i
    character(len=9) :: cmd='mkdir -p '
 
    inquire(file='infile.in',exist=ex)

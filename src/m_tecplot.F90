@@ -19,8 +19,8 @@ subroutine tecplot(ens,enspar,pri)
 
    type(states), intent(in) :: ens(0:nt,nrens)
 
-   type(states) ave(0:nt)
-   type(states) std(0:nt)
+!   type(states) ave(0:nt)
+!   type(states) std(0:nt)
 
    type(diag) ensd(0:nt,nrens)
    type(diag) aved(0:nt)
@@ -30,7 +30,6 @@ subroutine tecplot(ens,enspar,pri)
    real dt,t
    character(len=1) tag
    character(len=3) tag3
-   character(len=100) :: cmd='mkdir -p '
 
    print '(a)','Dumping tecplot files.'
 

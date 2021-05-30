@@ -22,7 +22,7 @@ program seir
    use m_readvaccines
 
    implicit none
-   integer i,ic,k,j,m
+   integer i,ic,j
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    type(states), allocatable :: ens(:,:)       ! Storage of the ensemble of solutions for printing
@@ -115,7 +115,6 @@ subroutine f(neqq, t, y, ydot)
    type(states) ydot
 
    real R(na,na)
-   real RCI(nc,nc)
    real dt
    real vacc(na)
    integer i,ia,ic,jc,ir
@@ -136,7 +135,8 @@ subroutine f(neqq, t, y, ydot)
    do ic=1,nc
       vacc=0.0
       do ia=1,na
-         if ((vaccine(ia,ic)%start_day <= t) .and. (t <= vaccine(ia,ic)%end_day) .and. (vaccine(ia,ic)%time > 0.1)) vacc(ia)=1.0/vaccine(ia,ic)%time
+         if ((vaccine(ia,ic)%start_day <= t) .and. (t <= vaccine(ia,ic)%end_day) &
+                   .and. (vaccine(ia,ic)%time > 0.1)) vacc(ia)=1.0/vaccine(ia,ic)%time
       enddo
 
       RC(ic,ic,ir)=1.0 ! Diagonal is always one for contry-country interaction

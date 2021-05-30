@@ -8,8 +8,9 @@ subroutine enkfpost(ens,enspar)
    implicit none
    type(states), intent(inout) :: ens(0:nt,nrens)
    type(params), intent(inout) :: enspar(nrens)
-   type(params) avepar,nordif,parvar,chisq
-   real chisqsum
+   type(params) avepar
+!   type(params) nordif,chisq,parvar
+!   real chisqsum
    integer j,ic
    character(len=3) tag3
 
