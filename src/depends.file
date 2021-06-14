@@ -93,6 +93,7 @@ m_readinicond.o:      mod_params.o
 m_readinicond.o:      mod_states.o
 m_readinicond.o:      m_readagegroups.o
 m_readvaccines.o:      makefile
+m_readvaccines.o:      m_getday.o
 m_readvaccines.o:      mod_dimensions.o
 m_readvaccines.o:      MODEL.CPP
 m_Rmatrix.o:      makefile

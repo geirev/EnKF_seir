@@ -14,7 +14,7 @@ CF77 = gfortran
 PAR = 
 #DEBUG_FFLAGS = -c -g -fdefault-real-8 -C -u -Xlist -O2 -std=f2003 -fimplicit-none -frange-check -fmax-errors=10 -pedantic -pedantic-errors -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
 DEBUG_FFLAGS = -c -g -fdefault-real-8 -C -u -Xlist -O2            -fimplicit-none -frange-check -fmax-errors=10 -pedantic -pedantic-errors -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
-DEBUG_FFLAGF = -c -g -fdefault-real-8 -C -u -Xlist -O2                            -frange-check -fmax-errors=10                            -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
+DEBUG_FFLAGF = -c -g -fdefault-real-8 -C -u -Xlist -O2  -std=legacy               -frange-check -fmax-errors=10                            -Waliasing -Wampersand -Wcharacter-truncation -Wline-truncation -Wsurprising -Wno-tabs -Wunderflow -ffpe-trap=invalid,zero,overflow -Wunused -Werror -O3 
 
 FFLAGS =  $(DEBUG_FFLAGS)
 FFLAGF =  $(DEBUG_FFLAGF)
