@@ -101,8 +101,9 @@ If you are new to Git, read the section <a href="#git-instructions">Git instruct
 ### Linux
 
 ```bash
-sudo apt-get update
-sudo apt-get install libblas-dev liblapack-dev libfftw3-dev gfortran
+sudo apt-get -y update
+sudo apt-get -y install libblas-dev liblapack-dev libfftw3-dev gfortran
+sudo apt-get -y install gnuplot  # Needed if you want to use the gnuplot plotting macro
 ```
 
 ### Mac
@@ -231,13 +232,23 @@ seir2
 
 ## 7. Plotting
 
-If you have tecplot (tec360) there are `.lay` and `.mcr` files in the `run`
-directory. For more plotting options, view `python/enkf_seir/plot`:
+If you have tecplot (tec360) there are `.lay` and `.mcr` files in the `run2` directory.
 
-Note that the python plotting needs to be updated to read the multigroup output files.
+The simplest plotting option is to use gnuplot.
+Move the file run2/p.gnu to the locations of the output files, e.g., Outdir, and plot using the following command
+```bash
+cd Outdir
+gnuplot p.gnu
+```
+which creates .eps files of your plots.
+
+For more plotting options, view `python/enkf_seir/plot`:
+The python plotting needs to be updated to read the multigroup output files.
+plot.py will currently not work
+The notebook will load all the data for one country 001 and plot, but there is a bug in the time locations of measurements.
 
 ```bash
-python ../python/enkf_seir/plot/plot.py
+python3 EnKF_seir/python/enkf_seir/plot/plot.py
 jupyter-notebook ../python/enkf_seir/plot/covid.ipynb
 ```
 

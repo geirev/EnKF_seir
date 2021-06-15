@@ -163,7 +163,7 @@ set fontpath
 set psdir
 set fit brief errorvariables nocovariancevariables errorscaling prescale nowrap v5
 GNUTERM = "qt"
-## Last datafile plotted: "hosp001_1.dat"
+## Last datafile plotted: "hosp00".nc."_1.dat"
 pack( r, g, b ) = 2**16*r + 2**8*g + b
 set key noautotitle
 set size 1, 0.7
@@ -180,27 +180,39 @@ set style line 10 lt 1 lw 1 pt 3 linecolor rgb pack(253,205,172)   # 42 light or
 set style line 11 lt 1 lw 5 pt 3 linecolor rgb pack(217,95,2)     # 26 dark orange
 
 
-N = system("awk 'NR==50{print NF}' hosp001_1.dat")
 N = 100
 set terminal postscript eps enhanced color font 'Helvetica,14'
 
-set output "hosp.eps"
-set yrange [ 0.00000 : * ] noreverse nowriteback
-plot for [i=4:N] "hosp001_1.dat" u 1:i w l ls 3,   "hosp001_1.dat" u 1:2 w l ls 4 title 'Hospitalized', "obsH001.dat" u 2:3 with points ls 9,\
-     for [i=4:N] "dead001_1.dat" u 1:i w l ls 1,   "dead001_1.dat" u 1:2 w l ls 2 title 'Total Dead ', "obsD001.dat" u 2:3 with points ls 9
 
-set output "reff.eps"
-set size 1, 0.3
-set yrange [ 0.00000 : 2.0 ] noreverse nowriteback
-plot for [i=4:N] "Rens001_1.dat" u 1:i w l ls 5,   "Rens001_1.dat" u 1:2 w l ls 6 title 'Effective R'
+# Loop over countries
+ncountries=system("ls hosp???_1.dat | wc -l")
+do for [nc = 1:ncountries] {
 
-set output "case.eps"
-set size 1, 0.7
-set yrange [ 0.00000 : * ] noreverse nowriteback
-plot for [i=4:N] "case001_1.dat" u 1:i w l ls 7,   "case001_1.dat" u 1:2 w l ls 8 title 'Total cases',\
-     for [i=4:N] "active001_1.dat" u 1:i w l ls 10,   "active001_1.dat" u 1:2 w l ls 11 title 'Active cases'
+# Setting file name country counter
+   if (nc < 10) {
+      nn = sprintf("%s%d",'00', nc);
+   } else {
+      nn = sprintf("%s%d",'0', nc);
+   }
 
-set output "susc.eps"
-set size 1, 0.7
-set yrange [ 0.00000 : * ] noreverse nowriteback
-plot for [i=4:N] "susc001_1.dat" u 1:i w l ls 7,   "susc001_1.dat" u 1:2 w l ls 8 title 'Susceptible'
+   set output "hosp".nn.".eps"
+   set yrange [ 0.00000 : * ] noreverse nowriteback
+   plot for [i=4:N] "hosp".nn."_1.dat" u 1:i w l ls 3,   "hosp".nn."_1.dat" u 1:2 w l ls 4 title 'Hospitalized', "obsH".nn.".dat" u 2:3 with points ls 9,\
+        for [i=4:N] "dead".nn."_1.dat" u 1:i w l ls 1,   "dead".nn."_1.dat" u 1:2 w l ls 2 title 'Total Dead ', "obsD".nn.".dat" u 2:3 with points ls 9
+
+   set output "reff".nn.".eps"
+   set size 1, 0.3
+   set yrange [ 0.00000 : 2.0 ] noreverse nowriteback
+   plot for [i=4:N] "Rens".nn."_1.dat" u 1:i w l ls 5,   "Rens".nn."_1.dat" u 1:2 w l ls 6 title 'Effective R'
+
+   set output "case".nn.".eps"
+   set size 1, 0.7
+   set yrange [ 0.00000 : * ] noreverse nowriteback
+   plot for [i=4:N] "case".nn."_1.dat" u 1:i w l ls 7,   "case".nn."_1.dat" u 1:2 w l ls 8 title 'Total cases',\
+        for [i=4:N] "active".nn."_1.dat" u 1:i w l ls 10,   "active".nn."_1.dat" u 1:2 w l ls 11 title 'Active cases'
+
+   set output "susc".nn.".eps"
+   set size 1, 0.7
+   set yrange [ 0.00000 : * ] noreverse nowriteback
+   plot for [i=4:N] "susc".nn."_1.dat" u 1:i w l ls 7,   "susc".nn."_1.dat" u 1:2 w l ls 8 title 'Susceptible'
+}
