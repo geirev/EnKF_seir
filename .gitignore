@@ -8,6 +8,7 @@ swiss
 swiss2
 Norway2
 run2
+!run2/p.gnu
 !run2/*.in
 !run2/README.md
 runs/*/*.eps
