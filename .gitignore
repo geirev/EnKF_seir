@@ -10,7 +10,6 @@ Norway2
 France2
 run2
 !run2/p.gnu
-!run2/g.gnu
 !run2/*.in
 !run2/README.md
 runs/*/*.eps

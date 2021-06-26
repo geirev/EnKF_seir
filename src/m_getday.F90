@@ -75,7 +75,7 @@ character(len=10) function getdate(time)
 ! find day
   id=t
 
-  write(getdate,'(i4.4,a,i2.2,a,i2.2)')iy,'-',im,'-',id
+  write(getdate,'(i2.2,a,i2.2,a,i4.4)')id,'_',im,'_',iy
 !  print '(i2.2,a,i2.2,a,i4.4)',id,'_',im,'_',iy 
 !  print '(a)',getdate
 

@@ -146,7 +146,6 @@ end subroutine
 
 subroutine saveresults(fname,varname,aved,stdd,ensd,tag,tag3,dt,outdir)
    use mod_dimensions
-   use m_getday
    implicit none
    real, intent(in)    :: dt
    real, intent(in) :: aved(0:nt)
@@ -159,6 +158,7 @@ subroutine saveresults(fname,varname,aved,stdd,ensd,tag,tag3,dt,outdir)
    character(len=*), intent(in) :: outdir
    integer i,j
    real t
+   
 
    open(10,file=trim(outdir)//'/'//fname//tag3//'_'//tag//'.dat')
       write(10,'(5a)')'TITLE = "'//varname//tag3//'_'//tag//'"'
@@ -168,11 +168,7 @@ subroutine saveresults(fname,varname,aved,stdd,ensd,tag,tag3,dt,outdir)
       if (stdd(0) < 1.0E-30) stdd(0)=0.0
       do i=0,nt-1
          t=0.0+real(i)*dt
-#ifdef GNUPLOT
-         write(10,'(a10,2000E13.5)')getdate(t+startday),aved(i), stdd(i), (ensd(i,j),j=1,min(nrens,1000))
-#else
          write(10,'(2000E13.5)')t, aved(i), stdd(i), (ensd(i,j),j=1,min(nrens,1000))
-#endif
       enddo
    close(10)
 
@@ -181,7 +177,6 @@ end subroutine
 subroutine saveobservations(ic,obstype,outdir)
    use mod_dimensions
    use m_enkfini
-   use m_getday
    implicit none
    integer, intent(in) :: ic
    character(len=1), intent(in) :: obstype
@@ -224,13 +219,7 @@ subroutine saveobservations(ic,obstype,outdir)
       else
          write(10,'(a,i5,a)')' ZONE T="'//trim(zonetitle)//'"  F=POINT, I=',m,', J=1, K=1'
          do i=1,nrobs
-#ifdef GNUPLOT
-            if (obs(i)%c==c .and. obs(i)%ic==ic) then
-               write(10,'(a10,2f14.4)')getdate(real(obs(i)%t)+startday), obs(i)%d, sqrt(Rprt(i))
-            endif
-#else
             if (obs(i)%c==c .and. obs(i)%ic==ic) write(10,'(2i5,2f14.4)')i,obs(i)%t, obs(i)%d, sqrt(Rprt(i))
-#endif
          enddo
       endif
    close(10)
@@ -241,7 +230,6 @@ subroutine saveparameters(enspar,ic,tag3,pri,outdir)
    use mod_dimensions
    use mod_parameters
    use mod_params
-   use m_getday
    implicit none
    type(params), intent(in) :: enspar(nrens)
    integer, intent(in) :: ic
@@ -277,7 +265,6 @@ subroutine saveR(enspar,ic,tag3,tag,dt,outdir)
    use mod_dimensions
    use mod_parameters
    use mod_params
-   use m_getday
    implicit none
    integer, intent(in) :: ic
    character(len=1) tag
@@ -309,11 +296,7 @@ subroutine saveR(enspar,ic,tag3,tag,dt,outdir)
       write(10,'(20(a,i4,a))')(' "',i,'"',i=1,min(nrens,1000))
       write(10,*)'ZONE T="Rens'//tag3//'_'//tag//'"  F=POINT, I=',min(nt+1,rdim+1),', J=1, K=1'
       do i=0,min(rdim,nt)
-#ifdef GNUPLOT
-         write(10,'(a10,2000f10.5)')getdate(real(i)*dt+startday),aveR(i),stdR(i),enspar(1:min(nrens,1000))%R(i,ic)
-#else
          write(10,'(2000f10.5)')real(i)*dt,aveR(i),stdR(i),enspar(1:min(nrens,1000))%R(i,ic)
-#endif
       enddo
    close(10)
 end subroutine

@@ -16,7 +16,6 @@ However, we recommend to use the new multigroup code also when running for a sin
   <a href="#installation">Installation</a> *
   <a href="#code-standards">Code standards</a> *
   <a href="#setting-up-an-experiment">Experiment setup</a> *
-  <a href="#plotting">Plotting</a> *
   <a href="#git-instructions">Git instructions</a> *
   <a href="#definition-of-time">Defintion of time</a> *
   <a href="https://github.com/geirev/EnKF_seir/blob/master/LICENSE">License</a> 
@@ -231,35 +230,23 @@ cd EnKF_seir/run2
 seir2
 ```
 
-# Plotting
+## 7. Plotting
 
-## Tecplot
 If you have tecplot (tec360) there are `.lay` and `.mcr` files in the `run2` directory.
 
-Use MODEL.CPP without #define GNUPLOT
-
-
-## Gnuplot
 The simplest plotting option is to use gnuplot.
-Use MODEL.CPP with #define GNUPLOT to output dates in the .dat files
-
-Move the file run2/d.gnu to the locations of the output files, e.g., Outdir, and plot using the following command
+Move the file run2/p.gnu to the locations of the output files, e.g., Outdir, and plot using the following command
 ```bash
 cd Outdir
-gnuplot d.gnu
+gnuplot p.gnu
 ```
 which creates .eps files of your plots.
-To display the .eps files use
-```bash
-cd Outdir
-evince *.eps &
-```
 
-## phyton plotting
-For more uynsupported plotting options, view `python/enkf_seir/plot`:
+For more plotting options, view `python/enkf_seir/plot`:
 The python plotting needs to be updated to read the multigroup output files.
 plot.py will currently not work
 The notebook will load all the data for one country 001 and plot, but there is a bug in the time locations of measurements.
+
 ```bash
 python3 EnKF_seir/python/enkf_seir/plot/plot.py
 jupyter-notebook ../python/enkf_seir/plot/covid.ipynb

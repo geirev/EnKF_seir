@@ -120,9 +120,9 @@ subroutine readinfile()
    open(10,file='day_to_date.out')
       do i=0,nt
          string=getdate(real(i)+startday)
-         read(string(9:10),'(i2.2)')id
-         read(string(6:7),'(i2.2)')im
-         read(string(1:4),'(i4.4)')iy
+         read(string(1:2),'(i2.2)')id
+         read(string(4:5),'(i2.2)')im
+         read(string(7:10),'(i4.4)')iy
          write(10,*)'day to date =',i,string !,id,im,iy,getday(id,im,iy)
       enddo
    close(10)
