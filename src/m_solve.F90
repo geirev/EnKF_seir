@@ -25,6 +25,7 @@ subroutine solve(ens,enspar,j)
    integer :: mf=10
    integer lrw,liw
    integer i
+   integer ic
 
    real,    allocatable  :: rwork(:) 
    integer, allocatable  :: iwork(:)  
@@ -41,11 +42,21 @@ subroutine solve(ens,enspar,j)
    p=enspar(j)
    y=ens(0,j) 
 !   print *,'sum y (1.0)',sum(y)
-   call pfactors 
+   call pfactors
 
    istate=1
    do i=1,nt 
       t=0+real(i-1)*dt
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Time dependence (linear decline) of CFR
+      do ic=1,nc
+         p%CFR(ic)=max(enspar(j)%CFR(ic)*(1.0-t/2000.0),0.0001)
+         if (j == 1 .and. mod(i,10) == 0)  print *,'cfr: ',t,p%CFR(ic)
+      enddo
+      call pfactors
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
       tout=t+dt
       call slsode(f,neq,y,t,tout,itol,rtol,atol,itask,istate,iopt,rwork,lrw,iwork,liw,jac,mf)
       ens(i,j)=y

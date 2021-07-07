@@ -440,6 +440,7 @@ For this to work install the scripts in the ./bin in your path and install ctags
 
 When working with git repositories other than the ones you own, and when you expect to contribute to the code,
 a good way got organize your git project is described in https://opensource.com/article/19/7/create-pull-request-github
+This link is also a good read: <a href="https://dev.to/valeriavg/master-git-in-7-minutes-gai">Git tutorial</a>
 
 This organization will allow you to make changes and suggest them to be taken into the original code through a pull request.
 
@@ -450,6 +451,7 @@ This you clone to your local system where you can compile and run.
 ```bash
 git clone https://github.com/<YourUserName>/EnKF_seir
 git remote add upstream https://github.com/geirev/EnKF_seir
+git remote add origin git@github.com:<YourUserName>/EnKF_seir
 git remote -v                   #   should list both your local and remote repository
 ```
 
@@ -489,7 +491,9 @@ To make a pull request:
 ```bash
 git add .                       #   In the root of your repo, stage for commit
 git status                      #   Tells you status
-git commit                      #   Commits your changes to the local repo
+git commit -m"Commit message"   #   Commits your changes to the local repo
+git commit --amend              #   Add changes to prevous commit
+git push --force                #   If using --amend and previous commit was pushed
 ```
 
 2. Update the branch where you are working to be consistent with the upstream master
