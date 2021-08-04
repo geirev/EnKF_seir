@@ -331,8 +331,22 @@ Vaccinations can be included by including the file
 ```bash
 vaccines001.in
 ```
-
 A template file vaccines001.temp is generated with some default values.
+
+## Variants of the virus
+Mutations can lead to virues where the vaccine in ineffective.
+The file
+```bash
+variants001.in
+```
+allows to set a startday, endday, and timescale for moving vaccinated back to suscetible for possible reinfections.
+A template file variants001.temp is generated with some default values.
+
+## Timedependence of p_CFR and p_sev
+With a large population vaccinated we expect less probability of deaths and severe decease.
+A template implementation is available as m_cfrtimedep.F90.
+To activate include #define CFRDECLINE in MODEL.CPP
+
 
 ## R(t) the effective reproductive number per country
 R001.in defines the effective reproductive number for country 001.  It contains an arbitrary number of lines with 

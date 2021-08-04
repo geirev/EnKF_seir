@@ -21,8 +21,6 @@ program seir
    use m_chisquared
    use m_readvaccines
    use m_readvariant
-   use m_readvariantcond
-   use m_readvaccov
 
    implicit none
    integer i,ic,j
@@ -48,14 +46,13 @@ program seir
    call iniens(ens,enspar)                     ! Initialize ensemble of models
    call readvaccines                           ! Reading vaccination data
    call readvariant                            ! Reading variant data
-   call readvariantcond                        ! Reading variant fractions
-   call readvaccov
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
    print '(a)','Computing prior ensemble prediction'
    do j=1,nrens
       call solve(ens,enspar,j)                 ! solve ODEs for member j
+      stop
    enddo
    print '(a)','Dumping tecplot files.'
    call tecplot(ens,enspar,0)                  ! Dump prior solution to files
@@ -124,6 +121,7 @@ subroutine f(neqq, t, y, ydot)
    real R(na,na)
    real dt
    real vacc(na)
+   real vari
 !   real vari
    integer i,ia,ic,jc,ir
 
@@ -142,23 +140,25 @@ subroutine f(neqq, t, y, ydot)
 
    do ic=1,nc
       vacc=0.0
-      !print '(a,11f8.2)','VAR:',variant(ic)%start_day,variant(ic)%end_day,variant(ic)%time,t
       do ia=1,na
-         if ((vaccine(ia,ic)%start_day <= t) .and. (t <= vaccine(ia,ic)%end_day) &
-                   .and. (vaccine(ia,ic)%time > 0.1)) vacc(ia)=1.0/vaccine(ia,ic)%time
-
-         if ((variant(ic)%start_day <= t) .and. (t <= variant(ic)%end_day) &
-                   .and. (variant(ic)%time > 0.1)) vacc(ia)=-1.0/variant(ic)%time
+         if ((vaccine(ia,ic)%start_day <= t) .and. (t <= vaccine(ia,ic)%end_day) .and. (vaccine(ia,ic)%time > 0.1)) then
+            vacc(ia)=1.0/vaccine(ia,ic)%time
+         endif
       enddo
+
+      vari=0.0
+      if ((variant(ic)%start_day <= t) .and. (t <= variant(ic)%end_day) .and. (variant(ic)%time > 0.1)) then
+         vari=1.0/variant(ic)%time
+      endif
 
       RC(ic,ic,ir)=1.0 ! Diagonal is always one for contry-country interaction
       R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)
 
       do ia=1,na
-         if (vacc(ia) > 0.0)  ydot%group(ic)%V(ia)  = vacc(ia) * y%group(ic)%S(ia)
-         if (vacc(ia) == 0.0) ydot%group(ic)%V(ia)  = 0.0
-         if (vacc(ia) < 0.0)  ydot%group(ic)%V(ia)  = vacc(ia) * y%group(ic)%V(ia)
+         ydot%group(ic)%V(ia)  = 0.0
+         if (vacc(ia) > 0.0)  ydot%group(ic)%V(ia) = ydot%group(ic)%V(ia) + vacc(ia) * y%group(ic)%S(ia)
       enddo
+      if (vari > 0.0)  ydot%group(ic)%V = ydot%group(ic)%V - vari*y%group(ic)%V
 
       ydot%group(ic)%S  = 0.0 !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
 
@@ -167,9 +167,12 @@ subroutine f(neqq, t, y, ydot)
                            - (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
       enddo
       do ia=1,na
+         ! Moving (subtracting) vaccinated from S to V
          if (vacc(ia) > 0.0) ydot%group(ic)%S(ia)  = ydot%group(ic)%S(ia) - vacc(ia) * y%group(ic)%S(ia)
-         if (vacc(ia) < 0.0) ydot%group(ic)%S(ia)  = ydot%group(ic)%S(ia) - vacc(ia) * y%group(ic)%V(ia) &
-                                                     - vacc(ia)*(ydot%group(ic)%Rm + ydot%group(ic)%Rs)
+         ! Moving vaccinated from V to S due to new mutation where vaccines are not effective
+         if (vari > 0.0) ydot%group(ic)%S(ia)  = ydot%group(ic)%S(ia) + vari*y%group(ic)%V(ia)
+         ! Moving Recovered from Rs and Rm to S due to new mutations
+         !if (vari > 0.0) ydot%group(ic)%S(ia)  = ydot%group(ic)%S(ia) + vari*(y%group(ic)%Rm + y%group(ic)%Rs)
       enddo
 
       ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E  !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
@@ -186,17 +189,17 @@ subroutine f(neqq, t, y, ydot)
       ydot%group(ic)%C  =    ((1.0-hos)/p%Thosp) * y%group(ic)%Qf - (1.0/p%Tdead) * y%group(ic)%C
       ydot%group(ic)%Rm =    (1.0/p%Trecm) * y%group(ic)%Qm
       ydot%group(ic)%Rs =    (1.0/p%Trecm) * y%group(ic)%Hs
-      if ((variant(ic)%start_day <= t) .and. (t <= variant(ic)%end_day)  .and. (variant(ic)%time > 0.1)) then 
-         ydot%group(ic)%Rm =    ydot%group(ic)%Rm - (1.0/variant(ic)%time) * ydot%group(ic)%Rm 
-         ydot%group(ic)%Rs =    ydot%group(ic)%Rs - (1.0/variant(ic)%time) * ydot%group(ic)%Rs 
-      endif
+      ! This part is tricky since we dont know the fraction to be moved to each agegroup.
+      !if ((variant(ic)%start_day <= t) .and. (t <= variant(ic)%end_day)  .and. (variant(ic)%time > 0.1)) then
+      !   ydot%group(ic)%Rm =  ydot%group(ic)%Rm - vari * y%group(ic)%Rm
+      !   ydot%group(ic)%Rs =  ydot%group(ic)%Rs - vari * y%group(ic)%Rs
+      !endif
       ydot%group(ic)%D  =    (1.0/p%Tdead) * y%group(ic)%Hf  + (1.0/p%Tdead) * y%group(ic)%C
    enddo
-
- !  print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)/real(nc)
+   !print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)/real(nc)
 
 end subroutine
- 
+
 subroutine jac(neqq, t, y, ml, mu, pd, nrowpd)
    use mod_dimensions
    use mod_states

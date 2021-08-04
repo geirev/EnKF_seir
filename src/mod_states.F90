@@ -6,7 +6,7 @@ module mod_states
 
 ! A full model state is an array of groups/countries/regions represented by a substate
    type states
-      type(substate) group(nc)  
+      type(substate) group(nc)
    end type states
 !  type(states) fullstate
 !  type(states) ensemble(nrens)

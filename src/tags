@@ -58,6 +58,8 @@ Trecm	mod_params.F90	/^      real Trecm$/;"	k	type:params
 Trecs	mod_params.F90	/^      character(len=9) ::   Trecs /;"	k	type:paramnames
 Trecs	mod_params.F90	/^      real Trecs$/;"	k	type:params
 V	mod_substate.F90	/^      real V(/;"	k	type:substate
+V_qf	m_readvariantcond.F90	/^   real V_qf$/;"	k	type:varcond_data
+V_qs	m_readvariantcond.F90	/^   real V_qs$/;"	k	type:varcond_data
 Xmax	mod_parameters.F90	/^   real :: Xmax /;"	v	module:mod_parameters
 add_diag	mod_diag.F90	/^   function add_diag(/;"	f	module:mod_diag
 add_params	mod_params.F90	/^   function add_params(/;"	f	module:mod_params
@@ -72,14 +74,17 @@ assign_states	mod_states.F90	/^   subroutine assign_states(/;"	s	module:mod_stat
 assign_substate	mod_substate.F90	/^   subroutine assign_substate(/;"	s	module:mod_substate
 c	m_enkfini.F90	/^      ch/;"	k	type:observation
 cfrac	m_enkfini.F90	/^   real relerrc, minerrc, maxerrc, cfrac /;"	v	module:m_enkfini
+cfrtimedep	m_cfrtimedep.F90	/^subroutine cfrtimedep(/;"	s	module:m_cfrtimedep
 chisquared	m_chisquared.F90	/^subroutine chisquared(/;"	s	module:m_chisquared
+coef	m_readvaccov.F90	/^   real coef$/;"	k	type:vaccov_data
 d	m_enkfini.F90	/^      real             d /;"	k	type:observation
 days_in_month	m_getday.F90	/^   integer days_in_month(/;"	v	module:m_getday
 days_in_year	m_getday.F90	/^   integer days_in_year(/;"	v	module:m_getday
 diag	mod_diag.F90	/^   type diag$/;"	t	module:mod_diag
 diag_diag_mult	mod_diag.F90	/^   function diag_diag_mult(/;"	f	module:mod_diag
 diag_real_mult	mod_diag.F90	/^   function diag_real_mult(/;"	f	module:mod_diag
-end_day	m_readvaccines.F90	/^   integer end_day$/;"	k	type:vaccine_data
+end_day	m_readvaccines.F90	/^   real end_day$/;"	k	type:vaccine_data
+end_day	m_readvariant.F90	/^   real end_day$/;"	k	type:variant_data
 enkfini	m_enkfini.F90	/^subroutine enkfini(/;"	s	module:m_enkfini
 enkfpost	m_enkfpost.F90	/^subroutine enkfpost(/;"	s	module:m_enkfpost
 enkfprep	m_enkfprep.F90	/^subroutine enkfprep(/;"	s	module:m_enkfprep
@@ -102,10 +107,8 @@ infmult	m_enkfini.F90	/^   integer :: infmult=/;"	v	module:m_enkfini
 iniens	m_iniens.F90	/^subroutine iniens(/;"	s	module:m_iniens
 inienspar	m_inienspar.F90	/^subroutine inienspar(/;"	s	module:m_inienspar
 innovation	m_enkfini.F90	/^   real, allocatable    :: innovation(/;"	v	module:m_enkfini
-inv_time	m_readvaccines.F90	/^   real    inv_time$/;"	k	type:vaccine_data
-j	seir.F90	/^   integer i,ic,k,j,/;"	v	program:seir
+j	seir.F90	/^   integer i,ic,j$/;"	v	program:seir
 jac	seir.F90	/^subroutine jac(/;"	s
-k	seir.F90	/^   integer i,ic,k,/;"	v	program:seir
 lRrescale	m_readinfile.F90	/^logical lRrescale /;"	v	module:m_readinfile
 lc	m_enkfini.F90	/^   logical ld,lh,lc /;"	v	module:m_enkfini
 ld	m_enkfini.F90	/^   logical ld,/;"	v	module:m_enkfini
@@ -113,14 +116,13 @@ lenkf	m_enkfini.F90	/^   logical lenkf /;"	v	module:m_enkfini
 lh	m_enkfini.F90	/^   logical ld,lh,/;"	v	module:m_enkfini
 lmeascorr	m_enkfini.F90	/^   logical lmeascorr /;"	v	module:m_enkfini
 lpost_pfactors	m_pfactors.F90	/^logical :: lpost_pfactors=/;"	v	module:m_pfactors
-lpost_pfactors	m_readvaccines.F90	/^logical :: lpost_pfactors=/;"	v	module:m_readvaccines
 lrandrot	m_enkfini.F90	/^   logical :: lrandrot=/;"	v	module:m_enkfini
 lrtime	m_readinfile.F90	/^logical lrtime /;"	v	module:m_readinfile
 lsymsqrt	m_enkfini.F90	/^   logical :: lsymsqrt=/;"	v	module:m_enkfini
 lupdate_randrot	m_enkfini.F90	/^   logical :: lupdate_randrot=/;"	v	module:m_enkfini
-m	seir.F90	/^   integer i,ic,k,j,m$/;"	v	program:seir
 m_Rmatrix	m_Rmatrix.F90	/^module m_Rmatrix$/;"	m
 m_Rprior	m_Rprior.F90	/^module m_Rprior$/;"	m
+m_cfrtimedep	m_cfrtimedep.F90	/^module m_cfrtimedep$/;"	m
 m_chisquared	m_chisquared.F90	/^module m_chisquared$/;"	m
 m_enkfini	m_enkfini.F90	/^module m_enkfini /;"	m
 m_enkfpost	m_enkfpost.F90	/^module m_enkfpost$/;"	m
@@ -136,7 +138,9 @@ m_readagegroups	m_readagegroups.F90	/^module m_readagegroups$/;"	m
 m_readinfile	m_readinfile.F90	/^module m_readinfile$/;"	m
 m_readinicond	m_readinicond.F90	/^module m_readinicond$/;"	m
 m_readvaccines	m_readvaccines.F90	/^module m_readvaccines$/;"	m
-m_readvaccines	m_readvaccines.F90	/^module m_readvaccines$/;"	m
+m_readvaccov	m_readvaccov.F90	/^module m_readvaccov$/;"	m
+m_readvariant	m_readvariant.F90	/^module m_readvariant$/;"	m
+m_readvariantcond	m_readvariantcond.F90	/^module m_readvariantcond$/;"	m
 m_solve	m_solve.F90	/^module m_solve$/;"	m
 m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
 max_params	mod_params.F90	/^   function max_params(/;"	f	module:mod_params
@@ -172,13 +176,14 @@ paramnames	mod_params.F90	/^   type paramnames$/;"	t	module:mod_params
 params	mod_params.F90	/^   type params$/;"	t	module:mod_params
 params_params_mult	mod_params.F90	/^   function params_params_mult(/;"	f	module:mod_params
 params_real_mult	mod_params.F90	/^   function params_real_mult(/;"	f	module:mod_params
-parnames	mod_parameters.F90	/^   type (paramnames) parnames$/;"	v	module:mod_parameters
+parnames	mod_parameters.F90	/^   type (paramnames), save :: parnames$/;"	v	module:mod_parameters
 parstd	mod_parameters.F90	/^   type (params) parstd$/;"	v	module:mod_parameters
 pf	m_pfactors.F90	/^real pf(/;"	v	module:m_pfactors
 pfactors	m_pfactors.F90	/^subroutine pfactors$/;"	s	module:m_pfactors
 pfg	mod_parameters.F90	/^   type (params) pfg$/;"	v	module:mod_parameters
 pm	m_pfactors.F90	/^real pm(/;"	v	module:m_pfactors
 population_norway	m_readagegroups.F90	/^subroutine population_norway(/;"	s	module:m_readagegroups
+power	m_readvaccov.F90	/^   real power$/;"	k	type:vaccov_data
 ps	m_pfactors.F90	/^real ps(/;"	v	module:m_pfactors
 qminf	m_readinfile.F90	/^real qminf /;"	v	module:m_readinfile
 random	m_random.F90	/^subroutine random(/;"	s	module:m_random
@@ -188,6 +193,9 @@ readagegroups	m_readagegroups.F90	/^subroutine readagegroups$/;"	s	module:m_read
 readinfile	m_readinfile.F90	/^subroutine readinfile(/;"	s	module:m_readinfile
 readinicond	m_readinicond.F90	/^subroutine readinicond(/;"	s	module:m_readinicond
 readvaccines	m_readvaccines.F90	/^subroutine readvaccines$/;"	s	module:m_readvaccines
+readvaccov	m_readvaccov.F90	/^subroutine readvaccov(/;"	s	module:m_readvaccov
+readvariant	m_readvariant.F90	/^subroutine readvariant$/;"	s	module:m_readvariant
+readvariantcond	m_readvariantcond.F90	/^subroutine readvariantcond(/;"	s	module:m_readvariantcond
 real_diag_mult	mod_diag.F90	/^   function real_diag_mult(/;"	f	module:mod_diag
 real_params_mult	mod_params.F90	/^   function real_params_mult(/;"	f	module:mod_params
 real_states_mult	mod_states.F90	/^   type(states) function real_states_mult(/;"	f	module:mod_states
@@ -210,7 +218,8 @@ solve	m_solve.F90	/^subroutine solve(/;"	s	module:m_solve
 sqrt_diag	mod_diag.F90	/^   function sqrt_diag(/;"	f	module:mod_diag
 sqrt_states	mod_states.F90	/^   type(states) function sqrt_states(/;"	f	module:mod_states
 sqrt_substate	mod_substate.F90	/^   function sqrt_substate(/;"	f	module:mod_substate
-start_day	m_readvaccines.F90	/^   integer start_day$/;"	k	type:vaccine_data
+start_day	m_readvaccines.F90	/^   real start_day$/;"	k	type:vaccine_data
+start_day	m_readvariant.F90	/^   real start_day$/;"	k	type:variant_data
 startday	m_getday.F90	/^   integer :: startday=/;"	v	module:m_getday
 states	mod_states.F90	/^   type states$/;"	t	module:mod_states
 states_real_mult	mod_states.F90	/^   type(states) function states_real_mult(/;"	f	module:mod_states
@@ -226,7 +235,16 @@ sum_states	mod_states.F90	/^  real function sum_states(/;"	f	module:mod_states
 sum_substate	mod_substate.F90	/^   function sum_substate(/;"	f	module:mod_substate
 t	m_enkfini.F90	/^      inte/;"	k	type:observation
 tecplot	m_tecplot.F90	/^subroutine tecplot(/;"	s	module:m_tecplot
+time	m_readvaccines.F90	/^   real time$/;"	k	type:vaccine_data
+time	m_readvariant.F90	/^   real time$/;"	k	type:variant_data
 time	mod_parameters.F90	/^   real :: time$/;"	v	module:mod_parameters
 truncation	m_enkfini.F90	/^   real :: truncation /;"	v	module:m_enkfini
-vaccine	m_readvaccines.F90	/^type (vaccine_/;"	v	module:m_readvaccines
+vaccinated	m_readvariantcond.F90	/^   real vaccinated$/;"	k	type:varcond_data
+vaccine	m_readvaccines.F90	/^type(vaccine_/;"	v	module:m_readvaccines
 vaccine_data	m_readvaccines.F90	/^type vaccine_data$/;"	t	module:m_readvaccines
+vaccov	m_readvaccov.F90	/^type(vaccov_/;"	v	module:m_readvaccov
+vaccov_data	m_readvaccov.F90	/^type vaccov_data$/;"	t	module:m_readvaccov
+varcond	m_readvariantcond.F90	/^type(varcond_/;"	v	module:m_readvariantcond
+varcond_data	m_readvariantcond.F90	/^type varcond_data$/;"	t	module:m_readvariantcond
+variant	m_readvariant.F90	/^type(variant_/;"	v	module:m_readvariant
+variant_data	m_readvariant.F90	/^type variant_data$/;"	t	module:m_readvariant
