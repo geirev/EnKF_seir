@@ -136,6 +136,7 @@ m_readagegroups	m_readagegroups.F90	/^module m_readagegroups$/;"	m
 m_readinfile	m_readinfile.F90	/^module m_readinfile$/;"	m
 m_readinicond	m_readinicond.F90	/^module m_readinicond$/;"	m
 m_readvaccines	m_readvaccines.F90	/^module m_readvaccines$/;"	m
+m_readvaccines	m_readvaccines.F90	/^module m_readvaccines$/;"	m
 m_solve	m_solve.F90	/^module m_solve$/;"	m
 m_tecplot	m_tecplot.F90	/^module m_tecplot$/;"	m
 max_params	mod_params.F90	/^   function max_params(/;"	f	module:mod_params

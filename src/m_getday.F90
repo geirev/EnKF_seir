@@ -1,7 +1,7 @@
 module m_getday
    integer :: startday=0
    integer, parameter  :: refyear= 2019
-   integer, parameter  :: maxyear= 2021
+   integer, parameter  :: maxyear= 2022
    integer, parameter  :: refmonth=1
 
    integer days_in_year(refyear:maxyear)
@@ -12,10 +12,11 @@ contains
 
 integer function assign_calendar()
    implicit none
-   days_in_year(:)   =(/365, 366, 365 /)   ! 2019, 2020, 2021
+   days_in_year(:)   =(/365, 366, 365, 365 /)   ! 2019, 2020, 2021 2022
    days_in_month(refyear  ,:)=(/31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2019
    days_in_month(refyear+1,:)=(/31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2020
    days_in_month(refyear+2,:)=(/31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2021
+   days_in_month(refyear+3,:)=(/31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 /) ! For 2022
    assign_calendar=1
 end function
 

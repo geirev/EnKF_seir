@@ -20,6 +20,9 @@ MODULES = \
 	m_readinfile.F90\
 	m_readinicond.F90\
 	m_readvaccines.F90\
+	m_readvariantcond.F90\
+	m_readvariant.F90\
+        m_readvaccov.F90\
 	m_Rmatrix.F90\
 	m_Rprior.F90\
 	m_solve.F90\
