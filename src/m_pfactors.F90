@@ -18,6 +18,8 @@ subroutine pfactors
    use mod_params
    use mod_parameters
    use m_readinfile
+   use m_readvariantcond
+   use m_readvariant
    implicit none
    real dead, seve
    integer i,ic
@@ -80,7 +82,7 @@ subroutine pfactors
          dead=dead+pforig(i,ic)*agegroup(i,ic)/Ntot(ic)
          seve=seve+psorig(i,ic)*agegroup(i,ic)/Ntot(ic)
       enddo
-      
+
       pf(:,ic)=(p%CFR(ic)/dead)*pforig(:,ic)
       ps(:,ic)=(p%sev(ic)/seve)*psorig(:,ic)
       pm(:,ic)=1.0-ps(:,ic)-pf(:,ic)

@@ -20,6 +20,9 @@ program seir
    use m_enkfpost
    use m_chisquared
    use m_readvaccines
+   use m_readvariant
+   use m_readvariantcond
+   use m_readvaccov
 
    implicit none
    integer i,ic,j
@@ -44,6 +47,9 @@ program seir
    call inienspar(enspar)                      ! Initialize ensemble of parameters
    call iniens(ens,enspar)                     ! Initialize ensemble of models
    call readvaccines                           ! Reading vaccination data
+   call readvariant                            ! Reading variant data
+   call readvariantcond                        ! Reading variant fractions
+   call readvaccov
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Prior ensemble prediction
@@ -108,6 +114,7 @@ subroutine f(neqq, t, y, ydot)
    use m_random
    use m_readinfile
    use m_readvaccines
+   use m_readvariant
    implicit none
    integer neqq
    real t
@@ -117,6 +124,7 @@ subroutine f(neqq, t, y, ydot)
    real R(na,na)
    real dt
    real vacc(na)
+!   real vari
    integer i,ia,ic,jc,ir
 
    dt= time/real(nt-1)
@@ -134,22 +142,35 @@ subroutine f(neqq, t, y, ydot)
 
    do ic=1,nc
       vacc=0.0
+      !print '(a,11f8.2)','VAR:',variant(ic)%start_day,variant(ic)%end_day,variant(ic)%time,t
       do ia=1,na
          if ((vaccine(ia,ic)%start_day <= t) .and. (t <= vaccine(ia,ic)%end_day) &
                    .and. (vaccine(ia,ic)%time > 0.1)) vacc(ia)=1.0/vaccine(ia,ic)%time
+
+         if ((variant(ic)%start_day <= t) .and. (t <= variant(ic)%end_day) &
+                   .and. (variant(ic)%time > 0.1)) vacc(ia)=-1.0/variant(ic)%time
       enddo
 
       RC(ic,ic,ir)=1.0 ! Diagonal is always one for contry-country interaction
-      R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)  
+      R(:,:)= p%R(i,ic) * Rmat(:,:,ir,ic)
 
-      ydot%group(ic)%V(:)  =    vacc(:) * y%group(ic)%S(:)
+      do ia=1,na
+         if (vacc(ia) > 0.0)  ydot%group(ic)%V(ia)  = vacc(ia) * y%group(ic)%S(ia)
+         if (vacc(ia) == 0.0) ydot%group(ic)%V(ia)  = 0.0
+         if (vacc(ia) < 0.0)  ydot%group(ic)%V(ia)  = vacc(ia) * y%group(ic)%V(ia)
+      enddo
 
       ydot%group(ic)%S  = 0.0 !- qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
+
       do jc=1,nc
          ydot%group(ic)%S  = ydot%group(ic)%S  &
                            - (1.0/p%Tinf) * (Ntot(jc)/Ntot(ic)) * RC(ic,jc,ir) * matmul(R,y%group(jc)%I) * y%group(ic)%S
       enddo
-      ydot%group(ic)%S(:)  = ydot%group(ic)%S(:) - vacc(:) * y%group(ic)%S(:)
+      do ia=1,na
+         if (vacc(ia) > 0.0) ydot%group(ic)%S(ia)  = ydot%group(ic)%S(ia) - vacc(ia) * y%group(ic)%S(ia)
+         if (vacc(ia) < 0.0) ydot%group(ic)%S(ia)  = ydot%group(ic)%S(ia) - vacc(ia) * y%group(ic)%V(ia) &
+                                                     - vacc(ia)*(ydot%group(ic)%Rm + ydot%group(ic)%Rs)
+      enddo
 
       ydot%group(ic)%E  =  - (1.0/p%Tinc ) * y%group(ic)%E  !+ qminf*(1.0/p%Tinf) * p%R(ir)*y%group(ic)%Qm * y%group(ic)%S
       do jc=1,nc
@@ -164,11 +185,15 @@ subroutine f(neqq, t, y, ydot)
       ydot%group(ic)%Hf =    (hos/p%Thosp) * y%group(ic)%Qf  - (1.0/p%Tdead) * y%group(ic)%Hf
       ydot%group(ic)%C  =    ((1.0-hos)/p%Thosp) * y%group(ic)%Qf - (1.0/p%Tdead) * y%group(ic)%C
       ydot%group(ic)%Rm =    (1.0/p%Trecm) * y%group(ic)%Qm
-      ydot%group(ic)%Rs =    (1.0/p%Trecs) * y%group(ic)%Hs
+      ydot%group(ic)%Rs =    (1.0/p%Trecm) * y%group(ic)%Hs
+      if ((variant(ic)%start_day <= t) .and. (t <= variant(ic)%end_day)  .and. (variant(ic)%time > 0.1)) then 
+         ydot%group(ic)%Rm =    ydot%group(ic)%Rm - (1.0/variant(ic)%time) * ydot%group(ic)%Rm 
+         ydot%group(ic)%Rs =    ydot%group(ic)%Rs - (1.0/variant(ic)%time) * ydot%group(ic)%Rs 
+      endif
       ydot%group(ic)%D  =    (1.0/p%Tdead) * y%group(ic)%Hf  + (1.0/p%Tdead) * y%group(ic)%C
    enddo
 
-!  print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)/real(nc)
+ !  print *,'sum ydot and y (0.0 and 1.0)',sum(ydot),sum(y)/real(nc)
 
 end subroutine
  
