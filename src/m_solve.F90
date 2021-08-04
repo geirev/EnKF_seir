@@ -59,6 +59,7 @@ subroutine solve(ens,enspar,j)
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Time dependence (linear decline) of CFR
       do ic=1,nc
+
          a = minloc(vaccine(:,ic)%start_day, DIM=1)
          if (variant(ic)%start_day <= t) then
             g = (vaccov(ic)%coef)*(10**(-7.0))*(t - vaccine(a,ic)%start_day)**(vaccov(ic)%power)
@@ -74,6 +75,8 @@ subroutine solve(ens,enspar,j)
 !         p%sev(ic)=max(enspar(j)%sev(ic)*(1.0-t/2000.0),0.0001)
 !         p%CFR(ic)=max(enspar(j)%CFR(ic)*(1.0-t/2000.0),0.0001)
 !         if (j == 1 .and. mod(i,10) == 0)  print *,'cfr: ',t,p%CFR(ic)
+
+        
       enddo
       call pfactors
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
